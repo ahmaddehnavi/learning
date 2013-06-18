@@ -7,7 +7,13 @@
 <body>
 <pre>
 	<?php
-	print_r($query);
+    print_r($query);
+
+
+
+
+
+    salam
 	?>
 </pre>
 </body>

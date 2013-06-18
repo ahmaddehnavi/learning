@@ -4,15 +4,12 @@
     <extra-name-characters>#@</extra-name-characters>
     <identifier-quote-string>`</identifier-quote-string>
     <synchronize>true</synchronize>
-    <jdbc-driver>org.gjt.mm.mysql.Driver</jdbc-driver>
+    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
     <jdbc-url>jdbc:mysql://</jdbc-url>
     <user-name>root</user-name>
     <libraries>
       <library>
         <url>jar://$PROJECT_DIR$/../mysql-connector-java-5.1.18-bin.jar!/</url>
-      </library>
-      <library>
-        <url>file://$PROJECT_DIR$/../mysql-connector-license.txt</url>
       </library>
     </libraries>
     <schema name="" catalog="cdcol"/>
