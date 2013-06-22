@@ -495,7 +495,7 @@ class CI_Image_lib {
 
 		//  Create The Image
 		//
-		//  old conditional which users report cause problems with shared GD libs who report themselves as "2.0 or greater"
+		//  old conditional which user report cause problems with shared GD libs who report themselves as "2.0 or greater"
 		//  it appears that this is no longer the issue that it was in 2004, so we've removed it, retaining it in the comment
 		//  below should that ever prove inaccurate.
 		//
@@ -1273,7 +1273,7 @@ class CI_Image_lib {
 	 * ratio between the full-sized image and the thumb.
 	 *
 	 * This function lets us re-proportion the width/height
-	 * if users choose to maintain the aspect ratio when resizing.
+	 * if user choose to maintain the aspect ratio when resizing.
 	 *
 	 * @access	public
 	 * @return	void

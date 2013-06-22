@@ -716,7 +716,7 @@ class CI_Input {
 	/**
 	* Clean Keys
 	*
-	* This is a helper function. To prevent malicious users
+	* This is a helper function. To prevent malicious user
 	* from trying to exploit keys we make sure that keys are
 	* only named with alpha-numeric text and a few other items.
 	*

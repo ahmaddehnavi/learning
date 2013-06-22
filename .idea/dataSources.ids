@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.0.67-community" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.18 ( Revision: tonci.grgin@oracle.com-20110930151701-jfj14ddfq48ifkfq )" uuid="2b2476be-af82-46a9-b765-d6ba3dbb15d3">
+  <data-source source="LOCAL" name="Mysql" product="MySQL" version="5.0.67-community" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.18 ( Revision: tonci.grgin@oracle.com-20110930151701-jfj14ddfq48ifkfq )" uuid="d3171e3a-5984-4d74-96b5-c31393de5021">
     <extra-name-characters>#@</extra-name-characters>
     <identifier-quote-string>`</identifier-quote-string>
     <synchronize>true</synchronize>
@@ -9,12 +9,13 @@
     <user-name>root</user-name>
     <libraries>
       <library>
-        <url>jar://$PROJECT_DIR$/../mysql-connector-java-5.1.18-bin.jar!/</url>
+        <url>file://F:/Software/Programming/mysql java/mysql-connector-java-5.1.18-bin.jar</url>
       </library>
     </libraries>
     <schema name="" catalog="cdcol"/>
     <schema name="" catalog="codeigniter"/>
     <schema name="" catalog="information_schema"/>
+    <schema name="" catalog="learning"/>
     <schema name="" catalog="mysql"/>
     <schema name="" catalog="panad"/>
     <schema name="" catalog="phpmyadmin"/>
@@ -242,6 +243,19 @@
       <column name="IS_UPDATABLE" sqlType="VARCHAR" length="3" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="DEFINER" sqlType="VARCHAR" length="77" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="SECURITY_TYPE" sqlType="VARCHAR" length="7" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+    </table>
+    <table name="users" schema="" catalog="learning" type="TABLE">
+      <column name="user_id" sqlType="BIGINT UNSIGNED" length="20" precision="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="mail" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" length="128" precision="0" nullable="false" jdbcType="12"/>
+      <column name="salt" sqlType="BINARY" length="20" precision="0" nullable="false" jdbcType="-2"/>
+      <column name="last_activity" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="user_type" sqlType="ENUM" length="8" precision="0" nullable="false" jdbcType="1" def="J3N0dWRlbnQn"/>
+      <column name="is_active" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="token" sqlType="BINARY" length="10" precision="0" nullable="false" jdbcType="-2"/>
+      <column name="token_time" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <index name="mail" unique="true" columns="mail"/>
     </table>
     <table name="columns_priv" schema="" catalog="mysql" type="TABLE"/>
     <table name="db" schema="" catalog="mysql" type="TABLE"/>

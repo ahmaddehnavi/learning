@@ -8,12 +8,6 @@
 <pre>
 	<?php
     print_r($query);
-
-
-
-
-
-    salam
 	?>
 </pre>
 </body>

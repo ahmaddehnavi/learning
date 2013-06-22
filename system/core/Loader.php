@@ -183,7 +183,7 @@ class CI_Loader {
 	/**
 	 * Class Loader
 	 *
-	 * This function lets users load and instantiate classes.
+	 * This function lets user load and instantiate classes.
 	 * It is designed to be called from a user's app controllers.
 	 *
 	 * @param	string	the name of the class
@@ -221,7 +221,7 @@ class CI_Loader {
 	/**
 	 * Model Loader
 	 *
-	 * This function lets users load and instantiate models.
+	 * This function lets user load and instantiate models.
 	 *
 	 * @param	string	the name of the class
 	 * @param	string	name for the model
