@@ -4,12 +4,12 @@
 <head>
     <meta charset = "UTF-8"/>
     <title>title</title>
-    <link rel = "stylesheet" type = "text/css" href = "<?=base_url('files/css/reset.css')?>"/>
-    <link rel = "stylesheet" type = "text/css" href = "<?=base_url('files/css/home.css')?>"/>
-    <link rel = "stylesheet" type = "text/css" href = "<?=base_url('files/css/train_slideshow.css')?>"/>
-    <script type = "text/javascript" src = "<?=base_url('files/js/html5shiv.js')?>"></script>
-    <script type = "text/javascript" src = "<?=base_url('files/js/slider.js')?>"></script>
-    <script type = "text/javascript" src = "<?=base_url('files/js/scroll.js')?>"></script>
+    <link rel = "stylesheet" type = "text/css" href = "<?=FILES_CSS_PATH?>reset.css"/>
+    <link rel = "stylesheet" type = "text/css" href = "<?=FILES_CSS_PATH?>home.css"/>
+    <link rel = "stylesheet" type = "text/css" href = "<?=FILES_CSS_PATH?>train_slideshow.css"/>
+    <script type = "text/javascript" src = "<?=FILES_JS_PATH?>html5shiv.js"></script>
+    <script type = "text/javascript" src = "<?=FILES_JS_PATH?>slider.js"></script>
+    <script type = "text/javascript" src = "<?=FILES_JS_PATH?>scroll.js"></script>
  </head>
 <body>
 <a name = "home">.</a>
@@ -20,7 +20,8 @@
             if(empty($user_id))
                 echo anchor('/auth/login/','sign in');
             else
-                echo anchor('/auth/logout/',"logout ( $username )");
+                echo anchor('/auth/logout/',"logout");
+
             ?>
         </div>
         <div class = "logo"></div>
@@ -65,7 +66,7 @@
             <ul class = "bullets">
                 <script>
                     for (var i = 0; i < 5; i++) {
-                        document.write("<li id='bullet" + i + "' onclick='show(" + i + ",this);'></li>");
+                        document.write("<li id=\"bullet" + i + "\" onclick=\"show(" + i + ",this);\"></li>");
                     }
                 </script>
             </ul>
