@@ -1,69 +1,67 @@
-<?=BASEPATH?>
 <!DOCTYPE HTML>
-<html lang = "en-US">
+<html lang="en-US">
 <head>
-    <meta charset = "UTF-8"/>
+    <meta charset="UTF-8"/>
     <title>title</title>
-    <link rel = "stylesheet" type = "text/css" href = "<?=FILES_CSS_PATH?>reset.css"/>
-    <link rel = "stylesheet" type = "text/css" href = "<?=FILES_CSS_PATH?>home.css"/>
-    <link rel = "stylesheet" type = "text/css" href = "<?=FILES_CSS_PATH?>train_slideshow.css"/>
-    <script type = "text/javascript" src = "<?=FILES_JS_PATH?>html5shiv.js"></script>
-    <script type = "text/javascript" src = "<?=FILES_JS_PATH?>slider.js"></script>
-    <script type = "text/javascript" src = "<?=FILES_JS_PATH?>scroll.js"></script>
- </head>
+    <link rel="stylesheet" type="text/css" href="<?= base_url('files/styles/reset.css') ?>"/>
+    <link rel="stylesheet" type="text/css" href="<?= base_url('files/styles/home.css') ?>"/>
+    <link rel="stylesheet" type="text/css" href="<?= base_url('files/styles/train_slideshow.css') ?>"/>
+    <script type="text/javascript" src="<?= base_url('files/js/html5shiv.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('files/js/slider.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('files/js/scroll.js)') ?>"></script>
+</head>
 <body>
-<a name = "home">.</a>
+<a name="home">.</a>
 <header>
-    <div class = "container">
-        <div class = "user">
+    <div class="container">
+        <div class="user">
             <?php
-            if(empty($user_id))
-                echo anchor('/auth/login/','sign in');
+            if (empty($user_id))
+                echo anchor('/auth/login/', 'sign in');
             else
-                echo anchor('/auth/logout/',"logout");
-
+                echo anchor('/auth/logout/', "logout ( $username )");
             ?>
         </div>
-        <div class = "logo"></div>
+        <div class="logo"></div>
         <nav>
             <menu>
-                <li class = "active" id = "pre_active"><a href = "#home" onclick = "return pageScroll(this);">get
+                <li class="active" id="pre_active"><a href="#home" onclick="return pageScroll(this);">get
                         start</a></li>
-                <li><a href = "#slides" onclick = "return pageScroll(this);">screen shot</a></li>
-                <li><a href = "#footer" onclick = "return pageScroll(this);">about us</a></li>
-                <li><a href = "#">faq</a></li>
-                <div class = "badboy"></div>
+                <li><a href="#slides" onclick="return pageScroll(this);">screen shot</a></li>
+                <li><a href="#footer" onclick="return pageScroll(this);">about us</a></li>
+                <li><a href="#">faq</a></li>
+                <div class="badboy"></div>
             </menu>
         </nav>
-        <div class = "badboy"></div>
+        <div class="badboy"></div>
     </div>
 </header>
 
-<div class = "content2">
-    <div class = "container">
-        <a name = "getstart">.</a>
+<div class="content2">
+    <div class="container">
+        <a name="getstart">.</a>
 
-        <h2 class = "center">A Cloud-Enabled Desktop App for All Your Email</h2>
+        <h2 class="center">A Cloud-Enabled Desktop App for All Your Email</h2>
         <h4>Unified Inbox, Relevance Sorting, Smart Views</h4>
         <h4>Unified Inbox, Relevance Sorting</h4>
-        <a class = "button center">get started</a>
+        <a class="button center">get started</a>
     </div>
 </div>
 
 
-<div class = "content">
-    <div class = "container">
-        <a name = "slides">.</a>
+<div class="content">
+    <div class="container">
+        <a name="slides">.</a>
 
-        <div class = "slideshow" onmouseover = "pauseSlider()" onmouseout = "resumeSlider()">
-            <ul class = "images" id = "slideshow">
-                <li style = "background-image:url('<?=FILES_IMG_PATH?>slideshow/1.jpg')"></li>
-                <li style = "background-image:url('<?=FILES_IMG_PATH?>slideshow/2.jpg')"></li>
-                <li style = "background-image:url('<?=FILES_IMG_PATH?>slideshow/3.jpg')"></li>
-                <li style = "background-image:url('<?=FILES_IMG_PATH?>slideshow/4.jpg')"></li>
-                <li style = "background-image:url('<?=FILES_IMG_PATH?>slideshow/5.jpg')"></li>
+        <div class="slideshow" onmouseover="pauseSlider()" onmouseout="resumeSlider()">
+            <ul class="images" id="slideshow">
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/1.jpg')"></li>
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/2.jpg')"></li>
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/3.jpg')"></li>
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/4.jpg')"></li>
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/5.jpg')"></li>
             </ul>
-            <ul class = "bullets">
+            <ul class="bullets">
                 <script>
                     for (var i = 0; i < 5; i++) {
                         document.write("<li id=\"bullet" + i + "\" onclick=\"show(" + i + ",this);\"></li>");
@@ -76,23 +74,23 @@
 </div>
 
 <footer>
-    <div class = "container">
-        <a name = "footer"></a>
+    <div class="container">
+        <a name="footer"></a>
 
-        <div class = "column left">
+        <div class="column left">
             column1
         </div>
-        <div class = "column left">
+        <div class="column left">
             column2
         </div>
-        <div class = "column left">
+        <div class="column left">
             column3
         </div>
-        <div class = "badboy"></div>
+        <div class="badboy"></div>
     </div>
 </footer>
 
-<script type = "text/javascript">
+<script type="text/javascript">
     startSlider();
 </script>
 </body>
