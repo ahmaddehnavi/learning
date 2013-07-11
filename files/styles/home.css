@@ -1,194 +1,193 @@
-.badboy{
-	clear                : both;
-	width                : 0 !important;
-	height               : 0 !important;
+.badboy {
+    clear: both;
+    width: 0 !important;
+    height: 0 !important;
 }
 
-body{
-	font-family          : "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background-color     : #06a8f0;
-	/*overflow: hidden;*/
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #06a8f0;
+    /*overflow: hidden;*/
 }
 
-.container{
-	width                : 950px;
-	margin               : 0 auto;
+.container {
+    width: 950px;
+    margin: 0 auto;
 }
 
-header{
-	background-color     : white; 
-	box-shadow           : 0 1px 0 transparent;
-	position             : fixed;
-	top                  : 0;
-	left                 : 0;
-	width                : 100%;
-	z-index              : 10000;
+header {
+    background-color: white;
+    box-shadow: 0 1px 0 transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
 }
 
-.content,.content2{
-	background-color     : #06a8f0;
-	padding              : 20px 0;
+.content, .content2 {
+    background-color: #06a8f0;
+    padding: 20px 0;
 }
 
-.content2{
-	margin               : 180px 0 400px 0;
+.content2 {
+    margin: 180px 0 400px 0;
 }
 
-footer{
-	background-color     : #0b2f46;
-	min-height           : 300px;
-	margin-top           : 100px;
+footer {
+    background-color: #0b2f46;
+    min-height: 300px;
+    margin-top: 100px;
 }
 
-header .container{
-	margin               : 10px auto;
+header .container {
+    margin: 10px auto;
 }
 
-header .logo{
-	float                :left;
-	width                :300px;
+header .logo {
+    float: left;
+    width: 300px;
 }
 
-header nav{
-	width                :600px;
-	float                :right;
+header nav {
+    width: 600px;
+    float: right;
 }
 
-nav menu{
-	list-style-type      : none;
+nav menu {
+    list-style-type: none;
 }
 
-nav li{
-	float                : right;
-	border-radius        : 2px;
-	margin               : 5px;
-	border               : 1px solid transparent;
+nav li {
+    float: right;
+    border-radius: 2px;
+    margin: 5px;
+    border: 1px solid transparent;
 }
 
-nav li:hover{
-	background-color     : #f5f6f8;
-	border-color         : #eff1f4; 
+nav li:hover {
+    background-color: #f5f6f8;
+    border-color: #eff1f4;
 }
 
-nav li a{
-	padding              : 13px 30px;
-	display              : block;
-	text-decoration      : none;
-	text-transform       : uppercase;
-	font-size            : 14px;
-	color                : #343c47;
+nav li a {
+    padding: 13px 30px;
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #343c47;
 }
 
 nav li.active {
-	background-color     : #3bb8f8;
-	border-color	     : #22ACF7;
-	-webkit-transition   : all .5s linear;
-	   -moz-transition   : all .5s linear;
-	    -ms-transition   : all .5s linear;
-	     -o-transition   : all .5s linear;
-	        transition   : all .5s linear;
-	
+    background-color: #3bb8f8;
+    border-color: #22ACF7;
+    -webkit-transition: all .5s linear;
+    -moz-transition: all .5s linear;
+    -ms-transition: all .5s linear;
+    -o-transition: all .5s linear;
+    transition: all .5s linear;
+
 }
 
-nav li.active a{
-	color                : white;
+nav li.active a {
+    color: white;
 }
 
-
-
-footer .column{
-	width                : 300px;
-	min-height           : 1000px;
-	margin               : 8px;
-	color                : white;
+footer .column {
+    width: 300px;
+    min-height: 1000px;
+    margin: 8px;
+    color: white;
 }
 
-.right{
-	float                : right;
+.right {
+    float: right;
 }
 
-.left{
-	float                : left;
+.left {
+    float: left;
 }
 
-.center{
-	margin               : 0 auto;
+.center {
+    margin: 0 auto;
 }
 
+.button {
+    display: block;
+    border: 1px solid #224D68;
+    padding: 30px 60px;
+    width: 200px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    background-color: #224e6b;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    font-weight: bold;
+    text-decoration: none;
+    -webkit-transition: all .25s ease-in;
+    -moz-transition: all .25s ease-in;
+    -ms-transition: all .25s ease-in;
+    -o-transition: all .25s ease-in;
+    transition: all .25s ease-in;
 
-.button{
-	display              : block;
-	border               : 1px solid #224D68; 
-	padding              : 30px 60px;
-	width                : 200px;
-	text-transform       : uppercase;
-	text-align           : center;
-	cursor               : pointer;
-	background-color     : #224e6b;
-	color                : white;
-	text-shadow          : 0 1px 1px rgba(0, 0, 0, 0.5);
-	border-radius        : 2px;
-	font-weight          : bold;
-	-webkit-transition   : all .25s ease-in;
-	   -moz-transition   : all .25s ease-in;
-	    -ms-transition   : all .25s ease-in;
-	     -o-transition   : all .25s ease-in;
-	        transition   : all .25s ease-in;
-	
 }
 
-.button:hover{
-	background-color     : #1c4058;
+.button:hover {
+    background-color: #1c4058;
 }
 
-.content2 h2 ,.content2 h4{
-	color                : #fff;
-	text-transform       : capitalize;
-	text-align           : center;
-	margin-bottom        : 20px;
+.content2 h2, .content2 h4 {
+    color: #fff;
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-h2{
-	font-weight          : bold;
-	display              : block;
-	font-size            : 1.5em;
-	margin               : 0.83em;
+h2 {
+    font-weight: bold;
+    display: block;
+    font-size: 1.5em;
+    margin: 0.83em;
 }
 
-h4{
-	display              : block;
-	margin               : 1.33em;
-	font-weight          : bold;
+h4 {
+    display: block;
+    margin: 1.33em;
+    font-weight: bold;
 }
 
-header .user{
-	float                : left;
-	background-color     : #3bb8f8;
-	border-color         : #22ACF7;
-	border-radius        : 2px;
-	margin               : 5px;
+header .user {
+    float: left;
+    background-color: #3bb8f8;
+    border-color: #22ACF7;
+    border-radius: 2px;
+    margin: 5px;
 }
 
-header .user a{
-	padding              : 14px;
-	font-size            : 13px;
-	display              : block;
-	color                : #fff;
-	text-decoration      : none;
-	text-transform       : uppercase;
+header .user a {
+    padding: 14px;
+    font-size: 13px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 ::-webkit-scrollbar {
-    width                : 12px;
+    width: 12px;
 }
-
 
 ::-webkit-scrollbar-track {
-     background          : #D5DCFD ; 
+    background: #D5DCFD;
 }
+
 ::-webkit-scrollbar-thumb {
-    background           : #224e6b ; 
+    background: #224e6b;
 }
+
 ::-webkit-scrollbar-thumb:window-inactive {
-	background           : #32729C ;  
+    background: #32729C;
 }

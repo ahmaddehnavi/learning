@@ -44,7 +44,8 @@
         <h2 class="center">A Cloud-Enabled Desktop App for All Your Email</h2>
         <h4>Unified Inbox, Relevance Sorting, Smart Views</h4>
         <h4>Unified Inbox, Relevance Sorting</h4>
-        <a class="button center">get started</a>
+
+        <?=anchor('/auth/register/', 'get started', 'class="button center"') ?>
     </div>
 </div>
 
