@@ -37,5 +37,10 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
+define('FILES_PATH','http://localhost/CodeIgniter/files/');
+define('FILES_CSS_PATH','http://localhost/CodeIgniter/files/styles/');
+define('FILES_JS_PATH','http://localhost/CodeIgniter/files/js/');
+define('FILES_IMG_PATH','http://localhost/CodeIgniter/files/images/');
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
