@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('files/styles/train_slideshow.css') ?>"/>
     <script type="text/javascript" src="<?= base_url('files/js/html5shiv.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('files/js/slider.js') ?>"></script>
-    <script type="text/javascript" src="<?= base_url('files/js/scroll.js)') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('files/js/scroll.js') ?>"></script>
 </head>
 <body>
 <a name="home">.</a>
@@ -55,11 +55,11 @@
 
         <div class="slideshow" onmouseover="pauseSlider()" onmouseout="resumeSlider()">
             <ul class="images" id="slideshow">
-                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/1.jpg')"></li>
-                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/2.jpg')"></li>
-                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/3.jpg')"></li>
-                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/4.jpg')"></li>
-                <li style="background-image:url('<?= FILES_IMG_PATH ?>slideshow/5.jpg')"></li>
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>/slideshow/1.jpg')"></li>
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>/slideshow/2.jpg')"></li>
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>/slideshow/3.jpg')"></li>
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>/slideshow/4.jpg')"></li>
+                <li style="background-image:url('<?= FILES_IMG_PATH ?>/slideshow/5.jpg')"></li>
             </ul>
             <ul class="bullets">
                 <script>

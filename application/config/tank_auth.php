@@ -40,7 +40,7 @@ $config['phpass_hash_strength'] = 8;
 |--------------------------------------------------------------------------
 */
 $config['allow_registration'] = TRUE;
-$config['captcha_registration'] = TRUE;
+$config['captcha_registration'] = FALSE;
 $config['email_activation'] = TRUE;
 $config['email_activation_expire'] = 60 * 60 * 24 * 2;
 $config['email_account_details'] = TRUE;
@@ -109,14 +109,14 @@ $config['forgot_password_expire'] = 60 * 15;
 | 'captcha_case_sensitive' = Captcha case sensitive or not.
 |--------------------------------------------------------------------------
 */
-$config['captcha_path'] = 'captcha/';
-$config['captcha_fonts_path'] = 'captcha/fonts/5.ttf';
+$config['captcha_path'] = 'files/captcha/';
+$config['captcha_fonts_path'] = 'files/captcha/fonts/4.ttf';
 $config['captcha_width'] = 200;
 $config['captcha_height'] = 50;
-$config['captcha_font_size'] = 14;
-$config['captcha_grid'] = FALSE;
+$config['captcha_font_size'] = 72;
+$config['captcha_grid'] = TRUE;
 $config['captcha_expire'] = 180;
-$config['captcha_case_sensitive'] = TRUE;
+$config['captcha_case_sensitive'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
