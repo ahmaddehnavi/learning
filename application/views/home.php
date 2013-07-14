@@ -18,8 +18,16 @@
             <?php
             if (empty($user_id))
                 echo anchor('/auth/login/', 'sign in');
-            else
-                echo anchor('/auth/logout/', "logout ( $username )");
+            else {
+                echo
+                    '<div class="popupmenu">' .
+                    '<a href="#">' . $username . '</a>' .
+                    '<ul>' .
+                    '<li>' . anchor('#', 'Profile') . '</li>' .
+                    '<li>' . anchor('/auth/logout/', 'logout') . '</li>' .
+                    '</ul>' .
+                    '</div>';
+            }
             ?>
         </div>
         <div class="logo"></div>
