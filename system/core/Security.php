@@ -172,7 +172,7 @@ class CI_Security
      */
     public function csrf_set_cookie()
     {
-        $expire = time() + $this->_csrf_expire;
+        $expire        = time() + $this->_csrf_expire;
         $secure_cookie = (config_item('cookie_secure') === TRUE) ? 1 : 0;
 
         if ($secure_cookie && (empty($_SERVER['HTTPS']) OR strtolower($_SERVER['HTTPS']) === 'off')) {
@@ -405,7 +405,7 @@ class CI_Security
          * Becomes: &lt;blink&gt;
          */
         $naughty = 'alert|applet|audio|basefont|base|behavior|bgsound|blink|body|embed|expression|form|frameset|frame|head|html|ilayer|iframe|input|isindex|layer|link|meta|object|plaintext|style|script|textarea|title|video|xml|xss';
-        $str = preg_replace_callback('#<(/*\s*)(' . $naughty . ')([^><]*)([><]*)#is', array($this, '_sanitize_naughty_html'), $str);
+        $str     = preg_replace_callback('#<(/*\s*)(' . $naughty . ')([^><]*)([><]*)#is', array($this, '_sanitize_naughty_html'), $str);
 
         /*
          * Sanitize naughty scripting elements
@@ -442,6 +442,7 @@ class CI_Security
         }
 
         log_message('debug', "XSS Filtering completed");
+
         return $str;
     }
 
@@ -487,6 +488,7 @@ class CI_Security
 
         $str = html_entity_decode($str, ENT_COMPAT, $charset);
         $str = preg_replace('~&#x(0*[0-9a-f]{2,5})~ei', 'chr(hexdec("\\1"))', $str);
+
         return preg_replace('~&#([0-9]{2,4})~e', 'chr(\\1)', $str);
     }
 
@@ -541,6 +543,7 @@ class CI_Security
         }
 
         $str = remove_invisible_characters($str, FALSE);
+
         return stripslashes(str_replace($bad, '', $str));
     }
 
@@ -584,14 +587,14 @@ class CI_Security
 
         if ($is_image === TRUE) {
             /*
-             * Adobe Photoshop puts XML metadata into JFIF images,
-             * including namespacing, so we have to allow this for images.
+             * Adobe Photoshop puts XML metadata into JFIF img,
+             * including namespacing, so we have to allow this for img.
              */
             unset($evil_attributes[array_search('xmlns', $evil_attributes)]);
         }
 
         do {
-            $count = 0;
+            $count   = 0;
             $attribs = array();
 
             // find occurrences of illegal attribute strings with quotes (042 and 047 are octal quotes)

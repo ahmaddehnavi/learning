@@ -7,7 +7,7 @@
 | These details are used in emails sent by authentication library.
 |--------------------------------------------------------------------------
 */
-$config['website_name'] = 'Your project';
+$config['website_name']    = 'Panda Academy';
 $config['webmaster_email'] = 'webmaster@your-site.com';
 
 /*
@@ -39,12 +39,12 @@ $config['phpass_hash_strength'] = 8;
 | 'password_max_length' = Max length of user's password.
 |--------------------------------------------------------------------------
 */
-$config['allow_registration'] = TRUE;
-$config['captcha_registration'] = FALSE;
-$config['email_activation'] = TRUE;
+$config['allow_registration']      = TRUE;
+$config['captcha_registration']    = FALSE;
+$config['email_activation']        = FALSE;
 $config['email_activation_expire'] = 60 * 60 * 24 * 2;
-$config['email_account_details'] = TRUE;
-$config['use_username'] = TRUE;
+$config['email_account_details']   = FALSE;
+$config['use_username']            = TRUE;
 
 $config['username_min_length'] = 4;
 $config['username_max_length'] = 20;
@@ -68,12 +68,12 @@ $config['password_max_length'] = 20;
 | 'login_attempt_expire' = Time to live for every attempt to login. Default is 24 hours (60*60*24).
 |--------------------------------------------------------------------------
 */
-$config['login_by_username'] = TRUE;
-$config['login_by_email'] = TRUE;
-$config['login_record_ip'] = TRUE;
-$config['login_record_time'] = TRUE;
+$config['login_by_username']    = TRUE;
+$config['login_by_email']       = TRUE;
+$config['login_record_ip']      = TRUE;
+$config['login_record_time']    = TRUE;
 $config['login_count_attempts'] = TRUE;
-$config['login_max_attempts'] = 5;
+$config['login_max_attempts']   = 5;
 $config['login_attempt_expire'] = 60 * 60 * 24;
 
 /*
@@ -109,13 +109,13 @@ $config['forgot_password_expire'] = 60 * 15;
 | 'captcha_case_sensitive' = Captcha case sensitive or not.
 |--------------------------------------------------------------------------
 */
-$config['captcha_path'] = 'files/captcha/';
-$config['captcha_fonts_path'] = 'files/captcha/fonts/4.ttf';
-$config['captcha_width'] = 200;
-$config['captcha_height'] = 50;
-$config['captcha_font_size'] = 72;
-$config['captcha_grid'] = TRUE;
-$config['captcha_expire'] = 180;
+$config['captcha_path']           = 'files/captcha/';
+$config['captcha_fonts_path']     = 'files/captcha/fonts/4.ttf';
+$config['captcha_width']          = 200;
+$config['captcha_height']         = 50;
+$config['captcha_font_size']      = 72;
+$config['captcha_grid']           = TRUE;
+$config['captcha_expire']         = 180;
 $config['captcha_case_sensitive'] = FALSE;
 
 /*
@@ -126,8 +126,8 @@ $config['captcha_case_sensitive'] = FALSE;
 | You can get reCAPTCHA keys by registering at http://recaptcha.net
 |--------------------------------------------------------------------------
 */
-$config['use_recaptcha'] = FALSE;
-$config['recaptcha_public_key'] = '';
+$config['use_recaptcha']         = FALSE;
+$config['recaptcha_public_key']  = '';
 $config['recaptcha_private_key'] = '';
 
 /*

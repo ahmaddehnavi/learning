@@ -1,16 +1,30 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html lang="en-US">
 <head>
+
+    <!-- global code  -->
     <meta charset="UTF-8"/>
-    <title>title</title>
-    <link rel="stylesheet" type="text/css" href="<?= base_url('files/styles/reset.css') ?>"/>
-    <link rel="stylesheet" type="text/css" href="<?= base_url('files/styles/home.css') ?>"/>
-    <link rel="stylesheet" type="text/css" href="<?= base_url('files/styles/train_slideshow.css') ?>"/>
-    <script type="text/javascript" src="<?= base_url('files/js/html5shiv.js') ?>"></script>
-    <script type="text/javascript" src="<?= base_url('files/js/slider.js') ?>"></script>
-    <script type="text/javascript" src="<?= base_url('files/js/scroll.js') ?>"></script>
+    <meta name="author" content=""/>
+    <meta name='keywords' content=''/>
+    <meta name='description' content=''/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no"/>
+
+    <!--[if lt IE 9]>
+    <script src="<?=FILES_JS_PATH?>/base/html5shiv.js"></script>
+    <script src="<?=FILES_JS_PATH?>/base/css3-mediaqueries.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/base/global.css"/>
+    <!-- ############################################################################ -->
+
+    <link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/home.css"/>
+    <link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/train_slideshow.css"/>
+
 </head>
 <body>
+
 <a name="home">.</a>
 <header>
     <div class="container">
@@ -33,8 +47,8 @@
         <div class="logo"></div>
         <nav>
             <menu>
-                <li class="active" id="pre_active"><a href="#home" onclick="return pageScroll(this);">get
-                        start</a></li>
+                <li class="active" id="pre_active">
+                    <a href="#home" onclick="return pageScroll(this);">get start</a></li>
                 <li><a href="#slides" onclick="return pageScroll(this);">screen shot</a></li>
                 <li><a href="#footer" onclick="return pageScroll(this);">about us</a></li>
                 <li><a href="#">faq</a></li>
@@ -52,7 +66,6 @@
         <h2 class="center">A Cloud-Enabled Desktop App for All Your Email</h2>
         <h4>Unified Inbox, Relevance Sorting, Smart Views</h4>
         <h4>Unified Inbox, Relevance Sorting</h4>
-
         <?=anchor('/auth/register/', 'get started', 'class="button center"') ?>
     </div>
 </div>
@@ -99,8 +112,24 @@
     </div>
 </footer>
 
+
+<!-- ############################################################################ -->
+<script src="<?= FILES_JS_PATH ?>/base/prefixfree.min.js"></script>
+<!--[if lt IE 9]>
+<script src="<?=FILES_JS_PATH?>/base/jquery-1.9.0.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<script src="<?= FILES_JS_PATH ?>/base/jquery-2.0.3.js"></script>
+<!--[endif]-->
+<!-- ############################################################################ -->
+
+
+<script type="text/javascript" src="<?= FILES_JS_PATH ?>/slider.js"></script>
+<script type="text/javascript" src="<?= FILES_JS_PATH ?>/scroll.js"></script>
+
 <script type="text/javascript">
     startSlider();
 </script>
+
 </body>
 </html>
