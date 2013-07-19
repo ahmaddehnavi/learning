@@ -55,7 +55,7 @@
  * @property CI_Trackback $trackback              Trackback Sending/Receiving Class
  * @property CI_Typography $typography            Typography Class
  * @property CI_Unit_test $unit_test              Simple testing class
- * @property CI_Upload $upload                    File Uploading Class
+ * @property CI_Upload $File                    File Uploading Class
  * @property CI_URI $uri                          Parses URIs and determines routing
  * @property CI_User_agent $user_agent            Identifies the platform, browser, robot, or mobile devise of the browsing agent
  * @property CI_Validation $validation            //dead
@@ -71,7 +71,9 @@
  */
 class CI_Controller extends my_models
 {
-  public function __construct() {} //This default return construct as set
+    public function __construct()
+    {
+    } //This default return construct as set
 }
 
 /**
@@ -105,7 +107,7 @@ class CI_Controller extends my_models
  * @property CI_Trackback $trackback              Trackback Sending/Receiving Class
  * @property CI_Typography $typography            Typography Class
  * @property CI_Unit_test $unit_test              Simple testing class
- * @property CI_Upload $upload                    File Uploading Class
+ * @property CI_Upload $File                    File Uploading Class
  * @property CI_URI $uri                          Parses URIs and determines routing
  * @property CI_User_agent $user_agent            Identifies the platform, browser, robot, or mobile devise of the browsing agent
  * @property CI_Validation $validation            //dead
@@ -121,5 +123,7 @@ class CI_Controller extends my_models
  */
 class CI_Model
 {
-  public function __construct() {} //This default return construct as set
+    public function __construct()
+    {
+    } //This default return construct as set
 }

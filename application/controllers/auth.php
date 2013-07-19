@@ -38,7 +38,7 @@ class Auth extends CI_Controller
         } else {
             $data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
                 $this->config->item('use_username', 'tank_auth'));
-            $data['login_by_email'] = $this->config->item('login_by_email', 'tank_auth');
+            $data['login_by_email']    = $this->config->item('login_by_email', 'tank_auth');
 
             $this->form_validation->set_rules('login', 'Login', 'trim|required|xss_clean');
             $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
@@ -70,8 +70,7 @@ class Auth extends CI_Controller
                     $data['login_by_username'],
                     $data['login_by_email'])
                 ) { // success
-                    redirect('');
-
+                    redirect($this->session->userdata('pre_page'));
                 } else {
                     $errors = $this->tank_auth->get_error_message();
                     if (isset($errors['banned'])) { // banned user
@@ -137,7 +136,7 @@ class Auth extends CI_Controller
             $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
 
             $captcha_registration = $this->config->item('captcha_registration', 'tank_auth');
-            $use_recaptcha = $this->config->item('use_recaptcha', 'tank_auth');
+            $use_recaptcha        = $this->config->item('use_recaptcha', 'tank_auth');
             if ($captcha_registration) {
                 if ($use_recaptcha) {
                     $this->form_validation->set_rules('recaptcha_response_field', 'Confirmation Code', 'trim|xss_clean|required|callback__check_recaptcha');
@@ -189,9 +188,9 @@ class Auth extends CI_Controller
                     $data['captcha_html'] = $this->_create_captcha();
                 }
             }
-            $data['use_username'] = $use_username;
+            $data['use_username']         = $use_username;
             $data['captcha_registration'] = $captcha_registration;
-            $data['use_recaptcha'] = $use_recaptcha;
+            $data['use_recaptcha']        = $use_recaptcha;
             $this->load->view('auth/register_form', $data);
         }
     }
@@ -216,7 +215,7 @@ class Auth extends CI_Controller
                     $this->form_validation->set_value('email')))
                 ) { // success
 
-                    $data['site_name'] = $this->config->item('website_name', 'tank_auth');
+                    $data['site_name']         = $this->config->item('website_name', 'tank_auth');
                     $data['activation_period'] = $this->config->item('email_activation_expire', 'tank_auth') / 3600;
 
                     $this->_send_email('activate', $data['email'], $data);
@@ -241,7 +240,7 @@ class Auth extends CI_Controller
      */
     function activate()
     {
-        $user_id = $this->uri->segment(3);
+        $user_id       = $this->uri->segment(3);
         $new_email_key = $this->uri->segment(4);
 
         // Activate user
@@ -302,7 +301,7 @@ class Auth extends CI_Controller
      */
     function reset_password()
     {
-        $user_id = $this->uri->segment(3);
+        $user_id      = $this->uri->segment(3);
         $new_pass_key = $this->uri->segment(4);
 
         $this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length[' . $this->config->item('password_min_length', 'tank_auth') . ']|max_length[' . $this->config->item('password_max_length', 'tank_auth') . ']|alpha_dash');
@@ -419,7 +418,7 @@ class Auth extends CI_Controller
      */
     function reset_email()
     {
-        $user_id = $this->uri->segment(3);
+        $user_id       = $this->uri->segment(3);
         $new_email_key = $this->uri->segment(4);
 
         // Reset email
@@ -539,6 +538,7 @@ class Auth extends CI_Controller
 
         if ($now - $time > $this->config->item('captcha_expire', 'tank_auth')) {
             $this->form_validation->set_message('_check_captcha', $this->lang->line('auth_captcha_expired'));
+
             return FALSE;
 
         } elseif (($this->config->item('captcha_case_sensitive', 'tank_auth') AND
@@ -546,8 +546,10 @@ class Auth extends CI_Controller
             strtolower($code) != strtolower($word)
         ) {
             $this->form_validation->set_message('_check_captcha', $this->lang->line('auth_incorrect_captcha'));
+
             return FALSE;
         }
+
         return TRUE;
     }
 
@@ -585,8 +587,10 @@ class Auth extends CI_Controller
 
         if (!$resp->is_valid) {
             $this->form_validation->set_message('_check_recaptcha', $this->lang->line('auth_incorrect_captcha'));
+
             return FALSE;
         }
+
         return TRUE;
     }
 
