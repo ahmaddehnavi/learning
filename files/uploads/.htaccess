@@ -1,2 +1,2 @@
-deny from all
-ErrorDocument 403 /codeigniter/404.html
+#deny from all
+#ErrorDocument 403 /codeigniter/404.html
