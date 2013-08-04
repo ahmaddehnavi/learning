@@ -42,7 +42,7 @@
             <section id="content-head">
                 <section class="top">
                     <ul>
-                        <li><a href="#"> home </a><i class="icon-gt"></i></li>
+                        <li><a href="#"> home </a>&nbsp;&gt;&nbsp;</li>
                         <li>dashboard</li>
                         <div class="badboy"></div>
                     </ul>
