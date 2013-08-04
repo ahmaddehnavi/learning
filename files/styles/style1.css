@@ -1,16 +1,31 @@
 body {
-    background : url("http://localhost/CodeIgniter/files/img/bg.png");
-    min-height : 100%;
-    min-width  : 100%;
-    position   : absolute;
-    top        : 0;
-    bottom     : 0;
-    /*right: 0;*/
-    left       : 0;
+    /*background  : url("http://localhost/CodeIgniter/files/img/bg.png");*/
+    min-height  : 100%;
+    min-width   : 100%;
+    position    : absolute;
+    top         : 0;
+    bottom      : 0;
+    right       : 0;
+    left        : 0;
+    font-family : "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-* {
-    /*box-shadow : inset 0 0 10px red;*/
+a {
+    color           : #0088cc;
+    text-decoration : none;
+}
+
+a:hover, a:focus {
+    color           : #005580;
+    text-decoration : underline;
+}
+
+menu {
+    list-style-type : none;
+}
+
+menu a:hover {
+    text-decoration : none;
 }
 
 #content {
@@ -20,7 +35,7 @@ body {
 
 main {
     margin-left        : 280px;
-    background-color   : #6bff98;
+    /*background-color   : #6bff98;*/
     min-height         : 400px;
     -webkit-transition : margin 1s ease-in-out;
     -moz-transition    : margin 1s ease-in-out;
@@ -59,25 +74,30 @@ main {
     -webkit-box-shadow : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
     -moz-box-shadow    : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
     box-shadow         : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
+    background         : #333;
+    border-bottom      : 1px solid #000;
+
+    -webkit-box-shadow : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
+    -moz-box-shadow    : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
+    box-shadow         : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
     /*height: 60px;*/
-    padding            : 20px 20px 20px 50px;
-    font-size          : 20px;
-    color              : #fff;
-    text-shadow        : 0 0 2px white;
+    padding            : 23px 20px 23px 50px;
+    font-size          : 14px;
+    color              : #ccc;
+    margin-bottom      : 30px;
 }
 
-menu {
-    list-style-type : none;
-}
-
-#sidebar li {
-    padding : 10px 15px 10px 55px;
-
+#sidebar li:last-child {
+    border-top : 1px dotted #333;
 }
 
 #sidebar a {
-    text-decoration : none;
-    color           : #ccc;
+    color          : #ccc;
+    display        : block;
+    padding        : 10px 15px 10px 55px;
+    text-transform : capitalize;
+    font-size      : 13px;
+    font-weight    : 500;
 }
 
 #sidebar li:hover {
@@ -94,9 +114,106 @@ menu {
     -webkit-box-shadow : 0 0 2px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.5) inset;
     -moz-box-shadow    : 0 0 2px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.5) inset;
     box-shadow         : 0 0 2px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.5) inset;
-    color              : #cacaca;
-    height             : 60px;
+    color              : #fff;
+    line-height        : 60px;
+    padding-left       : 30px;
 }
+
+#content-head {
+    padding : 30px 30px 0 30px;
+}
+
+#content-head section {
+    display : block;
+}
+
+#content-head .top {
+    font-size : 14px;
+}
+
+#content-head .bottom {
+    margin : 33px 0;
+}
+
+#content-head ul {
+    list-style-type : none;
+    display         : block;
+}
+
+#content-head li {
+    float : left;
+    color : #555;
+}
+
+#content-head h2 {
+    /*font-weight: bold;*/
+    text-transform : capitalize;
+    color          : #333;
+    font-size      : 20px;
+}
+
+#content-head div {
+    margin    : 15px 0;
+    color     : #ccc;
+    font-size : 13px;
+}
+
+#content-body {
+    background-color : rgb(241, 240, 255);
+    height           : inherit;
+    padding-top      : 1px;
+}
+
+#content-body > section {
+    /*background-color : #fff;*/
+    border-radius : 2px;
+    border        : 1px solid #d9d9dd;
+    margin        : 30px;
+}
+
+#content-body section header {
+    background    : #f7f8f9;
+    border-bottom : 1px solid #d9d9dd;
+    border-radius : 2px 2px 0 0;
+    box-shadow    : 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    color         : #727476;
+    font-weight   : 500;
+    padding       : 10px 15px;
+
+}
+
+#content-body section article {
+    background    : #fff;
+    padding       : 15px;
+    border-radius : 0 0 2px 2px;
+}
+
+/*nav{*/
+/*background-color: #111;*/
+/*-webkit-box-shadow: 0 1px 10px rgba(0,0,0,.1);*/
+/*-moz-box-shadow: 0 1px 10px rgba(0,0,0,.1);*/
+/*box-shadow: 0 1px 10px rgba(0,0,0,.1);*/
+/*}*/
+
+/*nav menu{*/
+
+/*}*/
+
+/*nav li{*/
+/*float: left;*/
+/*}*/
+
+/*nav a{*/
+/*display: block;*/
+/*padding: 10px 15px;*/
+/*font-size: 15px;*/
+/*color: #ccc;*/
+
+/*}*/
+
+/*nav a:hover,nav li.active a{*/
+/*color: #ffffff;*/
+/*}*/
 
 /*Large desktop*/
 @media (min-width: 1200px) {

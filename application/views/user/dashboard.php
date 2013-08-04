@@ -24,27 +24,111 @@
 <body>
 
 <div id="container">
+
+    <!--    <nav>
+            <menu>
+                <li><a href="#">item 1</a></li>
+                <li class="active"><a href="#">item 2</a></li>
+                <li><a href="#">item 3</a></li>
+                <li><a href="#">item 4</a></li>
+                <div class="badboy"></div>
+            </menu>
+        </nav>-->
     <div id="content">
         <header>
             panda academy
         </header>
         <main>
-            content content content content content content content content content content content content content
+            <section id="content-head">
+                <section class="top">
+                    <ul>
+                        <li><a href="#"> home </a><i class="icon-gt"></i></li>
+                        <li>dashboard</li>
+                        <div class="badboy"></div>
+                    </ul>
+                </section>
+
+                <section class="bottom">
+                    <h2>dashboard</h2>
+
+                    <div>Sample description for dashboard page</div>
+                </section>
+            </section>
+            <section id="content-body">
+                <section>
+                    <header>header header header</header>
+                    <article>
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article
+                    </article>
+                </section>
+                <section>
+                    <header>header header header</header>
+                    <article>
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article
+                    </article>
+                </section>
+                <section>
+                    <header>header header header</header>
+                    <article>
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article
+                    </article>
+                </section>
+                <section>
+                    <header>header header header</header>
+                    <article>
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article
+                    </article>
+                </section>
+                <section>
+                    <header>header header header</header>
+                    <article>
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article article article article
+                        article article article article article article article article article
+                    </article>
+                </section>
+            </section>
         </main>
     </div>
     <aside id="sidebar">
         <header>ahmad dehnavi</header>
-        <nav>
-            <menu>
-                <li><a href="#">item 1</a></li>
-                <li><a href="#">item 2</a></li>
-                <li><a href="#">item 3</a></li>
-                <li><a href="#">item 4</a></li>
-                <li><a href="#">item 5</a></li>
-            </menu>
-        </nav>
+        <menu>
+            <li class="icon-dashboard"><a href="#">dashboard</a></li>
+            <li class="icon-massage"><a href="#">massage</a></li>
+            <li class="icon-class"><a href="#">class</a></li>
+            <li class="icon-profile"><a href="#">profile</a></li>
+            <li class="icon-logout"><a href="#">logout</a></li>
+        </menu>
     </aside>
-    <footer id="footer">footer</footer>
+    <!--    <footer id="footer">footer</footer>-->
 </div>
 
 
