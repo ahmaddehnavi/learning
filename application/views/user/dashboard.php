@@ -147,10 +147,7 @@
 
 <script type="text/javascript" src="<?= FILES_JS_PATH ?>/js.js"></script>
 <script>
-    $('h2').helloWorld({
-        color: '#005dff',
-        fontStyle: 'italic'
-    });
+    $().responsive();
 </script>
 </body>
 </html>
