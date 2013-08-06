@@ -1,62 +1,41 @@
 body {
     /*background  : url("http://localhost/CodeIgniter/files/img/bg.png");*/
-    min-height  : 100%;
-    min-width   : 100%;
-    position    : absolute;
-    top         : 0;
-    bottom      : 0;
-    right       : 0;
-    left        : 0;
+    /*min-height  : 100%;*/
+    /*min-width   : 100%;*/
+    position    : relative;
+    /*top         : 0;*/
+    /*bottom      : 0;*/
+    /*right       : 0;*/
+    /*left        : 0;*/
     font-family : "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-a {
-    color           : #0088cc;
-    text-decoration : none;
-}
-
-a:hover, a:focus {
-    color           : #005580;
-    text-decoration : underline;
-}
-
-menu {
-    list-style-type : none;
-}
-
-menu a:hover {
-    text-decoration : none;
-}
-
 #content {
-    float : left;
-    width : 100%;
+    padding-left       : 280px;
+    -webkit-transition : padding 1s ease-in-out;
+    -moz-transition    : padding 1s ease-in-out;
+    -ms-transition     : padding 1s ease-in-out;
+    transition         : padding 1s ease-in-out;
 }
 
 main {
-    margin-left        : 280px;
+    /*margin-left        : 280px;*/
     /*background-color   : #6bff98;*/
-    min-height         : 400px;
-    -webkit-transition : margin 1s ease-in-out;
-    -moz-transition    : margin 1s ease-in-out;
-    -ms-transition     : margin 1s ease-in-out;
-    transition         : margin 1s ease-in-out;
+    min-height : 400px;
 }
 
 #sidebar {
     float              : left;
     width              : 280px;
-    min-height         : 100%;
+    height             : 100%;
     background-color   : #222;
-    position           : fixed;
-    left               : 0;
-    top                : 0;
-    bottom             : 0;
     -webkit-transition : width 1s ease-in-out;
     -moz-transition    : width 1s ease-in-out;
     -ms-transition     : width 1s ease-in-out;
     transition         : width 1s ease-in-out;
     overflow           : hidden;
+    position           : absolute;
+
 }
 
 /*#footer {*/
@@ -138,6 +117,7 @@ main {
 #content-head ul {
     list-style-type : none;
     display         : block;
+    height          : 30px;
 }
 
 #content-head li {
@@ -188,32 +168,32 @@ main {
     border-radius : 0 0 2px 2px;
 }
 
-/*nav{*/
-/*background-color: #111;*/
-/*-webkit-box-shadow: 0 1px 10px rgba(0,0,0,.1);*/
-/*-moz-box-shadow: 0 1px 10px rgba(0,0,0,.1);*/
-/*box-shadow: 0 1px 10px rgba(0,0,0,.1);*/
-/*}*/
+nav {
+    background-color   : #111;
+    -webkit-box-shadow : 0 1px 10px rgba(0, 0, 0, .1);
+    -moz-box-shadow    : 0 1px 10px rgba(0, 0, 0, .1);
+    box-shadow         : 0 1px 10px rgba(0, 0, 0, .1);
+}
 
-/*nav menu{*/
+nav menu {
 
-/*}*/
+}
 
-/*nav li{*/
-/*float: left;*/
-/*}*/
+nav li {
+    float : left;
+}
 
-/*nav a{*/
-/*display: block;*/
-/*padding: 10px 15px;*/
-/*font-size: 15px;*/
-/*color: #ccc;*/
+nav a {
+    display   : block;
+    padding   : 10px 15px;
+    font-size : 15px;
+    color     : #ccc;
 
-/*}*/
+}
 
-/*nav a:hover,nav li.active a{*/
-/*color: #ffffff;*/
-/*}*/
+nav a:hover, nav li.active a {
+    color : #ffffff;
+}
 
 /*Landscape phones and down*/
 @media (max-width: 480px) {
@@ -221,8 +201,12 @@ main {
         width : 40px;
     }
 
-    #content > * {
-        margin-left : 40px;
+    #content {
+        padding-left : 40px;
+    }
+
+    #sidebar header {
+        text-indent : -500px;
     }
 }
 
@@ -232,8 +216,12 @@ main {
         width : 40px;
     }
 
-    #content > * {
-        margin-left : 40px;
+    #content {
+        padding-left : 40px;
+    }
+
+    #sidebar header {
+        text-indent : -500px;
     }
 }
 
@@ -243,8 +231,8 @@ main {
         width : 200px;
     }
 
-    #content > * {
-        margin-left : 200px;
+    #content {
+        padding-left : 200px;
     }
 }
 
@@ -253,8 +241,8 @@ main {
         width : 250px;
     }
 
-    #content > * {
-        margin-left : 250px;
+    #content {
+        padding-left : 250px;
     }
 }
 
@@ -264,8 +252,8 @@ main {
         width : 280px;
     }
 
-    #content > * {
-        margin-left : 280px;
+    #content {
+        padding-left : 280px;
     }
 }
 

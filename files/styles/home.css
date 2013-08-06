@@ -170,22 +170,6 @@ header .user a {
     text-transform  : uppercase;
 }
 
-::-webkit-scrollbar {
-    width : 12px;
-}
-
-::-webkit-scrollbar-track {
-    background : #D5DCFD;
-}
-
-::-webkit-scrollbar-thumb {
-    background : #224e6b;
-}
-
-::-webkit-scrollbar-thumb:window-inactive {
-    background : #32729C;
-}
-
 .popupmenu {
     position : relative;
 }

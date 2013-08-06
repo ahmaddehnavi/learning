@@ -25,15 +25,27 @@
 
 <div id="container">
 
-    <!--    <nav>
-            <menu>
-                <li><a href="#">item 1</a></li>
-                <li class="active"><a href="#">item 2</a></li>
-                <li><a href="#">item 3</a></li>
-                <li><a href="#">item 4</a></li>
-                <div class="badboy"></div>
-            </menu>
-        </nav>-->
+    <nav>
+        <menu>
+            <li><a href="#">item 1</a></li>
+            <li class="active"><a href="#">item 2</a></li>
+            <li><a href="#">item 3</a></li>
+            <li><a href="#">item 4</a></li>
+            <div class="badboy"></div>
+        </menu>
+    </nav>
+    <aside id="sidebar">
+        <header>ahmad dehnavi</header>
+        <menu>
+            <li class="icon-dashboard"><a href="#">dashboard</a></li>
+            <li class="icon-massage"><a href="#">massage<sup>5</sup></a></li>
+            <li class="icon-exercise"><a href="#">exercise</a></li>
+            <li class="icon-class"><a href="#">class</a></li>
+            <li class="icon-exam"><a href="#">exam</a></li>
+            <li class="icon-profile"><a href="#">profile</a></li>
+            <li class="icon-logout"><a href="#">logout</a></li>
+        </menu>
+    </aside>
     <div id="content">
         <header>
             panda academy
@@ -44,7 +56,6 @@
                     <ul>
                         <li><a href="#"> home </a>&nbsp;&gt;&nbsp;</li>
                         <li>dashboard</li>
-                        <div class="badboy"></div>
                     </ul>
                 </section>
 
@@ -118,16 +129,7 @@
             </section>
         </main>
     </div>
-    <aside id="sidebar">
-        <header>ahmad dehnavi</header>
-        <menu>
-            <li class="icon-dashboard"><a href="#">dashboard</a></li>
-            <li class="icon-massage"><a href="#">massage</a></li>
-            <li class="icon-class"><a href="#">class</a></li>
-            <li class="icon-profile"><a href="#">profile</a></li>
-            <li class="icon-logout"><a href="#">logout</a></li>
-        </menu>
-    </aside>
+    <div class="badboy"></div>
     <!--    <footer id="footer">footer</footer>-->
 </div>
 
@@ -143,7 +145,12 @@
 <!-- ############################################################################ -->
 
 
-<script type="text/javascript" src="<?= FILES_JS_PATH ?>/slider.js"></script>
-
+<script type="text/javascript" src="<?= FILES_JS_PATH ?>/js.js"></script>
+<script>
+    $('h2').helloWorld({
+        color: '#005dff',
+        fontStyle: 'italic'
+    });
+</script>
 </body>
 </html>

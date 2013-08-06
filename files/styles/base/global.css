@@ -113,6 +113,44 @@
     height : 0 !important;
 }
 
+::-webkit-scrollbar {
+    width : 12px;
+}
+
+::-webkit-scrollbar-track {
+    background : #D5DCFD;
+}
+
+::-webkit-scrollbar-thumb {
+    background : #222;
+}
+
+a {
+    color           : #0088cc;
+    text-decoration : none;
+}
+
+a:hover, a:focus {
+    color           : #005580;
+    text-decoration : underline;
+}
+
+menu {
+    list-style-type : none;
+}
+
+menu a:hover {
+    text-decoration : none;
+}
+
+a > sup {
+    vertical-align : super;
+    line-height    : 0;
+    color          : white;
+    text-shadow    : 0 0 2px white;
+    padding        : 5px;
+}
+
 /*.btn,button,input[type=button]{*/
 /*padding: 13px 30px;*/
 /*display: inline-block;*/
