@@ -36,13 +36,13 @@
     <aside id="sidebar">
         <header>ahmad dehnavi</header>
         <menu>
-            <li class="icon-dashboard"><a href="#">dashboard</a></li>
-            <li class="icon-massage"><a href="#">massage<sup>5</sup></a></li>
-            <li class="icon-exercise"><a href="#">exercise</a></li>
-            <li class="icon-class"><a href="#">class</a></li>
-            <li class="icon-exam"><a href="#">exam</a></li>
-            <li class="icon-profile"><a href="#">profile</a></li>
-            <li class="icon-logout"><a href="#">logout</a></li>
+            <li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
+            <li class="icon-message"><?php echo anchor("user/messages", "messages<sup>5</sup>") ?></li>
+            <li class="icon-exercise"><?php echo anchor("academy/exercises", "exercises") ?></li>
+            <li class="icon-class"><?php echo anchor("academy/classes", "classes") ?></li>
+            <li class="icon-exam active"><?php echo anchor("academy/exames", "exames") ?></li>
+            <li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
+            <li class="icon-logout"><?php echo anchor("auth/logout", "logout") ?></li>
         </menu>
     </aside>
     <div id="content">
@@ -53,15 +53,16 @@
             <section id="content-head">
                 <section class="top">
                     <ul>
-                        <li><a href="#"> home </a>&nbsp;&gt;&nbsp;</li>
-                        <li>dashboard</li>
+                        <li><?php echo anchor('home', 'home')?> </a>&nbsp;&gt;&nbsp;</li>
+                        <li><?php echo anchor('academy/home', 'academy')?> </a>&nbsp;&gt;&nbsp;</li>
+                        <li>exames</li>
                     </ul>
                 </section>
 
                 <section class="bottom">
-                    <h2>dashboard</h2>
+                    <h2>exames</h2>
 
-                    <div>Sample description for dashboard page</div>
+                    <div>Sample description for classes page</div>
                 </section>
             </section>
             <section id="content-body">

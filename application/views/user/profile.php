@@ -36,12 +36,12 @@
     <aside id="sidebar">
         <header>ahmad dehnavi</header>
         <menu>
-            <li class="icon-dashboard active"><?php echo anchor("user/dashboard", "dashboard") ?></li>
+            <li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
             <li class="icon-message"><?php echo anchor("user/messages", "messages<sup>5</sup>") ?></li>
             <li class="icon-exercise"><?php echo anchor("academy/exercises", "exercises") ?></li>
             <li class="icon-class"><?php echo anchor("academy/classes", "classes") ?></li>
             <li class="icon-exam"><?php echo anchor("academy/exames", "exames") ?></li>
-            <li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
+            <li class="icon-profile active"><?php echo anchor("user/profile", "profile") ?></li>
             <li class="icon-logout"><?php echo anchor("auth/logout", "logout") ?></li>
         </menu>
     </aside>
@@ -55,12 +55,12 @@
                     <ul>
                         <li><?php echo anchor('home', 'home')?> </a>&nbsp;&gt;&nbsp;</li>
                         <li><?php echo anchor('user/home', 'user')?> </a>&nbsp;&gt;&nbsp;</li>
-                        <li>dashboard</li>
+                        <li>profile</li>
                     </ul>
                 </section>
 
                 <section class="bottom">
-                    <h2>dashboard</h2>
+                    <h2>profile</h2>
 
                     <div>Sample description for classes page</div>
                 </section>
