@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-US">
 <head>
-    <!-- global code  -->
+
     <meta charset="UTF-8"/>
     <meta name="author" content=""/>
     <meta name='keywords' content=''/>
@@ -10,15 +10,16 @@
     <meta name="HandheldFriendly" content="true"/>
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no"/>
 
-    <!--[if lt IE 9]>-->
+    <!--ss[if lt IE 9]>-->
     <script src="<?= FILES_JS_PATH ?>/base/html5shiv.js"></script>
     <script src="<?= FILES_JS_PATH ?>/base/css3-mediaqueries.js"></script>
-    <![end if]-->
+    <!ss[end if]-->
 
     <link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/base/global.css"/>
     <!-- ############################################################################ -->
 
     <link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/style1.css"/>
+
 </head>
 
 <body>
@@ -34,7 +35,7 @@
         </menu>
     </nav>
     <aside id="sidebar">
-        <header><?php echo $this->tank_auth->get_username(); ?></header>
+        <header><?php echo $this->tank_auth->get_username(); ?>&nbsp;</header>
         <menu>
             <h2>academy :</h2>
             <li class="icon-exercise"><?php echo anchor("academy/exercises", "exercises") ?></li>
@@ -49,6 +50,11 @@
     </aside>
     <div id="content">
         <header>
+            <ul id="collapse-btn" collapse-target="#sidebar">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
             panda academy
         </header>
         <main>
@@ -138,16 +144,27 @@
 
 <!-- ############################################################################ -->
 <script src="<?= FILES_JS_PATH ?>/base/prefixfree.min.js"></script>
-<!--[if lt IE 9]>
-<script src="<?=FILES_JS_PATH?>/base/jquery-1.9.0.js"></script>
-<![endif]-->
-<!--[if gte IE 9]><!-->
-<script src="<?= FILES_JS_PATH ?>/base/jquery-2.0.3.js"></script>
-<!--[endif]-->
+
+<script src="<?= FILES_JS_PATH ?>/base/jquery-1.9.0.js"></script>
 <!-- ############################################################################ -->
 
-<!--<script type="text/javascript" src="--><?//= FILES_JS_PATH ?><!--/base/bootstrap.js"></script>-->
-
 <script type="text/javascript" src="<?= FILES_JS_PATH ?>/js.js"></script>
+
+<script type="text/javascript">
+
+    $('html').responsive();
+
+    var opt2 = {
+        onCollapse: function () {
+            $('#sidebar').animate({width: "0"}, 1000);
+            $('#content').animate({paddingLeft: '0'}, 1000);
+        },
+        onUnCollapse: function () {
+            $('#sidebar').animate({width: "280px"}, 1000);
+            $('#content').animate({paddingLeft: '280px'}, 1000);
+        }
+    }
+    $('#collapse-btn').collapse(opt2);
+</script>
 </body>
 </html>
