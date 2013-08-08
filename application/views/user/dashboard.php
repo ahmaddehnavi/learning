@@ -10,11 +10,6 @@
     <meta name="HandheldFriendly" content="true"/>
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no"/>
 
-    <link type="text/css"
-          href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic,500italic,500,300italic,300"
-          rel="stylesheet">
-    <link type="text/css" href="http://fonts.googleapis.com/css?family=Fugaz+One|Leckerli+One" rel="stylesheet">
-
     <!--ss[if lt IE 9]>-->
     <script src="<?= FILES_JS_PATH ?>/base/html5shiv.js"></script>
     <!--    <script src="--><?//= FILES_JS_PATH ?><!--/base/css3-mediaqueries.js"></script>-->
@@ -38,10 +33,15 @@
             <li><a href="#">item 4</a></li>
             <div class="badboy"></div>
         </menu>
+        <ul class="collapse-btn btn-top" collapse-target="nav">
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
     </nav>
     <aside id="sidebar">
         <header><?php echo $this->tank_auth->get_username(); ?>&nbsp;</header>
-        <ul class="collapse-btn" collapse-target="#sidebar">
+        <ul class="collapse-btn btn-left" collapse-target="#sidebar">
             <li></li>
             <li></li>
             <li></li>
@@ -61,7 +61,7 @@
     </aside>
     <div id="content">
         <header>
-            <ul class="collapse-btn" collapse-target="#sidebar">
+            <ul class="collapse-btn btn-left" collapse-target="#sidebar">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -161,20 +161,34 @@
 <script type="text/javascript" src="<?= FILES_JS_PATH ?>/js.js"></script>
 
 <script type="text/javascript">
-
-    $('html').responsive();
+    var opt1 = {
+        onNoMiniPhone: function () {
+            $('nav').css('marginTop', '0');
+        }
+    }
+    $('html').responsive(opt1);
 
     var opt2 = {
-        onCollapse: function () {
+        onUnCollapse: function () {
             $('#sidebar').animate({width: "0"}, 1000);
             $('#content').animate({paddingLeft: '0'}, 1000);
         },
-        onUnCollapse: function () {
+        onCollapse: function () {
             $('#sidebar').animate({width: "280px"}, 1000);
             $('#content').animate({paddingLeft: '280px'}, 1000);
         }
     }
-    $('.collapse-btn').collapse(opt2);
+    $('.btn-left').collapse(opt2);
+
+    var opt3 = {
+        onCollapse: function () {
+            $('nav').animate({marginTop: "0"}, 1000);
+        },
+        onUnCollapse: function () {
+            $('nav').animate({marginTop: "-187px"}, 1000);
+        }
+    }
+    $('.btn-top').collapse(opt3);
 </script>
 </body>
 </html>

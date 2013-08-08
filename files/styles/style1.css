@@ -90,12 +90,21 @@ main {
 }
 
 .collapse-btn {
-    display  : none;
-    position : absolute;
-    left     : 5px;
-    top      : 8px;
-    cursor   : pointer;
-    padding  : 10px;
+    display       : none;
+    position      : absolute;
+    cursor        : pointer !important;
+    padding       : 10px !important;
+    border-radius : 2px;
+}
+
+.mini-phone nav .collapse-btn {
+    display : block;
+    bottom  : 5px;
+    left    : 5px;
+}
+
+.mini-phone nav .collapse-on {
+    box-shadow : inset 2px 0px 2px #111;
 }
 
 #content .collapse-btn {
@@ -105,17 +114,29 @@ main {
     display : block;
 }
 
+.collapse-on {
+    transition : all 1s;
+    transform  : rotate(90deg);
+}
+
+.collapse-off {
+    transition : all 1s;
+    transform  : rotate(0deg);
+}
+
 .mini-phone #sidebar .collapse-btn {
     right   : 5px;
+    top     : 8px;
     left    : auto;
     display : block;
 }
 
 .collapse-btn li {
     background-color : white !important;
-    height           : 3px;
-    margin           : 4px;
-    width            : 20px;
+    height           : 3px !important;
+    margin           : 4px !important;
+    width            : 20px !important;
+    padding          : 0 !important;
 }
 
 #content-head {
@@ -193,10 +214,20 @@ nav {
     -webkit-box-shadow : 0 1px 10px rgba(0, 0, 0, .1);
     -moz-box-shadow    : 0 1px 10px rgba(0, 0, 0, .1);
     box-shadow         : 0 1px 10px rgba(0, 0, 0, .1);
+    position           : relative;
 }
 
-nav menu {
+.mini-phone nav {
+    overflow   : hidden;
+    margin-top : -187px;
+}
 
+no-mini-phone nav {
+    margin-top : 0;
+}
+
+.mini-phone nav menu {
+    padding-bottom : 60px;
 }
 
 nav li {
@@ -204,9 +235,11 @@ nav li {
 }
 
 .mini-phone nav li {
-    float      : none;
-    width      : 100%;
-    text-align : center;
+    float         : none;
+    width         : 100%;
+    text-align    : center;
+    padding       : 10px;
+    border-bottom : 1px solid #333;
 }
 
 nav a {
