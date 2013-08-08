@@ -40,10 +40,21 @@
             onPhone: function () {
             },
             onMiniPhone: function () {
+            },
+            onUnLargeDesktop: function () {
+            },
+            onUnDesktop: function () {
+            },
+            onUnTablet: function () {
+            },
+            onUnPhone: function () {
+            },
+            onUnMiniPhone: function () {
             }
         }, options);
 
         var $window = jQuery(window);
+        var preClass = "";
 //        return this.each(function () {
 
         var $tag = $(this);
@@ -60,22 +71,42 @@
 
         function checkWidth($tag) {
             if ($window.width() > 1200) {
-                $tag.removeClass('desktop tablet phone mini-phone').addClass('large-desktop');
+                $tag.removeClass('no-large-desktop desktop tablet phone mini-phone').addClass('large-desktop no-desktop no-tablet no-phone no-mini-phone');
                 settings.onLargeDesktop();
+                settings.onUnDesktop();
+                settings.onUnTablet();
+                settings.onUnPhone();
+                settings.onUnMiniPhone();
             }
             else if ($window.width() > 979) {
-                $tag.removeClass('large-desktop tablet phone mini-phone').addClass('desktop');
+                $tag.removeClass('large-desktop no-desktop tablet phone mini-phone').addClass('no-large-desktop desktop no-tablet no-phone no-mini-phone');
+                settings.onUnLargeDesktop();
                 settings.onDesktop();
+                settings.onUnTablet();
+                settings.onUnPhone();
+                settings.onUnMiniPhone();
             }
             else if ($window.width() > 767) {
-                $tag.removeClass('large-desktop desktop phone mini-phone').addClass('tablet');
+                $tag.removeClass('large-desktop desktop no-tablet phone mini-phone').addClass('no-large-desktop no-desktop tablet no-phone no-mini-phone');
+                settings.onUnLargeDesktop();
+                settings.onUnDesktop();
                 settings.onTablet();
+                settings.onUnPhone();
+                settings.onUnMiniPhone();
             }
             else if ($window.width() > 480) {
-                $tag.removeClass('large-desktop desktop tablet mini-phone').addClass('phone');
+                $tag.removeClass('large-desktop desktop tablet no-phone mini-phone').addClass('no-large-desktop no-desktop no-tablet phone no-mini-phone');
+                settings.onUnLargeDesktop();
+                settings.onUnDesktop();
+                settings.onUnTablet();
                 settings.onPhone();
+                settings.onUnMiniPhone();
             } else {
-                $tag.removeClass('large-desktop desktop tablet phone').addClass('mini-phone');
+                $tag.removeClass('large-desktop desktop tablet phone no-mini-phone').addClass('no-large-desktop no-desktop no-tablet no-phone mini-phone');
+                settings.onUnLargeDesktop();
+                settings.onUnDesktop();
+                settings.onUnTablet();
+                settings.onUnPhone();
                 settings.onMiniPhone();
             }
         }

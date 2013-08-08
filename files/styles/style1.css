@@ -6,10 +6,6 @@ body {
 
 #content {
     padding-left : 280px;
-    /*-webkit-transition : padding 1s ease-in-out;*/
-    /*-moz-transition    : padding 1s ease-in-out;*/
-    /*-ms-transition     : padding 1s ease-in-out;*/
-    /*transition         : padding 1s ease-in-out;*/
 }
 
 main {
@@ -20,25 +16,13 @@ main {
 #sidebar {
     float            : left;
     width            : 280px;
+    max-width        : 100%;
     height           : 100%;
     background-color : #222;
-    /*-webkit-transition : width 1s ease-in-out;*/
-    /*-moz-transition    : width 1s ease-in-out;*/
-    /*-ms-transition     : width 1s ease-in-out;*/
-    /*transition         : width 1s ease-in-out;*/
     overflow         : hidden;
     position         : absolute;
 
 }
-
-/*#footer {*/
-/*clear : both;*/
-/*position: absolute;*/
-/*bottom: 0;*/
-/*left: 0;*/
-/*right: 0;*/
-/*width : 100%*/
-/*}*/
 
 #sidebar header {
     background         : #333;
@@ -52,14 +36,12 @@ main {
     -webkit-box-shadow : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
     -moz-box-shadow    : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
     box-shadow         : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
-    /*height: 60px;*/
     padding            : 23px 20px 23px 50px;
     font-size          : 14px;
     color              : #ccc;
-    /*margin-bottom      : 30px;*/
 }
 
-#sidebar li:last-child {
+.top-line {
     border-top : 1px dotted #333;
 }
 
@@ -101,17 +83,36 @@ main {
     position           : relative;
     overflow           : hidden;
     white-space        : nowrap;
+    font-family        : 'Leckerli One', cursive, Helvetica, Arial, sans-seri;
+    text-transform     : capitalize;
+    font-weight        : 200;
+    font-size          : 20px;
 }
 
-#collapse-btn {
+.collapse-btn {
+    display  : none;
     position : absolute;
-    left     : 15px;
-    top      : 18px;
+    left     : 5px;
+    top      : 8px;
     cursor   : pointer;
+    padding  : 10px;
 }
 
-#collapse-btn li {
-    background-color : white;
+#content .collapse-btn {
+    left    : 5px;
+    top     : 8px;
+    display : block;
+    display : block;
+}
+
+.mini-phone #sidebar .collapse-btn {
+    right   : 5px;
+    left    : auto;
+    display : block;
+}
+
+.collapse-btn li {
+    background-color : white !important;
     height           : 3px;
     margin           : 4px;
     width            : 20px;
@@ -202,6 +203,12 @@ nav li {
     float : left;
 }
 
+.mini-phone nav li {
+    float      : none;
+    width      : 100%;
+    text-align : center;
+}
+
 nav a {
     display   : block;
     padding   : 7px 10px;
@@ -214,61 +221,6 @@ nav a:hover, nav li.active a {
     color : #ffffff;
 }
 
-/*Landscape phones and down*/
-@media (max-width: 480px) {
-    #sidebar {
-        width : 0;
-    }
-
-    #content {
-        padding-left : 0;
-    }
-}
-
-/*Landscape phone to portrait tablet*/
-@media (max-width: 767px) {
-    #sidebar {
-        width : 0;
-    }
-
-    #content {
-        padding-left : 0;
-    }
-}
-
-/*Portrait tablet to landscape and desktop*/
-@media (min-width: 768px) and (max-width: 979px) {
-    #sidebar {
-        width : 280px;
-    }
-
-    #content {
-        padding-left : 280px;
-    }
-}
-
-@media (min-width: 980px) {
-    #sidebar {
-        width : 280px;
-    }
-
-    #content {
-        padding-left : 280px;
-    }
-}
-
-/*Large desktop*/
-@media (min-width: 1200px) {
-    #sidebar {
-        width : 280px;
-    }
-
-    #content {
-        padding-left : 280px;
-    }
-}
-
-/*fallback*/
 .large-desktop #sidebar, .desktop #sidebar {
     width : 280px;
 }
@@ -284,5 +236,3 @@ nav a:hover, nav li.active a {
 .tablet #content, .phone #content, .mini-phone #content {
     padding-left : 0;
 }
-
-/*end fallback*/

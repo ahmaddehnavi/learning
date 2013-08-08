@@ -10,9 +10,14 @@
     <meta name="HandheldFriendly" content="true"/>
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no"/>
 
+    <link type="text/css"
+          href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic,500italic,500,300italic,300"
+          rel="stylesheet">
+    <link type="text/css" href="http://fonts.googleapis.com/css?family=Fugaz+One|Leckerli+One" rel="stylesheet">
+
     <!--ss[if lt IE 9]>-->
     <script src="<?= FILES_JS_PATH ?>/base/html5shiv.js"></script>
-    <script src="<?= FILES_JS_PATH ?>/base/css3-mediaqueries.js"></script>
+    <!--    <script src="--><?//= FILES_JS_PATH ?><!--/base/css3-mediaqueries.js"></script>-->
     <!ss[end if]-->
 
     <link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/base/global.css"/>
@@ -36,6 +41,11 @@
     </nav>
     <aside id="sidebar">
         <header><?php echo $this->tank_auth->get_username(); ?>&nbsp;</header>
+        <ul class="collapse-btn" collapse-target="#sidebar">
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
         <menu>
             <h2>academy :</h2>
             <li class="icon-exercise"><?php echo anchor("academy/exercises", "exercises") ?></li>
@@ -45,12 +55,13 @@
             <li class="icon-dashboard active"><?php echo anchor("user/dashboard", "dashboard") ?></li>
             <li class="icon-message"><?php echo anchor("user/messages", "messages<sup>5</sup>") ?></li>
             <li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
-            <li class="icon-logout"><?php echo anchor("auth/logout", "logout") ?></li>
+            <li class="icon-logout .top-line"><?php echo anchor("auth/logout", "logout") ?></li>
         </menu>
+
     </aside>
     <div id="content">
         <header>
-            <ul id="collapse-btn" collapse-target="#sidebar">
+            <ul class="collapse-btn" collapse-target="#sidebar">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -144,7 +155,6 @@
 
 <!-- ############################################################################ -->
 <script src="<?= FILES_JS_PATH ?>/base/prefixfree.min.js"></script>
-
 <script src="<?= FILES_JS_PATH ?>/base/jquery-1.9.0.js"></script>
 <!-- ############################################################################ -->
 
@@ -164,7 +174,7 @@
             $('#content').animate({paddingLeft: '280px'}, 1000);
         }
     }
-    $('#collapse-btn').collapse(opt2);
+    $('.collapse-btn').collapse(opt2);
 </script>
 </body>
 </html>
