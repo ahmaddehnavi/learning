@@ -6,6 +6,7 @@ body {
 
 #content {
     padding-left : 280px;
+    overflow     : hidden;
 }
 
 main {
@@ -71,6 +72,19 @@ main {
     text-transform : uppercase;
 }
 
+#sidebar menu .label {
+    background            : #0072C6;
+    -webkit-border-radius : 2px;
+    -moz-border-radius    : 2px;
+    border-radius         : 2px;
+    color                 : #fff;
+    font-size             : 11px;
+    font-weight           : normal;
+    float                 : right;
+    line-height           : 20px;
+    padding               : 0 10px;
+}
+
 #content > header {
     background         : #0870be;
     border-bottom      : 1px solid rgba(0, 0, 0, 0.2);
@@ -95,15 +109,17 @@ main {
     cursor        : pointer !important;
     padding       : 10px !important;
     border-radius : 2px;
+    transition    : all 1s;
 }
 
 .mini-phone nav .collapse-btn {
-    display : block;
-    bottom  : 5px;
-    left    : 5px;
+    display    : block;
+    bottom     : 5px;
+    left       : 5px;
+    margin-top : -187px;
 }
 
-.mini-phone nav .collapse-on {
+.mini-phone nav .toggle-on {
     box-shadow : inset 2px 0px 2px #111;
 }
 
@@ -111,17 +127,14 @@ main {
     left    : 5px;
     top     : 8px;
     display : block;
-    display : block;
 }
 
-.collapse-on {
-    transition : all 1s;
-    transform  : rotate(90deg);
+.toggle-on {
+    transform : rotate(270deg);
 }
 
-.collapse-off {
-    transition : all 1s;
-    transform  : rotate(0deg);
+.toggle-off {
+    transform : rotate(-180deg);
 }
 
 .mini-phone #sidebar .collapse-btn {
@@ -269,3 +282,9 @@ nav a:hover, nav li.active a {
 .tablet #content, .phone #content, .mini-phone #content {
     padding-left : 0;
 }
+
+/*.large-desktop #content-body > section {*/
+/*float: left;*/
+/*max-width: 47%;*/
+/*margin: 20px 0px 0px 20px;*/
+/*}*/

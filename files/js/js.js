@@ -118,34 +118,31 @@
 
 (function ($) {
 
-    $.fn.collapse = function (options) {
+    $.fn.toggleButton = function (options) {
 
         // Establish our default settings
         var settings = $.extend({
-            onCollapse: function () {
+            onToggleOn: function () {
             },
-            onUnCollapse: function () {
+            onToggleOff: function () {
             }
         }, options);
 
         return this.each(function () {
             var $this = $(this);
-            var $collapseTarget = $($this.attr('collapse-target'));
             $this.click(function () {
 
-                if ($this.hasClass('collapse-on')) {
-                    $this.toggleClass('collapse-on').addClass('collapse-off');
-                    settings.onUnCollapse();
-                } else if ($this.hasClass('collapse-off')) {
-                    $this.removeClass('collapse-off').addClass('collapse-on');
-                    settings.onCollapse();
+                if ($this.hasClass('toggle-on')) {
+                    $this.removeClass('toggle-on').addClass('toggle-off');
+                    settings.onToggleOff();
+                } else if ($this.hasClass('toggle-off')) {
+                    $this.removeClass('toggle-off').addClass('toggle-on');
+                    settings.onToggleOn();
                 }
                 else {
-                    $this.addClass('collapse-on');
-                    settings.onCollapse();
-                    $collapseTarget.removeClass('collapse');
+                    $this.addClass('toggle-on');
+                    settings.onToggleOn();
                 }
-                $collapseTarget.toggleClass('collapse');
             });
         });
 
