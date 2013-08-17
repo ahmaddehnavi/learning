@@ -149,3 +149,52 @@
     }
 
 }(jQuery));
+
+$(document).ready(function () {
+    var opt3;
+    var opt1 = {
+        onNoMiniPhone: function () {
+            $('nav').animate({marginTop: "0"}, 1000);
+//            opt3.onToggleOn();
+        }
+    }
+    $('html').responsive(opt1);
+
+
+    var opt2 = {
+        onToggleOff: function () {
+
+            $('#sidebar').animate({width: "0"}, 1000);
+            $('#content').animate({paddingLeft: '0'}, 1000);
+        },
+        onToggleOn: function () {
+            $('#sidebar').animate({width: '280px'}, 1000);
+            $('#content').animate({paddingLeft: '280px'}, 1000);
+        }
+    }
+    $('.btn-left').toggleButton(opt2);
+
+
+    opt3 = {
+        onToggleOn: function () {
+            $('nav').animate({marginTop: "0"}, 1000);
+
+        },
+        onToggleOff: function () {
+            $('nav').animate({marginTop: "-187px"}, 1000);
+        }
+    }
+    $('.btn-top').toggleButton(opt3);
+
+    $window = $(window);
+    $main = $('main');
+
+    var fixSize = function () {
+        if ($window.height() - 114 > $main.height()) {
+            $main.height($window.height() - 114);
+        }
+    }
+    $(window).resize(fixSize);
+    fixSize();
+
+});

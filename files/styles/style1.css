@@ -4,6 +4,88 @@ body {
     background-color : rgb(241, 240, 250);
 }
 
+.right {
+    float : right;
+}
+
+.left {
+    float : left;
+}
+
+/*________________________________________form________________________________________*/
+
+form input:-webkit-autofill {
+    background-color   : #fff !important;
+    background-image   : none;
+    color              : rgb(0, 0, 0);
+    -webkit-box-shadow : 0 0 0px 1000px white inset;
+}
+
+form {
+    padding : 10px;
+}
+
+form .row {
+    margin : 20px;
+}
+
+form input, form textarea, form img {
+    margin        : 10px 0;
+    border-radius : 2px;
+}
+
+input[type=text], input[type=number], input[type=email], input[type=date], input[type=password], textarea {
+    padding    : 8px;
+    border     : none;
+    outline    : none;
+    background : #f7f8f9;
+    box-shadow : 0 1px 3px #999 inset;
+    color      : #727476;
+    transition : all .5s ease;
+    width      : 90%;
+    width      : calc(100% -20px);
+    max-width  : 300px;
+}
+
+input:focus, textarea:focus {
+    box-shadow : 0 1px 3px #333 inset;
+    color      : #000;
+}
+
+label {
+    display        : block;
+    color          : #555;
+    font-size      : 13px;
+    font-weight    : 800;
+    text-transform : capitalize;
+}
+
+.form_err {
+    color       : red;
+    font-size   : 12px;
+    margin-left : 10px;
+}
+
+.mini-phone form {
+    padding : 0;
+}
+
+/*________________________________________Button________________________________________*/
+.btn {
+    outline     : none;
+    border      : none;
+    background  : #0072C6;
+    line-height : 1.5;
+    padding     : 8px 28px;
+    color       : white;
+    box-shadow  : none;
+}
+
+.btn:hover {
+    background : #0160A7;
+}
+
+/*________________________________________page style________________________________________*/
 #content {
     padding-left : 280px;
     overflow     : hidden;

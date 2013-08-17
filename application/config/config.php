@@ -1,5 +1,9 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+
+$config['passwd_change_timeout'] = 60;
+
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

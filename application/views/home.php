@@ -31,14 +31,14 @@
         <div class="user">
             <?php
             if (empty($user_id))
-                echo anchor('/auth/login/', 'sign in');
+                echo anchor('/user/login/', 'sign in');
             else {
                 echo
                     '<div class="popupmenu">' .
                     '<a href="#">' . $username . '</a>' .
                     '<ul>' .
-                    '<li>' . anchor('#', 'Profile') . '</li>' .
-                    '<li>' . anchor('/auth/logout/', 'logout') . '</li>' .
+                    '<li>' . anchor('user/logged_in', 'Profile') . '</li>' .
+                    '<li>' . anchor('/user/logout/', 'logout') . '</li>' .
                     '</ul>' .
                     '</div>';
             }
@@ -66,7 +66,7 @@
         <h2 class="center">A Cloud-Enabled Desktop App for All Your Email</h2>
         <h4>Unified Inbox, Relevance Sorting, Smart Views</h4>
         <h4>Unified Inbox, Relevance Sorting</h4>
-        <?=anchor('/auth/register/', 'get started', 'class="button center"') ?>
+        <?=anchor('/user/register/', 'get started', 'class="button center"') ?>
     </div>
 </div>
 

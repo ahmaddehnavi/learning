@@ -16,7 +16,7 @@
             </ul>
         </nav>
         <aside id="sidebar">
-            <header><?php echo $this->tank_auth->get_username(); ?>&nbsp;</header>
+            <header><?php echo 'f_name l_name' ?>&nbsp;</header>
             <ul class="collapse-btn btn-left toggle-off" collapse-target="#sidebar">
                 <li></li>
                 <li></li>
