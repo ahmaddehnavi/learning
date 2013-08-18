@@ -36,20 +36,20 @@ form input, form textarea, form img {
 
 input[type=text], input[type=number], input[type=email], input[type=date], input[type=password], textarea {
     padding    : 8px;
-    border     : none;
+    /*border     : 1px solid rgb(245,245,245);*/
     outline    : none;
-    background : #f7f8f9;
+    border     : none;
     box-shadow : 0 1px 3px #999 inset;
     color      : #727476;
     transition : all .5s ease;
     width      : 90%;
-    width      : calc(100% -20px);
     max-width  : 300px;
 }
 
 input:focus, textarea:focus {
     box-shadow : 0 1px 3px #333 inset;
     color      : #000;
+    background : #f7f8f9;
 }
 
 label {

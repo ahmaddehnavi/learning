@@ -58,33 +58,18 @@
                 </section>
                 <section id="content-body">
                     <section>
-                        <header>update profile :</header>
+                        <header>profile :</header>
                         <article>
-                            <?php echo form_open('user/profile');?>
-                            <div class="left">
+                            <?php echo form_open('user/profile/');?>
+                            <input type="hidden" name="form_num" value="1"/>
 
-                                <div class="row">
-                                    <label for="full_name"> full name :</label>
-                                    <input type="text" name="full_name"/>
-                                    <?=form_error('full_name', '<div class="form_err">', '</div>')?>
+                            <div class="row left">
+                                <label for="full_name"> full name :</label>
+                                <input type="text" name="full_name" value="<?= $full_name ?>"/>
+                                <?=form_error('full_name', '<div class="form_err">', '</div>')?>
 
-                                </div>
-                                <div class="row">
-                                    <label for="university"> university :</label>
-                                    <input type="text" name="university"/>
-                                    <?=form_error('university', '<div class="form_err">', '</div>')?>
-                                </div>
-
-                                <div class="row">
-                                    <label for="field"> field :</label>
-                                    <input type="text" name="field"/>
-                                    <?=form_error('field', '<div class="form_err">', '</div>')?>
-                                </div>
-                            </div>
-
-                            <div class="left row col2">
                                 <label for="about"> about :</label>
-                                <textarea name="about" style="min-height:184px;width:184px;max-width: 90%"> </textarea>
+                                <textarea name="about"><?=$about?></textarea>
                                 <?=form_error('about', '<div class="form_err">', '</div>')?>
                             </div>
 
@@ -105,6 +90,37 @@
                                 <input class="btn" type="submit" value="update"/>
                             </div>
                             </form>
+
+                        </article>
+                    </section>
+
+                    <section>
+                        <header>academy:</header>
+                        <article>
+                            <?php echo form_open('user/profile/');?>
+                            <input type="hidden" name="form_num" value="2"/>
+
+                            <div class="left">
+                                <div class="row">
+                                    <label for="university"> university :</label>
+                                    <input type="text" name="university" value="<?= $university ?>"/>
+                                    <?=form_error('university', '<div class="form_err">', '</div>')?>
+                                </div>
+
+                                <div class="row">
+                                    <label for="field"> field :</label>
+                                    <input type="text" name="field" value="<?= $field ?>"/>
+                                    <?=form_error('field', '<div class="form_err">', '</div>')?>
+                                </div>
+                            </div>
+
+                            <div class="badboy"></div>
+
+                            <div class="row">
+                                <input class="btn" type="submit" value="update"/>
+                            </div>
+                            </form>
+
                         </article>
                     </section>
 
