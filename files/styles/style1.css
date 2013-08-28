@@ -12,6 +12,10 @@ body {
     float : left;
 }
 
+.white {
+    background-color : white;
+}
+
 /*________________________________________form________________________________________*/
 
 form input:-webkit-autofill {
@@ -32,24 +36,42 @@ form .row {
 form input, form textarea, form img {
     margin        : 10px 0;
     border-radius : 2px;
+    border        : 1px solid rgb(245, 245, 245);
+    outline       : none;
 }
 
 input[type=text], input[type=number], input[type=email], input[type=date], input[type=password], textarea {
-    padding    : 8px;
-    /*border     : 1px solid rgb(245,245,245);*/
+    padding    : 8px 15px;
+    border     : 1px solid rgb(245, 245, 245);
     outline    : none;
-    border     : none;
-    box-shadow : 0 1px 3px #999 inset;
+    /*border     : none;*/
+    /*box-shadow : 0 1px 3px #999 inset;*/
     color      : #727476;
     transition : all .5s ease;
     width      : 90%;
     max-width  : 300px;
 }
 
+input[type=submit] {
+    padding : 8px 15px;
+
+}
+
 input:focus, textarea:focus {
     box-shadow : 0 1px 3px #333 inset;
     color      : #000;
     background : #f7f8f9;
+}
+
+textarea {
+    margin : 10px 0px;
+    height : 100px;
+    width  : 300px;
+}
+
+.mini-phone textarea, .phone textarea {
+    width  : 100%;
+    height : 200px;
 }
 
 label {
@@ -72,17 +94,58 @@ label {
 
 /*________________________________________Button________________________________________*/
 .btn {
-    outline     : none;
-    border      : none;
-    background  : #0072C6;
-    line-height : 1.5;
-    padding     : 8px 28px;
-    color       : white;
-    box-shadow  : none;
+    outline       : none;
+    border        : none;
+    background    : #0072C6;
+    line-height   : 1.5;
+    padding       : 8px 28px;
+    color         : white;
+    box-shadow    : none;
+    border-radius : 2px;
 }
 
 .btn:hover {
-    background : #0160A7;
+    background      : #0160A7;
+    color           : white;
+    text-decoration : none;
+}
+
+.btn-small {
+    padding   : 7px 13px;
+    font-size : 12px;
+}
+
+/*_________________*/
+table {
+    width           : 100%;
+    border-collapse : collapse;
+
+}
+
+tr {
+    /*background : #aaa;*/
+    padding : 0 30px;
+}
+
+tr:hover td {
+    background-color : #F8F8F8;
+}
+
+td {
+    padding          : 8px;
+    text-align       : left;
+    background-color : #fff;
+    border-top       : 1px solid #dddddd;
+}
+
+th {
+    background         : #f7f8f9 !important;
+    -webkit-box-shadow : 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    -moz-box-shadow    : 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    box-shadow         : 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    font-weight        : bold;
+    border-top         : 1px solid #dddddd;
+    padding            : 10px;
 }
 
 /*________________________________________page style________________________________________*/
@@ -276,18 +339,18 @@ main {
 }
 
 #content-body {
-    height      : inherit;
-    padding-top : 1px;
+    height  : inherit;
+    padding : 30px;
 }
 
-#content-body > section {
+#content-body .widget {
     /*background-color : #fff;*/
     border-radius : 2px;
     border        : 1px solid #d9d9dd;
-    margin        : 30px;
+    margin-bottom : 30px;
 }
 
-#content-body section header {
+#content-body .widget-head {
     background    : #f7f8f9;
     border-bottom : 1px solid #d9d9dd;
     border-radius : 2px 2px 0 0;
@@ -298,7 +361,7 @@ main {
 
 }
 
-#content-body section article {
+#content-body .widget-body {
     background    : #fff;
     padding       : 15px;
     border-radius : 0 0 2px 2px;

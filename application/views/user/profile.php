@@ -57,9 +57,9 @@
                     </section>
                 </section>
                 <section id="content-body">
-                    <section>
-                        <header>profile :</header>
-                        <article>
+                    <section class="widget">
+                        <header class="widget-head">profile :</header>
+                        <article class="widget-body">
                             <?php echo form_open('user/profile/');?>
                             <input type="hidden" name="form_num" value="1"/>
 
@@ -82,6 +82,7 @@
                                     <input type="file" class="file_input" name="image"/>
                                     <?=form_error('image', '<div class="form_err">', '</div>')?>
                                 </div>
+                                <div class="badboy"></div>
                             </div>
 
                             <div class="badboy"></div>
@@ -94,9 +95,9 @@
                         </article>
                     </section>
 
-                    <section>
-                        <header>academy:</header>
-                        <article>
+                    <section class="widget">
+                        <header class="widget-head">academy:</header>
+                        <article class="widget-body">
                             <?php echo form_open('user/profile/');?>
                             <input type="hidden" name="form_num" value="2"/>
 

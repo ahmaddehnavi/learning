@@ -61,9 +61,9 @@
                     </section>
                 </section>
                 <section id="content-body">
-                    <section>
-                        <header>header header header</header>
-                        <article>
+                    <section class="widget">
+                        <header class="widget-head">header header header</header>
+                        <article class="widget-body">
                             article article article article article article article article article article article
                             article
                             article article article article article article article article article article article
@@ -79,32 +79,9 @@
                             article article article article article article article article article
                         </article>
                     </section>
-                    <section>
-                        <header>header header header</header>
-                        <article>
-                            <p>article article article article article article article article article article article
-                                article
-                                article article article article article article article article article article article
-                                article
-                                article article article article article article article article article article article
-                                article
-                                article article article article article article article article article article article
-                                article
-                                article article article article article article article article article article article
-                                article
-                                article article article article article article article article article article article
-                                article
-                                article article article article article article article article article
-                            </p>
-                            <figure>
-                                <img src="" width="100%" height="100%" alt=""/>
-                            </figure>
-                        </article>
-
-                    </section>
-                    <section>
-                        <header>header header header</header>
-                        <article>
+                    <section class="widget">
+                        <header class="widget-head">header header header</header>
+                        <article class="widget-body">
                             article article article article article article article article article article article
                             article
                             article article article article article article article article article article article
@@ -120,27 +97,9 @@
                             article article article article article article article article article
                         </article>
                     </section>
-                    <section>
-                        <header>header header header</header>
-                        <article>
-                            article article article article article article article article article article article
-                            article
-                            article article article article article article article article article article article
-                            article
-                            article article article article article article article article article article article
-                            article
-                            article article article article article article article article article article article
-                            article
-                            article article article article article article article article article article article
-                            article
-                            article article article article article article article article article article article
-                            article
-                            article article article article article article article article article
-                        </article>
-                    </section>
-                    <section>
-                        <header>header header header</header>
-                        <article>
+                    <section class="widget">
+                        <header class="widget-head">header header header</header>
+                        <article class="widget-body">
                             article article article article article article article article article article article
                             article
                             article article article article article article article article article article article
