@@ -15,7 +15,7 @@ class Class_Model extends CI_Model
      * @param $prof_id
      * @return int
      */
-    public function create_class($academy_id, $field_id, $lesson_id, $prof_id)
+    public function create($academy_id, $field_id, $lesson_id, $prof_id)
     {
         $sql = 'SELECT class_id FROM class WHERE academy_id=? AND field_id=? AND lesson_id=? AND prof_id=? LIMIT 1';
         $row = $this->db->query($sql, array($academy_id, $field_id, $lesson_id, $prof_id));
@@ -25,6 +25,27 @@ class Class_Model extends CI_Model
 
         $sql = 'INSERT INTO class(academy_id,field_id,lesson_id,prof_id) VALUES(?,?,?,?)';
         if (FALSE !== $this->db->query($sql, array($academy_id, $field_id, $lesson_id, $prof_id))) {
+            return $this->db->insert_id();
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * @param $class_id
+     * @param $student_id
+     * @return bool
+     */
+    public function join($class_id, $student_id)
+    {
+//        $sql = 'SELECT class_id FROM class WHERE academy_id=? AND field_id=? AND lesson_id=? AND prof_id=? LIMIT 1';
+//        $row = $this->db->query($sql, array($academy_id, $field_id, $lesson_id, $prof_id));
+//        if ($row->num_rows() > 0) {
+//            return $row->row('class_id');
+//        }
+
+        $sql = 'INSERT INTO class_member(class_id, student_id) VALUES(?,?)';
+        if (FALSE !== $this->db->query($sql, array($class_id, $student_id))) {
             return $this->db->insert_id();
         }
 

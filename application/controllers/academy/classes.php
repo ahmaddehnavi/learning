@@ -28,7 +28,7 @@ class Classes extends CI_Controller
             $field   = $this->field_model->get_id($this->form_validation->set_value('field'));
             $lesson  = $this->lesson_model->get_id($this->form_validation->set_value('lesson'));
             $prof_id = $this->auth->get_user_id();
-            $id      = $this->class_model->create_class($academy, $field, $lesson, $prof_id);
+            $id      = $this->class_model->create($academy, $field, $lesson, $prof_id);
             if (FALSE !== $id) {
                 redirect('/academy/classes/view/' . $id);
             }
