@@ -25,8 +25,8 @@ class Profile extends CI_Controller
             }
         } else if ($this->input->post('form_num') == 2) {
             $this->form_validation
-                ->set_rules('academy', 'academy', 'trim|xss_clean|callback_academy_available')
-                ->set_rules('field', 'field', 'trim|xss_clean|callback_field_available');
+                ->set_rules('academy', 'academy', 'trim|xss_clean|is_exist[academy.name]')
+                ->set_rules('field', 'field', 'trim|xss_clean|is_exist[field_table.name]');
 
             if ($this->form_validation->run()) {
                 $this->profile_model->update_academy(
@@ -38,34 +38,10 @@ class Profile extends CI_Controller
 
         $data['full_name'] = $this->profile_model->get_full_name();
         $data['about']     = $this->profile_model->get_about();
-        $data['academy']   = $this->profile_model->get_academy();
-        $data['field']     = $this->profile_model->get_field();
+        $data['academy']   = $this->profile_model->get_academy_name();
+        $data['field']     = $this->profile_model->get_field_name();
 
         $this->load->view('user/profile', $data);
-    }
-
-    function academy_available($name)
-    {
-        $this->load->model('academy_model');
-        if ($this->academy_model->get_academy_id($name) === FALSE) {
-            $this->form_validation->set_message('academy_available', 'academy not exist ' . anchor('/academy/academy/create', 'create academy'));
-
-            return FALSE;
-        }
-
-        return TRUE;
-    }
-
-    function field_available($name)
-    {
-        $this->load->model('field_model');
-        if ($this->field_model->get_field_id($name) === FALSE) {
-            $this->form_validation->set_message('field_available', 'field not exist ' . anchor('/academy/field/create', 'create field'));
-
-            return FALSE;
-        }
-
-        return TRUE;
     }
 
 }

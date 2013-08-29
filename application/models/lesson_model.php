@@ -8,7 +8,7 @@ class Lesson_Model extends CI_Model
         parent::__construct();
     }
 
-    public function get_id($lesson)
+    public function get_id_by_name($lesson)
     {
         $row = $this->db->select('lesson_id')->where('name', $lesson)->get('lesson');
         if ($row->num_rows() == 1) {

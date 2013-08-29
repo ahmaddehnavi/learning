@@ -12,9 +12,9 @@ class Academy_Model extends CI_Model
      * @param $academy
      * @return bool|mixed
      */
-    public function get_id($academy)
+    public function get_id_by_name($academy)
     {
-        $row = $this->db->select('academy_id')->where('name', $academy)->get('academy');
+        $row = $this->db->select('academy_id')->where('name', $academy)->limit(1)->get('academy');
         if ($row->num_rows() == 1) {
             return $row->row('academy_id');
         }

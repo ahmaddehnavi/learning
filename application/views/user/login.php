@@ -9,8 +9,8 @@
 <?php echo $registration_message; ?>
 <?php echo form_open('user/login')?>
 	<?php echo validation_errors('<p style="color:red">', '</p>'); ?>
-	<?php if ($login_error):?><p style="color:red">Invalid Username or Password</p><?php endif; ?>
-	<label>Username:
+	<?php if ($login_error):?><p style="color:red">Invalid username or Password</p><?php endif; ?>
+	<label>username:
 		<?php echo form_input('username')?>
 	</label><br>
 	<label>Password:

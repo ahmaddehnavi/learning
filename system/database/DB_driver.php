@@ -231,7 +231,7 @@ class CI_DB_driver
      * @access    public
      * @param    string    An SQL query string
      * @param    array    An array of binding data
-     * @return CI_DB_result
+     * @return    mixed
      */
     function query($sql, $binds = FALSE, $return_object = TRUE)
     {

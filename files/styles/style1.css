@@ -175,6 +175,14 @@ tr.table-head {
     border-bottom : 2px solid #333;
 }
 
+.table-form {
+    margin : 30px;
+}
+
+.mini-phone .table-form {
+    margin : 5px;
+}
+
 .table-form td {
     padding : 0 8px;
 }

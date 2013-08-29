@@ -111,7 +111,7 @@
                                 <div class="row">
                                     <label for="field"> field :</label>
                                     <input type="text" name="field" value="<?= $field ?>"/>
-                                    <?=form_error('field', '<div class="form_err">', '</div>')?>
+                                    <?=form_error('field_table', '<div class="form_err">', '</div>')?>
                                 </div>
                             </div>
 

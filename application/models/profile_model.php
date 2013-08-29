@@ -8,11 +8,11 @@ class Profile_Model extends CI_Model
         parent::__construct();
     }
 
-    public function get_field()
+    public function get_field_name()
     {
         $row = $this->db->select('field_id')->where('user_id', $this->auth->get_user_id())->get('profile');
         if ($row->num_rows() == 1) {
-            $row = $this->db->select('name')->where('field_id', $row->row('field_id'))->get('field');
+            $row = $this->db->select('name')->where('field_id', $row->row('field_id'))->get('field_table');
         }
 
         if ($row->num_rows() == 1) {
@@ -22,18 +22,26 @@ class Profile_Model extends CI_Model
         return '';
     }
 
-    public function get_academy()
+    public function get_academy_name()
     {
-        $row = $this->db->select('academy_id')->where('user_id', $this->auth->get_user_id())->get('profile');
-        if ($row->num_rows() == 1) {
-            $row = $this->db->select('name')->where('academy_id', $row->row('academy_id'))->get('academy');
-        }
-
-        if ($row->num_rows() == 1) {
-            return $row->row('name');
+        if (($id = $this->get_academy_id()) !== FALSE) {
+            $row = $this->db->select('name')->where('academy_id', $id)->get('academy');
+            if ($row->num_rows() == 1) {
+                return $row->row('name');
+            }
         }
 
         return '';
+    }
+
+    public function get_academy_id()
+    {
+        $row = $this->db->select('academy_id')->where('user_id', $this->auth->get_user_id())->limit(1)->get('profile');
+        if ($row->num_rows() === 1) {
+            return $row->row('academy_id');
+        }
+
+        return FALSE;
     }
 
     public function get_full_name()
@@ -56,35 +64,29 @@ class Profile_Model extends CI_Model
         return '';
     }
 
+    /**
+     * @param $academy
+     * @param $field
+     * @return bool
+     */
     public function update_academy($academy, $field)
     {
+        $this->load->model(array('academy_model', 'field_model'));
         $data = array(
-            'academy_id' => $this->get_academy_id($academy),
-            'field_id' => $this->get_field_id($field)
+            'academy_id' => $this->academy_model->get_id_by_name($academy),
+            'field_id' => $this->field_model->get_id_by_name($field)
         );
-
-
         $this->db
             ->where('user_id', $this->auth->get_user_id())
             ->limit(1)
             ->update('profile', $data);
 
-        return $this->db->affected_rows();
+        return $this->db->affected_rows() == 1;
     }
 
-    public function get_academy_id($academy)
+    public function get_field_id()
     {
-        $row = $this->db->select('academy_id')->where('name', $academy)->get('academy');
-        if ($row->num_rows() == 1) {
-            return $row->row('academy_id');
-        }
-
-        return FALSE;
-    }
-
-    public function get_field_id($field)
-    {
-        $row = $this->db->select('field_id')->where('name', $field)->get('field');
+        $row = $this->db->select('field_id')->where('user_id', $this->auth->get_user_id())->get('profile');
         if ($row->num_rows() == 1) {
             return $row->row('field_id');
         }
