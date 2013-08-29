@@ -92,16 +92,22 @@ label {
     padding : 0;
 }
 
+.mini-phone form * {
+    text-align : center !important;
+    width      : 100%;
+}
+
 /*________________________________________Button________________________________________*/
 .btn {
     outline       : none;
     border        : none;
     background    : #0072C6;
-    line-height   : 1.5;
-    padding       : 8px 28px;
+    /*line-height   : 1.5;*/
+    padding       : 9px 28px;
     color         : white;
     box-shadow    : none;
     border-radius : 2px;
+    cursor        : pointer;
 }
 
 .btn:hover {
@@ -117,7 +123,7 @@ label {
 
 /*_________________*/
 table {
-    width           : 100%;
+    width           : 93%;
     border-collapse : collapse;
 
 }
@@ -131,32 +137,60 @@ tr:hover td {
     background-color : #F8F8F8;
 }
 
-td {
-    padding          : 8px;
+td, th {
     text-align       : left;
     background-color : #fff;
-    border-top       : 1px solid #dddddd;
+    text-align       : left !important;
+}
+
+td {
+    padding    : 8px;
+    border-top : 1px solid #dddddd;
 }
 
 th {
-    background         : #f7f8f9 !important;
-    -webkit-box-shadow : 0 1px 0 rgba(255, 255, 255, 0.8) inset;
-    -moz-box-shadow    : 0 1px 0 rgba(255, 255, 255, 0.8) inset;
-    box-shadow         : 0 1px 0 rgba(255, 255, 255, 0.8) inset;
-    font-weight        : bold;
-    border-top         : 1px solid #dddddd;
-    padding            : 10px;
+    /*background     : #f7f8f9 !important;*/
+    font-weight    : bold;
+    padding        : 10px;
+    border-bottom  : 2px solid #333;
+    text-transform : capitalize;
+}
+
+.table-form td {
+    padding : 0 8px;
+}
+
+.table-form form {
+    padding : 0;
+}
+
+.mini-phone td, .phone td, .mini-phone th, .phone th {
+    display : block;
+    border  : none;
+    float   : left;
+    width   : 95%;
+    padding : 8px;
+}
+
+.mini-phone tr, .phone tr {
+    border-top : 1px solid #dddddd;
+    display    : block;
+    float      : left;
+    width      : 100%;
+    padding    : 0;
+
 }
 
 /*________________________________________page style________________________________________*/
 #content {
     padding-left : 280px;
-    overflow     : hidden;
+    overflow-x   : hidden;
 }
 
 main {
     min-height     : 400px;
     padding-bottom : 1px;
+    overflow-y     : visible;
 }
 
 #sidebar {
@@ -341,6 +375,10 @@ main {
 #content-body {
     height  : inherit;
     padding : 30px;
+}
+
+.mini-phone #content-body {
+    padding : 7px;
 }
 
 #content-body .widget {

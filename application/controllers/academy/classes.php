@@ -16,7 +16,7 @@ class Classes extends CI_Controller
     function create()
     {
 
-        $this->load->view('academy/classes/');
+        $this->load->view('academy/classes');
     }
 
     function remove()

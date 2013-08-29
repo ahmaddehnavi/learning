@@ -196,5 +196,4 @@ $(document).ready(function () {
     }
     $(window).resize(fixSize);
     fixSize();
-
 });
