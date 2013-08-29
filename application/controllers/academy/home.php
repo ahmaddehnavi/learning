@@ -12,6 +12,7 @@ class Home extends CI_Controller
     {
         $this->load->view('academy/home');
     }
+
 }
 
 /* End of file Home.php */

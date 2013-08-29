@@ -1,6 +1,6 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class University_Model extends CI_Model
+class Academy_Model extends CI_Model
 {
 
     function __construct()
@@ -9,14 +9,14 @@ class University_Model extends CI_Model
     }
 
     /**
-     * @param $university
+     * @param $academy
      * @return bool|mixed
      */
-    public function get_university_id($university)
+    public function get_id($academy)
     {
-        $row = $this->db->select('university_id')->where('name', $university)->get('university');
+        $row = $this->db->select('academy_id')->where('name', $academy)->get('academy');
         if ($row->num_rows() == 1) {
-            return $row->row('university_id');
+            return $row->row('academy_id');
         }
 
         return FALSE;

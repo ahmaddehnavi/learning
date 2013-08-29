@@ -1,6 +1,6 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Field_Model extends CI_Model
+class Lesson_Model extends CI_Model
 {
 
     function __construct()
@@ -8,11 +8,11 @@ class Field_Model extends CI_Model
         parent::__construct();
     }
 
-    public function get_id($field)
+    public function get_id($lesson)
     {
-        $row = $this->db->select('field_id')->where('name', $field)->get('field');
+        $row = $this->db->select('lesson_id')->where('name', $lesson)->get('lesson');
         if ($row->num_rows() == 1) {
-            return $row->row('field_id');
+            return $row->row('lesson_id');
         }
 
         return FALSE;

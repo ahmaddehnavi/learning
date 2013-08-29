@@ -103,9 +103,9 @@
 
                             <div class="left">
                                 <div class="row">
-                                    <label for="university"> university :</label>
-                                    <input type="text" name="university" value="<?= $university ?>"/>
-                                    <?=form_error('university', '<div class="form_err">', '</div>')?>
+                                    <label for="academy"> academy :</label>
+                                    <input type="text" name="academy" value="<?= $academy ?>"/>
+                                    <?=form_error('academy', '<div class="form_err">', '</div>')?>
                                 </div>
 
                                 <div class="row">

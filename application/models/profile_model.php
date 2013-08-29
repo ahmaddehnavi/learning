@@ -10,7 +10,7 @@ class Profile_Model extends CI_Model
 
     public function get_field()
     {
-        $row = $this->db->select('field_id')->where('user_id', $this->auth->get_user_id())->get('profiles');
+        $row = $this->db->select('field_id')->where('user_id', $this->auth->get_user_id())->get('profile');
         if ($row->num_rows() == 1) {
             $row = $this->db->select('name')->where('field_id', $row->row('field_id'))->get('field');
         }
@@ -22,11 +22,11 @@ class Profile_Model extends CI_Model
         return '';
     }
 
-    public function get_university()
+    public function get_academy()
     {
-        $row = $this->db->select('university_id')->where('user_id', $this->auth->get_user_id())->get('profiles');
+        $row = $this->db->select('academy_id')->where('user_id', $this->auth->get_user_id())->get('profile');
         if ($row->num_rows() == 1) {
-            $row = $this->db->select('name')->where('university_id', $row->row('university_id'))->get('university');
+            $row = $this->db->select('name')->where('academy_id', $row->row('academy_id'))->get('academy');
         }
 
         if ($row->num_rows() == 1) {
@@ -38,7 +38,7 @@ class Profile_Model extends CI_Model
 
     public function get_full_name()
     {
-        $row = $this->db->select('full_name')->where('user_id', $this->auth->get_user_id())->get('profiles');
+        $row = $this->db->select('full_name')->where('user_id', $this->auth->get_user_id())->get('profile');
         if ($row->num_rows() == 1) {
             return $row->row('full_name');
         }
@@ -48,7 +48,7 @@ class Profile_Model extends CI_Model
 
     public function get_about()
     {
-        $row = $this->db->select('about')->where('user_id', $this->auth->get_user_id())->get('profiles');
+        $row = $this->db->select('about')->where('user_id', $this->auth->get_user_id())->get('profile');
         if ($row->num_rows() == 1) {
             return $row->row('about');
         }
@@ -56,10 +56,10 @@ class Profile_Model extends CI_Model
         return '';
     }
 
-    public function update_academy($university, $field)
+    public function update_academy($academy, $field)
     {
         $data = array(
-            'university_id' => $this->get_university_id($university),
+            'academy_id' => $this->get_academy_id($academy),
             'field_id' => $this->get_field_id($field)
         );
 
@@ -67,16 +67,16 @@ class Profile_Model extends CI_Model
         $this->db
             ->where('user_id', $this->auth->get_user_id())
             ->limit(1)
-            ->update('profiles', $data);
+            ->update('profile', $data);
 
         return $this->db->affected_rows();
     }
 
-    public function get_university_id($university)
+    public function get_academy_id($academy)
     {
-        $row = $this->db->select('university_id')->where('name', $university)->get('university');
+        $row = $this->db->select('academy_id')->where('name', $academy)->get('academy');
         if ($row->num_rows() == 1) {
-            return $row->row('university_id');
+            return $row->row('academy_id');
         }
 
         return FALSE;
@@ -103,7 +103,7 @@ class Profile_Model extends CI_Model
         $this->db
             ->where('user_id', $this->auth->get_user_id())
             ->limit(1)
-            ->update('profiles', $data);
+            ->update('profile', $data);
 
         return $this->db->affected_rows();
     }

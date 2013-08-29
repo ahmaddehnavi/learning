@@ -61,41 +61,125 @@
         </section>
     </section>
     <section id="content-body">
-        <section class="widget white"
-        ">
+    <section class="widget white">
         <header class="widget-head">create class</header>
-        <?=form_open('', 'class=widget-body')?>
-        <input type="text" name="university" placeholder="university"/>
-        <input type="text" name="field" placeholder="field"/>
-        <input type="submit" value="create class" class="btn"/>
+        <table class="table-form" style="margin: 30px">
+            <thead>
+            <tr>
+                <?=form_open('/academy/classes/create/', 'class=widget-body')?>
+                <th><input type="text" name="academy" class="suggest" placeholder="academy"/></th>
+                <th><input type="text" name="field" placeholder="field"/></th>
+                <th><input type="text" name="lesson" placeholder="lesson"/></th>
+                <th><input type="submit" value="create class" class="btn"/></th>
+                <div class="badboy"></div>
+                </form>
+            </tr>
+            <tr class="form_err">
+                <?=form_error('academy', '<td>', '</td>')?>
+                <?=form_error('field', '<td>', '</td>')?>
+                <?=form_error('lesson', '<td>', '</td>')?>
+            </tr>
+            <tr class="table-head">
+                <th>id</th>
+                <th>academy</th>
+                <th>field</th>
+                <th>lesson</th>
+                <th>action</th>
+                <div class="badboy"></div>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?=anchor('/academy/classes/view/7', '7');?></td>
+                <td>shahrood</td>
+                <td>computer</td>
+                <td>data base</td>
+                <td>
+                    <?=form_open('/academy/class/remove/')?>
+                    <input type="hidden" name="id" value="1"/>
+                    <input type="submit" value="remove" class="btn btn-small"/>
 
-        <div class="badboy"></div>
-        </form>
+                    <div class="badboy"></div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>shahrood</td>
+                <td>computer</td>
+                <td>data base</td>
+                <td>
+                    <?=form_open('/academy/class/remove/')?>
+                    <input type="hidden" name="id" value="1"/>
+                    <input type="submit" value="remove" class="btn btn-small"/>
+
+                    <div class="badboy"></div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>shahrood</td>
+                <td>computer</td>
+                <td>data base</td>
+                <td>
+                    <?=form_open('/academy/class/remove/')?>
+                    <input type="hidden" name="id" value="1"/>
+                    <input type="submit" value="remove" class="btn btn-small"/>
+
+                    <div class="badboy"></div>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>shahrood</td>
+                <td>computer</td>
+                <td>data base</td>
+                <td>
+                    <?=form_open('/academy/class/remove/')?>
+                    <input type="hidden" name="id" value="1"/>
+                    <input type="submit" value="remove" class="btn btn-small"/>
+
+                    <div class="badboy"></div>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
     </section>
 
     <section class="widget white" style="">
         <header class="widget-head">join to class</header>
         <table class="table-form" style="margin: 30px">
             <thead>
+
             <tr>
 
                 <form action="" style="padding:0">
-                    <td><input type="text" name="id" placeholder="id"/>
-                    </td>
-                    <td><input type="text" name="academy" placeholder="academy"/>
-                    </td>
-                    <td><input type="text" name="field" placeholder="field"/>
-                    </td>
-                    <td><input type="text" name="lesson" placeholder="lesson"/>
-                    </td>
-                    <td><input type="text" name="prof" placeholder="prof"/>
-                    </td>
-                    <td><input type="submit" value="search" class="btn"/>
-                    </td>
+                    <th>
+                        <input type="text" name="id" placeholder="id"/>
+                    </th>
+                    <th>
+                        <input type="text" name="academy" placeholder="academy" title="academy"/>
+                    </th>
+                    <th>
+                        <input type="text" name="field" placeholder="field"/>
+                    </th>
+                    <th>
+                        <input type="text" name="lesson" placeholder="lesson"/>
+                    </th>
+                    <th>
+                        <input type="text" name="prof" placeholder="prof"/>
+                    </th>
+                    <th colspan="2">
+                        <input type="submit" value="search" class="btn"/>
+                    </th>
                     <div class="badboy"></div>
                 </form>
             </tr>
-            <tr>
+            <tr class="table-head">
                 <th>id</th>
                 <th>academy</th>
                 <th>field</th>
@@ -173,12 +257,11 @@
         </table>
     </section>
 
-
     <section class="widget white">
         <header class="widget-head">joined class</header>
         <table class="table-form" style="margin: 30px">
             <thead>
-            <tr>
+            <tr class="table-head">
                 <th>id</th>
                 <th>academy</th>
                 <th>field</th>

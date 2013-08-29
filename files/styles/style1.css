@@ -63,6 +63,10 @@ input:focus, textarea:focus {
     background : #f7f8f9;
 }
 
+.placeholder {
+    color : #aaa !important;
+}
+
 textarea {
     margin : 10px 0px;
     height : 100px;
@@ -110,6 +114,10 @@ label {
     cursor        : pointer;
 }
 
+.mini-phone .btn {
+    width : 97%;
+}
+
 .btn:hover {
     background      : #0160A7;
     color           : white;
@@ -148,12 +156,23 @@ td {
     border-top : 1px solid #dddddd;
 }
 
-th {
+tr.form_err td {
+    border : none;
+}
+
+tr.form_err:hover td {
+    background-color : #fff;
+}
+
+tr.table-head th {
     /*background     : #f7f8f9 !important;*/
     font-weight    : bold;
-    padding        : 10px;
-    border-bottom  : 2px solid #333;
+    padding        : 30px 10px 10px 10px;
     text-transform : capitalize;
+}
+
+tr.table-head {
+    border-bottom : 2px solid #333;
 }
 
 .table-form td {
