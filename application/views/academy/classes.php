@@ -146,15 +146,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php if ($suggest->num_rows() < 0) { ?>
-                            <tr>No class is not available.</tr>
+                        <?php if ($suggest->num_rows() == 0) { ?>
+                            <tr>
+                                <td colspan="6">No class is not available.</td>
+                            </tr>
                         <?php }foreach ($suggest->result() as $row) { ?>
                             <tr>
-                                <td><?=$row->class_id?></td>
-                                <td><?=$row->academy_name?></td>
-                                <td><?=$row->field_name?></td>
-                                <td><?=$row->lesson_name?></td>
-                                <td><?=$row->prof_name?></td>
+                                <td><?php echo $row->class_id?></td>
+                                <td><?php echo $row->academy_name?></td>
+                                <td><?php echo $row->field_name?></td>
+                                <td><?php echo $row->lesson_name?></td>
+                                <td><?php echo $row->prof_name?></td>
                                 <td>
                                     <?=form_open('/academy/classes/join/')?>
                                     <input type="hidden" name="class_id" value="1"/>

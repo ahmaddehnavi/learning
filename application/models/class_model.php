@@ -38,7 +38,7 @@ class Class_Model extends CI_Model
      */
     public function join($class_id, $student_id)
     {
-        $sql = 'SELECT * FROM class_member WHERE class_id=? student_id=? LIMIT 1';
+        $sql = 'SELECT * FROM class_member WHERE class_id=? AND student_id=? LIMIT 1';
         $row = $this->db->query($sql, array($class_id, $student_id));
         if ($row->num_rows() > 0) {
             return TRUE;
@@ -68,7 +68,9 @@ class Class_Model extends CI_Model
              JOIN lesson ON lesson.lesson_id=class.lesson_id
              JOIN profile ON profile.user_id=class.prof_id';
 
-        return $this->db->query($sql, array($academy_id, $field_id));
+//             JOIN class_member ON class_member.class_id=class.class_id AND student_id!=? ';
+
+        return $this->db->query($sql, array($academy_id, $field_id, $this->auth->get_user_id()));
     }
 
     /**

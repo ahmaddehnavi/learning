@@ -136,11 +136,6 @@ table {
 
 }
 
-tr {
-    /*background : #aaa;*/
-    padding : 0 30px;
-}
-
 tr:hover td {
     background-color : #F8F8F8;
 }
