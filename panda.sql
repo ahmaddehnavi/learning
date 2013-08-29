@@ -3,11 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 29, 2013 at 01:49 PM
+-- Generation Time: Aug 29, 2013 at 09:01 PM
 -- Server version: 5.0.67
 -- PHP Version: 5.2.6
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -26,16 +26,11 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `academy` (
-  `academy_id` INT(11)                 NOT NULL AUTO_INCREMENT,
-  `name`       VARCHAR(40)
-               CHARACTER SET utf8
-               COLLATE utf8_persian_ci NOT NULL,
-  PRIMARY KEY (`academy_id`),
+  `academy_id` int(11) NOT NULL auto_increment,
+  `name` varchar(40) character set utf8 collate utf8_persian_ci NOT NULL,
+  PRIMARY KEY  (`academy_id`),
   UNIQUE KEY `name` (`name`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = latin1
-  AUTO_INCREMENT = 6;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `academy`
@@ -55,13 +50,11 @@ INSERT INTO `academy` (`academy_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `auth_passwd_request` (
-  `user_id`      INT(11)          NOT NULL,
-  `hash`         VARCHAR(40)      NOT NULL,
-  `request_time` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY (`hash`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = latin1;
+  `user_id` int(11) NOT NULL,
+  `hash` varchar(40) NOT NULL,
+  `request_time` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`hash`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `auth_passwd_request`
@@ -75,15 +68,13 @@ CREATE TABLE IF NOT EXISTS `auth_passwd_request` (
 --
 
 CREATE TABLE IF NOT EXISTS `ci_sessions` (
-  `session_id`    VARCHAR(40)      NOT NULL DEFAULT '0',
-  `ip_address`    VARCHAR(16)      NOT NULL DEFAULT '0',
-  `user_agent`    VARCHAR(100)     NOT NULL,
-  `last_activity` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `user_data`     TEXT             NOT NULL,
-  PRIMARY KEY (`session_id`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = latin1;
+  `session_id` varchar(40) NOT NULL default '0',
+  `ip_address` varchar(16) NOT NULL default '0',
+  `user_agent` varchar(100) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL default '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY  (`session_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ci_sessions`
@@ -97,49 +88,60 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 CREATE TABLE IF NOT EXISTS `class` (
-  `class_id`    INT(11) NOT NULL AUTO_INCREMENT,
-  `academy_id`  INT(11) NOT NULL,
-  `field_id`    INT(11) NOT NULL,
-  `lesson_id`   INT(11) NOT NULL,
-  `prof_id`     INT(11) NOT NULL,
-  `join_status` TINYINT(1) DEFAULT '1',
-  PRIMARY KEY (`class_id`),
-  UNIQUE KEY `academy_id` (`academy_id`, `field_id`, `lesson_id`, `prof_id`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = latin1
-  AUTO_INCREMENT = 2;
+  `class_id` int(11) NOT NULL auto_increment,
+  `academy_id` int(11) NOT NULL,
+  `field_id` int(11) NOT NULL,
+  `lesson_id` int(11) NOT NULL,
+  `prof_id` int(11) NOT NULL,
+  `join_status` tinyint(1) default '1',
+  PRIMARY KEY  (`class_id`),
+  UNIQUE KEY `academy_id` (`academy_id`,`field_id`,`lesson_id`,`prof_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `class`
 --
 
 INSERT INTO `class` (`class_id`, `academy_id`, `field_id`, `lesson_id`, `prof_id`, `join_status`) VALUES
-(1, 1, 1, 1, 1, 1);
+(1, 1, 1, 1, 1, 1),
+(2, 1, 1, 2, 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `field`
+-- Table structure for table `class_member`
 --
 
-CREATE TABLE IF NOT EXISTS `field` (
-  `field_id` INT(11)                 NOT NULL AUTO_INCREMENT,
-  `name`     VARCHAR(50)
-             CHARACTER SET utf8
-             COLLATE utf8_persian_ci NOT NULL,
-  PRIMARY KEY (`field_id`),
+CREATE TABLE IF NOT EXISTS `class_member` (
+  `class_id` int(11) NOT NULL,
+  `student_id` int(32) NOT NULL,
+  `status` enum('wait','active','block') NOT NULL,
+  PRIMARY KEY  (`class_id`,`student_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `class_member`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `field_table`
+--
+
+CREATE TABLE IF NOT EXISTS `field_table` (
+  `field_id` int(11) NOT NULL auto_increment,
+  `name` varchar(50) character set utf8 collate utf8_persian_ci NOT NULL,
+  PRIMARY KEY  (`field_id`),
   UNIQUE KEY `name` (`name`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = latin1
-  AUTO_INCREMENT = 6;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `field`
+-- Dumping data for table `field_table`
 --
 
-INSERT INTO `field` (`field_id`, `name`) VALUES
+INSERT INTO `field_table` (`field_id`, `name`) VALUES
 (1, 'رشته1'),
 (2, 'رشته2'),
 (3, 'رشته3'),
@@ -153,16 +155,11 @@ INSERT INTO `field` (`field_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `lesson` (
-  `lesson_id` INT(11)                 NOT NULL AUTO_INCREMENT,
-  `name`      VARCHAR(40)
-              CHARACTER SET utf8
-              COLLATE utf8_persian_ci NOT NULL,
-  PRIMARY KEY (`lesson_id`),
+  `lesson_id` int(11) NOT NULL auto_increment,
+  `name` varchar(40) character set utf8 collate utf8_persian_ci NOT NULL,
+  PRIMARY KEY  (`lesson_id`),
   UNIQUE KEY `name` (`name`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = latin1
-  AUTO_INCREMENT = 6;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `lesson`
@@ -182,26 +179,21 @@ INSERT INTO `lesson` (`lesson_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `profile` (
-  `user_id`    BIGINT(32) NOT NULL,
-  `full_name`  VARCHAR(40)
-               CHARACTER SET utf8
-               COLLATE utf8_persian_ci DEFAULT 'your name',
-  `academy_id` INT(11) DEFAULT NULL,
-  `field_id`   INT(11) DEFAULT NULL,
-  `about`      TEXT
-               CHARACTER SET utf8
-               COLLATE utf8_persian_ci,
-  PRIMARY KEY (`user_id`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = latin1;
+  `user_id` bigint(32) NOT NULL,
+  `full_name` varchar(40) character set utf8 collate utf8_persian_ci default 'your name',
+  `academy_id` int(11) default NULL,
+  `field_id` int(11) default NULL,
+  `about` text character set utf8 collate utf8_persian_ci,
+  PRIMARY KEY  (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `profile`
 --
 
 INSERT INTO `profile` (`user_id`, `full_name`, `academy_id`, `field_id`, `about`) VALUES
-(1, 'Ahmad Dehnavi222', 1, 1, 'about    about    about    about    about    about    about    about    about    about    about    about    about    about    about    about    about');
+(1, 'Ahmad Dehnavi1', 2, 1, 'about    about    about    about    about    about    about    about    about    about    about    about    about    about    about    about\r\nsd'),
+(2, 'ahmad', 1, 1, 'salam');
 
 -- --------------------------------------------------------
 
@@ -210,25 +202,21 @@ INSERT INTO `profile` (`user_id`, `full_name`, `academy_id`, `field_id`, `about`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `user_id`  INT(11)                 NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(40)
-             CHARACTER SET utf8
-             COLLATE utf8_persian_ci NOT NULL,
-  `email`    VARCHAR(50)             NOT NULL,
-  `password` VARCHAR(40)             NOT NULL,
-  `salt`     VARCHAR(40)             NOT NULL,
-  `status`   TINYINT(1)              NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_id`),
+  `user_id` int(11) NOT NULL auto_increment,
+  `username` varchar(40) character set utf8 collate utf8_persian_ci NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `salt` varchar(40) NOT NULL,
+  `status` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`user_id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = latin1
-  AUTO_INCREMENT = 2;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `salt`, `status`) VALUES
-(1, 'test1', 'test1@mail.com', 'b82f6248d26bed7653baa619bd1d0848b8d405b5', 'da94036d1fac11f7e7821ab379ce0e4f447fc0ac', 0);
+(1, 'test1', 'test1@mail.com', 'b82f6248d26bed7653baa619bd1d0848b8d405b5', 'da94036d1fac11f7e7821ab379ce0e4f447fc0ac', 0),
+(2, 'test2', 'test2@mail.com', '9cdcb5afe93fa858984921e893aec4010f308ee0', 'd40bc776406e7e4153c811ee5c31c223eba2c197', 0);
