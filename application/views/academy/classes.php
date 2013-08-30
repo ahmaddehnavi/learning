@@ -89,23 +89,28 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><?=anchor('/academy/classes/view/7', '7');?></td>
-                            <td>shahrood</td>
-                            <td>computer</td>
-                            <td>data base</td>
-                            <td>
-                                <?=form_open('/academy/classes/remove/')?>
-                                <input type="hidden" name="class_id" value="1"/>
-                                <input type="submit" value="remove" class="btn btn-small"/>
+                        <?php if ($prof_class->num_rows() == 0) { ?>
+                            <tr>
+                                <td colspan="6">No class exist.</td>
+                            </tr>
+                        <?php }foreach ($prof_class->result() as $row) { ?>
+                            <tr>
+                                <td><?php echo $row->class_id?></td>
+                                <td><?php echo $row->academy_name?></td>
+                                <td><?php echo $row->field_name?></td>
+                                <td><?php echo $row->lesson_name?></td>
+                                <td>
+                                    <?=form_open('/academy/classes/remove/')?>
+                                    <input type="hidden" name="class_id" value="<?= $row->class_id ?>"/>
+                                    <input type="submit" value="remove" class="btn btn-small"/>
 
-                                <div class="badboy"></div>
-                                </form>
-                            </td>
-                        </tr>
+                                    <div class="badboy"></div>
+                                    </form>
+                                </td>
+                            </tr>
+                        <? }?>
                         </tbody>
                     </table>
-
                 </section>
 
                 <section class="widget white" style="">
@@ -148,9 +153,12 @@
                         <tbody>
                         <?php if ($suggest->num_rows() == 0) { ?>
                             <tr>
-                                <td colspan="6">No class is not available.</td>
+                                <td colspan="6">No suggest available.</td>
                             </tr>
-                        <?php }foreach ($suggest->result() as $row) { ?>
+                        <?php
+                        }
+                        foreach ($suggest->result() as $row) {
+                            ?>
                             <tr>
                                 <td><?php echo $row->class_id?></td>
                                 <td><?php echo $row->academy_name?></td>
@@ -159,7 +167,7 @@
                                 <td><?php echo $row->prof_name?></td>
                                 <td>
                                     <?=form_open('/academy/classes/join/')?>
-                                    <input type="hidden" name="class_id" value="1"/>
+                                    <input type="hidden" name="class_id" value="<?= $row->class_id ?>"/>
                                     <input type="submit" value="join" class="btn btn-small"/>
 
                                     <div class="badboy"></div>

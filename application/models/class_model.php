@@ -66,9 +66,46 @@ class Class_Model extends CI_Model
              JOIN academy ON academy.academy_id=class.academy_id AND class.academy_id=? AND class.field_id=?
              JOIN field_table ON field_table.field_id=class.field_id
              JOIN lesson ON lesson.lesson_id=class.lesson_id
-             JOIN profile ON profile.user_id=class.prof_id';
+             JOIN profile ON profile.user_id=class.prof_id
+             AND class.class_id NOT IN (SELECT class_id FROM class_member WHERE student_id = ?)
+             LIMIT 100';
 
-//             JOIN class_member ON class_member.class_id=class.class_id AND student_id!=? ';
+        return $this->db->query($sql, array($academy_id, $field_id, $this->auth->get_user_id()));
+    }
+
+    public function get_student_classes()
+    {
+        $this->load->model('profile_model');
+        $academy_id = $this->profile_model->get_academy_id();
+        $field_id   = $this->profile_model->get_field_id();
+        $sql        =
+            'SELECT class.class_id,academy.name AS academy_name,field_table.name AS field_name,lesson.name AS lesson_name ,profile.full_name AS prof_name
+             FROM class
+             JOIN class_member ON class.class_id=class_member.class_id AND class_member.student_id=?
+             JOIN academy ON academy.academy_id=class.academy_id
+             JOIN field_table ON field_table.field_id=class.field_id
+             JOIN lesson ON lesson.lesson_id=class.lesson_id
+             JOIN profile ON profile.user_id=class.prof_id
+             LIMIT 100';
+
+        return $this->db->query($sql, array($academy_id, $field_id, $this->auth->get_user_id()));
+    }
+
+    /**
+     * @return CI_DB_result
+     */
+    public function get_prof_classes()
+    {
+        $this->load->model('profile_model');
+        $academy_id = $this->profile_model->get_academy_id();
+        $field_id   = $this->profile_model->get_field_id();
+        $sql        =
+            'SELECT class.class_id,academy.name AS academy_name,field_table.name AS field_name,lesson.name AS lesson_name
+             FROM class
+             JOIN academy ON academy.academy_id=class.academy_id AND class.prof_id=?
+             JOIN field_table ON field_table.field_id=class.field_id
+             JOIN lesson ON lesson.lesson_id=class.lesson_id
+             LIMIT 100';
 
         return $this->db->query($sql, array($academy_id, $field_id, $this->auth->get_user_id()));
     }

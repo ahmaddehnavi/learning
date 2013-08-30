@@ -12,7 +12,9 @@ class Classes extends CI_Controller
 
     function index()
     {
-        $data['suggest'] = $this->class_model->get_suggest();
+        $data['suggest']       = $this->class_model->get_suggest();
+        $data['prof_class']    = $this->class_model->get_prof_classes();
+        $data['student_class'] = $this->class_model->get_student_classes();
         $this->load->view('academy/classes', $data);
     }
 
@@ -41,7 +43,9 @@ class Classes extends CI_Controller
 
     function remove()
     {
-        $data['suggest'] = $this->class_model->get_suggest();
+        $data['suggest']       = $this->class_model->get_suggest();
+        $data['prof_class']    = $this->class_model->get_prof_classes();
+        $data['student_class'] = $this->class_model->get_student_classes();
         $this->load->view('academy/classes', $data);
     }
 
@@ -56,7 +60,9 @@ class Classes extends CI_Controller
             $this->class_model->join($class_id, $student_id);
         }
 
-        $data['suggest'] = $this->class_model->get_suggest();
+        $data['suggest']       = $this->class_model->get_suggest();
+        $data['prof_class']    = $this->class_model->get_prof_classes();
+        $data['student_class'] = $this->class_model->get_student_classes();
         $this->load->view('academy/classes', $data);
     }
 
@@ -80,7 +86,9 @@ class Classes extends CI_Controller
 
         }
 
-        $data['suggest'] = $this->class_model->get_suggest();
+        $data['suggest']       = $this->class_model->get_suggest();
+        $data['prof_class']    = $this->class_model->get_prof_classes();
+        $data['student_class'] = $this->class_model->get_student_classes();
         $this->load->view('academy/classes', $data);
     }
 
