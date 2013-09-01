@@ -1,27 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Home</title>
-</head>
-<body>
+<?php $this->load->view('base/header'); ?>
+	<style type="text/css">
+		.login-form {
+			margin    : 50px auto;
+			width     : 330px;
+			max-width : 100%;
+		}
 
-<?php echo $registration_message; ?>
-<?php echo form_open('user/login')?>
-	<?php echo validation_errors('<p style="color:red">', '</p>'); ?>
-	<?php if ($login_error):?><p style="color:red">Invalid username or Password</p><?php endif; ?>
-	<label>username:
-		<?php echo form_input('username')?>
-	</label><br>
-	<label>Password:
-		<?php echo form_password('password')?>
-	</label><br>
-	<p><?=anchor('forgot_password', 'Forgot password')?></p>
-	<p><?=anchor('register', 'Register Here')?></p>
-	
-	<p><input type="submit" value="Continue &rarr;" name='submits'></p>
-</form>
-<p>Page rendered in {elapsed_time} seconds</p>
+		.login-form form {
+			margin : 10px;
+		}
 
-</body>
-</html>
+		.mini-phone .login-form {
+			margin : auto;
+		}
+
+		.login-form a {
+			font-size : 11px;
+			padding   : 30px 0 10px 10px;
+			display   : block;
+		}
+
+		.mini-phone .login-form a {
+			padding : 3px 10px;
+		}
+
+		.login-form header {
+			font-size      : 16px;
+			font-weight    : bold;
+			padding        : 25px 10px 10px 10px;
+			text-align     : center;
+			text-transform : uppercase;
+			color          : #555;
+			border-bottom  : 1px solid rgb(245, 245, 245);
+		}
+
+		.login-form header i {
+			background : #333;
+		}
+
+	</style>
+	<nav>
+		<menu>
+			<li><a href="#">item 1</a></li>
+			<li><a href="#">item 2</a></li>
+			<li><a href="#">item 3</a></li>
+			<li><a href="#">item 4</a></li>
+			<div class="badboy"></div>
+		</menu>
+		<ul class="collapse-btn btn-top toggle-on" collapse-target="nav">
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</nav>
+
+	<div class="login-form white">
+		<header><i></i>login form <i></i></header>
+		<?php echo $registration_message; ?>
+		<?php echo form_open('user/login')?>
+		<?php echo validation_errors('<p class="form_err">', '</p>'); ?>
+		<?php if ($login_error): ?><p class="form_err">Invalid username or Password</p><?php endif; ?>
+		<input type="text" name="username" placeholder="mail or username"/>
+		<input type="password" name="password" placeholder="password"/>
+
+		<input type="hidden" name="next_page" value="<?= $next_page ?>"/>
+
+
+		<div>
+
+			<div class="left">
+				<input type="submit" value="Login" class="btn" name='submits'>
+			</div>
+
+			<div class="right">
+				<p><?=anchor('forgot_password', 'Forgot password')?></p>
+			</div>
+			<div class="right">
+				<p><?=anchor('register', 'Register Here')?></p>
+
+			</div>
+
+			<div class="badboy"></div>
+		</div>
+		</form>
+
+	</div>
+
+<?php $this->load->view('base/footer'); ?>
