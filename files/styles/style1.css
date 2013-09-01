@@ -91,6 +91,7 @@ label {
     color       : red;
     font-size   : 12px;
     margin-left : 10px;
+    margin-top  : -5px;
 }
 
 .mini-phone form {

@@ -61,11 +61,12 @@
 	<div class="login-form widget">
 		<?php echo $registration_message; ?>
 		<?php echo form_open('user/login', 'class="widget-body"')?>
-		<?php echo validation_errors('<p class="form_err">', '</p>'); ?>
-		<?php if ($login_error): ?><p class="form_err">Invalid username or Password</p><?php endif; ?>
-		<input type="text" name="username" placeholder="mail or username"/>
-		<input type="password" name="password" placeholder="password"/>
 
+		<input type="text" name="username" placeholder="mail or username"/>
+		<?= form_error('username', '<p class="form_err">', '</p>')?>
+		<input type="password" name="password" placeholder="password"/>
+		<?= form_error('password', '<p class="form_err">', '</p>')?>
+		<?php if ($login_error): ?><p class="form_err">Invalid username or Password</p><?php endif; ?>
 		<input type="hidden" name="next_page" value="<?= $next_page ?>"/>
 
 

@@ -73,7 +73,7 @@
 								<?=form_error('about', '<div class="form_err">', '</div>')?>
 							</div>
 
-							<div class="left" style="max-width: 30%;">
+							<div class="left">
 								<div class="row">
 									<label for="image"> image :</label>
 									<img src="" alt="" width="100px" height="100px"/>
