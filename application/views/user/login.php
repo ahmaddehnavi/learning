@@ -7,7 +7,11 @@
 		}
 
 		.login-form form {
-			margin : 10px;
+			padding : 30px;
+		}
+
+		.mini-phone .login-form form {
+			padding : 0;
 		}
 
 		.mini-phone .login-form {
@@ -24,19 +28,19 @@
 			padding : 3px 10px;
 		}
 
-		.login-form header {
-			font-size      : 16px;
-			font-weight    : bold;
-			padding        : 25px 10px 10px 10px;
-			text-align     : center;
-			text-transform : uppercase;
-			color          : #555;
-			border-bottom  : 1px solid rgb(245, 245, 245);
-		}
+			/*.login-form header {*/
+			/*font-size      : 16px;*/
+			/*font-weight    : bold;*/
+			/*padding        : 25px 10px 10px 10px;*/
+			/*text-align     : center;*/
+			/*text-transform : uppercase;*/
+			/*color          : #555;*/
+			/*border-bottom  : 1px solid rgb(245, 245, 245);*/
+			/*}*/
 
-		.login-form header i {
-			background : #333;
-		}
+			/*.login-form header i {*/
+			/*background : #333;*/
+			/*}*/
 
 	</style>
 	<nav>
@@ -54,10 +58,9 @@
 		</ul>
 	</nav>
 
-	<div class="login-form white">
-		<header><i></i>login form <i></i></header>
+	<div class="login-form widget">
 		<?php echo $registration_message; ?>
-		<?php echo form_open('user/login')?>
+		<?php echo form_open('user/login', 'class="widget-body"')?>
 		<?php echo validation_errors('<p class="form_err">', '</p>'); ?>
 		<?php if ($login_error): ?><p class="form_err">Invalid username or Password</p><?php endif; ?>
 		<input type="text" name="username" placeholder="mail or username"/>
