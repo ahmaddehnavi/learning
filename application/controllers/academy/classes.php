@@ -20,6 +20,9 @@ class Classes extends Auth_Controller
 
 	function view($id)
 	{
+		if (!is_numeric($id)) {
+			show_404();
+		}
 		$info = $this->class_model->get_info($id);
 //		$this->class_model->inc_number_of_change($id);
 		$data = array(
@@ -30,6 +33,7 @@ class Classes extends Auth_Controller
 			'next_exam_time' => '2 day and 3 hour and 25 min'
 		);
 		$this->load->view('academy/classes/view', $data);
+
 	}
 
 	function create()
