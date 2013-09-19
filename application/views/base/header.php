@@ -16,8 +16,12 @@
 	<!-- ############################################################################ -->
 
 	<link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/style1.css"/>
-
-	<title><?=$title?></title>
+	<?php
+	if (!isset($title))
+		echo '<title>Panda</title>';
+	else
+		echo '<title>Panda |' . $title . '</title>';
+	?>
 </head>
 
 <body>

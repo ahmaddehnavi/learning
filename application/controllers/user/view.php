@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class home extends CI_Controller
+class View extends CI_Controller
 {
 	function __construct()
 	{
@@ -8,10 +8,16 @@ class home extends CI_Controller
 
 	}
 
-	function index()
+	function by_username()
 	{
-		redirect('user/dashboard');
+		$this->load->view('user/view');
 	}
+
+	function by_id($user_id)
+	{
+		$this->load->view('user/view');
+	}
+
 }
 
 /* End of file Home.php */
