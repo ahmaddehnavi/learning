@@ -505,6 +505,38 @@ nav a:hover, nav li.active a {
     padding-left : 0;
 }
 
+.items{
+  background-color: #999;
+}
+
+.items ul{
+  list-style-type: none;
+}
+
+.item{
+  display:block;
+  width: 170px;
+  height: 200px;
+  border:1px solid red;
+  float: left;
+  margin:10px
+}
+
+.items img{
+  width:160px;
+  height:100px;
+  margin: 5px;
+}
+
+.item li{
+  text-align: center;
+}
+
+
+
+
+
+
 /*.large-desktop #content-body > section {*/
 /*float: left;*/
 /*max-width: 47%;*/
