@@ -151,3 +151,7 @@ a > sup {
     text-shadow    : 0 0 2px white;
     padding        : 5px;
 }
+
+.success {
+    color : #0a0;
+}

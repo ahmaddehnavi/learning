@@ -1,4 +1,13 @@
 <?php $this->load->view('base/header'); ?>
+	<style>
+		.large-desktop .widget, .desktop .widget, .tablet .widget {
+			width       : 45%;
+			margin-left : 2%;
+			float       : left;
+		}
+
+
+	</style>
 	<div id="container" class="p-profile">
 
 		<nav>
@@ -16,7 +25,7 @@
 			</ul>
 		</nav>
 		<aside id="sidebar">
-			<header><?php echo 'full name' ?>&nbsp;</header>
+			<header><?php echo $this->auth->get_full_name() ?>&nbsp;</header>
 			<ul class="collapse-btn btn-left toggle-off" collapse-target="#sidebar">
 				<li></li>
 				<li></li>
@@ -24,9 +33,9 @@
 			</ul>
 			<menu>
 				<h2>user :</h2>
-				<li class="icon-dashboard active"><?php echo anchor("user/dashboard", "dashboard") ?></li>
+				<li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
 				<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>5</b>") ?></li>
-				<li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
+				<li class="icon-profile active"><?php echo anchor("user/profile", "profile") ?></li>
 				<li class="icon-logout .top-line"><?php echo anchor("user/logout", "logout") ?></li>
 			</menu>
 
@@ -56,12 +65,16 @@
 						<div>Sample description for classes page</div>
 					</section>
 				</section>
+
 				<section id="content-body">
+
 					<section class="widget">
 						<header class="widget-head">profile :</header>
+
+
 						<article class="widget-body">
-							<?php echo form_open('user/profile/');?>
-							<input type="hidden" name="form_num" value="1"/>
+							<?php echo form_open_multipart('user/profile/');?>
+							<input type="hidden" name="form_num" value="2"/>
 
 							<div class="row left">
 								<label for="full_name"> full name :</label>
@@ -69,17 +82,17 @@
 								<?=form_error('full_name', '<div class="form_err">', '</div>')?>
 
 								<label for="about"> about :</label>
-								<textarea name="about"><?=$about?></textarea>
+								<textarea name="about" style="width:100%;"><?=$about?></textarea>
 								<?=form_error('about', '<div class="form_err">', '</div>')?>
 							</div>
 
 							<div class="left">
 								<div class="row">
 									<label for="image"> image :</label>
-									<img src="" alt="" width="100px" height="100px"/>
+									<img src="<?= $image ?>" alt="<?= $full_name ?>" width="100px" height="100px"/>
 								</div>
 								<div class="row">
-									<input type="file" class="file_input" name="image"/>
+									<input type="file" class="file_input" name="userfile"/>
 									<?=form_error('image', '<div class="form_err">', '</div>')?>
 								</div>
 								<div class="badboy"></div>
@@ -96,10 +109,42 @@
 					</section>
 
 					<section class="widget">
+						<header class="widget-head">change password :</header>
+						<article class="widget-body">
+							<?php echo form_open('user/profile/');?>
+							<input type="hidden" name="form_num" value="1"/>
+
+							<div class="row left">
+								<?=$form_1_msg?>
+								<label for="current_password"> current password :</label>
+								<input type="password" name="current_password"/>
+								<?=form_error('current_password', '<div class="form_err">', '</div>')?>
+
+								<label for="new_password">new password :</label>
+								<input type="password" name="new_password" value="<?= set_value('new_password') ?>"/>
+								<?=form_error('new_password', '<div class="form_err">', '</div>')?>
+
+								<label for="conf_new_password"> confirm new password :</label>
+								<input type="password" name="conf_new_password"
+									   value="<?= set_value('conf_new_password') ?>"/>
+								<?=form_error('conf_new_password', '<div class="form_err">', '</div>')?>
+							</div>
+
+							<div class="badboy"></div>
+							<div class="row">
+								<input class="btn" type="submit" value="change password."/>
+							</div>
+							</form>
+
+						</article>
+
+					</section>
+
+					<section class="widget">
 						<header class="widget-head">academy:</header>
 						<article class="widget-body">
 							<?php echo form_open('user/profile/');?>
-							<input type="hidden" name="form_num" value="2"/>
+							<input type="hidden" name="form_num" value="3"/>
 
 							<div class="left">
 								<div class="row">

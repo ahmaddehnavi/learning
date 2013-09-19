@@ -88,10 +88,9 @@ label {
 }
 
 .form_err {
-    color       : red;
-    font-size   : 12px;
-    margin-left : 10px;
-    margin-top  : -5px;
+    color     : red;
+    font-size : 12px;
+    margin    : -5px 0 10px 0;
 }
 
 .mini-phone form {
@@ -111,7 +110,7 @@ label {
 }
 
 /*________________________________________Button________________________________________*/
-.btn {
+.btn, .btn-fix {
     outline       : none;
     border        : none;
     background    : #0072C6;
@@ -123,11 +122,16 @@ label {
     cursor        : pointer;
 }
 
+a.btn, a.btn-fix {
+    display : inline-block;
+    margin  : 5px 0;
+}
+
 .mini-phone .btn {
     width : 97%;
 }
 
-.btn:hover {
+.btn:hover, .btn-fix:hover {
     background      : #0160A7;
     color           : white;
     text-decoration : none;

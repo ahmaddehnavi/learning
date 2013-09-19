@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -37,9 +37,9 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
-$route['default_controller'] = "Home";
-$route['404_override'] = '';
+$routes['allow_multiple_subfolders'] = TRUE;
+$route['default_controller']         = "Home";
+$route['404_override']               = '';
 
 
 /* End of file routes.php */

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 29, 2013 at 09:01 PM
+-- Generation Time: Sep 14, 2013 at 01:39 PM
 -- Server version: 5.0.67
 -- PHP Version: 5.2.6
 
@@ -96,15 +96,15 @@ CREATE TABLE IF NOT EXISTS `class` (
   `join_status` tinyint(1) default '1',
   PRIMARY KEY  (`class_id`),
   UNIQUE KEY `academy_id` (`academy_id`,`field_id`,`lesson_id`,`prof_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `class`
 --
 
 INSERT INTO `class` (`class_id`, `academy_id`, `field_id`, `lesson_id`, `prof_id`, `join_status`) VALUES
-(1, 1, 1, 1, 1, 1),
-(2, 1, 1, 2, 2, 1);
+(2, 1, 1, 2, 2, 1),
+(6, 1, 1, 4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -123,6 +123,9 @@ CREATE TABLE IF NOT EXISTS `class_member` (
 -- Dumping data for table `class_member`
 --
 
+INSERT INTO `class_member` (`class_id`, `student_id`, `status`) VALUES
+(5, 1, 'wait'),
+(2, 1, 'wait');
 
 -- --------------------------------------------------------
 
@@ -192,8 +195,8 @@ CREATE TABLE IF NOT EXISTS `profile` (
 --
 
 INSERT INTO `profile` (`user_id`, `full_name`, `academy_id`, `field_id`, `about`) VALUES
-(1, 'Ahmad Dehnavi1', 2, 1, 'about    about    about    about    about    about    about    about    about    about    about    about    about    about    about    about\r\nsd'),
-(2, 'ahmad', 1, 1, 'salam');
+(1, 'Ahmad Dehnavi', 1, 1, 'about    about    about    about    about    about    about    about    about    about    about    about    about    about    about    about\r\nsd'),
+(2, 'asgar jafari', 1, 1, 'salam');
 
 -- --------------------------------------------------------
 

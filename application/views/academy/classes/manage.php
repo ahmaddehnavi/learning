@@ -25,10 +25,10 @@
 		<menu>
 			<h2>academy :</h2>
 			<li class="icon-exercise"><?php echo anchor("academy/exercises", "exercises") ?></li>
-			<li class="icon-class"><?php echo anchor("academy/classes", "classes") ?></li>
+			<li class="icon-class active"><?php echo anchor("academy/classes", "classes") ?></li>
 			<li class="icon-exam"><?php echo anchor("academy/exames", "exames") ?></li>
 			<h2>user :</h2>
-			<li class="icon-dashboard active"><?php echo anchor("user/dashboard", "dashboard") ?></li>
+			<li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
 			<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>5</b>") ?></li>
 			<li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
 			<li class="icon-logout .top-line"><?php echo anchor("user/logout", "logout") ?></li>
@@ -50,14 +50,16 @@
 					<ul>
 						<li><?php echo anchor('home', 'home')?> </a>&nbsp;&gt;&nbsp;</li>
 						<li><?php echo anchor('academy/home', 'academy')?> </a>&nbsp;&gt;&nbsp;</li>
-						<li>classes</li>
+						<li><?php echo anchor('academy/classes', 'classes')?> </a>&nbsp;&gt;&nbsp;</li>
+						<li>manage</li>
 					</ul>
 				</section>
 
 				<section class="bottom">
-					<h2>Classes</h2>
+					<h2>Manage Classes</h2>
 
-					<div>Sample description for classes page</div>
+					<div>create , remove , join and leave classes.</div>
+					<?=anchor('/academy/classes/', 'view mode', 'class="btn-fix btn-small right" title="view your classes"');?>
 				</section>
 			</section>
 			<section id="content-body">

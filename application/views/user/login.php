@@ -18,29 +18,26 @@
 			margin : auto;
 		}
 
-		.login-form a {
+		.login-form .aa {
 			font-size : 11px;
 			padding   : 30px 0 10px 10px;
 			display   : block;
 		}
 
-		.mini-phone .login-form a {
+		.mini-phone .login-form .aa {
 			padding : 3px 10px;
 		}
 
-			/*.login-form header {*/
-			/*font-size      : 16px;*/
-			/*font-weight    : bold;*/
-			/*padding        : 25px 10px 10px 10px;*/
-			/*text-align     : center;*/
-			/*text-transform : uppercase;*/
-			/*color          : #555;*/
-			/*border-bottom  : 1px solid rgb(245, 245, 245);*/
-			/*}*/
+		.login-form h2 {
+			border-bottom : 1px solid #aaa;
+			margin-bottom : 15px;
+			padding       : 10px 0;
+			color         : #aaa;
+		}
 
-			/*.login-form header i {*/
-			/*background : #333;*/
-			/*}*/
+		.login-with {
+			margin-top : 50px;
+		}
 
 	</style>
 	<nav>
@@ -62,6 +59,7 @@
 		<?php echo $registration_message; ?>
 		<?php echo form_open('user/login', 'class="widget-body"')?>
 
+		<!--		<h2>username and password :</h2>-->
 		<input type="text" name="username" placeholder="mail or username"/>
 		<?= form_error('username', '<p class="form_err">', '</p>')?>
 		<input type="password" name="password" placeholder="password"/>
@@ -69,25 +67,28 @@
 		<?php if ($login_error): ?><p class="form_err">Invalid username or Password</p><?php endif; ?>
 		<input type="hidden" name="next_page" value="<?= $next_page ?>"/>
 
-
 		<div>
-
 			<div class="left">
 				<input type="submit" value="Login" class="btn" name='submits'>
 			</div>
 
 			<div class="right">
-				<p><?=anchor('forgot_password', 'Forgot password')?></p>
+				<p><?=anchor('user/lost_password', 'lost password ?', 'class="aa"')?></p>
 			</div>
 			<div class="right">
-				<p><?=anchor('register', 'Register Here')?></p>
-
+				<p><?=anchor('user/register', 'create new account', 'class="aa"')?></p>
 			</div>
 
 			<div class="badboy"></div>
 		</div>
-		</form>
 
+		<div class="login-with">
+			<h2>or login with :</h2>
+			<?=anchor('#', 'google', 'class="btn btn-small"')?>
+			<?=anchor('#', 'yahoo', 'class="btn btn-small"')?>
+			<?=anchor('#', 'facebook', 'class="btn btn-small"')?>
+		</div>
+		</form>
 	</div>
 
 <?php $this->load->view('base/footer'); ?>

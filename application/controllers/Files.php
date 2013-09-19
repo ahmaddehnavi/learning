@@ -19,7 +19,7 @@ class Files extends CI_Controller
 
 	function do_upload()
 	{
-		$config['upload_path']   = 'files/uploads/' . $this->tank_auth->get_user_id();
+		$config['upload_path']   = 'files/uploads/' . $this->auth->get_user_id();
 		$config['allowed_types'] = 'gif|jpg|png|rar';
 		$config['max_size']      = '10240';
 		$config['max_width']     = '1024';
