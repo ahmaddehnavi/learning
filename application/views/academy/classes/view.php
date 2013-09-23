@@ -1,4 +1,4 @@
-<?php $this->load->view('base/header', array('title' => '')); ?>
+<?php $this->load->view('base/header', array('title' => $lesson_name)); ?>
 <div id="container">
 
 	<nav>
@@ -68,6 +68,25 @@
 					echo $new_change;
 					?>
 
+				</section>
+				<?php foreach ($posts->result() as $post) { ?>
+
+					<section class="widget ">
+						<header class="widget-head">
+							<?php echo $post->subject ?>
+						</header>
+						<section class="widget-body">
+							<?php echo $post->body ?>
+						</section>
+						<footer class="widget-footer">
+							post id :<?php echo $post->post_id ?>
+							author id: <?php echo $post->author_id ?>
+						</footer>
+					</section>
+				<?php }?>
+				<div class="badboy"></div>
+				<section class="widget" style="width: inherit;">
+					<?php echo $pagination; ?>
 				</section>
 			</section>
 		</main>

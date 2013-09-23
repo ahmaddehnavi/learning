@@ -6,7 +6,7 @@ class Classes extends Auth_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->model('class_model');
+		$this->load->model(array('class_model', 'post_model'));
 
 	}
 
@@ -18,20 +18,32 @@ class Classes extends Auth_Controller
 		$this->load->view('academy/classes/list', $data);
 	}
 
-	function view($id)
+	function view($id, $page = 0)
 	{
 		if (!is_numeric($id)) {
 			show_404();
 		}
 		$info = $this->class_model->get_info($id);
-//		$this->class_model->inc_number_of_change($id);
-		$data = array(
-			'lesson_name' => $info['lesson_name'],
-			'prof_name' => $info['prof_name'],
-			'new_change' => $info['new_change'],
-			'is_prof' => ($info['prof_id'] === $this->auth->get_user_id()),
-			'next_exam_time' => '2 day and 3 hour and 25 min'
-		);
+
+
+		$data = $this->post_model->get_class_posts($id, $page * 10);
+
+		$this->load->library('pagination');
+		$config['base_url']         = site_url('academy/classes/view/' . $id . '/');
+		$config['total_rows']       = $data['total'];
+		$config['per_page']         = 10;
+		$config['use_page_numbers'] = TRUE;
+		$config['uri_segment']      = 5;
+		$this->pagination->initialize($config);
+
+
+		$data['lesson_name']    = $info['lesson_name'];
+		$data['prof_name']      = $info['prof_name'];
+		$data['new_change']     = $info['new_change'];
+		$data['is_prof']        = ($info['prof_id'] === $this->auth->get_user_id());
+		$data['next_exam_time'] = '2 day and 3 hour and 25 min';
+		$data['pagination']     = $this->pagination->create_links();
+
 		$this->load->view('academy/classes/view', $data);
 
 	}

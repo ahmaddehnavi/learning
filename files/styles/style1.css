@@ -16,6 +16,17 @@ body {
     background-color : white;
 }
 
+a {
+    color           : #0088cc;
+    text-decoration : none;
+}
+
+a:hover, a:focus {
+    color           : #005580;
+    text-decoration : underline;
+    outline         : none;
+}
+
 /*________________________________________form________________________________________*/
 
 form input:-webkit-autofill {
@@ -41,7 +52,7 @@ form input, form textarea, form img {
     outline       : none;
 }
 
-input[type=text], input[type=number], input[type=email], input[type=date], input[type=password], textarea {
+input[type=text], input[type=number], input[type=email], input[type=date], input[type=password], textarea, select {
     padding    : 8px 15px;
     border     : 1px solid rgb(245, 245, 245);
     outline    : none;
@@ -58,6 +69,10 @@ input[type=submit] {
 
 }
 
+select {
+    color : #000;
+}
+
 input:focus, textarea:focus {
     box-shadow : 0 1px 3px #333 inset;
     color      : #000;
@@ -71,7 +86,8 @@ input:focus, textarea:focus {
 textarea {
     margin : 10px 0px;
     height : 100px;
-    width  : 300px;
+    /*width  : 300px;*/
+    /*max-width: 97%;*/
 }
 
 .mini-phone textarea, .phone textarea {
@@ -80,8 +96,11 @@ textarea {
 }
 
 label {
-    display        : block;
-    color          : #555;
+    display : block;
+    color   : #555;
+}
+
+.label {
     font-size      : 13px;
     font-weight    : 800;
     text-transform : capitalize;
@@ -427,6 +446,18 @@ main {
     margin-bottom : 30px;
 }
 
+#content-body .widget.mini {
+    width  : 47%;
+    float  : left;
+    margin : 2% 0 0 2%;
+}
+
+.mini-phone #content-body .widget.mini, .phone #content-body .widget.mini {
+    width         : 100%;
+    float         : none;
+    margin-bottom : 10px;
+}
+
 #content-body .widget-head {
     background    : #f7f8f9;
     border-bottom : 1px solid #d9d9dd;
@@ -435,6 +466,14 @@ main {
     color         : #727476;
     font-weight   : 500;
     padding       : 10px 15px;
+    word-wrap     : break-word;
+
+}
+
+#content-body .widget-head.white {
+    background  : #fff;
+    color       : #000;
+    font-weight : bolder;
 
 }
 
@@ -442,6 +481,16 @@ main {
     background    : #fff;
     padding       : 15px;
     border-radius : 0 0 2px 2px;
+    word-wrap     : break-word;
+}
+
+#content-body .widget-footer {
+    background : #fff;
+    border-top : 1px solid #eee;
+    box-shadow : 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    color      : #ccc;
+    padding    : 5px 10px;
+
 }
 
 nav {
@@ -505,37 +554,32 @@ nav a:hover, nav li.active a {
     padding-left : 0;
 }
 
-.items{
-  background-color: #999;
+.items {
+    background-color : #999;
 }
 
-.items ul{
-  list-style-type: none;
+.items ul {
+    list-style-type : none;
 }
 
-.item{
-  display:block;
-  width: 170px;
-  height: 200px;
-  border:1px solid red;
-  float: left;
-  margin:10px
+.item {
+    display : block;
+    width   : 170px;
+    height  : 200px;
+    border  : 1px solid red;
+    float   : left;
+    margin  : 10px
 }
 
-.items img{
-  width:160px;
-  height:100px;
-  margin: 5px;
+.items img {
+    width  : 160px;
+    height : 100px;
+    margin : 5px;
 }
 
-.item li{
-  text-align: center;
+.item li {
+    text-align : center;
 }
-
-
-
-
-
 
 /*.large-desktop #content-body > section {*/
 /*float: left;*/

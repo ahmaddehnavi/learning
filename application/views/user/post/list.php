@@ -59,8 +59,30 @@
 
 						<div>Sample description for classes page</div>
 					</section>
+					<?php echo anchor('/user/post/publish', 'publish new post', 'class="btn-fix btn-small right"')?>
+					<div class="badboy"></div>
 				</section>
 				<section id="content-body">
+					<?php foreach ($posts->result() as $post) { ?>
+
+						<section class="widget ">
+							<header class="widget-head">
+								<?php echo $post->subject ?>
+							</header>
+							<section class="widget-body">
+								<?php echo $post->body ?>
+							</section>
+							<footer class="widget-footer">
+								post id :<?php echo $post->post_id ?>
+								author id: <?php echo $post->author_id ?>
+							</footer>
+						</section>
+					<?php }?>
+					<div class="badboy"></div>
+					<section class="widget" style="width: inherit;">
+						<?php echo $pagination; ?>
+					</section>
+
 
 				</section>
 			</main>
