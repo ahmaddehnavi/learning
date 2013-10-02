@@ -1,9 +1,10 @@
 <?php $this->load->view('base/header'); ?>
+
 	<style type="text/css">
 		select {
-			padding : 0;
-			border : 0;
-			margin : 10px 0;
+			padding  : 0;
+			border   : 0;
+			margin   : 10px 0;
 			overflow : auto;
 
 		}
@@ -72,7 +73,7 @@
 				</section>
 				<section id="content-body">
 					<section class="widget-body">
-						<?php echo form_open_multipart('/user/post/publish')?>
+						<?php echo form_open_multipart('/user/posts/publish')?>
 						<section class="left">
 							<p>1) write your post :</p>
 
@@ -93,6 +94,9 @@
 								<option value="1">class2</option>
 								<option value="2">class3</option>
 								<option value="3">class4</option>
+								<option value="4">class4</option>
+								<option value="5">class4</option>
+								<option value="6">class4</option>
 							</select>
 							<?php echo form_error('classes[]', '<p class="form_err">', '</p>') ?>
 

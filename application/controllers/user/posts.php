@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Post extends Auth_Controller
+class Posts extends Auth_Controller
 {
 	function __construct()
 	{
@@ -14,7 +14,7 @@ class Post extends Auth_Controller
 		$data = $this->post_model->get_author_posts(0);
 
 		$this->load->library('pagination');
-		$config['base_url']         = site_url('user/post/page/');
+		$config['base_url']         = site_url('user/posts/page/');
 		$config['total_rows']       = $data['total'];
 		$config['per_page']         = 10;
 		$config['use_page_numbers'] = TRUE;
@@ -34,7 +34,7 @@ class Post extends Auth_Controller
 		$data = $this->post_model->get_author_posts(($item - 1) * 10);
 
 		$this->load->library('pagination');
-		$config['base_url']         = site_url('user/post/page/');
+		$config['base_url']         = site_url('user/posts/page/');
 		$config['total_rows']       = $data['total'];
 		$config['per_page']         = 10;
 		$config['use_page_numbers'] = TRUE;
@@ -44,6 +44,17 @@ class Post extends Auth_Controller
 
 		$data['pagination'] = $this->pagination->create_links();
 		$this->load->view('user/post/list', $data);
+	}
+
+	private function class_check($str)
+	{
+		if ($str == 'test') {
+			$this->form_validation->set_message('username_check', 'The %s field can not be the word "test"');
+
+			return FALSE;
+		} else {
+			return TRUE;
+		}
 	}
 
 	function publish()
@@ -63,7 +74,7 @@ class Post extends Auth_Controller
 			$this->load->model(array('post_model'));
 			$subject     = $this->form_validation->set_value('subject');
 			$body        = $this->form_validation->set_value('body');
-			$classes     = $this->form_validation->set_value('classes[]');
+			$classes     = $this->input->post('classes');
 			$mail_notice = $this->form_validation->set_value('mail_notice');
 			$sms_notice  = $this->form_validation->set_value('sms_notice');
 			$post_type   = $this->form_validation->set_value('post_type');
@@ -75,14 +86,14 @@ class Post extends Auth_Controller
 				$data['publish_error'] = 'error';
 			} else {
 				$this->load->model('class_post_model');
-				$this->load->library('notification');
+//				$this->load->library('notification');
 
 				$this->class_post_model->add_post_to_classes($id, $classes);
-				if ($mail_notice == 1)
-					$this->notification->new_post_mail($id, $subject, $body, $classes);
-				if ($sms_notice == 1)
-					$this->notification->new_post_sms($id, $subject, $body, $classes);
-				redirect('user/post/');
+//				if ($mail_notice == 1)
+//					$this->notification->new_post_mail($id, $subject, $body, $classes);
+//				if ($sms_notice == 1)
+//					$this->notification->new_post_sms($id, $subject, $body, $classes);
+//				redirect('user/posts/');
 			}
 		}
 

@@ -1,12 +1,12 @@
 <html>
 <head>
-    <title>Upload Form</title>
+	<title>Upload Form</title>
 </head>
 <body>
 
 <?php echo $error;?>
 
-<?php echo form_open_multipart('files/do_upload');?>
+<?php echo form_open_multipart('files/upload_image');?>
 
 <input type="file" name="userfile" size="20"/>
 <br/><br/>

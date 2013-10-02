@@ -59,7 +59,7 @@
 
 						<div>Sample description for classes page</div>
 					</section>
-					<?php echo anchor('/user/post/publish', 'publish new post', 'class="btn-fix btn-small right"')?>
+					<?php echo anchor('/user/posts/publish', 'publish new post', 'class="btn-fix btn-small right"')?>
 					<div class="badboy"></div>
 				</section>
 				<section id="content-body">
