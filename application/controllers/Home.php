@@ -2,16 +2,18 @@
 
 class Home extends CI_Controller
 {
-    function __construct()
-    {
-        parent::__construct();
-    }
+	function __construct()
+	{
+		parent::__construct();
+	}
 
-    function index()
-    {
+	function index()
+	{
 
-        $this->load->view('Home');
-    }
+		$this->load->view('Home');
+	}
+
+
 }
 
 /* End of file Home.php */
