@@ -603,6 +603,7 @@ nav a:hover, nav li.active a {
     color: #9B8F8F;
     text-align: center;
     margin-top: 10px;
+    word-wrap: break-word;
 }
 
 .widget .total {
