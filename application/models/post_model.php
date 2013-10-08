@@ -33,11 +33,14 @@ class Post_Model extends CI_Model
 		$data['total'] = $this->db
 			->where('author_id', $this->auth->get_user_id())
 			->count_all_results('post');
+
 		$data['posts'] = $this->db
+			->select('author_id,full_name AS author_name,post_id,subject,body,post_type')
 			->where('author_id', $this->auth->get_user_id())
 			->offset($offset)
 			->limit($limit)
 			->order_by('post_id', 'desc')
+			->join('profile', 'profile.user_id = post.author_id')
 			->get('post');
 
 		return $data;
