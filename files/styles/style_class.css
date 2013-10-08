@@ -28,10 +28,6 @@ header.widget-head {
     transition : all .2s;
 }
 
-.one:hover {
-    box-shadow : 0px 2px 2px -1px #555;
-}
-
 .desktop .one {
     /*margin: 18px 0px 18px 4px;*/
 }
