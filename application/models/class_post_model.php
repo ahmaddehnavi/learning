@@ -10,7 +10,7 @@ class Class_Post_Model extends CI_Model
 
 	function add_post_to_classes($post_id, $classes)
 	{
-		print_r($classes);
+//		print_r($classes);
 	}
 
 }
