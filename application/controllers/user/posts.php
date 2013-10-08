@@ -2,121 +2,115 @@
 
 class Posts extends Auth_Controller
 {
-    function __construct()
-    {
-        parent::__construct();
-        $this->load->model('post_model');
-    }
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model('post_model');
+	}
 
+	function index()
+	{
+		$data = $this->post_model->get_author_posts(0);
 
-    function index()
-    {
-        $data = $this->post_model->get_author_posts(0);
+		$this->load->library('pagination');
+		$config['base_url']         = site_url('user/posts/page/');
+		$config['total_rows']       = $data['total'];
+		$config['per_page']         = 10;
+		$config['use_page_numbers'] = TRUE;
+		$config['uri_segment']      = 4;
 
-        $this->load->library('pagination');
-        $config['base_url'] = site_url('user/posts/page/');
-        $config['total_rows'] = $data['total'];
-        $config['per_page'] = 10;
-        $config['use_page_numbers'] = TRUE;
-        $config['uri_segment'] = 4;
+		$this->pagination->initialize($config);
 
-        $this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+		$this->load->view('user/post/list', $data);
+	}
 
-        $data['pagination'] = $this->pagination->create_links();
-        $this->load->view('user/post/list', $data);
-    }
+	function page($item = 1)
+	{
+		if (!is_numeric($item))
+			$item = 1;
 
-    function page($item = 1)
-    {
-        if (!is_numeric($item))
-            $item = 1;
+		$data = $this->post_model->get_author_posts(($item - 1) * 10);
 
-        $data = $this->post_model->get_author_posts(($item - 1) * 10);
+		$this->load->library('pagination');
+		$config['base_url']         = site_url('user/posts/page/');
+		$config['total_rows']       = $data['total'];
+		$config['per_page']         = 10;
+		$config['use_page_numbers'] = TRUE;
+		$config['uri_segment']      = 4;
 
-        $this->load->library('pagination');
-        $config['base_url'] = site_url('user/posts/page/');
-        $config['total_rows'] = $data['total'];
-        $config['per_page'] = 10;
-        $config['use_page_numbers'] = TRUE;
-        $config['uri_segment'] = 4;
+		$this->pagination->initialize($config);
 
-        $this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+		$this->load->view('user/post/list', $data);
+	}
 
-        $data['pagination'] = $this->pagination->create_links();
-        $this->load->view('user/post/list', $data);
-    }
+	function publish()
+	{
+		$this->load->library('form_validation');
+		$this->load->model('class_model');
 
-    private function class_check($str)
-    {
-        if ($str == 'test') {
-            $this->form_validation->set_message('username_check', 'The %s field can not be the word "test"');
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
+		$this->form_validation
+			->set_rules('subject', 'Subject', 'trim|required|alpha_dash')
+			->set_rules('body', 'post body', 'trim|required')
+			->set_rules('classes[]', 'Selected Classes', 'trim')
+			->set_rules('mail_notice', 'Mail notification', 'trim')
+			->set_rules('sms_notice', 'sms notification', 'trim')
+			->set_rules('post_type', 'post type', 'trim|required')
+			->set_rules('blog', 'blog publish', 'trim');
 
-    function publish()
-    {
-        $this->load->library('form_validation');
-        $this->form_validation
-            ->set_rules('subject', 'Subject', 'trim|required|alpha_dash')
-            ->set_rules('body', 'post body', 'trim|required')
-            ->set_rules('classes[]', 'Selected Classes', 'trim')//بررسی مالکیت کلاس
-            ->set_rules('mail_notice', 'Mail notification', 'trim')
-            ->set_rules('sms_notice', 'sms notification', 'trim')
-            ->set_rules('post_type', 'post type', 'trim|required')
-            ->set_rules('blog', 'blog publish', 'trim');
+		$data['publish_error'] = '';
+		if ($this->form_validation->run()) {
+			$subject = $this->form_validation->set_value('subject');
+			$body    = $this->form_validation->set_value('body');
+			$classes = $this->input->post('classes');
 
-        $data['publish_error'] = '';
-        if ($this->form_validation->run()) {
-            $this->load->model(array('post_model'));
-            $subject = $this->form_validation->set_value('subject');
-            $body = $this->form_validation->set_value('body');
-            $classes = $this->input->post('classes');
-            $mail_notice = $this->form_validation->set_value('mail_notice');
-            $sms_notice = $this->form_validation->set_value('sms_notice');
-            $post_type = $this->form_validation->set_value('post_type');
-            $blog = $this->form_validation->set_value('blog');
+			foreach ($classes AS $class) {
+				if ($this->class_model->is_validate_class($class) == FALSE)
+					exit('your request has been blocked.');
+			}
 
-            $id = $this->post_model->create($post_type, $subject, $body);
+			$mail_notice = $this->form_validation->set_value('mail_notice');
+			$post_type   = $this->form_validation->set_value('post_type');
+			$blog        = $this->form_validation->set_value('blog');
 
-            if (FALSE === $id) {
-                $data['publish_error'] = 'error';
-            } else {
-                $this->load->model('class_post_model');
-//				$this->load->library('notification');
+			$id = $this->post_model->create($post_type, $subject, $body);
 
-                $this->class_post_model->add_post_to_classes($id, $classes);
-//				if ($mail_notice == 1)
-//					$this->notification->new_post_mail($id, $subject, $body, $classes);
-//				if ($sms_notice == 1)
-//					$this->notification->new_post_sms($id, $subject, $body, $classes);
-//				redirect('user/posts/');
-            }
-        }
+			if (FALSE === $id) {
+				$data['publish_error'] = 'error';
+			} else {
+				$this->load->model('class_post_model');
+				$this->load->library('notification');
 
-        $this->load->view('user/post/publish', $data);
+				$this->class_post_model->add_post_to_classes($id, $classes);
+				if ($mail_notice == 1)
+					$this->notification->new_post_mail($id, $subject, $body, $classes);
+				redirect('user/posts/');
+			}
+		}
 
-    }
+		$data['prof_classes'] = $this->class_model->get_prof_classes();
+		$this->load->view('user/post/publish', $data);
 
-    function view($id)
-    {
-        if (!is_numeric($id)) {
-            show_404();
-        }
-        $info = $this->class_model->get_info($id);
+	}
+
+	function view($id)
+	{
+		if (!is_numeric($id)) {
+			show_404();
+		}
+		$info = $this->class_model->get_info($id);
 //		$this->class_model->inc_number_of_change($id);
-        $data = array(
-            'lesson_name' => $info['lesson_name'],
-            'prof_name' => $info['prof_name'],
-            'new_change' => $info['new_change'],
-            'is_prof' => ($info['prof_id'] === $this->auth->get_user_id()),
-            'next_exam_time' => '2 day and 3 hour and 25 min'
-        );
-        $this->load->view('academy/classes/view', $data);
+		$data = array(
+			'lesson_name' => $info['lesson_name'],
+			'prof_name' => $info['prof_name'],
+			'new_change' => $info['new_change'],
+			'is_prof' => ($info['prof_id'] === $this->auth->get_user_id()),
+			'next_exam_time' => '2 day and 3 hour and 25 min'
+		);
+		$this->load->view('academy/classes/view', $data);
 
-    }
+	}
 
 //	function remove()
 //	{

@@ -9,7 +9,7 @@ class Auth_Controller extends CI_Controller
 
 		$this->load->library('Auth');
 		if (!$this->auth->is_logged_in()) {
-			$this->session->set_flashdata('next_page', current_url());
+			$this->session->set_userdata('next_page', current_url());
 			redirect('user/login');
 		}
 	}
