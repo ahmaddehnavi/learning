@@ -46,7 +46,7 @@ class Profile extends CI_Controller
 
 			if (!empty($_FILES['userfile'])) {
 				$config = array(
-					'upload_path' => 'files/uploads/' . $this->auth->get_user_id() . '/images/',
+					'upload_path' => 'files/uploads/' . $this->auth->get_user_id() . '/image/',
 					'allowed_types' => 'gif|jpg|png',
 					'max_size' => '2048',
 					'file_name' => 'profile.jpg',

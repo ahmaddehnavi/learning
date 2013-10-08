@@ -101,7 +101,7 @@ class Profile_Model extends CI_Model
 
 	public function get_image()
 	{
-		return FILES_USERS_PATH . '/' . $this->auth->get_user_id() . '/files/profile/profile.jpg';
+		return FILES_USERS_PATH . '/' . $this->auth->get_user_id() . '/image/profile.jpg';
 	}
 
 
