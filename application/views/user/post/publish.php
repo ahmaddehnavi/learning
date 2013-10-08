@@ -1,5 +1,5 @@
 <?php $this->load->view('base/header'); ?>
-
+	<script type="text/javascript" src="<?php echo FILES_JS_PATH . '/ckeditor/ckeditor.js'; ?>"></script>
 	<style type="text/css">
 		select {
 			padding  : 0;
@@ -83,20 +83,19 @@
 							<textarea name="body" id="body" cols="30" rows="10" placeholder="post body"></textarea>
 							<?php echo form_error('body', '<p class="form_err">', '</p>') ?>
 
-							<h2>attach files (.jpg , .png , .gif , .zip , .rar or .pdf) : </h2>
-							<input type="file" name="userfile"/>
+							<!--							<h2>attach files (.jpg , .png , .gif , .zip , .rar or .pdf) : </h2>-->
+							<!--							<input type="file" name="userfile"/>-->
 
 						</section>
 
 						<section class="left">
 							<h2>publish on classes :</h2>
 							<select name="classes[]" multiple size="5" title="use CTRL for multi select...">
-								<option value="1">class2</option>
-								<option value="2">class3</option>
-								<option value="3">class4</option>
-								<option value="4">class4</option>
-								<option value="5">class4</option>
-								<option value="6">class4</option>
+								<?php
+								foreach ($prof_classes->result() as $row) {
+									echo "<option value='$row->class_id' title='$row->lesson_name \n$row->academy_name \n $row->field_name '>$row->lesson_name</option>";
+								}
+								?>
 							</select>
 							<?php echo form_error('classes[]', '<p class="form_err">', '</p>') ?>
 
@@ -104,10 +103,7 @@
 								<input type="checkbox" name="mail_notice" value="1"/>mail notification (free)?
 								<?php echo form_error('mail_notice', '<p class="form_err">', '</p>') ?>
 							</label>
-							<label for="mail_notice">
-								<input type="checkbox" name="sms_notice" value="1"/>sms notification (need credit)?
-								<?php echo form_error('sms_notice', '<p class="form_err">', '</p>') ?>
-							</label>
+
 						</section>
 						<section class="left">
 							<label for="post_type">
@@ -120,17 +116,13 @@
 								</select>
 								<?php echo form_error('post_type', '<p class="form_err">', '</p>') ?>
 							</label>
+
 							<label for="blog">
 								<input type="checkbox" name="blog" value="0"/> publish on
-								your <?php echo anchor('/blog/' . $this->auth->get_user_id(), 'blog'); ?>
+								your <?php echo anchor('/blog/' . $this->auth->get_username(), 'blog'); ?>
 								<?php echo form_error('blog', '<p class="form_err">', '</p>') ?>
 							</label>
 
-							<label for="end_time" title="exercise : can not be send after it.">
-								end time:
-								<input type="date" name="end_time" placeholder="09/28/2013"/>
-								<?php echo form_error('end_time', '<p class="form_err">', '</p>') ?>
-							</label>
 						</section>
 
 						<div class="badboy"></div>

@@ -39,7 +39,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 define('FILES_IMG_PATH', 'http://localhost/Codeigniter/files/img');
 define('FILES_CSS_PATH', 'http://localhost/Codeigniter/files/styles');
 define('FILES_JS_PATH', 'http://localhost/Codeigniter/files/js');
-define('FILES_USERS_PATH', 'http://localhost/Codeigniter/files/users');
+define('FILES_USERS_PATH', 'http://localhost/Codeigniter/files/uploads/');
 define('FILES_PATH', 'http://localhost/Codeigniter/files');
 
 /* End of file constants.php */

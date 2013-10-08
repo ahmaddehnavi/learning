@@ -198,6 +198,16 @@ class Class_Model extends CI_Model
 
 		return $this->db->affected_rows() == 1;
 	}
+
+	/**
+	 * @return CI_DB_result
+	 */
+	public function is_validate_class($class_id)
+	{
+		$sql = 'SELECT prof_id FROM class WHERE class_id=?  ';
+
+		return $this->db->query($sql, array($class_id))->row('prof_id') === $this->auth->get_user_id();
+	}
 }
 /* End of file academy_model.php */
 /* Location: ./application/models/academy_model.php */

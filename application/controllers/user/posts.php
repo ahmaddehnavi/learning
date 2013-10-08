@@ -8,7 +8,6 @@ class Posts extends Auth_Controller
 		$this->load->model('post_model');
 	}
 
-
 	function index()
 	{
 		$data = $this->post_model->get_author_posts(0);
@@ -46,24 +45,15 @@ class Posts extends Auth_Controller
 		$this->load->view('user/post/list', $data);
 	}
 
-	private function class_check($str)
-	{
-		if ($str == 'test') {
-			$this->form_validation->set_message('username_check', 'The %s field can not be the word "test"');
-
-			return FALSE;
-		} else {
-			return TRUE;
-		}
-	}
-
 	function publish()
 	{
 		$this->load->library('form_validation');
+		$this->load->model('class_model');
+
 		$this->form_validation
 			->set_rules('subject', 'Subject', 'trim|required|alpha_dash')
 			->set_rules('body', 'post body', 'trim|required')
-			->set_rules('classes[]', 'Selected Classes', 'trim')//بررسی مالکیت کلاس
+			->set_rules('classes[]', 'Selected Classes', 'trim')
 			->set_rules('mail_notice', 'Mail notification', 'trim')
 			->set_rules('sms_notice', 'sms notification', 'trim')
 			->set_rules('post_type', 'post type', 'trim|required')
@@ -71,12 +61,16 @@ class Posts extends Auth_Controller
 
 		$data['publish_error'] = '';
 		if ($this->form_validation->run()) {
-			$this->load->model(array('post_model'));
-			$subject     = $this->form_validation->set_value('subject');
-			$body        = $this->form_validation->set_value('body');
-			$classes     = $this->input->post('classes');
+			$subject = $this->form_validation->set_value('subject');
+			$body    = $this->form_validation->set_value('body');
+			$classes = $this->input->post('classes');
+
+			foreach ($classes AS $class) {
+				if ($this->class_model->is_validate_class($class) == FALSE)
+					exit('your request has been blocked.');
+			}
+
 			$mail_notice = $this->form_validation->set_value('mail_notice');
-			$sms_notice  = $this->form_validation->set_value('sms_notice');
 			$post_type   = $this->form_validation->set_value('post_type');
 			$blog        = $this->form_validation->set_value('blog');
 
@@ -86,17 +80,16 @@ class Posts extends Auth_Controller
 				$data['publish_error'] = 'error';
 			} else {
 				$this->load->model('class_post_model');
-//				$this->load->library('notification');
+				$this->load->library('notification');
 
 				$this->class_post_model->add_post_to_classes($id, $classes);
-//				if ($mail_notice == 1)
-//					$this->notification->new_post_mail($id, $subject, $body, $classes);
-//				if ($sms_notice == 1)
-//					$this->notification->new_post_sms($id, $subject, $body, $classes);
-//				redirect('user/posts/');
+				if ($mail_notice == 1)
+					$this->notification->new_post_mail($id, $subject, $body, $classes);
+				redirect('user/posts/');
 			}
 		}
 
+		$data['prof_classes'] = $this->class_model->get_prof_classes();
 		$this->load->view('user/post/publish', $data);
 
 	}
