@@ -77,10 +77,6 @@
 							<input type="hidden" name="form_num" value="2"/>
 
 							<div class="row left">
-								<label for="full_name"> full name :</label>
-								<input type="text" name="full_name" value="<?= $full_name ?>"/>
-								<?=form_error('full_name', '<div class="form_err">', '</div>')?>
-
 								<label for="about"> about :</label>
 								<textarea name="about" style="width:100%;"><?=$about?></textarea>
 								<?=form_error('about', '<div class="form_err">', '</div>')?>

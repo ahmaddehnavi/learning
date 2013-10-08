@@ -33,13 +33,11 @@ class Profile extends CI_Controller
 			}
 		} else if ($this->input->post('form_num') == 2) {
 			$this->form_validation
-				->set_rules('full_name', 'full name', 'trim|xss_clean')
 				->set_rules('about', 'about', 'trim|xss_clean');
 
 
 			if ($this->form_validation->run()) {
-				$this->profile_model->update_personal(
-					$this->form_validation->set_value('full_name'),
+				$this->profile_model->update_about(
 					$this->form_validation->set_value('about')
 				);
 			}

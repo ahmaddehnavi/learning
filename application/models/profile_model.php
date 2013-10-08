@@ -105,10 +105,9 @@ class Profile_Model extends CI_Model
 	}
 
 
-	public function update_personal($full_name, $about)
+	public function update_about($about)
 	{
 		$data = array(
-			'full_name' => $full_name,
 			'about' => $about
 		);
 
