@@ -1,30 +1,30 @@
 body {
-    font-family: Leelawadee;
+    font-family : Leelawadee;
 }
 
 header.widget-head {
-    font-size: 18px;
-    text-align: center;
-    display: block;
+    font-size  : 18px;
+    text-align : center;
+    display    : block;
 }
 
 .widget_body {
-    padding: 0 25px 18px 25px;
-    background-image: url("bg.png");
-    padding-top: 1px;
+    padding          : 0 25px 18px 25px;
+    background-image : url("bg.png");
+    padding-top      : 1px;
 }
 
 .widget_body .img {
-    border-bottom: 1px solid rgba(223, 207, 207, 0.25);
-    background: #fff;
-    padding: 3%;
+    border-bottom : 1px solid rgba(223, 207, 207, 0.25);
+    background    : #fff;
+    padding       : 3%;
 }
 
 .one {
-    float: left;
-    width: 22%;
-    margin: 2% 1.3%;
-    border: 1px solid rgb(223, 207, 207);
+    float  : left;
+    width  : 22%;
+    margin : 2% 1.3%;
+    border : 1px solid rgb(223, 207, 207);
 }
 
 .desktop .one {
@@ -32,40 +32,40 @@ header.widget-head {
 }
 
 .descript {
-    background: #F3F3F3;
-    padding-top: 1 PX;
-    min-height: 69px;
+    background  : #F3F3F3;
+    padding-top : 1px;
+    min-height  : 69px;
 }
 
 .descript p.name_teacher {
-    text-align: center;
-    margin-top: 10px
+    text-align : center;
+    margin-top : 10px
 }
 
 .descript p.name_lesson {
-    text-align: center;
-    margin-top: 11px;
-    font-size: 11px;
+    text-align : center;
+    margin-top : 11px;
+    font-size  : 11px;
 }
 
 .descript a {
-    display: block;
-    width: 33px;
-    background: #419CF0;
-    color: #fff;
-    padding: 2px 4px;
-    margin: 4px auto 0;
-    text-decoration: none;
+    display         : block;
+    width           : 33px;
+    background      : #419CF0;
+    color           : #fff;
+    padding         : 2px 4px;
+    margin          : 4px auto 0;
+    text-decoration : none;
 }
 
 .phone .one {
-    margin: 1%;
-    width: 30.1%;
+    margin : 1%;
+    width  : 30.1%;
 }
 
 .mini-phone .one {
-    width: 100%;
-    margin: 10px auto;
-    max-width: 250px;
-    float: none;
+    width     : 100%;
+    margin    : 10px auto;
+    max-width : 250px;
+    float     : none;
 }
