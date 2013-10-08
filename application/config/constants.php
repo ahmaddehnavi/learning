@@ -41,6 +41,7 @@ define('FILES_CSS_PATH', 'http://localhost/Codeigniter/files/styles');
 define('FILES_JS_PATH', 'http://localhost/Codeigniter/files/js');
 define('FILES_USERS_PATH', 'http://localhost/Codeigniter/files/uploads');
 define('FILES_PATH', 'http://localhost/Codeigniter/files');
+define('FILE_MANAGE_PATH', 'http://localhost/Codeigniter/file_management');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

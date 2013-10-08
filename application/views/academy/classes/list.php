@@ -85,7 +85,9 @@
 								<a href="<?php echo $class->class_id; ?>">
 									<section class="one">
 										<figure class='img'>
-											<img src="<?php echo FILES_IMG_PATH . '/1.jpg' ?>" alt="" width="100%"/>
+											<img
+												src="<?php echo FILES_USERS_PATH . '/' . $class->prof_id . 'image/profile.jpg' ?>"
+												alt="<?php echo $class->prof_name; ?>" width="100%"/>
 										</figure>
 										<div class="descript">
 											<p class="name_teacher"><?php echo $class->prof_name;?></p>
