@@ -17,6 +17,7 @@ header.widget-head {
 .widget_body .background {
     /*border-bottom : 1px solid rgba(223, 207, 207, 0.25);*/
     background    : #fff;
+    height: 139px;
 }
 
 .one {

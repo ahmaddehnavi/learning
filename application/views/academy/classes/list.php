@@ -76,14 +76,14 @@
 											<figure class="background">
 												<img
 													src="<?php echo FILES_IMG_PATH .  '/bg2.jpg';?> "
-												alt="" width="100%" />
+												alt="" width="100%" height=100% />
 										</figure>
 
                                     <section class="img-teacher">
                                         <figure class="img">
                                             <a href="#">
                                                 <img
-													src="<?php echo FILES_IMG_PATH .  '/2.jpg';?>"
+													src="<?php echo FILES_IMG_PATH .  '/2.jpg ';?>"
 												alt="" width="100%"/>
                                             </a>
 										</figure>
