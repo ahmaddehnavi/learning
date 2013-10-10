@@ -29,7 +29,7 @@ class Classes extends Auth_Controller
 
 		$data            = $this->post_model->get_class_posts($id, $page * 10);
 		$data['members'] = $this->class_member_model->get_members($id);
-
+		print_r($data['members']);
 		$this->load->library('pagination');
 		$config['base_url']         = site_url('academy/classes/view/' . $id . '/');
 		$config['total_rows']       = $data['total'];
