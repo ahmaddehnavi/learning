@@ -112,17 +112,17 @@ class Posts extends Auth_Controller
 
 	}
 
-//	function remove()
-//	{
-//		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural|is_exist[class.class_id]');
-//
-//		if ($this->form_validation->run()) {
-//			$this->load->model('class_model');
-//			$this->class_model->remove($this->form_validation->set_value('class_id'));
-//		}
-//
-//		redirect('academy/classes/manage');
-//	}
+	function remove()
+	{
+		$this->form_validation->set_rules('post_id', 'post id', 'trim|required|is_natural|is_exist[class.class_id]');
+
+		if ($this->form_validation->run()) {
+			$this->load->model('post_model');
+			$this->post_model->remove($this->form_validation->set_value('post_id'));
+		}
+
+		redirect('user/posts');
+	}
 }
 
 /* End of file Home.php */

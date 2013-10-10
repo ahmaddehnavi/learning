@@ -12,6 +12,8 @@ class Profile extends CI_Controller
 	function index()
 	{
 		$data['form_1_msg'] = '';
+		$data['upload_err'] = '';
+
 		if ($this->input->post('form_num') == 1) {
 			$this->form_validation
 				->set_rules('current_password', 'current password', 'trim|required')
@@ -43,9 +45,7 @@ class Profile extends CI_Controller
 			}
 
 			if (!empty($_FILES['userfile'])) {
-
-				$this->_upload_profile_image();
-
+				$data['upload_err'] = $this->_upload_profile_image();
 			}
 		} else if ($this->input->post('form_num') == 3) {
 			$this->form_validation
@@ -95,9 +95,12 @@ class Profile extends CI_Controller
 				->resize(100, 100)
 				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_100.jpg');
 
+			return TRUE;
 		} else {
 			return $this->upload->display_errors();
 		}
+
+		return FALSE;
 	}
 
 }

@@ -99,7 +99,7 @@ class Classes extends Auth_Controller
 			$this->load->model('class_member_model');
 			$student_id = $this->auth->get_user_id();
 			$class_id   = $this->form_validation->set_value('class_id');
-			$this->class_model->join($class_id, $student_id);
+			$this->class_member_model->join($class_id, $student_id);
 		}
 
 		redirect('academy/classes/manage');
@@ -111,7 +111,7 @@ class Classes extends Auth_Controller
 
 		if ($this->form_validation->run()) {
 			$this->load->model('class_member_model');
-			$this->class_model->leave($this->form_validation->set_value('class_id'));
+			$this->class_member_model->leave($this->form_validation->set_value('class_id'));
 		}
 
 		redirect('academy/classes/manage');
