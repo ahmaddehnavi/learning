@@ -22,7 +22,7 @@
             <li></li>
             <li></li>
         </ul>
-        <menu>
+        <menu class="menu">
             <h2>academy :</h2>
             <li class="icon-exercise"><?php echo anchor("academy/exercises", "exercises") ?></li>
             <li class="icon-class"><?php echo anchor("academy/classes", "classes") ?></li>
@@ -34,16 +34,23 @@
             <li class="icon-logout"><?php echo anchor("user/logout", "logout") ?></li>
         </menu>
 
-        <div class="list">
+
+        <section class="list">
             <menu>
-                <ul>
-                    <li>
-                        <figure><img src="" alt=""/></figure>
-                        <p></p>
-                    </li>
-                </ul>
+
+                    <?php  foreach ($members->result() as $member) {
+                        ?>
+                        <li>
+                            <a class="ad" href="#" >
+                                <figure><img src="<?php echo FILES_USERS_PATH.'/'.$member->student_id . '/image/profile.jpg' ;?>" alt="" width=24 height=24/></figure>
+                                <p><?php echo $member->student_name ; ?></p>
+                                <div class="badboy"></div>
+                            </a>
+                        </li>
+                    <?php } ?>
+
             </menu>
-        </div>
+        </section>
     </aside>
     <div id="content">
         <header>
@@ -105,15 +112,15 @@
                             </section>
 
                             <?php if ($post->author_id==$user_id){  ?>
-                            <footer class="widget_footer">
-                                <div class="menu">
-                                    <ul>
-                                        <li><a href="#">delete </a></li>
-                                        <li><a href="#">edit </a></li>
-                                        <div class="badboy"></div>
-                                    </ul>
-                                </div>
-                            </footer>
+                                <footer class="widget_footer">
+                                    <div class="menu">
+                                        <ul>
+                                            <li><a href="#">delete </a></li>
+                                            <li><a href="#">edit </a></li>
+                                            <div class="badboy"></div>
+                                        </ul>
+                                    </div>
+                                </footer>
                             <?php } ?>
                         </section>
                     </section>

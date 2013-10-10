@@ -672,3 +672,53 @@ nav a:hover, nav li.active a {
 .widget:focus .widget_footer {
     display : block;
 }
+
+section.list{
+    width: 90%;
+    height: 37%;
+    margin: 20px 0 0 9px;
+    border-top : 1px solid #676B6D;
+    padding-top: 10px;
+    overflow: hidden;
+    /*-webkit-border-top-image: linear-gradient( rgba(219, 219, 219,0) 13% , rgba(232, 232, 232,0.5) 42%, rgb(255, 255, 255) 64%) 14% stretch;*/
+}
+
+.list:hover{
+    overflow-y: scroll ;
+    overflow-x: hidden;
+}
+
+.list::-webkit-scrollbar {
+    width : 5px;
+}
+
+.list::-webkit-scrollbar-track {
+    background : #555;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background : #D5DCFD;
+}
+
+.list .menu{
+    list-style: none;
+}
+
+.list a.ad{
+    display: block !important;
+    padding: 6px 0px 6px 25px !important;
+    margin-bottom: 5px !important;
+}
+
+.list figure{
+    float: left;
+    margin: 0 0 0 -19px;
+}
+
+.list p{
+    margin-left: 15px;
+    color: #C9C9C9;
+    margin-top: 1.5%;
+    display: inline-block;
+    font-size: 14px;
+}
