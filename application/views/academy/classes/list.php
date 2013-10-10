@@ -70,38 +70,35 @@
 							$user_id = $this->auth->get_user_id();
 							foreach ($prof_class->result() as $class) {
 								?>
-								<a href="<?php echo $class->class_id; ?>">
-									<section class="one">
-										<figure class='img'>
-											<img
-												src="<?php echo FILES_USERS_PATH . '/' . $user_id . '/image/profile.jpg' ?>"
+								<?php echo anchor('academy/classes/view/' . $class->class_id,
+									'<section class="one">
+											<figure class="img">
+												<img
+													src="' . FILES_USERS_PATH . '/' . $user_id . '/image/profile.jpg"
 												alt="" width="100%"/>
 										</figure>
 										<div class="descript">
 											<p class="name_teacher">you</p>
 
-											<p class="name_lesson"><?php echo $class->lesson_name;?></p>
+											<p class="name_lesson">' . $class->lesson_name . '</p>
 										</div>
-									</section>
-								</a>
-							<?php }?>
-
-							<?php foreach ($student_class->result() as $class) { ?>
-								<a href="<?php echo $class->class_id; ?>">
-									<section class="one">
-										<figure class='img'>
+									</section>');
+							} foreach ($student_class->result() as $class) {
+								echo anchor('academy/classes/view/' . $class->class_id,
+									'<section class="one">
+										<figure class="img">
 											<img
-												src="<?php echo FILES_USERS_PATH . '/' . $class->prof_id . '/image/profile.jpg' ?>"
+												src="' . FILES_USERS_PATH . '/' . $class->prof_id . '/image/profile.jpg"
 												alt="<?php echo $class->prof_name; ?>" width="100%"/>
 										</figure>
 										<div class="descript">
-											<p class="name_teacher"><?php echo $class->prof_name;?></p>
+											<p class="name_teacher">' . $class->prof_name . '</p>
 
-											<p class="name_lesson"><?php echo $class->lesson_name;?></p>
+											<p class="name_lesson">' . $class->lesson_name . '</p>
 										</div>
-									</section>
-								</a>
-							<?php }?>
+									</section>');
+							}
+							?>
 
 
 
