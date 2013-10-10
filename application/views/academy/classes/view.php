@@ -33,6 +33,17 @@
             <li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
             <li class="icon-logout"><?php echo anchor("user/logout", "logout") ?></li>
         </menu>
+
+        <div class="list">
+            <menu>
+                <ul>
+                    <li>
+                        <figure><img src="" alt=""/></figure>
+                        <p></p>
+                    </li>
+                </ul>
+            </menu>
+        </div>
     </aside>
     <div id="content">
         <header>
@@ -69,14 +80,18 @@
                 //					?>
                 <!---->
                 <!--				</section>-->
-                <?php foreach ($posts->result() as $post) { ?>
+
+                <?php $user_id = $this->auth->get_user_id();
+                foreach ($posts->result() as $post) {
+                    ?>
                     <section class="widget" tabindex="1">
                         <section class="image">
                             <figure class="imgpost">
                                 <img
                                     src="<?php echo FILES_USERS_PATH . '/' . $post->author_id . '/image/profile.jpg' ?>"
                                     alt="" width="50px" height="50px"/></figure>
-                            <!--                            <p class='name'>--><?php //echo $post->author_name?><!--</p>-->
+                            <!--                            <p class='name'>-->
+                            <?php //echo $post->author_name?><!--</p>-->
                         </section>
                         <section class='total' style="padding-top: 1px;">
                             <header class='widget_head'>
@@ -88,6 +103,8 @@
                                 <div class="text">    <?php echo $post->body ?></div>
                                 <p class='publish'><?php echo'2 hours ago' ?></p>
                             </section>
+
+                            <?php if ($post->author_id==$user_id){  ?>
                             <footer class="widget_footer">
                                 <div class="menu">
                                     <ul>
@@ -97,10 +114,11 @@
                                     </ul>
                                 </div>
                             </footer>
+                            <?php } ?>
                         </section>
                     </section>
                 <?php }?>
-                <div class="badboy"></div>
+                <!--                <div class="badboy"></div>-->
                 <section class="widget" style="width: inherit;">
                     <?php echo $pagination; ?>
                 </section>
