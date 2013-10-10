@@ -14,7 +14,7 @@ class Login extends CI_Controller
 		$this->form_validation->set_rules('username', 'username', $base . '|max_length[40]')
 			->set_rules('password', 'Password', $base);
 
-		$next_page = $this->session->flashdata('next_page');
+		$next_page = $this->session->userdata('next_page');
 		$data      = array(
 			'login_error' => FALSE,
 			'registration_message' => $this->session->flashdata('registration_message'),
