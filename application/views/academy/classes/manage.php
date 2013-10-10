@@ -124,20 +124,20 @@
 								<th>
 									<input type="text" name="class_id" placeholder="class_id"/>
 								</th>
+								<!--								<th>-->
+								<!--									<input type="text" name="academy" placeholder="academy" title="academy"/>-->
+								<!--								</th>-->
+								<!--								<th>-->
+								<!--									<input type="text" name="field" placeholder="field"/>-->
+								<!--								</th>-->
+								<!--								<th>-->
+								<!--									<input type="text" name="lesson" placeholder="lesson"/>-->
+								<!--								</th>-->
+								<!--								<th>-->
+								<!--									<input type="text" name="prof" placeholder="prof"/>-->
+								<!--								</th>-->
 								<th>
-									<input type="text" name="academy" placeholder="academy" title="academy"/>
-								</th>
-								<th>
-									<input type="text" name="field" placeholder="field"/>
-								</th>
-								<th>
-									<input type="text" name="lesson" placeholder="lesson"/>
-								</th>
-								<th>
-									<input type="text" name="prof" placeholder="prof"/>
-								</th>
-								<th colspan="2">
-									<input type="submit" value="search" class="btn"/>
+									<input type="submit" value="join" class="btn"/>
 								</th>
 								<div class="badboy"></div>
 							</form>

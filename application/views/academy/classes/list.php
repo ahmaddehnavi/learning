@@ -66,11 +66,16 @@
 				<section id="content-body">
 					<section class="widget white">
 						<section class="widget_body">
-							<?php foreach ($prof_class->result() as $class) { ?>
+							<?php
+							$user_id = $this->auth->get_user_id();
+							foreach ($prof_class->result() as $class) {
+								?>
 								<a href="<?php echo $class->class_id; ?>">
 									<section class="one">
 										<figure class='img'>
-											<img src="<?php echo FILES_IMG_PATH . '/1.jpg' ?>" alt="" width="100%"/>
+											<img
+												src="<?php echo FILES_USERS_PATH . '/' . $user_id . '/image/profile.jpg' ?>"
+												alt="" width="100%"/>
 										</figure>
 										<div class="descript">
 											<p class="name_teacher">you</p>
@@ -86,7 +91,7 @@
 									<section class="one">
 										<figure class='img'>
 											<img
-												src="<?php echo FILES_USERS_PATH . '/' . $class->prof_id . 'image/profile.jpg' ?>"
+												src="<?php echo FILES_USERS_PATH . '/' . $class->prof_id . '/image/profile.jpg' ?>"
 												alt="<?php echo $class->prof_name; ?>" width="100%"/>
 										</figure>
 										<div class="descript">

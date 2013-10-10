@@ -109,6 +109,25 @@ class Class_Model extends CI_Model
 		return $this->db->query($sql, array($academy_id, $field_id, $this->auth->get_user_id()));
 	}
 
+	public function get_full_student_classes()
+	{
+		$this->load->model('profile_model');
+		$academy_id = $this->profile_model->get_academy_id();
+		$field_id   = $this->profile_model->get_field_id();
+		$sql        =
+			'SELECT class.class_id,class.prof_id,lesson.name AS lesson_name ,profile.full_name AS prof_name
+					,academy.name AS academy_name,field_table.name AS field_name
+			 FROM class
+			 JOIN academy ON academy.academy_id=class.academy_id AND class.prof_id=?
+			 JOIN field_table ON field_table.field_id=class.field_id
+			 JOIN class_member ON class.class_id=class_member.class_id AND class_member.student_id=?
+			 JOIN lesson ON lesson.lesson_id=class.lesson_id
+			 JOIN profile ON profile.user_id=class.prof_id
+			 LIMIT 100';
+
+		return $this->db->query($sql, array($academy_id, $field_id, $this->auth->get_user_id()));
+	}
+
 	/**
 	 * @return CI_DB_result
 	 */
