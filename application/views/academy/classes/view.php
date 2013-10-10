@@ -14,6 +14,10 @@
 			<li></li>
 			<li></li>
 		</ul>
+
+
+
+
 	</nav>
 	<aside id="sidebar">
 		<header><?php echo $this->auth->get_full_name() ?>&nbsp;</header>
