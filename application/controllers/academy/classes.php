@@ -6,7 +6,7 @@ class Classes extends Auth_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->model(array('class_model', 'post_model'));
+		$this->load->model(array('class_model', 'post_model', 'class_member_model'));
 
 	}
 
@@ -27,7 +27,8 @@ class Classes extends Auth_Controller
 		$info = $this->class_model->get_info($id);
 
 
-		$data = $this->post_model->get_class_posts($id, $page * 10);
+		$data            = $this->post_model->get_class_posts($id, $page * 10);
+		$data['members'] = $this->class_member_model->get_members($id);
 
 		$this->load->library('pagination');
 		$config['base_url']         = site_url('academy/classes/view/' . $id . '/');
@@ -96,7 +97,7 @@ class Classes extends Auth_Controller
 		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural|is_exist[class.class_id]');
 
 		if ($this->form_validation->run()) {
-			$this->load->model('class_model');
+			$this->load->model('class_member_model');
 			$student_id = $this->auth->get_user_id();
 			$class_id   = $this->form_validation->set_value('class_id');
 			$this->class_model->join($class_id, $student_id);
@@ -110,7 +111,7 @@ class Classes extends Auth_Controller
 		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural|is_exist[class.class_id]');
 
 		if ($this->form_validation->run()) {
-			$this->load->model('class_model');
+			$this->load->model('class_member_model');
 			$this->class_model->leave($this->form_validation->set_value('class_id'));
 		}
 
