@@ -43,24 +43,9 @@ class Profile extends CI_Controller
 			}
 
 			if (!empty($_FILES['userfile'])) {
-				$config = array(
-					'upload_path' => 'files/uploads/' . $this->auth->get_user_id() . '/image/',
-					'allowed_types' => 'gif|jpg|png',
-					'max_size' => '2048',
-					'file_name' => 'profile.jpg',
-					'is_image' => TRUE,
-					'overwrite' => TRUE,
-				);
-				$this->load->library('upload', $config);
 
-				if (!$this->upload->do_upload()) {
-					echo  $this->upload->display_errors();
+				$this->_upload_profile_image();
 
-//					$this->load->view('file_view/upload_form', $error);
-				} else {
-//					$data = array('upload_data' => $this->upload->data());
-//					$this->load->view('file_view/upload_success', $data);
-				}
 			}
 		} else if ($this->input->post('form_num') == 3) {
 			$this->form_validation
@@ -83,6 +68,37 @@ class Profile extends CI_Controller
 		$this->load->view('user/profile', $data);
 	}
 
+	function _upload_profile_image()
+	{
+		$config = array(
+			'upload_path' => 'files/uploads/' . $this->auth->get_user_id() . '/image/',
+			'allowed_types' => 'gif|jpg|png',
+			'max_size' => '2048',
+			'file_name' => 'profile.jpg',
+			'is_image' => TRUE,
+			'overwrite' => TRUE,
+		);
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload()) {
+
+			$this->load->library('image_moo');
+			$this->image_moo
+				->load('files/uploads/' . $this->auth->get_user_id() . '/image/profile.jpg')
+
+				->resize(24, 24)
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_24.jpg')
+
+				->resize(80, 80)
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_80.jpg')
+
+				->resize(100, 100)
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_100.jpg');
+
+		} else {
+			return $this->upload->display_errors();
+		}
+	}
 
 }
 
