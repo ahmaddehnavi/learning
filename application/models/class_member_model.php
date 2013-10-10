@@ -41,7 +41,9 @@ class Class_Member_Model extends CI_Model
 
 	public function get_members($class_id)
 	{
-		$sql = 'SELECT FROM class_member WHERE class_id=?';
+		$sql = 'SELECT student_id , profile.full_name AS student_name
+		FROM class_member WHERE class_id=?
+		JOIN profile ON profile.user_id=class_member.student_id';
 
 		return $this->db->query($sql, array($class_id));
 	}
