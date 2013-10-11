@@ -17,12 +17,10 @@ class uploader
 
 	/** Release version */
 	const VERSION = "2.51";
-
 	/** Config session-overrided settings
 	 * @var array
 	 */
 	protected $config = array();
-
 	/** Opener applocation properties
 	 *   $opener['name']                 Got from $_GET['opener'];
 	 *   $opener['CKEditor']['funcNum']  CKEditor function number (got from $_GET)
@@ -30,99 +28,74 @@ class uploader
 	 * @var array
 	 */
 	protected $opener = array();
-
 	/** Got from $_GET['type'] or first one $config['types'] array key, if inexistant
 	 * @var string
 	 */
 	protected $type;
-
 	/** Helper property. Local filesystem path to the Type Directory
 	 * Equivalent: $config['uploadDir'] . "/" . $type
 	 * @var string
 	 */
 	protected $typeDir;
-
 	/** Helper property. Web URL to the Type Directory
 	 * Equivalent: $config['uploadURL'] . "/" . $type
 	 * @var string
 	 */
 	protected $typeURL;
-
 	/** Linked to $config['types']
 	 * @var array
 	 */
 	protected $types = array();
-
 	/** Settings which can override default settings if exists as keys in $config['types'][$type] array
 	 * @var array
 	 */
 	protected $typeSettings = array('disabled', 'theme', 'dirPerms', 'filePerms', 'denyZipDownload', 'maxImageWidth', 'maxImageHeight', 'thumbWidth', 'thumbHeight', 'jpegQuality', 'access', 'filenameChangeChars', 'dirnameChangeChars', 'denyExtensionRename', 'deniedExts');
-
 	/** Got from language file
 	 * @var string
 	 */
 	protected $charset;
-
 	/** The language got from $_GET['lng'] or $_GET['lang'] or... Please see next property
 	 * @var string
 	 */
 	protected $lang = 'en';
-
 	/** Possible language $_GET keys
 	 * @var array
 	 */
 	protected $langInputNames = array('lang', 'langCode', 'lng', 'language', 'lang_code');
-
 	/** Uploaded file(s) info. Linked to first $_FILES element
 	 * @var array
 	 */
 	protected $file;
-
 	/** Next three properties are got from the current language file
 	 * @var string
 	 */
 	protected $dateTimeFull; // Currently not used
 	protected $dateTimeMid; // Currently not used
 	protected $dateTimeSmall;
-
 	/** Contain Specified language labels
 	 * @var array
 	 */
 	protected $labels = array();
-
 	/** Contain unprocessed $_GET array. Please use this instead of $_GET
 	 * @var array
 	 */
 	protected $get;
-
 	/** Contain unprocessed $_POST array. Please use this instead of $_POST
 	 * @var array
 	 */
 	protected $post;
-
 	/** Contain unprocessed $_COOKIE array. Please use this instead of $_COOKIE
 	 * @var array
 	 */
 	protected $cookie;
-
 	/** Session array. Please use this property instead of $_SESSION
 	 * @var array
 	 */
 	protected $session;
-
 	/** CMS integration attribute (got from $_GET['cms'])
 	 * @var string
 	 */
 	protected $cms = "";
-
-	/** Magic method which allows read-only access to protected or private class properties
-	 * @param string $property
-	 * @return mixed
-	 */
-	public function __get($property)
-	{
-		return property_exists($this, $property) ? $this->$property : NULL;
-	}
 
 	public function __construct()
 	{
@@ -295,6 +268,51 @@ class uploader
 			$this->backMsg("Cannot read upload folder.");
 	}
 
+	protected function localize($langCode)
+	{
+		require "lang/{$langCode}.php";
+		setlocale(LC_ALL, $lang['_locale']);
+		$this->charset       = $lang['_charset'];
+		$this->dateTimeFull  = $lang['_dateTimeFull'];
+		$this->dateTimeMid   = $lang['_dateTimeMid'];
+		$this->dateTimeSmall = $lang['_dateTimeSmall'];
+		unset($lang['_locale']);
+		unset($lang['_charset']);
+		unset($lang['_dateTimeFull']);
+		unset($lang['_dateTimeMid']);
+		unset($lang['_dateTimeSmall']);
+		$this->labels = $lang;
+	}
+
+	protected function get_htaccess()
+	{
+		return "<IfModule mod_php4.c>
+  php_value engine off
+</IfModule>
+<IfModule mod_php5.c>
+  php_value engine off
+</IfModule>
+";
+	}
+
+	protected function backMsg($message, array $data = NULL)
+	{
+		$message = $this->label($message, $data);
+		if (isset($this->file['tmp_name']) && file_exists($this->file['tmp_name']))
+			@unlink($this->file['tmp_name']);
+		$this->callBack("", $message);
+		die;
+	}
+
+	/** Magic method which allows read-only access to protected or private class properties
+	 * @param string $property
+	 * @return mixed
+	 */
+	public function __get($property)
+	{
+		return property_exists($this, $property) ? $this->$property : NULL;
+	}
+
 	public function upload()
 	{
 		$config = & $this->config;
@@ -362,24 +380,14 @@ class uploader
 		$this->callBack($url, $message);
 	}
 
-	protected function normalizeFilename($filename)
+	protected function label($string, array $data = NULL)
 	{
-		if (isset($this->config['filenameChangeChars']) &&
-			is_array($this->config['filenameChangeChars'])
-		)
-			$filename = strtr($filename, $this->config['filenameChangeChars']);
+		$return = isset($this->labels[$string]) ? $this->labels[$string] : $string;
+		if (is_array($data))
+			foreach ($data as $key => $val)
+				$return = str_replace("{{$key}}", $val, $return);
 
-		return $filename;
-	}
-
-	protected function normalizeDirname($dirname)
-	{
-		if (isset($this->config['dirnameChangeChars']) &&
-			is_array($this->config['dirnameChangeChars'])
-		)
-			$dirname = strtr($dirname, $this->config['dirnameChangeChars']);
-
-		return $dirname;
+		return $return;
 	}
 
 	protected function checkUploadedFile(array $aFile = NULL)
@@ -456,34 +464,6 @@ class uploader
 		return TRUE;
 	}
 
-	protected function checkInputDir($dir, $inclType = TRUE, $existing = TRUE)
-	{
-		$dir = path::normalize($dir);
-		if (substr($dir, 0, 1) == "/")
-			$dir = substr($dir, 1);
-
-		if ((substr($dir, 0, 1) == ".") || (substr(basename($dir), 0, 1) == "."))
-			return FALSE;
-
-		if ($inclType) {
-			$first = explode("/", $dir);
-			$first = $first[0];
-			if ($first != $this->type)
-				return FALSE;
-			$return = $this->removeTypeFromPath($dir);
-		} else {
-			$return = $dir;
-			$dir    = "{$this->type}/$dir";
-		}
-
-		if (!$existing)
-			return $return;
-
-		$path = "{$this->config['uploadDir']}/$dir";
-
-		return (is_dir($path) && is_readable($path)) ? $return : FALSE;
-	}
-
 	protected function validateExtension($ext, $type)
 	{
 		$ext = trim(strtolower($ext));
@@ -510,18 +490,6 @@ class uploader
 		$exts = explode(" ", trim(strtolower($exts)));
 
 		return in_array($ext, $exts);
-	}
-
-	protected function getTypeFromPath($path)
-	{
-		return preg_match('/^([^\/]*)\/.*$/', $path, $patt)
-			? $patt[1] : $path;
-	}
-
-	protected function removeTypeFromPath($path)
-	{
-		return preg_match('/^[^\/]*\/(.*)$/', $path, $patt)
-			? $patt[1] : "";
 	}
 
 	protected function imageResize($image, $file = NULL)
@@ -566,6 +534,50 @@ class uploader
 		return $gd->imagejpeg($file, $this->config['jpegQuality']);
 	}
 
+	protected function checkInputDir($dir, $inclType = TRUE, $existing = TRUE)
+	{
+		$dir = path::normalize($dir);
+		if (substr($dir, 0, 1) == "/")
+			$dir = substr($dir, 1);
+
+		if ((substr($dir, 0, 1) == ".") || (substr(basename($dir), 0, 1) == "."))
+			return FALSE;
+
+		if ($inclType) {
+			$first = explode("/", $dir);
+			$first = $first[0];
+			if ($first != $this->type)
+				return FALSE;
+			$return = $this->removeTypeFromPath($dir);
+		} else {
+			$return = $dir;
+			$dir    = "{$this->type}/$dir";
+		}
+
+		if (!$existing)
+			return $return;
+
+		$path = "{$this->config['uploadDir']}/$dir";
+
+		return (is_dir($path) && is_readable($path)) ? $return : FALSE;
+	}
+
+	protected function removeTypeFromPath($path)
+	{
+		return preg_match('/^[^\/]*\/(.*)$/', $path, $patt)
+			? $patt[1] : "";
+	}
+
+	protected function normalizeFilename($filename)
+	{
+		if (isset($this->config['filenameChangeChars']) &&
+			is_array($this->config['filenameChangeChars'])
+		)
+			$filename = strtr($filename, $this->config['filenameChangeChars']);
+
+		return $filename;
+	}
+
 	protected function makeThumb($file, $overwrite = TRUE)
 	{
 		$gd = new gd($file);
@@ -599,41 +611,6 @@ class uploader
 
 		// Save thumbnail
 		return $gd->imagejpeg($thumb, $this->config['jpegQuality']);
-	}
-
-	protected function localize($langCode)
-	{
-		require "lang/{$langCode}.php";
-		setlocale(LC_ALL, $lang['_locale']);
-		$this->charset       = $lang['_charset'];
-		$this->dateTimeFull  = $lang['_dateTimeFull'];
-		$this->dateTimeMid   = $lang['_dateTimeMid'];
-		$this->dateTimeSmall = $lang['_dateTimeSmall'];
-		unset($lang['_locale']);
-		unset($lang['_charset']);
-		unset($lang['_dateTimeFull']);
-		unset($lang['_dateTimeMid']);
-		unset($lang['_dateTimeSmall']);
-		$this->labels = $lang;
-	}
-
-	protected function label($string, array $data = NULL)
-	{
-		$return = isset($this->labels[$string]) ? $this->labels[$string] : $string;
-		if (is_array($data))
-			foreach ($data as $key => $val)
-				$return = str_replace("{{$key}}", $val, $return);
-
-		return $return;
-	}
-
-	protected function backMsg($message, array $data = NULL)
-	{
-		$message = $this->label($message, $data);
-		if (isset($this->file['tmp_name']) && file_exists($this->file['tmp_name']))
-			@unlink($this->file['tmp_name']);
-		$this->callBack("", $message);
-		die;
 	}
 
 	protected function callBack($url, $message = "")
@@ -679,15 +656,20 @@ class uploader
 
 	}
 
-	protected function get_htaccess()
+	protected function normalizeDirname($dirname)
 	{
-		return "<IfModule mod_php4.c>
-  php_value engine off
-</IfModule>
-<IfModule mod_php5.c>
-  php_value engine off
-</IfModule>
-";
+		if (isset($this->config['dirnameChangeChars']) &&
+			is_array($this->config['dirnameChangeChars'])
+		)
+			$dirname = strtr($dirname, $this->config['dirnameChangeChars']);
+
+		return $dirname;
+	}
+
+	protected function getTypeFromPath($path)
+	{
+		return preg_match('/^([^\/]*)\/.*$/', $path, $patt)
+			? $patt[1] : $path;
 	}
 }
 
