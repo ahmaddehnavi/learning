@@ -84,7 +84,7 @@
                                             <a href="#">
                                                 <img
 													src="<?php echo FILES_IMG_PATH .  '/2.jpg ';?>"
-												alt="" width="100%"/>
+											 />
                                             </a>
 										</figure>
 									</section>

@@ -79,11 +79,13 @@ header.widget-head {
 .img-teacher{
     position: absolute;
     top: 27%;
-    left: 29.63%;
+    left: 29%;
+    width: 42%;
 }
 
 .img-teacher img{
     border-radius: 50%;
+    width:100%;
 }
 
 a.btn-fix{
@@ -94,4 +96,8 @@ a.btn-fix{
     background: #06a8f0;
     margin: 22px 78px 0;
     text-align: center;
+}
+
+figure a{
+    display: block;
 }
