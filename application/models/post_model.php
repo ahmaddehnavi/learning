@@ -65,18 +65,55 @@ class Post_Model extends CI_Model
 		return $data;
 	}
 
-	public function get_info($class_id)
+	public function get_author_id($post_id)
+	{
+		$sql = 'SELECT author_id FROM post WHERE post_id=? LIMIT 1';
+		$row = $this->db->query($sql, array($post_id));
+		if ($row->num_rows() === 1) {
+			return $row->row('author_id');
+		}
+
+		return FALSE;
+	}
+
+	public function is_valid_exercise($post_id)
+	{
+		$sql = "SELECT author_id FROM post WHERE post_id=? AND post_type='exercise' LIMIT 1";
+		$row = $this->db->query($sql, array($post_id));
+		if ($row->num_rows() === 1) {
+			return $row->row('author_id');
+		}
+
+		return FALSE;
+	}
+
+	public function is_can_read($post_id)
 	{
 		$this->load->model(array('profile_model', 'lesson_model'));
 
-		$sql                 = 'SELECT * FROM class WHERE class_id=? LIMIT 1';
-		$row                 = $this->db->query($sql, array($class_id));
-		$data['prof_name']   = $this->profile_model->get_full_name_by_id($row->row('prof_id'));
-		$data['lesson_name'] = $this->lesson_model->get_name_by_id($row->row('lesson_id'));
-		$data['prof_id']     = $row->row('prof_id');
-		$data['new_change']  = $this->get_number_of_new_change($class_id);
+		$sql = '
+		SELECT * FROM class_member
+		JOIN class ON class.class_id=class_member.class_id AND class_member.student_id = ?
+		JOIN class_post ON class_post.post_id = ?';
+		$row = $this->db->query($sql, array($this->auth->get_user_id(), $post_id));
+		if ($row->num_rows() > 1) {
+			return TRUE;
+		}
 
-		return $data;
+		return FALSE;
+	}
+
+	public function is_can_edit($post_id)
+	{
+		$this->load->model(array('profile_model', 'lesson_model'));
+
+		$sql = 'SELECT author_id FROM post WHERE post_id=? LIMIT 1';
+		$row = $this->db->query($sql, array($post_id));
+		if ($row->num_rows() === 1) {
+			return $row->row('author_id');
+		}
+
+		return FALSE;
 	}
 
 }

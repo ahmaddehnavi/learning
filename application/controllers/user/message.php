@@ -8,8 +8,8 @@ class Message extends Auth_Controller
 		$this->load->model('message_model');
 
 		$this->load->library('pagination');
-		$config['base_url']         = site_url('user/posts/page/');
-		$config['total_rows']       = $data['total'];
+		$config['base_url'] = site_url('user/posts/page/');
+//		$config['total_rows']       = $data['total'];
 		$config['per_page']         = 10;
 		$config['use_page_numbers'] = TRUE;
 		$config['uri_segment']      = 4;
@@ -27,8 +27,8 @@ class Message extends Auth_Controller
 		$this->load->model('message_model');
 
 		$this->load->library('pagination');
-		$config['base_url']         = site_url('user/posts/page/');
-		$config['total_rows']       = $data['total'];
+		$config['base_url'] = site_url('user/posts/page/');
+//		$config['total_rows']       = $data['total'];
 		$config['per_page']         = 10;
 		$config['use_page_numbers'] = TRUE;
 		$config['uri_segment']      = 4;
