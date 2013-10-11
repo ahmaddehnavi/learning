@@ -10,7 +10,12 @@ class Class_Post_Model extends CI_Model
 
 	function add_post_to_classes($post_id, $classes)
 	{
-//		print_r($classes);
+		$sql = '';
+		foreach ($classes as $class) {
+			$sql .= 'INSERT INTO class_post VALUES(' . $post_id . ',' . intval($class) . ');';
+		}
+		$this->db->query($sql);
+		$this->db->affected_rows() == count($classes);
 	}
 
 }

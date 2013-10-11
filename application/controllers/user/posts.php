@@ -55,7 +55,6 @@ class Posts extends Auth_Controller
 			->set_rules('body', 'post body', 'trim|required')
 			->set_rules('classes[]', 'Selected Classes', 'trim')
 			->set_rules('mail_notice', 'Mail notification', 'trim')
-			->set_rules('sms_notice', 'sms notification', 'trim')
 			->set_rules('post_type', 'post type', 'trim|required')
 			->set_rules('blog', 'blog publish', 'trim');
 

@@ -96,29 +96,6 @@ class Auth
 		return $user_id;
 	}
 
-	/**
-	 * Create Salt
-	 *
-	 * This function will create a salt hash to be used in
-	 * authentication
-	 *
-	 * @todo it might be nice to use /dev/urandom to create the salt,
-	 * but it would need to be configurable, or at least fall back in case
-	 * the host does not allow access there.  For the time being
-	 * using random_string() from the string helper should do
-	 * just plain fine.
-	 *
-	 * @return    string        the salt
-	 */
-	protected function _create_salt()
-	{
-		$this->CI->load->helper('string');
-
-		return sha1(random_string('alnum', 32));
-	}
-
-	// --------------------------------------------------------------------------
-
 	private function create_profile($user_id, $full_name)
 	{
 		$data = array(
@@ -133,9 +110,6 @@ class Auth
 		@mkdir('files/uploads/' . $user_id . '/files/public/image', 666, TRUE);
 
 	}
-
-	// --------------------------------------------------------------------------
-
 
 	// --------------------------------------------------------------------------
 
@@ -160,6 +134,8 @@ class Auth
 
 		return TRUE;
 	}
+
+	// --------------------------------------------------------------------------
 
 
 	// --------------------------------------------------------------------------
@@ -187,6 +163,7 @@ class Auth
 
 		return $r;
 	}
+
 
 	// --------------------------------------------------------------------------
 
@@ -256,6 +233,8 @@ class Auth
 		return FALSE;
 	}
 
+	// --------------------------------------------------------------------------
+
 	public function force_login($mail)
 	{
 		$qry = $this->CI->db->where('email', $mail)->get('user');
@@ -281,8 +260,6 @@ class Auth
 
 		return $id;
 	}
-
-	// --------------------------------------------------------------------------
 
 	/**
 	 * Forgot Password
@@ -323,6 +300,8 @@ class Auth
 			'user_id' => $query->row('user_id')
 		);
 	}
+
+	// --------------------------------------------------------------------------
 
 	/**
 	 * Test the reset hash
@@ -381,5 +360,60 @@ class Auth
 	public function get_user_id()
 	{
 		return $this->CI->session->userdata('user_id');
+	}
+
+	public function send_new_password($user_id)
+	{
+		$this->CI->load->helper('string');
+
+		$salt         = $this->_create_salt();
+		$new_password = random_string('alnum', 10);
+		$data         = array(
+			'password' => sha1($new_password . $salt),
+			'salt' => $salt
+		);
+
+		$this->CI->db->where('user_id', $user_id)->limit(1)->update('user', $data);
+
+		if ($this->CI->db->affected_rows() === 1) {
+
+			$mail = $this->CI->db->select('email')->where('user_id', $user_id)->limit(1)->get('user')->row('email');
+
+			$this->CI->load->library('email');
+
+			$this->CI->email->from('system@academy.com', 'System')
+				->to($mail)
+				->subject('Recovery Password, Panda Academy!')
+				->message('
+				your new password is : ' . $new_password
+				)
+				->send();
+//			echo $this->CI->email->print_debugger();
+
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	/**
+	 * Create Salt
+	 *
+	 * This function will create a salt hash to be used in
+	 * authentication
+	 *
+	 * @todo it might be nice to use /dev/urandom to create the salt,
+	 * but it would need to be configurable, or at least fall back in case
+	 * the host does not allow access there.  For the time being
+	 * using random_string() from the string helper should do
+	 * just plain fine.
+	 *
+	 * @return    string        the salt
+	 */
+	protected function _create_salt()
+	{
+		$this->CI->load->helper('string');
+
+		return sha1(random_string('alnum', 32));
 	}
 }

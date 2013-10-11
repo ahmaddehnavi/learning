@@ -42,7 +42,7 @@ class Lost_password extends CI_Controller
 					->message($message)
 					->send();
 //				echo $this->email->print_debugger();
-				// redirect('forgot_password/reset_requested');
+				 redirect('forgot_password/reset_requested');
 			}
 
 			$data['form_error'] = TRUE;
@@ -75,26 +75,14 @@ class Lost_password extends CI_Controller
 			show_404();
 		}
 
-		$base = 'required|trim|xss_clean';
-
-		$this->form_validation->set_rules('password', 'Password', $base)
-			->set_rules('password_conf', 'Password Confirmation', $base . '|min_length[5]|matches[password]');
-
-
-		if ($this->form_validation->run()) {
-			$this->auth->change_password($this->form_validation->set_value('password'));
-
-			redirect('user/login');
-		}
-
-
 		$data['user_id'] = $this->auth->test_reset_hash($hash);
 
 		if (!$data['user_id']) {
 			show_404();
 		}
+		$data['is_error'] = $this->auth->send_new_password($data['user_id']);
 
-		$this->load->view('user/password_reset_form', $data);
+		$this->load->view('user/password_send', $data);
 	}
 
 	// --------------------------------------------------------------------------
@@ -111,10 +99,10 @@ class Lost_password extends CI_Controller
 Greetings!
 
 You requested to have your password reset.
-Please visit this link to reset your password.  
+Please visit this link to reset your password.
 
 %s
-	
+
 If you didn\'t do this, you can ignore this message.
 
 Thanks!',
