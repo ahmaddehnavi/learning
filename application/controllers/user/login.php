@@ -8,9 +8,18 @@ class Login extends CI_Controller
 		if ($this->auth->is_logged_in())
 			redirect('/user/home');
 
-
-		$this->load->library('login_with_google');
-
+		$google_url = '';
+		try {
+			$this->load->library('loginwithgoogle');
+			if ($this->loginwithgoogle->is_logged_in()) {
+				if ($this->auth->force_login($this->loginwithgoogle->get_mail()) !== FALSE) {
+					$next_page = $this->session->userdata('next_page');
+					redirect(empty($next_page) ? 'user/dashboard' : $next_page);
+				}
+			}
+			$google_url = $this->loginwithgoogle->get_auth_url();
+		} catch (Exception $e) {
+		}
 
 		$this->load->library('form_validation');
 
@@ -23,7 +32,8 @@ class Login extends CI_Controller
 		$data      = array(
 			'login_error' => FALSE,
 			'registration_message' => $this->session->flashdata('registration_message'),
-			'next_page' => empty($next_page) ? 'user/dashboard' : $next_page
+			'next_page' => empty($next_page) ? 'user/dashboard' : $next_page,
+			'google_url' => $google_url
 		);
 
 		if ($this->form_validation->run()) {
@@ -36,6 +46,7 @@ class Login extends CI_Controller
 
 			$data['login_error'] = TRUE;
 		}
+
 
 		$this->load->view('user/login', $data);
 	}

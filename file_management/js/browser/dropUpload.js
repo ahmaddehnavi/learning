@@ -1,104 +1,102 @@
 <?php
 
 /** This file is part of KCFinder project
-*
-*      @desc Upload files using drag and drop
-*   @package KCFinder
-*   @version 2.51
-*    @author Forum user (updated by Pavel Tzonkov)
-* @copyright 2010, 2011 KCFinder Project
-*   @license http://www.opensource.org/licenses/gpl-2.0.php GPLv2
-*   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
-*      @link http://kcfinder.sunhater.com
-*/?>
+  *
+  *      @desc Upload files using drag and drop
+  *   @package KCFinder
+  *   @version 2.51
+  *    @author Forum user (updated by Pavel Tzonkov)
+  * @copyright 2010, 2011 KCFinder Project
+  *   @license http://www.opensource.org/licenses/gpl-2.0.php GPLv2
+  *   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
+  *      @link http://kcfinder.sunhater.com
+  */?>
 
 browser.initDropUpload = function() {
     if ((typeof(XMLHttpRequest) == 'undefined') ||
-    (typeof(document.addEventListener) == 'undefined') ||
-    (typeof(File) == 'undefined') ||
-    (typeof(FileReader) == 'undefined')
+        (typeof(document.addEventListener) == 'undefined') ||
+        (typeof(File) == 'undefined') ||
+        (typeof(FileReader) == 'undefined')
     )
-    return;
+        return;
 
     if (!XMLHttpRequest.prototype.sendAsBinary) {
-    XMLHttpRequest.prototype.sendAsBinary = function(datastr) {
-    var ords = Array.prototype.map.call(datastr, function(x) {
-    return x.charCodeAt(0) & 0xff;
-    });
-var ui8a = new Uint8Array(ords);
-this.send(ui8a.buffer);
-}
-}
-
-var uploadQueue = [],
-uploadInProgress = false,
-filesCount = 0,
-errors = [],
-files = $('#files'),
-        folders = $('div.folder > a'),
-boundary = '------multipartdropuploadboundary' + (new Date).getTime(),
-currentFile,
-
-filesDragOver = function(e) {
-    if (e.preventDefault) e.preventDefault();
-    $('#files').addClass('drag');
-    return false;
-    },
-
-filesDragEnter = function(e) {
-    if (e.preventDefault) e.preventDefault();
-    return false;
-    },
-
-filesDragLeave = function(e) {
-    if (e.preventDefault) e.preventDefault();
-    $('#files').removeClass('drag');
-    return false;
-    },
-
-filesDrop = function(e) {
-    if (e.preventDefault) e.preventDefault();
-    if (e.stopPropagation) e.stopPropagation();
-    $('#files').removeClass('drag');
-    if (!$('#folders span.current').first().parent().data('writable')) {
-    browser.alert("Cannot write to upload folder.");
-    return false;
-    }
-filesCount += e.dataTransfer.files.length
-for (var i = 0; i
-    < e.dataTransfer.files.length; i++) {
-        var file = e.dataTransfer.files[i];
-        file.thisTargetDir = browser.dir;
-        uploadQueue.push(file);
+        XMLHttpRequest.prototype.sendAsBinary = function(datastr) {
+            var ords = Array.prototype.map.call(datastr, function(x) {
+                return x.charCodeAt(0) & 0xff;
+            });
+            var ui8a = new Uint8Array(ords);
+            this.send(ui8a.buffer);
         }
-    processUploadQueue();
-    return false;
+    }
+
+    var uploadQueue = [],
+        uploadInProgress = false,
+        filesCount = 0,
+        errors = [],
+        files = $('#files'),
+        folders = $('div.folder > a'),
+        boundary = '------multipartdropuploadboundary' + (new Date).getTime(),
+        currentFile,
+
+    filesDragOver = function(e) {
+        if (e.preventDefault) e.preventDefault();
+        $('#files').addClass('drag');
+        return false;
+    },
+
+    filesDragEnter = function(e) {
+        if (e.preventDefault) e.preventDefault();
+        return false;
+    },
+
+    filesDragLeave = function(e) {
+        if (e.preventDefault) e.preventDefault();
+        $('#files').removeClass('drag');
+        return false;
+    },
+
+    filesDrop = function(e) {
+        if (e.preventDefault) e.preventDefault();
+        if (e.stopPropagation) e.stopPropagation();
+        $('#files').removeClass('drag');
+        if (!$('#folders span.current').first().parent().data('writable')) {
+            browser.alert("Cannot write to upload folder.");
+            return false;
+        }
+        filesCount += e.dataTransfer.files.length
+        for (var i = 0; i < e.dataTransfer.files.length; i++) {
+            var file = e.dataTransfer.files[i];
+            file.thisTargetDir = browser.dir;
+            uploadQueue.push(file);
+        }
+        processUploadQueue();
+        return false;
     },
 
     folderDrag = function(e) {
         if (e.preventDefault) e.preventDefault();
         return false;
-        },
+    },
 
     folderDrop = function(e, dir) {
         if (e.preventDefault) e.preventDefault();
         if (e.stopPropagation) e.stopPropagation();
         if (!$(dir).data('writable')) {
-        browser.alert("Cannot write to upload folder.");
-        return false;
+            browser.alert("Cannot write to upload folder.");
+            return false;
         }
-    filesCount += e.dataTransfer.files.length
-    for (var i = 0; i
-        < e.dataTransfer.files.length; i++) {
+        filesCount += e.dataTransfer.files.length
+        for (var i = 0; i < e.dataTransfer.files.length; i++) {
             var file = e.dataTransfer.files[i];
             file.thisTargetDir = $(dir).data('path');
             uploadQueue.push(file);
-            }
+        }
         processUploadQueue();
         return false;
-        };
+    };
 
-        files.get(0).removeEventListener('dragover', filesDragOver, false);
+    files.get(0).removeEventListener('dragover', filesDragOver, false);
     files.get(0).removeEventListener('dragenter', filesDragEnter, false);
     files.get(0).removeEventListener('dragleave', filesDragLeave, false);
     files.get(0).removeEventListener('drop', filesDrop, false);
@@ -140,7 +138,7 @@ for (var i = 0; i
     function updateProgress(evt) {
         var progress = evt.lengthComputable
             ? Math.round((evt.loaded * 100) / evt.total) + '%'
-        : Math.round(evt.loaded / 1024) + " KB";
+            : Math.round(evt.loaded / 1024) + " KB";
         $('#loading').html(browser.label("Uploading file {number} of {count}... {progress}", {
             number: filesCount - uploadQueue.length,
             count: filesCount,
@@ -172,8 +170,8 @@ for (var i = 0; i
                 uploadInProgress = true;
 
                 var postbody = '--' + boundary + '\r\nContent-Disposition: form-data; name="upload[]"';
-        if (evt.target.thisFileName)
-        postbody += '; filename="' + _.utf8encode(evt.target.thisFileName) + '"';
+                if (evt.target.thisFileName)
+                    postbody += '; filename="' + _.utf8encode(evt.target.thisFileName) + '"';
                 postbody += '\r\n';
                 if (evt.target.thisFileSize)
                     postbody += 'Content-Length: ' + evt.target.thisFileSize + '\r\n';
@@ -197,36 +195,36 @@ for (var i = 0; i
                     uploadInProgress = false;
                     processUploadQueue();
                     if (xhr.responseText.substr(0, 1) != '/')
-        errors[errors.length] = xhr.responseText;
-        }
+                        errors[errors.length] = xhr.responseText;
+                }
 
-        xhr.sendAsBinary(postbody);
-        };
+                xhr.sendAsBinary(postbody);
+            };
 
-        reader.onerror = function(evt) {
-            $('#loading').css('display', 'none');
-            uploadInProgress = false;
-            processUploadQueue();
-            errors[errors.length] = browser.label("Failed to upload {filename}!", {
-            filename: evt.target.thisFileName
-            });
-        };
+            reader.onerror = function(evt) {
+                $('#loading').css('display', 'none');
+                uploadInProgress = false;
+                processUploadQueue();
+                errors[errors.length] = browser.label("Failed to upload {filename}!", {
+                    filename: evt.target.thisFileName
+                });
+            };
 
-        reader.readAsBinaryString(file);
+            reader.readAsBinaryString(file);
 
         } else {
             filesCount = 0;
             var loop = setInterval(function() {
-            if (uploadInProgress) return;
-            clearInterval(loop);
-            if (currentFile.thisTargetDir == browser.dir)
-            browser.refresh();
-            boundary = '------multipartdropuploadboundary' + (new Date).getTime();
-            if (errors.length) {
-            browser.alert(errors.join('\n'));
-            errors = [];
-            }
-        }, 333);
+                if (uploadInProgress) return;
+                clearInterval(loop);
+                if (currentFile.thisTargetDir == browser.dir)
+                    browser.refresh();
+                boundary = '------multipartdropuploadboundary' + (new Date).getTime();
+                if (errors.length) {
+                    browser.alert(errors.join('\n'));
+                    errors = [];
+                }
+            }, 333);
         }
-        }
-        };
+    }
+};

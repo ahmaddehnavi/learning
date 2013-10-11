@@ -39,9 +39,12 @@ class Auth
 	public function log_out($redirect = '')
 	{
 		$this->CI->session->sess_destroy();
-		session_start();
+		if (!isset($_SESSION)) {
+			session_start();
+		}
 		$_SESSION['file_management']['disabled']  = TRUE;
 		$_SESSION['file_management']['uploadURL'] = '../files/uploads/public';
+
 		redirect($redirect);
 	}
 
@@ -93,6 +96,29 @@ class Auth
 		return $user_id;
 	}
 
+	/**
+	 * Create Salt
+	 *
+	 * This function will create a salt hash to be used in
+	 * authentication
+	 *
+	 * @todo it might be nice to use /dev/urandom to create the salt,
+	 * but it would need to be configurable, or at least fall back in case
+	 * the host does not allow access there.  For the time being
+	 * using random_string() from the string helper should do
+	 * just plain fine.
+	 *
+	 * @return    string        the salt
+	 */
+	protected function _create_salt()
+	{
+		$this->CI->load->helper('string');
+
+		return sha1(random_string('alnum', 32));
+	}
+
+	// --------------------------------------------------------------------------
+
 	private function create_profile($user_id, $full_name)
 	{
 		$data = array(
@@ -106,13 +132,6 @@ class Auth
 		@mkdir('files/uploads/' . $user_id . '/files/private/exercise', 666, TRUE);
 		@mkdir('files/uploads/' . $user_id . '/files/public/image', 666, TRUE);
 
-	}
-
-	// --------------------------------------------------------------------------
-
-	public function get_user_id()
-	{
-		return $this->CI->session->userdata('user_id');
 	}
 
 	// --------------------------------------------------------------------------
@@ -225,7 +244,9 @@ class Auth
 			$id   = $qry->row('user_id');
 			$this->CI->session->set_userdata($data);
 
-			session_start();
+			if (!isset($_SESSION)) {
+				session_start();
+			}
 			$_SESSION['file_management']['disabled']  = FALSE;
 			$_SESSION['file_management']['uploadURL'] = '../files/uploads/' . $id;
 
@@ -233,6 +254,32 @@ class Auth
 		}
 
 		return FALSE;
+	}
+
+	public function force_login($mail)
+	{
+		$qry = $this->CI->db->where('email', $mail)->get('user');
+
+		// No results, we're done.
+		if ($qry->num_rows() !== 1) {
+			return FALSE;
+		}
+
+		$data = array(
+			'user_id' => $qry->row('user_id'),
+			'username' => $qry->row('username'),
+			'email' => $qry->row('email'),
+			'status' => $qry->row('status')
+		);
+		$id   = $qry->row('user_id');
+		$this->CI->session->set_userdata($data);
+		if (!isset($_SESSION)) {
+			session_start();
+		}
+		$_SESSION['file_management']['disabled']  = FALSE;
+		$_SESSION['file_management']['uploadURL'] = '../files/uploads/' . $id;
+
+		return $id;
 	}
 
 	// --------------------------------------------------------------------------
@@ -275,27 +322,6 @@ class Auth
 			'username' => $query->row('username'),
 			'user_id' => $query->row('user_id')
 		);
-	}
-
-	/**
-	 * Create Salt
-	 *
-	 * This function will create a salt hash to be used in
-	 * authentication
-	 *
-	 * @todo it might be nice to use /dev/urandom to create the salt,
-	 * but it would need to be configurable, or at least fall back in case
-	 * the host does not allow access there.  For the time being
-	 * using random_string() from the string helper should do
-	 * just plain fine.
-	 *
-	 * @return    string        the salt
-	 */
-	protected function _create_salt()
-	{
-		$this->CI->load->helper('string');
-
-		return sha1(random_string('alnum', 32));
 	}
 
 	/**
@@ -344,12 +370,16 @@ class Auth
 		return $this->CI->db->query($sql, array($this->get_user_id()))->row('username');
 	}
 
-
 	function get_last_active_time()
 	{
 		$sql = "SELECT last_active_time FROM user WHERE user_id=? LIMIT 1";
 
 		return $this->CI->db->query($sql, array($this->get_user_id()))->row('last_active_time');
 
+	}
+
+	public function get_user_id()
+	{
+		return $this->CI->session->userdata('user_id');
 	}
 }

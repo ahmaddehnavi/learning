@@ -1,17 +1,17 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Login_With_Google extends CI_Controller
+class Loginwithgoogle
 {
 	private $user_id;
 	private $user_name;
-	private $email;
+	private $user_mail;
 	private $profile_url;
 	private $profile_image_url;
 	private $authUrl;
-	private $google_client_id = "XXXXX";
-	private $google_client_secret = "XXXXX";
-	private $google_redirect_url = "XXXXX";
-	private $google_developer_key = "XXXXX";
+	private $google_client_id = "616960038894.apps.googleusercontent.com";
+	private $google_client_secret = "vuvWltW0EcmKoMsyx7Glg3Wd";
+	private $google_redirect_url = "http://ahmaddehnavi.ir/panda/index.php/user/login";
+	private $google_developer_key = "AIzaSyAuYQOlCyA5830VtBjl1d-HSfhlv6xcark";
 	private $user_login = FALSE;
 
 	public function __construct()
@@ -54,7 +54,7 @@ class Login_With_Google extends CI_Controller
 			$user                    = $google_oauthV2->userinfo->get();
 			$this->user_id           = $user['id'];
 			$this->user_name         = filter_var($user['name'], FILTER_SANITIZE_SPECIAL_CHARS);
-			$this->email             = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
+			$this->user_mail             = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
 			$this->profile_url       = filter_var($user['link'], FILTER_VALIDATE_URL);
 			$this->profile_image_url = filter_var($user['picture'], FILTER_VALIDATE_URL);
 //			$personMarkup      = "$email<div><img src='$profile_image_url?sz=50'></div>";
@@ -91,6 +91,11 @@ class Login_With_Google extends CI_Controller
 	public function get_profile_url()
 	{
 		return $this->profile_url;
+	}
+
+	public function get_mail()
+	{
+		return $this->user_mail;
 	}
 
 	public function get_profile_image()
