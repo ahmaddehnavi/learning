@@ -1,94 +1,125 @@
 <?php $this->load->view('base/header'); ?>
-	<style type="text/css">
-		.login-form {
-			margin    : 50px auto;
-			width     : 330px;
-			max-width : 100%;
-		}
+<style type="text/css">
+	.login-form {
+		margin    : 50px auto;
+		width     : 330px;
+		max-width : 100%;
+	}
 
-		.login-form form {
-			padding : 30px;
-		}
+	.login-form form {
+		padding : 30px;
+	}
 
-		.mini-phone .login-form form {
-			padding : 0;
-		}
+	.mini-phone .login-form form {
+		padding : 0;
+	}
 
-		.mini-phone .login-form {
-			margin : auto;
-		}
+	.mini-phone .login-form {
+		margin : auto;
+	}
 
-		.login-form .aa {
-			font-size : 11px;
-			padding   : 30px 0 10px 10px;
-			display   : block;
-		}
+	.login-form .aa {
+		font-size : 11px;
+		padding   : 30px 0 10px 10px;
+		display   : block;
+	}
 
-		.mini-phone .login-form .aa {
-			padding : 3px 10px;
-		}
+	.mini-phone .login-form .aa {
+		padding : 3px 10px;
+	}
 
-		.login-form h2 {
-			border-bottom : 1px solid #aaa;
-			margin-bottom : 15px;
-			padding       : 10px 0;
-			color         : #aaa;
-		}
+	.login-form h2 {
+		border-bottom : 1px solid #aaa;
+		margin-bottom : 15px;
+		padding       : 10px 0;
+		color         : #aaa;
+	}
 
-		.login-with {
-			margin-top : 50px;
-		}
+	.login-with {
+		margin-top : 50px;
+	}
 
-	</style>
-	<nav>
-		<menu>
-			<li><a href="#">item 1</a></li>
-			<li><a href="#">item 2</a></li>
-			<li><a href="#">item 3</a></li>
-			<li><a href="#">item 4</a></li>
-			<div class="badboy"></div>
-		</menu>
-		<ul class="collapse-btn btn-top toggle-on" collapse-target="nav">
-			<li></li>
-			<li></li>
-			<li></li>
-		</ul>
-	</nav>
+</style>
+<nav>
+	<menu>
+		<li><a href="#">item 1</a></li>
+		<li><a href="#">item 2</a></li>
+		<li><a href="#">item 3</a></li>
+		<li><a href="#">item 4</a></li>
+		<div class="badboy"></div>
+	</menu>
+	<ul class="collapse-btn btn-top toggle-on" collapse-target="nav">
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</nav>
 
-	<div class="login-form widget">
-		<?php echo $registration_message; ?>
-		<?php echo form_open('user/login', 'class="widget-body"')?>
+<div class="login-form widget">
+	<?php echo $registration_message; ?>
+	<?php echo form_open('user/login', 'class="widget-body"')?>
 
-		<!--		<h2>username and password :</h2>-->
-		<input type="text" name="username" placeholder="mail or username"/>
-		<?= form_error('username', '<p class="form_err">', '</p>')?>
-		<input type="password" name="password" placeholder="password"/>
-		<?= form_error('password', '<p class="form_err">', '</p>')?>
-		<?php if ($login_error): ?><p class="form_err">Invalid username or Password</p><?php endif; ?>
-		<input type="hidden" name="next_page" value="<?= $next_page ?>"/>
+	<!--		<h2>username and password :</h2>-->
+	<input type="text" name="username" placeholder="mail or username"/>
+	<?= form_error('username', '<p class="form_err">', '</p>')?>
+	<input type="password" name="password" placeholder="password"/>
+	<?= form_error('password', '<p class="form_err">', '</p>')?>
+	<?php if ($login_error): ?><p class="form_err">Invalid username or Password</p><?php endif; ?>
+	<input type="hidden" name="next_page" value="<?= $next_page ?>"/>
 
-		<div>
-			<div class="left">
-				<input type="submit" value="Login" class="btn" name='submits'>
-			</div>
-
-			<div class="right">
-				<p><?=anchor('user/lost_password', 'lost password ?', 'class="aa"')?></p>
-			</div>
-			<div class="right">
-				<p><?=anchor('user/register', 'create new account', 'class="aa"')?></p>
-			</div>
-
-			<div class="badboy"></div>
+	<div>
+		<div class="left">
+			<input type="submit" value="Login" class="btn" name='submits'>
 		</div>
 
-		<div class="login-with">
-			<h2>or login with :</h2>
-			<?=anchor('#', 'google', 'class="btn btn-small"')?>
-			<?=anchor('#', 'yahoo', 'class="btn btn-small"')?>
-			<?=anchor('#', 'facebook', 'class="btn btn-small"')?>
+		<div class="right">
+			<p><?=anchor('user/lost_password', 'lost password ?', 'class="aa"')?></p>
 		</div>
-		</form>
+		<div class="right">
+			<p><?=anchor('user/register', 'create new account', 'class="aa"')?></p>
+		</div>
+
+		<div class="badboy"></div>
 	</div>
 
+	<div class="login-with">
+		<h2>or login with :</h2>
+		<?=anchor('#', 'google', 'class="btn btn-small"')?>
+		<?=anchor('#', 'yahoo', 'class="btn btn-small"')?>
+		<?=anchor('#', 'facebook', 'class="btn btn-small"')?>
+	</div>
+	</form>
+</div>
+
 <?php $this->load->view('base/footer'); ?>
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Login with Google</title>
+</head>
+<body>
+<h1>Login with Google</h1>
+
+<?php if (!$user_login): //user is not logged in, show login button ?>
+	<a href="<?php echo $authUrl; ?>">Click to login aparnet with Google account</a><br/>
+
+<?php else: // user logged in ?>
+	<ul>
+		<li><strong>User id: </strong><?php echo $user_id ?></li>
+		<li><strong>User name: </strong><?php echo $user_name ?></li>
+		<li><strong>Email: </strong><?php echo $email ?></li>
+		<li><strong><a href="<?php echo $profile_url ?>">Profile url</a></strong></li>
+		<li><strong><a href="<?php echo $profile_image_url ?>">Profile image url</a></strong></li>
+		<li><strong>Person markup: </strong><?php echo $personMarkup ?></li>
+	</ul>
+	<h3>All info user:</h3>
+	<pre><?php print_r($user); ?></pre>
+	<h4><a class="logout" href="?reset=1">Logout</a></h4>
+<?php
+endif;
+?>
+</body>
+</html>

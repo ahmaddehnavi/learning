@@ -7,6 +7,11 @@ class Login extends CI_Controller
 	{
 		if ($this->auth->is_logged_in())
 			redirect('/user/home');
+
+
+		$this->load->library('login_with_google');
+
+
 		$this->load->library('form_validation');
 
 		$base = 'required|trim|xss_clean';
