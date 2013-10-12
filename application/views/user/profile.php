@@ -7,6 +7,11 @@
 		}
 
 
+		#about{
+			/*width:100%;*/
+			display:block;
+			max-width:100%;
+		}
 	</style>
 	<div id="container" class="p-profile">
 
@@ -76,29 +81,29 @@
 							<?php echo form_open_multipart('user/profile/');?>
 							<input type="hidden" name="form_num" value="2"/>
 
-							<div class="row left">
+							<section class="row">
 								<label for="about"> about :</label>
-								<textarea name="about" style="width:100%;"><?=$about?></textarea>
+								<textarea name="about" id="about"><?=$about?></textarea>
 								<?=form_error('about', '<div class="form_err">', '</div>')?>
-							</div>
+							</section>
 
-							<div class="left">
-								<div class="row">
-									<label for="image"> image :</label>
-									<img src="<?= $image ?>" alt="<?= $full_name ?>" width="100px" height="100px"/>
-								</div>
-								<div class="row">
+							<section class="left row">
+								<section >
+									<label for="userfile"> image :</label>
+									<img src="<?php echo FILES_USERS_PATH.'/'.$this->auth->get_user_id().'/image/profile_100.jpg' ?>" alt="<?= $full_name ?>" width="100px" height="100px"/>
+								</section>
+								<section >
 									<input type="file" class="file_input" name="userfile"/>
-									<?=form_error('image', '<div class="form_err">', '</div>')?>
-								</div>
+									<?=form_error('userfile', '<div class="form_err">', '</div>')?>
+								</section>
 								<div class="badboy"></div>
-							</div>
+							</section>
 
 							<div class="badboy"></div>
 
-							<div class="row">
+							<section class="row">
 								<input class="btn" type="submit" value="update"/>
-							</div>
+							</section>
 							</form>
 
 						</article>
@@ -112,17 +117,20 @@
 
 							<div class="row left">
 								<?=$form_1_msg?>
-								<label for="current_password"> current password :</label>
-								<input type="password" name="current_password"/>
+<!--								<label for="current_password"> </label>-->
+								<input type="password" name="current_password"
+									   placeholder="current password" title="Enter current password."/>
 								<?=form_error('current_password', '<div class="form_err">', '</div>')?>
 
-								<label for="new_password">new password :</label>
-								<input type="password" name="new_password" value="<?= set_value('new_password') ?>"/>
+<!--								<label for="new_password">new password :</label>-->
+								<input type="password" name="new_password" value="<?= set_value('new_password') ?>"
+									   placeholder="new password" title="Enter new password."/>
 								<?=form_error('new_password', '<div class="form_err">', '</div>')?>
 
-								<label for="conf_new_password"> confirm new password :</label>
+<!--								<label for="conf_new_password"> confirm new password :</label>-->
 								<input type="password" name="conf_new_password"
-									   value="<?= set_value('conf_new_password') ?>"/>
+									   value="<?= set_value('conf_new_password') ?>"
+									   placeholder="new password confirm" title="Enter new password again."/>
 								<?=form_error('conf_new_password', '<div class="form_err">', '</div>')?>
 							</div>
 

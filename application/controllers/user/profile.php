@@ -64,7 +64,7 @@ class Profile extends CI_Controller
 		$data['about']     = $this->profile_model->get_about();
 		$data['academy']   = $this->profile_model->get_academy_name();
 		$data['field']     = $this->profile_model->get_field_name();
-		$data['image']     = $this->profile_model->get_image();
+//		$data['image']     = $this->profile_model->get_image();
 		$this->load->view('user/profile', $data);
 	}
 
