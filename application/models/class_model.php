@@ -138,7 +138,7 @@ class Class_Model extends CI_Model
 		$academy_id = $this->profile_model->get_academy_id();
 		$field_id   = $this->profile_model->get_field_id();
 		$sql        =
-			'SELECT class.class_id,academy.name AS academy_name,field_table.name AS field_name,lesson.name AS lesson_name
+			'SELECT class.class_id,class.prof_id,academy.name AS academy_name,field_table.name AS field_name,lesson.name AS lesson_name
 			 FROM class
 			 JOIN academy ON academy.academy_id=class.academy_id AND class.prof_id=?
 			 JOIN field_table ON field_table.field_id=class.field_id

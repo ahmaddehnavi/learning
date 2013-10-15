@@ -5,10 +5,10 @@
 
 		<nav>
 			<menu>
-				<li><a href="#">item 1</a></li>
-				<li class="active"><a href="#">item 2</a></li>
-				<li><a href="#">item 3</a></li>
-				<li><a href="#">item 4</a></li>
+				<li><?= anchor('/', 'home')?></li>
+				<li class="active"><?=anchor('/academy', 'academy')?></li>
+				<li><?=anchor('/user', 'user')?></li>
+				<li><a href="<?= FILE_MANAGE_PATH ?>">file management</a></li>
 				<div class="badboy"></div>
 			</menu>
 			<ul class="collapse-btn btn-top toggle-off" collapse-target="nav">
@@ -26,10 +26,10 @@
 			</ul>
 			<menu>
 				<h2>academy :</h2>
-				<li class="icon-class"><?php echo anchor("academy/classes", "classes") ?></li>
-				<li class="icon-"><?php echo anchor("academy/lighteners", "lighteners") ?></li>
+				<li class="icon-class active"><?php echo anchor("academy/classes", "classes") ?></li>
+				<li class="icon-lighteners"><?php echo anchor("academy/lighteners", "lighteners") ?></li>
 				<h2>user :</h2>
-				<li class="icon-dashboard active"><?php echo anchor("user/dashboard", "dashboard") ?></li>
+				<li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
 				<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>5</b>") ?></li>
 				<li class="icon-post"><?php echo anchor("user/posts", "posts") ?></li>
 				<li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
@@ -71,56 +71,48 @@
 							foreach ($prof_class->result() as $class) {
 								?>
 
-									<section class="one">
+								<section class="one">
 
-											<figure class="background">
-												<img
-													src="<?php echo FILES_IMG_PATH .  '/bg2.jpg';?> "
-												alt="" width="100%" height=100% />
-										</figure>
+									<figure class="background">
+										<img src="<?php echo FILES_IMG_PATH . '/bg2.jpg'; ?> " alt="" width="100%"
+											 height=100%/>
+									</figure>
+									<figure class="img-teacher">
+											<a href="#">
+												<img src="<?php echo FILES_USERS_PATH . '/'.$class->prof_id.'/image/profile_100.jpg'; ?>"
+													width="100px" height="100px"/>
+											</a>
+									</figure>
 
-                                    <section class="img-teacher">
-                                        <figure class="img">
-                                            <a href="#">
-                                                <img
-													src="<?php echo FILES_IMG_PATH .  '/2.jpg ';?>"
-											 />
-                                            </a>
-										</figure>
+									<section class="descript">
+										<p class="name_lesson"> <?php echo $class->lesson_name; ?></p>
+										<p class="name_teacher">you</p>
+										<a href="#" class="btn-fix">view</a>
 									</section>
+								</section> <?php
+							} foreach ($student_class->result() as $class) {
+								?>
+								<section class="one">
+								<figure class="img">
+									<img
+										src=" <?php echo FILES_IMG_PATH . '/bg2.jpg'; ?>"
+										alt="<?php echo $class->prof_name; ?>" width="100%"/>
+								</figure>
 
+								<section class="img-teacher">
+									<figure class="img">
+										<img
+											src="<?php echo FILES_IMG_PATH . '/2.jpg'; ?>"
+											alt="" width="100%"/>
+									</figure>
+								</section>
+								<div class="descript">
+									<p class="name_lesson"><?php echo $class->lesson_name; ?></p>
 
-
-										<section class="descript">
-
-											<p class="name_lesson"> <?php echo $class->lesson_name; ?></p>
-                                            <p class="name_teacher">you</p>
-                                            <a href="#" class="btn-fix">view</a>
-										</section>
-									</section> <?php
-							} foreach ($student_class->result() as $class) {?>
-
-									<section class="one">
-										<figure class="img">
-											<img
-												src=" <?php echo FILES_IMG_PATH .  '/bg2.jpg';?>"
-												alt="<?php echo $class->prof_name; ?>" width="100%"/>
-										</figure>
-
-                                <section class="img-teacher">
-                                    <figure class="img">
-                                        <img
-                                            src="<?php echo FILES_IMG_PATH .  '/2.jpg';?>"
-                                            alt="" width="100%"/>
-                                    </figure>
-                                </section>
-										<div class="descript">
-											<p class="name_lesson"><?php echo $class->lesson_name; ?></p>
-
-											<p class="name_teacher"><?php echo $class->prof_name; ?> </p>
-                                            <a href="#" class="btn-fix">view</a>
-										</div>
-									</section><?php
+									<p class="name_teacher"><?php echo $class->prof_name; ?> </p>
+									<a href="#" class="btn-fix">view</a>
+								</div>
+								</section><?php
 							}
 							?>
 

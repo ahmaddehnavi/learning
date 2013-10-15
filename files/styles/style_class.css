@@ -1,11 +1,11 @@
 body {
-    font-family : Leelawadee;
+    /*font-family : Leelawadee;*/
 }
 
 header.widget-head {
-    font-size  : 18px;
-    text-align : center;
-    display    : block;
+    /*font-size  : 18px;*/
+    /*text-align : center;*/
+    /*display    : block;*/
 }
 
 .widget_body {
@@ -31,7 +31,7 @@ header.widget-head {
 }
 
 .desktop .one {
-   background-image : url();
+   /*background-image : url();*/
 }
 
 .descript {
@@ -74,6 +74,16 @@ header.widget-head {
     margin    : 10px auto;
     max-width : 250px;
     float     : none;
+}
+
+.phone .one {
+     width     : 50%;
+}
+
+.tablet .one {
+    width  : 30%;
+    max-width : 250px;
+    float: left;
 }
 
 .img-teacher{

@@ -3,10 +3,9 @@
 
 		<nav>
 			<menu>
-				<li><a href="#">item 1</a></li>
-				<li class="active"><a href="#">item 2</a></li>
-				<li><a href="#">item 3</a></li>
-				<li><a href="#">item 4</a></li>
+				<li><?= anchor('/','home')?></li>
+				<li><?=anchor('/academy','academy','class="active"')?></li>
+				<li><a href="<?=FILE_MANAGE_PATH?>">file management</a></li>
 				<div class="badboy"></div>
 			</menu>
 			<ul class="collapse-btn btn-top toggle-off" collapse-target="nav">
@@ -24,12 +23,12 @@
 			</ul>
 			<menu>
 				<h2>academy :</h2>
-				<li class="icon-exercise"><?php echo anchor("academy/exercises", "exercises") ?></li>
-				<li class="icon-class"><?php echo anchor("academy/classes", "classes") ?></li>
-				<li class="icon-exam"><?php echo anchor("academy/exames", "exames") ?></li>
+				<li class="icon-class active"><?php echo anchor("academy/classes", "classes") ?></li>
+				<li class="icon-lighteners"><?php echo anchor("academy/lighteners", "lighteners") ?></li>
 				<h2>user :</h2>
-				<li class="icon-dashboard active"><?php echo anchor("user/dashboard", "dashboard") ?></li>
+				<li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
 				<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>5</b>") ?></li>
+				<li class="icon-post"><?php echo anchor("user/posts", "posts") ?></li>
 				<li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
 				<li class="icon-logout .top-line"><?php echo anchor("user/logout", "logout") ?></li>
 			</menu>

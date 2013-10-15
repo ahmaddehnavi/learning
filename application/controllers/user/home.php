@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class home extends CI_Controller
+class home extends  Auth_Controller
 {
 	function __construct()
 	{

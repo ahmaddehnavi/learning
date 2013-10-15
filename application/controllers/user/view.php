@@ -5,17 +5,23 @@ class View extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-
+		$this->load->model('profile_model');
 	}
 
-	function by_username()
+	function u($username)
 	{
-		$this->load->view('user/view');
+		$data['user_info'] = $this->profile_model->get_info_by_username($username);
+		if ($data['user_info']->num_rows() == 0)
+			show_404();
+		$this->load->view('user/view', $data);
 	}
 
-	function by_id($user_id)
+	function id($user_id)
 	{
-		$this->load->view('user/view');
+		$data['user_info'] = $this->profile_model->get_info_by_user_id($user_id);
+		if ($data['user_info']->num_rows() == 0)
+			show_404();
+		$this->load->view('user/view', $data);
 	}
 
 }

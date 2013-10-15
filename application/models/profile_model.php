@@ -69,6 +69,26 @@ class Profile_Model extends CI_Model
 		return '';
 	}
 
+
+	public function get_info_by_username($username)
+	{
+		$sql = 'SELECT profile.*,academy.name AS academy_name ,field_table.name AS field_name FROM profile
+		JOIN user ON profile.user_id=user.user_id AND user.username=?
+		LEFT JOIN academy ON academy.academy_id=profile.academy_id
+		LEFT JOIN field_table ON field_table.field_id=profile.field_id';
+
+		return $this->db->query($sql, array($username));
+	}
+
+	public function get_info_by_user_id($id)
+	{
+		$sql = 'SELECT profile.*,academy.name AS academy_name ,field_table.name AS field_name  FROM profile
+		LEFT JOIN academy ON academy.academy_id=profile.academy_id
+		LEFT JOIN field_table ON field_table.field_id=profile.field_id
+		WHERE user_id=?';
+		return $this->db->query($sql, array($id));
+	}
+
 	/**
 	 * @param $academy
 	 * @param $field

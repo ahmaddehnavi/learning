@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Exercise extends CI_Controller
+class Exercise extends  Auth_Controller
 {
 	function __construct()
 	{

@@ -48,7 +48,7 @@ $_CONFIG = array(
 		)
 	),
 
-	'deniedExts' => "exe com msi bat php phps phtml php3 php4 cgi pl",
+	'deniedExts' => "exe com msi bat php phps phtml php3 php4 cgi pl htaccess",
 
 	'types' => array(
 

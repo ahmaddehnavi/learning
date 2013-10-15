@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Profile extends CI_Controller
+class Profile extends Auth_Controller
 {
 	function __construct()
 	{
@@ -87,14 +87,15 @@ class Profile extends CI_Controller
 				->load('files/uploads/' . $this->auth->get_user_id() . '/image/profile.jpg')
 
 				->resize(24, 24)
-				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_24.jpg')
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_24.jpg',true)
 
 				->resize(80, 80)
-				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_80.jpg')
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_80.jpg',true)
 
 				->resize(100, 100)
-				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_100.jpg');
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_100.jpg',true);
 
+//			echo $this->image_moo->display_errors();
 			return TRUE;
 		} else {
 			return $this->upload->display_errors();

@@ -17,10 +17,10 @@
 
 		<nav>
 			<menu>
-				<li><a href="#">home</a></li>
-				<li class="active"><a href="#">academy</a></li>
-				<li><a href="#">file management</a></li>
-				<li><a href="#">social network</a></li>
+				<li><?= anchor('/','home')?></li>
+				<li><?=anchor('/academy','academy')?></li>
+				<li class="active"><?=anchor('/user','user')?></li>
+				<li><a href="<?=FILE_MANAGE_PATH?>">file management</a></li>
 				<div class="badboy"></div>
 			</menu>
 			<ul class="collapse-btn btn-top toggle-off" collapse-target="nav">
@@ -40,7 +40,8 @@
 				<h2>user :</h2>
 				<li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
 				<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>5</b>") ?></li>
-				<li class="icon-profile active"><?php echo anchor("user/profile", "profile") ?></li>
+				<li class="icon-post"><?php echo anchor("user/posts", "posts") ?></li>
+				<li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
 				<li class="icon-logout .top-line"><?php echo anchor("user/logout", "logout") ?></li>
 			</menu>
 
