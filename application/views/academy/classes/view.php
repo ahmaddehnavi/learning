@@ -39,18 +39,15 @@
 			<menu>
 
 				<?php  foreach ($members->result() as $member) {
-					?>
-					<li>
-						<a class="ad" href="#">
-							<figure><img
-									src="<?php echo FILES_USERS_PATH . '/' . $member->student_id . '/image/profile.jpg'; ?>"
-									alt="" width=24 height=24/></figure>
-							<p><?php echo $member->student_name; ?></p>
-
-							<div class="badboy"></div>
-						</a>
-					</li>
-				<?php } ?>
+					echo '<li>';
+					echo    anchor('user/view/id/'.$member->student_id,'
+							<figure><img src="'.FILES_USERS_PATH . '/' . $member->student_id . '/image/profile_24.jpg"
+							alt="" width=24 height=24/></figure>
+							<p>'.$member->student_name.'</p>
+							<div class="badboy"></div>'
+						,'class="ad" target="_blank"');
+					echo '</li>';
+				} ?>
 
 			</menu>
 		</section>
