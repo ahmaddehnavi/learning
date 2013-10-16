@@ -8,10 +8,10 @@ class Post_Model extends CI_Model
 		parent::__construct();
 	}
 
-	public function create($post_type, $subject, $body)
+	public function create($post_type,$is_public, $subject, $body)
 	{
-		$sql = 'INSERT INTO post(author_id,post_type,subject,body) VALUES(?,?,?,?)';
-		if (FALSE !== $this->db->query($sql, array($this->auth->get_user_id(), $post_type, $subject, $body))) {
+		$sql = 'INSERT INTO post(author_id,post_type,is_public,subject,body) VALUES(?,?,?,?)';
+		if (FALSE !== $this->db->query($sql, array($this->auth->get_user_id(), $post_type,$is_public, $subject, $body))) {
 			return $this->db->insert_id();
 		}
 
@@ -35,8 +35,27 @@ class Post_Model extends CI_Model
 			->count_all_results('post');
 
 		$data['posts'] = $this->db
-			->select('author_id,full_name AS author_name,post_id,subject,body,post_type')
+			->select('author_id,full_name AS author_name,is_public,post_id,subject,body,post_type')
 			->where('author_id', $this->auth->get_user_id())
+			->offset($offset)
+			->limit($limit)
+			->order_by('post_id', 'desc')
+			->join('profile', 'profile.user_id = post.author_id')
+			->get('post');
+
+		return $data;
+	}
+
+	public function get_public_posts($author_id,$offset = 0, $limit = 10)
+	{
+		$author_id=intval($author_id);
+		$data['total'] = $this->db
+			->where(array('author_id'=>$author_id,'is_public'=>1) )
+			->count_all_results('post');
+
+		$data['posts'] = $this->db
+			->select('author_id,full_name AS author_name,post_id,subject,body,post_type')
+			->where(array('author_id'=>$author_id,'is_public'=>1) )
 			->offset($offset)
 			->limit($limit)
 			->order_by('post_id', 'desc')

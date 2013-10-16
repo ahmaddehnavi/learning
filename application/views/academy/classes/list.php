@@ -78,41 +78,45 @@
 											 height=100%/>
 									</figure>
 									<figure class="img-teacher">
-											<a href="#">
-												<img src="<?php echo FILES_USERS_PATH . '/'.$class->prof_id.'/image/profile_100.jpg'; ?>"
-													width="100px" height="100px"/>
-											</a>
+										<a href="#">
+											<img
+												src="<?php echo FILES_USERS_PATH . '/' . $class->prof_id . '/image/profile_100.jpg'; ?>"
+												width="100px" height="100px"/>
+										</a>
 									</figure>
 
 									<section class="descript">
 										<p class="name_lesson"> <?php echo $class->lesson_name; ?></p>
+
 										<p class="name_teacher">you</p>
-										<a href="#" class="btn-fix">view</a>
+										<?php echo anchor('academy/classes/view/'.$class->class_id,'view','class="btn-fix"')?>
 									</section>
 								</section> <?php
 							} foreach ($student_class->result() as $class) {
 								?>
+
 								<section class="one">
-								<figure class="img">
-									<img
-										src=" <?php echo FILES_IMG_PATH . '/bg2.jpg'; ?>"
-										alt="<?php echo $class->prof_name; ?>" width="100%"/>
-								</figure>
 
-								<section class="img-teacher">
-									<figure class="img">
-										<img
-											src="<?php echo FILES_IMG_PATH . '/2.jpg'; ?>"
-											alt="" width="100%"/>
+									<figure class="background">
+										<img src="<?php echo FILES_IMG_PATH . '/bg2.jpg'; ?> " alt="" width="100%"
+											 height=100%/>
 									</figure>
-								</section>
-								<div class="descript">
-									<p class="name_lesson"><?php echo $class->lesson_name; ?></p>
+									<figure class="img-teacher">
+										<a href="#">
+											<img
+												src="<?php echo FILES_USERS_PATH . '/' . $class->prof_id . '/image/profile_100.jpg'; ?>"
+												width="100px" height="100px"/>
+										</a>
+									</figure>
 
-									<p class="name_teacher"><?php echo $class->prof_name; ?> </p>
-									<a href="#" class="btn-fix">view</a>
-								</div>
-								</section><?php
+									<section class="descript">
+										<p class="name_lesson"> <?php echo $class->lesson_name; ?></p>
+
+										<p class="name_teacher"><?php echo $class->prof_name; ?> </p>
+										<?php echo anchor('academy/classes/view/'.$class->class_id,'view','class="btn-fix"')?>
+									</section>
+								</section>
+							<?php
 							}
 							?>
 

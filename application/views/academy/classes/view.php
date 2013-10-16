@@ -82,16 +82,11 @@
 				</section>
 			</section>
 			<section id="content-body">
-				<!--				<section class="widget white">-->
-				<!--					--><?//
-				//					if ($is_prof)
-				//						echo 'you are professor of this class.<br/>';
-				//					echo $new_change;
-				//					?>
-				<!---->
-				<!--				</section>-->
 
-				<?php $user_id = $this->auth->get_user_id();
+				<?php
+				$user_id = $this->auth->get_user_id();
+				$delete_url=site_url('user/posts/remove');
+				$next=current_url();
 				foreach ($posts->result() as $post) {
 					?>
 					<section class="widget" tabindex="1">
@@ -113,15 +108,15 @@
 								<div class="text">    <?php echo $post->body ?></div>
 								<p class='publish'><?php echo'2 hours ago' ?></p>
 							</section>
-
+>
 							<?php if ($post->author_id == $user_id) { ?>
 								<footer class="widget_footer">
 									<div class="menu">
-										<ul>
-											<li><a href="#">delete </a></li>
-											<li><a href="#">edit </a></li>
-											<div class="badboy"></div>
-										</ul>
+										<?=form_open($delete_url);?>
+										<input type="hidden" name="post_id" value="<?= $post->post_id; ?>"/>
+										<input type="hidden" name="next" value="<?=$next?>"/>
+										<input type="submit" class="btn" value="delete"/>
+										</form>
 									</div>
 								</footer>
 							<?php } ?>

@@ -90,12 +90,12 @@
 					<section class="left">
 						<h2>publish on classes :</h2>
 						<select name="classes[]" multiple size="5" title="use CTRL for multi select...">
-							<option value="1">class2</option>
-							<option value="2">class3</option>
-							<option value="3">class4</option>
-							<option value="4">class4</option>
-							<option value="5">class4</option>
-							<option value="6">class4</option>
+							<?php
+							foreach ($prof_classes->result() as $class) {
+							echo "<option value='$class->class_id'
+									title='$class->academy_name \n $class->field_name \n $class->lesson_name' >$class->lesson_name</option>";
+							}
+							?>
 						</select>
 						<?php echo form_error('classes[]', '<p class="form_err">', '</p>') ?>
 
@@ -116,9 +116,9 @@
 							<?php echo form_error('post_type', '<p class="form_err">', '</p>') ?>
 						</label>
 						<label for="blog">
-							<input type="checkbox" name="blog" value="0"/> publish on
-							your <?php echo anchor('/blog/' . $this->auth->get_user_id(), 'blog'); ?>
-							<?php echo form_error('blog', '<p class="form_err">', '</p>') ?>
+							<input type="checkbox" name="is_public" value="1"/>share on your
+							<?php echo anchor('/user/view/id/' . $this->auth->get_user_id(), 'public profile'); ?>
+							<?php echo form_error('is_public', '<p class="form_err">', '</p>') ?>
 						</label>
 
 					</section>

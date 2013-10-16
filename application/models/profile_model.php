@@ -72,8 +72,9 @@ class Profile_Model extends CI_Model
 
 	public function get_info_by_username($username)
 	{
-		$sql = 'SELECT profile.*,academy.name AS academy_name ,field_table.name AS field_name FROM profile
-		JOIN user ON profile.user_id=user.user_id AND user.username=?
+		$sql = 'SELECT profile.*,academy.name AS academy_name ,field_table.name AS field_name , user.user_id ,user.username
+        FROM profile
+        JOIN user ON profile.user_id=user.user_id AND user.username=?
 		LEFT JOIN academy ON academy.academy_id=profile.academy_id
 		LEFT JOIN field_table ON field_table.field_id=profile.field_id';
 
@@ -82,10 +83,11 @@ class Profile_Model extends CI_Model
 
 	public function get_info_by_user_id($id)
 	{
-		$sql = 'SELECT profile.*,academy.name AS academy_name ,field_table.name AS field_name  FROM profile
+		$sql = 'SELECT profile.*,academy.name AS academy_name ,field_table.name AS field_name ,user.username , user.user_id
+ 		FROM profile
+ 		JOIN user ON profile.user_id=user.user_id AND user.user_id=?
 		LEFT JOIN academy ON academy.academy_id=profile.academy_id
-		LEFT JOIN field_table ON field_table.field_id=profile.field_id
-		WHERE user_id=?';
+		LEFT JOIN field_table ON field_table.field_id=profile.field_id';
 		return $this->db->query($sql, array($id));
 	}
 

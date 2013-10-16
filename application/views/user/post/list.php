@@ -3,10 +3,9 @@
 
 		<nav>
 			<menu>
-				<li><a href="#">item 1</a></li>
-				<li class="active"><a href="#">item 2</a></li>
-				<li><a href="#">item 3</a></li>
-				<li><a href="#">item 4</a></li>
+				<li><?= anchor('/','home')?></li>
+				<li class="active"><?=anchor('/academy','academy')?></li>
+				<li><a href="<?=FILE_MANAGE_PATH?>">file management</a></li>
 				<div class="badboy"></div>
 			</menu>
 			<ul class="collapse-btn btn-top toggle-off" collapse-target="nav">
@@ -23,10 +22,6 @@
 				<li></li>
 			</ul>
 			<menu>
-				<h2>academy :</h2>
-				<li class="icon-exercise"><?php echo anchor("academy/exercises", "exercises") ?></li>
-				<li class="icon-class"><?php echo anchor("academy/classes", "classes") ?></li>
-				<li class="icon-exam"><?php echo anchor("academy/exames", "exames") ?></li>
 				<h2>user :</h2>
 				<li class="icon-dashboard active"><?php echo anchor("user/dashboard", "dashboard") ?></li>
 				<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>5</b>") ?></li>
@@ -63,7 +58,9 @@
 					<div class="badboy"></div>
 				</section>
 				<section id="content-body">
-					<?php foreach ($posts->result() as $post) { ?>
+					<?php $delete_url=site_url('user/posts/remove');
+					$next=current_url();
+					foreach ($posts->result() as $post) { ?>
 
 						<section class="widget " tabindex="1">
 							<section class="image">
@@ -85,11 +82,11 @@
 								</section>
 								<footer class="widget_footer">
 									<div class="menu">
-										<ul>
-											<li><a href="#">delete </a></li>
-											<li><a href="#">edit </a></li>
-											<div class="badboy"></div>
-										</ul>
+										<?=form_open($delete_url);?>
+										<input type="hidden" name="post_id" value="<?=$post->post_id;?>"/>
+										<input type="hidden" name="next" value="<?=$next?>"/>
+										<input type="submit" class="btn" value="delete"/>
+										</form>
 									</div>
 								</footer>
 							</section>

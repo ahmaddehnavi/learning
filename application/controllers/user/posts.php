@@ -56,7 +56,7 @@ class Posts extends Auth_Controller
 			->set_rules('classes[]', 'Selected Classes', 'trim')
 			->set_rules('mail_notice', 'Mail notification', 'trim')
 			->set_rules('post_type', 'post type', 'trim|required')
-			->set_rules('blog', 'blog publish', 'trim');
+			->set_rules('is_public', 'public publish', 'trim');
 
 		$data['publish_error'] = '';
 		if ($this->form_validation->run()) {
@@ -71,9 +71,9 @@ class Posts extends Auth_Controller
 
 			$mail_notice = $this->form_validation->set_value('mail_notice');
 			$post_type   = $this->form_validation->set_value('post_type');
-			$blog        = $this->form_validation->set_value('blog');
+			$is_public   = $this->form_validation->set_value('is_public');
 
-			$id = $this->post_model->create($post_type, $subject, $body);
+			$id = $this->post_model->create($post_type, $is_public, $subject, $body);
 
 			if (FALSE === $id) {
 				$data['publish_error'] = 'error';
@@ -113,14 +113,21 @@ class Posts extends Auth_Controller
 
 	function remove()
 	{
-		$this->form_validation->set_rules('post_id', 'post id', 'trim|required|is_natural|is_exist[class.class_id]');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('post_id', 'post id', 'trim|required|is_natural');
+		$this->form_validation->set_rules('next', 'next page', 'trim|required');
 
+		$next = 'user/posts';
 		if ($this->form_validation->run()) {
 			$this->load->model('post_model');
 			$this->post_model->remove($this->form_validation->set_value('post_id'));
+			$next = $this->form_validation->set_value('next');
+//				$this->load->view('base/message',array(
+//						'message'=>'post deleted successful.',
+//						'next_page'=>'user/posts')
+//				);
 		}
-
-		redirect('user/posts');
+		redirect($next);
 	}
 }
 

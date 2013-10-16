@@ -3,10 +3,10 @@
 
 		<nav>
 			<menu>
-				<li><?= anchor('/','home')?></li>
-				<li><?=anchor('/academy','academy')?></li>
-				<li class="active"><?=anchor('/user','user')?></li>
-				<li><a href="<?=FILE_MANAGE_PATH?>">file management</a></li>
+				<li><?= anchor('/', 'home')?></li>
+				<li><?=anchor('/academy', 'academy')?></li>
+				<li class="active"><?=anchor('/user', 'user')?></li>
+				<li><a href="<?= FILE_MANAGE_PATH ?>">file management</a></li>
 				<div class="badboy"></div>
 			</menu>
 
@@ -65,14 +65,60 @@
 					</section>
 				</section>
 				<section id="content-body">
-					<?=$user_info->row('about');?>
 
-					<?=$user_info->row('academy_name');?>
+					<?php
+					echo    'full name : '.$user_info->row('full_name').'<br/>';
+					echo    'academy name : '.$user_info->row('academy_name').'<br/>';
+					echo    'field name : '.$user_info->row('field_name').'<br/>';
+					echo    'about : '.$user_info->row('about').'<br/>';
+					echo    'user id : '.$user_info->row('user_id').'<br/>';
+					echo    'username : '.$user_info->row('username').'<br/>';
 
-					<?=$user_info->row('field_name');?>
 
-					<img src="<?= FILES_USERS_PATH . '/' . $user_info->row('user_id') . '/image/profile_100.jpg'; ?>"
-						width="100px" height="100px" alt=""/>
+
+					$user_id = $this->auth->get_user_id();
+					$delete_url = site_url('user/posts/remove');
+					$next = current_url();
+					foreach ($public_posts->result() as $post) {
+						?>
+						<section class="widget" tabindex="1">
+							<section class="image">
+								<figure class="imgpost">
+									<img
+										src="<?php echo FILES_USERS_PATH . '/' . $post->author_id . '/image/profile.jpg' ?>"
+										alt="" width="50px" height="50px"/></figure>
+								<!--                            <p class='name'>-->
+								<?php //echo $post->author_name?><!--</p>-->
+							</section>
+							<section class='total' style="padding-top: 1px;">
+								<header class='widget_head'>
+
+									<p class='subject'><?php echo $post->subject ?></p>
+
+								</header>
+								<section class='widget_body'>
+									<div class="text">    <?php echo $post->body ?></div>
+									<p class='publish'><?php echo'2 hours ago' ?></p>
+								</section>
+								>
+								<?php if ($post->author_id == $user_id) { ?>
+									<footer class="widget_footer">
+										<div class="menu">
+											<?=form_open($delete_url);?>
+											<input type="hidden" name="post_id" value="<?= $post->post_id; ?>"/>
+											<input type="hidden" name="next" value="<?= $next ?>"/>
+											<input type="submit" class="btn" value="delete"/>
+											</form>
+										</div>
+									</footer>
+								<?php } ?>
+							</section>
+						</section>
+					<?php }?>
+					<!--                <div class="badboy"></div>-->
+					<section class="widget" style="width: inherit;">
+						<?php echo $pagination; ?>
+					</section>
 
 				</section>
 			</main>
