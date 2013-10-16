@@ -10,7 +10,7 @@ class Post_Model extends CI_Model
 
 	public function create($post_type,$is_public, $subject, $body)
 	{
-		$sql = 'INSERT INTO post(author_id,post_type,is_public,subject,body) VALUES(?,?,?,?)';
+		$sql = 'INSERT INTO post(author_id,post_type,is_public,subject,body) VALUES(?,?,?,?,?)';
 		if (FALSE !== $this->db->query($sql, array($this->auth->get_user_id(), $post_type,$is_public, $subject, $body))) {
 			return $this->db->insert_id();
 		}

@@ -51,7 +51,7 @@ class Posts extends Auth_Controller
 		$this->load->model('class_model');
 
 		$this->form_validation
-			->set_rules('subject', 'Subject', 'trim|required|alpha_dash')
+			->set_rules('subject', 'Subject', 'trim|required')
 			->set_rules('body', 'post body', 'trim|required')
 			->set_rules('classes[]', 'Selected Classes', 'trim')
 			->set_rules('mail_notice', 'Mail notification', 'trim')

@@ -12,7 +12,6 @@ class Classes extends Auth_Controller
 
 	function index()
 	{
-//		$data['suggest']       = $this->class_model->get_suggest();
 		$data['prof_class']    = $this->class_model->get_prof_classes();
 		$data['student_class'] = $this->class_model->get_student_classes();
 
@@ -24,6 +23,10 @@ class Classes extends Auth_Controller
 		if (!is_numeric($id)) {
 			show_404();
 		}
+		if($this->class_member_model->is_validate_member($id)) {
+			show_404();
+		}
+
 		$info = $this->class_model->get_info($id);
 
 
@@ -76,7 +79,6 @@ class Classes extends Auth_Controller
 		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural|is_exist[class.class_id]');
 
 		if ($this->form_validation->run()) {
-			$this->load->model('class_model');
 			$this->class_model->remove($this->form_validation->set_value('class_id'));
 		}
 
@@ -96,7 +98,6 @@ class Classes extends Auth_Controller
 		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural|is_exist[class.class_id]');
 
 		if ($this->form_validation->run()) {
-			$this->load->model('class_member_model');
 			$student_id = $this->auth->get_user_id();
 			$class_id   = $this->form_validation->set_value('class_id');
 			$this->class_member_model->join($class_id, $student_id);
@@ -110,7 +111,6 @@ class Classes extends Auth_Controller
 		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural|is_exist[class.class_id]');
 
 		if ($this->form_validation->run()) {
-			$this->load->model('class_member_model');
 			$this->class_member_model->leave($this->form_validation->set_value('class_id'));
 		}
 
