@@ -3,10 +3,10 @@
 
 		<nav>
 			<menu>
-				<li><?= anchor('/','home')?></li>
-				<li><?=anchor('/academy','academy')?></li>
-				<li class="active"><?=anchor('/user','user')?></li>
-				<li><a href="<?=FILE_MANAGE_PATH?>">file management</a></li>
+				<li><?= anchor('/', 'home')?></li>
+				<li><?=anchor('/academy', 'academy')?></li>
+				<li class="active"><?=anchor('/user', 'user')?></li>
+				<li><a href="<?= FILE_MANAGE_PATH ?>">file management</a></li>
 				<div class="badboy"></div>
 			</menu>
 			<ul class="collapse-btn btn-top toggle-off" collapse-target="nav">
@@ -58,9 +58,43 @@
 					</section>
 				</section>
 				<section id="content-body">
-					<?php
+					<pre>
+						<?php
+						$user_id=$this->auth->get_user_id();
 
-					?>
+						foreach ($messages->result() as $message) {
+
+							if($user_id==  $message->from_id){//sent
+								echo '<div class="right">';
+								echo 'id : ' . $message->message_id . '<br/>';
+
+								echo 'from : ' . $user_full_name. '<br/>';
+								echo 'from id :' . $message->from_id . '<br/>';
+
+								echo 'to : ' . $other_full_name. '<br/>';
+
+								echo 'message : ' . $message->message . '<br/>';
+
+								echo '' . date('y/m/d h:m', $message->time) . '<hr/>';
+								echo '</div><div class="badboy"></div>';
+							}else{//received
+								echo '<div class="left">';
+								echo 'id : ' . $message->message_id . '<br/>';
+
+								echo 'from : ' . $other_full_name. '<br/>';
+								echo 'from id :' . $message->from_id . '<br/>';
+
+								echo 'to : ' .$user_full_name. '<br/>';
+
+								echo 'message : ' . $message->message . '<br/>';
+
+								echo '' . date('y/m/d h:m', $message->time) . '<hr/>';
+								echo '</div><div class="badboy"></div>';
+
+							}
+						}
+						?>
+						</pre>
 
 				</section>
 			</main>

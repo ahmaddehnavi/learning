@@ -37,6 +37,7 @@ class Message_Model extends CI_Model
 		LIMIT ?,10';
 		return $this->db->query($sql, array( $this->auth->get_user_id(),$offset));
 	}
+
 	public function get_unread_messages($offset = 0)
 	{
 		$sql='
@@ -44,7 +45,7 @@ class Message_Model extends CI_Model
    	    FROM message
 		JOIN profile ON profile.user_id=message.from_id AND to_id=? AND message.is_read = 0
 		ORDER BY time';
-		return $this->db->query($sql, array( $this->auth->get_user_id(),$offset));
+		return $this->db->query($sql, array( $this->auth->get_user_id()));
 	}
 
 	public function get_inbox_number()
@@ -64,13 +65,16 @@ class Message_Model extends CI_Model
 	}
 
 
-//	public function read($message_id)
-//	{
-//		$sql = 'UPDATE class SET number_of_change=number_of_change+1 WHERE class_id=? LIMIT 1';
-//		$this->db->query($sql, array($class_id));
-//
-//		return $this->db->affected_rows() == 1;
-//	}
+	public function get_conversation($other_id,$offset=0)
+	{
+		$user_id=$this->auth->get_user_id();
+		$sql='
+		SELECT DISTINCT * FROM message
+		WHERE (from_id= ? AND  to_id = ?) OR (from_id= ? AND  to_id = ?)
+		ORDER BY time
+		LIMIT ?,10';
+		return $this->db->query($sql, array($user_id,$other_id,$other_id,$user_id,$offset));
+	}
 
 }
 /* End of file academy_model.php */
