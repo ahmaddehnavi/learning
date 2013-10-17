@@ -63,10 +63,11 @@ class Posts extends Auth_Controller
 			$subject = $this->form_validation->set_value('subject');
 			$body    = $this->form_validation->set_value('body');
 			$classes = $this->input->post('classes');
-
-			foreach ($classes AS $class) {
-				if ($this->class_model->is_validate_class($class) == FALSE)
-					exit('your request has been blocked.');
+			if (is_array($classes)) {
+				foreach ($classes AS $class) {
+					if ($this->class_model->is_validate_class($class) == FALSE)
+						exit('your request has been blocked.');
+				}
 			}
 
 			$mail_notice = $this->form_validation->set_value('mail_notice');
@@ -80,8 +81,9 @@ class Posts extends Auth_Controller
 			} else {
 				$this->load->model('class_post_model');
 				$this->load->library('notification');
-
-				$this->class_post_model->add_post_to_classes($id, $classes);
+				if (is_array($classes)) {
+					$this->class_post_model->add_post_to_classes($id, $classes);
+				}
 				if ($mail_notice == 1)
 					$this->notification->new_post_mail($id, $subject, $body, $classes);
 				redirect('user/posts/');

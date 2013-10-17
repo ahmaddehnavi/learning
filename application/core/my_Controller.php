@@ -2,7 +2,7 @@
 
 class Auth_Controller extends CI_Controller
 {
-
+	public  $unread_message='';
 	function __construct()
 	{
 		parent::__construct();
@@ -12,6 +12,9 @@ class Auth_Controller extends CI_Controller
 			$this->session->set_userdata('next_page', current_url());
 			redirect('user/login');
 		}
+
+		$this->load->model('message_model');
+		$this->unread_message = $this->message_model->get_unread_number();
 	}
 }
 

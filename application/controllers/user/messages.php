@@ -5,41 +5,62 @@ class Messages extends Auth_Controller
 
 	function index()
 	{
-//		$this->load->model('message_model');
-//
-//		$this->load->library('pagination');
-//		$config['base_url'] = site_url('user/posts/page/');
-////		$config['total_rows']       = $data['total'];
-//		$config['per_page']         = 10;
-//		$config['use_page_numbers'] = TRUE;
-//		$config['uri_segment']      = 4;
-//
-//		$this->pagination->initialize($config);
-//
-//		$data['pagination'] = $this->pagination->create_links();
-//
-//		$data['messages'] = $this->message_model->get_message(10);
-		$this->load->view('user/messages');
+		$this->load->model('message_model');
+		$data['messages_unread'] = $this->message_model->get_unread_messages(0);
+		$this->load->view('user/messages/messages_unread',$data);
 	}
-//
-//	function page($page)
-//	{
-//		$this->load->model('message_model');
-//
-//		$this->load->library('pagination');
-//		$config['base_url'] = site_url('user/posts/page/');
-////		$config['total_rows']       = $data['total'];
-//		$config['per_page']         = 10;
-//		$config['use_page_numbers'] = TRUE;
-//		$config['uri_segment']      = 4;
-//
-//		$this->pagination->initialize($config);
-//
-//		$data['pagination'] = $this->pagination->create_links();
-//
-//		$data['messages'] = $this->message_model->get_message($page);
-//		$this->load->view('user/login', $data);
-//	}
+
+	function sent($page=0)
+	{
+		$this->load->model('message_model');
+
+		$this->load->library('pagination');
+		$config['base_url'] = site_url('user/messages/sent/');
+		$config['total_rows']       = $this->message_model->get_sent_number();
+		$config['per_page']         = 10;
+		$config['use_page_numbers'] = TRUE;
+		$config['uri_segment']      = 5;
+		$this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+
+		$data['messages_sent'] = $this->message_model->get_sent_messages($page*10);
+		$this->load->view('user/messages/messages_sent',$data);
+	}
+
+
+	function inbox($page=0)
+	{
+		$this->load->model('message_model');
+
+		$this->load->library('pagination');
+		$config['base_url'] = site_url('user/messages/inbox/');
+		$config['total_rows']       = $this->message_model->get_inbox_number();
+		$config['per_page']         = 10;
+		$config['use_page_numbers'] = TRUE;
+		$config['uri_segment']      = 5;
+		$this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+
+		$data['messages_inbox'] = $this->message_model->get_inbox_messages($page*10);
+		$this->load->view('user/messages/messages_inbox',$data);
+	}
+
+	function send()
+	{
+		$this->load->library('form_validation');
+		$this->form_validation
+			->set_rules('to', 'receiver', 'required|is_natural')
+			->set_rules('message', 'message', 'required');
+
+		if ($this->form_validation->run()) {
+			$this->load->model('message_model');
+			$to=$this->form_validation->set_value('to');
+			$message=$this->form_validation->set_value('message');
+			$this->session->set_userdata('is_sent', ($this->message_model->send($to,$message) != FALSE));
+		}
+
+		redirect('user/messages');
+	}
 
 }
 

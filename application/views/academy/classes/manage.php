@@ -27,7 +27,7 @@
 			<li class="icon-lighteners"><?php echo anchor("academy/lighteners", "lighteners") ?></li>
 			<h2>user :</h2>
 			<li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
-			<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>5</b>") ?></li>
+			<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>$this->unread_message</b>") ?></li>
 			<li class="icon-post"><?php echo anchor("user/posts", "posts") ?></li>
 			<li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
 			<li class="icon-logout .top-line"><?php echo anchor("user/logout", "logout") ?></li>

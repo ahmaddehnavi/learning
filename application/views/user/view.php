@@ -10,7 +10,7 @@
 				<div class="badboy"></div>
 			</menu>
 
-			<ul class="collapse-btn btn-top toggle-off" collapse-target="nav">
+			<ul class="collapse-btn btn-top toggle-off" >
 				<li></li>
 				<li></li>
 				<li></li>
@@ -18,7 +18,7 @@
 		</nav>
 		<aside id="sidebar">
 			<header><?php echo $this->auth->get_full_name() ?>&nbsp;</header>
-			<ul class="collapse-btn btn-left toggle-off" collapse-target="#sidebar">
+			<ul class="collapse-btn btn-left toggle-off">
 				<li></li>
 				<li></li>
 				<li></li>
@@ -27,7 +27,7 @@
 				<?if ($this->auth->is_logged_in()) { ?>
 					<h2>user :</h2>
 					<li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
-					<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>5</b>") ?></li>
+					<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'></b>") ?></li>
 					<li class="icon-post"><?php echo anchor("user/posts", "posts") ?></li>
 					<li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
 					<li class="icon-logout .top-line"><?php echo anchor("user/logout", "logout") ?></li>
@@ -67,13 +67,20 @@
 				<section id="content-body">
 
 					<?php
-					echo    'full name : '.$user_info->row('full_name').'<br/>';
-					echo    'academy name : '.$user_info->row('academy_name').'<br/>';
-					echo    'field name : '.$user_info->row('field_name').'<br/>';
-					echo    'about : '.$user_info->row('about').'<br/>';
-					echo    'user id : '.$user_info->row('user_id').'<br/>';
-					echo    'username : '.$user_info->row('username').'<br/>';
+					echo    'full name : ' . $user_info->row('full_name') . '<br/>';
+					echo    'academy name : ' . $user_info->row('academy_name') . '<br/>';
+					echo    'field name : ' . $user_info->row('field_name') . '<br/>';
+					echo    'about : ' . $user_info->row('about') . '<br/>';
+					echo    'user id : ' . $user_info->row('user_id') . '<br/>';
+					echo    'username : ' . $user_info->row('username') . '<br/>';
 
+					if ($this->auth->is_logged_in()) {
+						echo form_open('user/messages/send') .
+						'<input type="hidden" name="to" value="' . $user_info->row('user_id') . '"/>
+						<textarea   name="message" placeholder="message..." cols=30 rows=30></textarea>;
+						<input type="submit" value="send" class="btn-fix"/>;
+						</form>';
+					}
 
 
 					$user_id = $this->auth->get_user_id();

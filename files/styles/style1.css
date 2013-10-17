@@ -1,5 +1,5 @@
 body {
-    /*position         : relative;*/
+    position         : relative;
     font-family      : "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color : rgb(241, 240, 250);
 }
@@ -675,11 +675,11 @@ nav a:hover, nav li.active a {
 
 section.list{
     width: 90%;
-    height: 37%;
+    min-height: 200px;
     margin: 20px 0 0 9px;
     border-top : 1px solid #676B6D;
     padding-top: 10px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     /*-webkit-border-top-image: linear-gradient( rgba(219, 219, 219,0) 13% , rgba(232, 232, 232,0.5) 42%, rgb(255, 255, 255) 64%) 14% stretch;*/
 }
 

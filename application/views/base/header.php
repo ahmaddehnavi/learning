@@ -21,7 +21,7 @@
     if (!isset($title))
         echo '<title>Panda</title>';
     else
-        echo '<title>Panda |' . $title . '</title>';
+        echo '<title>Panda | ' . $title . '</title>';
     ?>
 </head>
 

@@ -26,6 +26,7 @@ class View extends CI_Controller
 		$this->pagination->initialize($config);
 		$data['pagination'] = $this->pagination->create_links();
 
+
 		$this->load->view('user/view', $data);
 	}
 
