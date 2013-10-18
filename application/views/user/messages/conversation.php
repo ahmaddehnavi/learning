@@ -65,7 +65,7 @@
 						foreach ($messages->result() as $message) {
 
 							if($user_id==  $message->from_id){//sent
-								echo '<div class="right">';
+								echo '<div style="background-color: yellowgreen;">';
 								echo 'id : ' . $message->message_id . '<br/>';
 
 								echo 'from : ' . $user_full_name. '<br/>';
@@ -78,7 +78,7 @@
 								echo '' . date('y/m/d h:m', $message->time) . '<hr/>';
 								echo '</div><div class="badboy"></div>';
 							}else{//received
-								echo '<div class="left">';
+								echo '<div style="background-color: greenyellow;">';
 								echo 'id : ' . $message->message_id . '<br/>';
 
 								echo 'from : ' . $other_full_name. '<br/>';

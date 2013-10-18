@@ -118,17 +118,14 @@
 
 							<div class="row left">
 								<?=$form_1_msg?>
-<!--								<label for="current_password"> </label>-->
 								<input type="password" name="current_password"
 									   placeholder="current password" title="Enter current password."/>
 								<?=form_error('current_password', '<div class="form_err">', '</div>')?>
 
-<!--								<label for="new_password">new password :</label>-->
 								<input type="password" name="new_password" value="<?= set_value('new_password') ?>"
 									   placeholder="new password" title="Enter new password."/>
 								<?=form_error('new_password', '<div class="form_err">', '</div>')?>
 
-<!--								<label for="conf_new_password"> confirm new password :</label>-->
 								<input type="password" name="conf_new_password"
 									   value="<?= set_value('conf_new_password') ?>"
 									   placeholder="new password confirm" title="Enter new password again."/>
@@ -178,6 +175,5 @@
 			</main>
 		</div>
 		<div class="badboy"></div>
-		<!--    <footer id="footer">footer</footer>-->
 	</div>
 <?php $this->load->view('base/footer'); ?>

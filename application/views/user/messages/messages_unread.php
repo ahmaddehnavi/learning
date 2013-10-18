@@ -71,7 +71,7 @@
 						foreach ($messages_unread->result() as $message) {
 							echo
 								'<tr>' .
-								'<td>' . anchor('user/view/id/' . $message->from_id, $message->full_name, 'target="_blank"') . '</td>' .
+								'<td>' . anchor('user/messages/conversation/' . $message->from_id, $message->full_name, 'target="_blank"') . '</td>' .
 								'<td>' . substr($message->message, 0, 50) . '</td>' .
 								'<td>' . date('y/m/d h:m', $message->time) . '</td>' .
 								'</tr>';
