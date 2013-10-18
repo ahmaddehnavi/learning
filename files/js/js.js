@@ -1,29 +1,92 @@
-//(function ($) {
-//
-//    $.fn.responsive = function (options) {
-//
-//        // Establish our default settings
-//        var settings = $.extend({
-//            onMobile: function(){},
-//            onDesktop: function(){}
-//        }, options);
-//
-//        return this.each(function () {
-//
-//            $(this).text(settings.text);
-//
-//            if (settings.color) {
-//                $(this).css('color', settings.color);
-//            }
-//
-//            if (settings.fontStyle) {
-//                $(this).css('font-style', settings.fontStyle);
-//            }
-//        });
-//
-//    }
-//
-//}(jQuery));
+/**
+ * jquery.confirm
+ *
+ * @version 1.2
+ *
+ * @author My C-Labs
+ * @author Matthieu Napoli <matthieu@mnapoli.fr>
+ *
+ * @url https://github.com/myclabs/jquery.confirm
+ */
+(function ($) {
+
+    /**
+     * Confirm a link or a button
+     * @param options {text, confirm, cancel, confirmButton, cancelButton, post}
+     */
+    $.fn.confirm = function (options) {
+        if (typeof options === 'undefined') {
+            options = {};
+        }
+
+        options.button = $(this);
+
+        this.click(function (e) {
+            e.preventDefault();
+
+            $.confirm(options, e);
+        });
+
+        return this;
+    };
+
+    /**
+     * Show a confirmation dialog
+     * @param options {text, confirm, cancel, confirmButton, cancelButton, post}
+     */
+    $.confirm = function (options, e) {
+        // Default options
+        var settings = $.extend({
+            text: "Are you sure?",
+            confirmButton: "Yes",
+            cancelButton: "Cancel",
+            post: false,
+            confirm: function (o) {
+                var url = e.currentTarget.attributes['href'].value;
+                if (options.post) {
+                    var form = $('<form method="post" class="hide" action="' + url + '"></form>');
+                    $("body").append(form);
+                    form.submit();
+                } else {
+                    window.location = url;
+                }
+            },
+            cancel: function (o) {
+            },
+            button: null
+        }, options);
+
+        // Modal
+        var buttons = '<button class="confirm btn btn-primary" type="button" data-dismiss="modal">'
+            + settings.confirmButton + '</button>'
+            + '<button class="cancel btn" type="button" data-dismiss="modal">'
+            + settings.cancelButton + '</button>';
+        var modalHTML = '<div class="confirmation-modal modal hide fade" tabindex="-1" role="dialog">'
+            + '<div class="modal-body">' + settings.text + '</div>'
+            + '<div class="modal-footer">' + buttons + '</div>'
+            + '</div>';
+
+        var modal = $(modalHTML);
+
+        modal.on('shown', function () {
+            modal.find(".btn-primary:first").focus();
+        });
+        modal.on('hidden', function () {
+            modal.remove();
+        });
+        modal.find(".confirm").click(function (e) {
+            settings.confirm(settings.button);
+        });
+        modal.find(".cancel").click(function (e) {
+            settings.cancel(settings.button);
+        });
+
+        // Show the modal
+        $("body").append(modal);
+        modal.modal();
+    }
+
+})(jQuery);
 
 (function ($) {
 
@@ -54,8 +117,7 @@
         }, options);
 
         var $window = jQuery(window);
-        var preClass = "";
-//        return this.each(function () {
+//        var preClass = "";
 
         var $tag = $(this);
         $window.load(function () {
@@ -66,8 +128,6 @@
             checkWidth($tag);
         });
         return $(this);
-//        });
-
 
         function checkWidth($tag) {
             if ($window.width() > 1200) {
@@ -114,98 +174,6 @@
     }
 
 }(jQuery));
-
-
-(function ($) {
-
-    $.fn.responsive = function (options) {
-
-        // Establish our default settings
-        var settings = $.extend({
-            onLargeDesktop: function () {
-            },
-            onDesktop: function () {
-            },
-            onTablet: function () {
-            },
-            onPhone: function () {
-            },
-            onMiniPhone: function () {
-            },
-            onNoLargeDesktop: function () {
-            },
-            onNoDesktop: function () {
-            },
-            onNoTablet: function () {
-            },
-            onNoPhone: function () {
-            },
-            onNoMiniPhone: function () {
-            }
-        }, options);
-
-        var $window = jQuery(window);
-        var preClass = "";
-//        return this.each(function () {
-
-        var $tag = $(this);
-        $window.load(function () {
-            checkWidth($tag);
-        });
-
-        $window.resize(function () {
-            checkWidth($tag);
-        });
-        return $(this);
-//        });
-
-
-        function checkWidth($tag) {
-            if ($window.width() > 1200) {
-                $tag.removeClass('no-large-desktop desktop tablet phone mini-phone').addClass('large-desktop no-desktop no-tablet no-phone no-mini-phone');
-                settings.onLargeDesktop();
-                settings.onNoDesktop();
-                settings.onNoTablet();
-                settings.onNoPhone();
-                settings.onNoMiniPhone();
-            }
-            else if ($window.width() > 979) {
-                $tag.removeClass('large-desktop no-desktop tablet phone mini-phone').addClass('no-large-desktop desktop no-tablet no-phone no-mini-phone');
-                settings.onNoLargeDesktop();
-                settings.onDesktop();
-                settings.onNoTablet();
-                settings.onNoPhone();
-                settings.onNoMiniPhone();
-            }
-            else if ($window.width() > 767) {
-                $tag.removeClass('large-desktop desktop no-tablet phone mini-phone').addClass('no-large-desktop no-desktop tablet no-phone no-mini-phone');
-                settings.onNoLargeDesktop();
-                settings.onNoDesktop();
-                settings.onTablet();
-                settings.onNoPhone();
-                settings.onNoMiniPhone();
-            }
-            else if ($window.width() > 480) {
-                $tag.removeClass('large-desktop desktop tablet no-phone mini-phone').addClass('no-large-desktop no-desktop no-tablet phone no-mini-phone');
-                settings.onNoLargeDesktop();
-                settings.onNoDesktop();
-                settings.onNoTablet();
-                settings.onPhone();
-                settings.onNoMiniPhone();
-            } else {
-                $tag.removeClass('large-desktop desktop tablet phone no-mini-phone').addClass('no-large-desktop no-desktop no-tablet no-phone mini-phone');
-                settings.onNoLargeDesktop();
-                settings.onNoDesktop();
-                settings.onNoTablet();
-                settings.onNoPhone();
-                settings.onMiniPhone();
-            }
-        }
-
-    }
-
-}(jQuery));
-
 
 (function ($) {
 
@@ -240,49 +208,6 @@
     }
 
 }(jQuery));
-
-/*(function ($) {
-
- $.fn.placeholder = function (options) {
-
- var settings = $.extend({
- placeholderClass: 'placeholder'
- }, options);
-
- //        $('form').submit(removePlaceholder());
- //        function removePlaceholder(){
- //            this.each(function () {
- //                var $this = $(this);
- //                var $placeholder = $this.attr('placeholder');
- //                if ($this.val() == $placeholder) {
- //                        $this.val('');
- //                }
- //             });
- //        }
-
- return this.each(function () {
- var $this = $(this);
- var $placeholder = $this.attr('placeholder');
- if ($this.val() == '') {
- $this.val($placeholder).addClass(settings.placeholderClass);
- }
-
- $this.focus(function () {
- if ($this.val() == $placeholder) {
- $this.val('').removeClass(settings.placeholderClass);
- }
- });
- $this.blur(function () {
- if ($this.val() == '') {
- $this.val($placeholder).addClass(settings.placeholderClass);
- }
- });
- })
- }
-
- }(jQuery));
- */
-
 (function (window, document, $) {
 
     var isInputSupported = 'placeholder' in document.createElement('input');
@@ -457,99 +382,6 @@
     }
 
 }(this, document, jQuery));
-
-
-///**
-// * jquery.confirm
-// *
-// * @version 1.2
-// *
-// * @author My C-Labs
-// * @author Matthieu Napoli <matthieu@mnapoli.fr>
-// *
-// * @url https://github.com/myclabs/jquery.confirm
-// */
-//(function ($) {
-//
-//    /**
-//     * Confirm a link or a button
-//     * @param options {text, confirm, cancel, confirmButton, cancelButton, post}
-//     */
-//    $.fn.confirm = function (options) {
-//        if (typeof options === 'undefined') {
-//            options = {};
-//        }
-//
-//        options.button = $(this);
-//
-//        this.click(function (e) {
-//            e.preventDefault();
-//
-//            $.confirm(options, e);
-//        });
-//
-//        return this;
-//    };
-//
-//    /**
-//     * Show a confirmation dialog
-//     * @param options {text, confirm, cancel, confirmButton, cancelButton, post}
-//     */
-//    $.confirm = function (options, e) {
-//        // Default options
-//        var settings = $.extend({
-//            text: "Are you sure?",
-//            confirmButton: "Yes",
-//            cancelButton: "Cancel",
-//            post: false,
-//            confirm: function (o) {
-//                var url = e.currentTarget.attributes['href'].value;
-//                if (options.post) {
-//                    var form = $('<form method="post" class="hide" action="' + url + '"></form>');
-//                    $("body").append(form);
-//                    form.submit();
-//                } else {
-//                    window.location = url;
-//                }
-//            },
-//            cancel: function (o) {
-//            },
-//            button: null
-//        }, options);
-//
-//        // Modal
-//        var buttons = '<button class="confirm btn btn-primary" type="button" data-dismiss="modal">'
-//            + settings.confirmButton + '</button>'
-//            + '<button class="cancel btn" type="button" data-dismiss="modal">'
-//            + settings.cancelButton + '</button>';
-//        var modalHTML = '<div class="modal hide fade" tabindex="-1" role="dialog">'
-//            + '<div class="modal-body">' + settings.text + '</div>'
-//            + '<div class="modal-footer">' + buttons + '</div>'
-//            + '</div>';
-//
-//        var modal = $(modalHTML);
-//
-//        modal.on('shown', function () {
-//            modal.find(".btn-primary:first").focus();
-//        });
-//        modal.on('hidden', function () {
-//            modal.remove();
-//        });
-//        modal.find(".confirm").click(function (e) {
-//            settings.confirm(settings.button);
-//        });
-//        modal.find(".cancel").click(function (e) {
-//            settings.cancel(settings.button);
-//        });
-//
-//        // Show the modal
-//        $("body").append(modal);
-//        modal.modal();
-//    }
-//
-//})(jQuery);
-
-
 $(document).ready(function () {
     var opt3;
     var opt1 = {
@@ -592,8 +424,8 @@ $(document).ready(function () {
     $main = $('main');
 
     var fixSize = function () {
-        if ($window.height() - 114 > $main.height()) {
-            $main.height($window.height() - 114);
+        if ($window.height() - 100 > $main.height()) {
+            $main.height($window.height() - 100);
         }
     }
     $(window).resize(fixSize);

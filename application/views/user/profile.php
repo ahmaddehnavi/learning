@@ -6,21 +6,20 @@
 			float       : left;
 		}
 
-
-		#about{
+		#about {
 			/*width:100%;*/
-			display:block;
-			max-width:100%;
+			display   : block;
+			max-width : 100%;
 		}
 	</style>
 	<div id="container" class="p-profile">
 
 		<nav>
 			<menu>
-				<li><?= anchor('/','home')?></li>
-				<li><?=anchor('/academy','academy')?></li>
-				<li class="active"><?=anchor('/user','user')?></li>
-				<li><a href="<?=FILE_MANAGE_PATH?>">file management</a></li>
+				<li><?= anchor('/', 'home')?></li>
+				<li><?=anchor('/academy', 'academy')?></li>
+				<li class="active"><?=anchor('/user', 'user')?></li>
+				<li><a href="<?= FILE_MANAGE_PATH ?>">file management</a></li>
 				<div class="badboy"></div>
 			</menu>
 			<ul class="collapse-btn btn-top toggle-off" collapse-target="nav">
@@ -89,11 +88,13 @@
 							</section>
 
 							<section class="left row">
-								<section >
+								<section>
 									<label for="userfile"> image :</label>
-									<img src="<?php echo FILES_USERS_PATH.'/'.$this->auth->get_user_id().'/image/profile_100.jpg' ?>" alt="<?= $full_name ?>" width="100px" height="100px"/>
+									<img
+										src="<?php echo FILES_USERS_PATH . '/' . $this->auth->get_user_id() . '/image/profile_100.jpg' ?>"
+										alt="<?= $full_name ?>" width="100px" height="100px"/>
 								</section>
-								<section >
+								<section>
 									<input type="file" class="file_input" name="userfile"/>
 									<?=form_error('userfile', '<div class="form_err">', '</div>')?>
 								</section>
@@ -148,16 +149,29 @@
 							<?php echo form_open('user/profile/');?>
 							<input type="hidden" name="form_num" value="3"/>
 
-							<div class="left">
+							<div>
 								<div class="row">
 									<label for="academy"> academy :</label>
-									<input type="text" name="academy" value="<?= $academy ?>"/>
+									<select name="academy" id="academy">
+										<?php
+										foreach ($academy_list->result() as $academy) {
+											echo '<option value="'.$academy->name.'">'.$academy->name.'</option>';
+										}?>
+									</select>
+									<!--<input type="text" name="academy" value="-->
+									<?//= $academy ?><!--"/>-->
 									<?=form_error('academy', '<div class="form_err">', '</div>')?>
 								</div>
 
 								<div class="row">
 									<label for="field"> field :</label>
-									<input type="text" name="field" value="<?= $field ?>"/>
+									<select name="field" id="academy">
+										<?php
+										foreach ($field_list->result() as $field) {
+											echo '<option value="'.$field->name.'">'.$field->name.'</option>';
+										}?>
+									</select>
+<!--									<input type="text" name="field" value="--><?//= $field ?><!--"/>-->
 									<?=form_error('field_table', '<div class="form_err">', '</div>')?>
 								</div>
 							</div>
@@ -176,4 +190,5 @@
 		</div>
 		<div class="badboy"></div>
 	</div>
+
 <?php $this->load->view('base/footer'); ?>

@@ -22,6 +22,10 @@ class Academy_Model extends CI_Model
         return FALSE;
     }
 
+	public function get_list()
+	{
+		return $this->db->select('name')->get('academy');
+	}
 
 }
 /* End of file academy_model.php */

@@ -6,7 +6,7 @@ class Profile extends Auth_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->model('profile_model');
+		$this->load->model(array('profile_model', 'field_model', 'academy_model'));
 	}
 
 	function index()
@@ -60,11 +60,13 @@ class Profile extends Auth_Controller
 			}
 		}
 
-		$data['full_name'] = $this->profile_model->get_full_name();
-		$data['about']     = $this->profile_model->get_about();
-		$data['academy']   = $this->profile_model->get_academy_name();
-		$data['field']     = $this->profile_model->get_field_name();
-//		$data['image']     = $this->profile_model->get_image();
+		$data['full_name']    = $this->profile_model->get_full_name();
+		$data['about']        = $this->profile_model->get_about();
+		$data['academy']      = $this->profile_model->get_academy_name();
+		$data['field']        = $this->profile_model->get_field_name();
+		$data['academy_list'] = $this->academy_model->get_list();
+		$data['field_list']   = $this->field_model->get_list();
+//		var_dump($data['field_list'] );
 		$this->load->view('user/profile', $data);
 	}
 
@@ -87,13 +89,13 @@ class Profile extends Auth_Controller
 				->load('files/uploads/' . $this->auth->get_user_id() . '/image/profile.jpg')
 
 				->resize(24, 24)
-				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_24.jpg',true)
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_24.jpg', TRUE)
 
 				->resize(80, 80)
-				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_80.jpg',true)
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_80.jpg', TRUE)
 
 				->resize(100, 100)
-				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_100.jpg',true);
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_100.jpg', TRUE);
 
 //			echo $this->image_moo->display_errors();
 			return TRUE;

@@ -14,7 +14,9 @@ class Auth_Controller extends CI_Controller
 		}
 
 		$this->load->model('message_model');
+
 		$this->unread_message = $this->message_model->get_unread_number();
+		if($this->unread_message ==0)$this->unread_message ='';
 	}
 }
 

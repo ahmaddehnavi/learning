@@ -109,6 +109,12 @@ class Auth
 		@mkdir('files/uploads/' . $user_id . '/files/private/exercise', 666, TRUE);
 		@mkdir('files/uploads/' . $user_id . '/files/public/image', 666, TRUE);
 
+		$htaccess = '
+		deny from all
+        ErrorDocument 403 /404.html
+        ';
+		@file_put_contents('files/uploads/' . $user_id . '/files/private/.htaccess', $htaccess);
+		chmod('files/uploads/' . $user_id . '/files/private/.htaccess',666);
 	}
 
 	// --------------------------------------------------------------------------
@@ -388,6 +394,7 @@ class Auth
 				your new password is : ' . $new_password
 				)
 				->send();
+
 //			echo $this->CI->email->print_debugger();
 
 			return TRUE;

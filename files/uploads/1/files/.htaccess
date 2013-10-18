@@ -1,8 +1,0 @@
-#deny from all
-ErrorDocument 403 /codeigniter/404.html
-<IfModule mod_php4.c>
-  php_value engine off
-</IfModule>
-<IfModule mod_php5.c>
-  php_value engine off
-</IfModule>
