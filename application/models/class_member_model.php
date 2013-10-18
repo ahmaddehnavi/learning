@@ -56,11 +56,11 @@ class Class_Member_Model extends CI_Model
 		return $this->db->query($sql, array($class_id));
 	}
 
-	public function is_validate_member($class_id)
+	public function is_student_of_class($class_id)
 	{
-		$sql = 'SELECT student_id FROM class_member WHERE class_id=?  ';
+		$sql = 'SELECT * FROM class_member WHERE class_id=? AND student_id=?';
 
-		return $this->db->query($sql, array($class_id))->row('prof_id') === $this->auth->get_user_id();
+		return $this->db->query($sql, array($class_id,$this->auth->get_user_id()))->num_rows()===1;
 	}
 }
 /* End of file academy_model.php */

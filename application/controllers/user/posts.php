@@ -65,7 +65,7 @@ class Posts extends Auth_Controller
 			$classes = $this->input->post('classes');
 			if (is_array($classes)) {
 				foreach ($classes AS $class) {
-					if ($this->class_model->is_validate_class($class) == FALSE)
+					if ($this->class_model->is_prof_of_class($class) == FALSE)
 						exit('your request has been blocked.');
 				}
 			}

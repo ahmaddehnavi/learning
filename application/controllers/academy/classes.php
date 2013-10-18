@@ -23,12 +23,16 @@ class Classes extends Auth_Controller
 		if (!is_numeric($id)) {
 			show_404();
 		}
-		if($this->class_member_model->is_validate_member($id)) {
+		$is_prof=false;
+		if ($this->class_member_model->is_student_of_class($id) === true) {
+			$is_prof=false;
+		}elseif ($this->class_model->is_prof_of_class($id) === true) {
+			$is_prof=true;
+		}else{
 			show_404();
 		}
 
 		$info = $this->class_model->get_info($id);
-
 
 		$data            = $this->post_model->get_class_posts($id, $page * 10);
 		$data['members'] = $this->class_member_model->get_members($id);
@@ -39,14 +43,38 @@ class Classes extends Auth_Controller
 		$config['use_page_numbers'] = TRUE;
 		$config['uri_segment']      = 5;
 		$this->pagination->initialize($config);
-
+		$data['pagination']     = $this->pagination->create_links();
 
 		$data['lesson_name']    = $info['lesson_name'];
 		$data['prof_name']      = $info['prof_name'];
 		$data['new_change']     = $info['new_change'];
-		$data['is_prof']        = ($info['prof_id'] === $this->auth->get_user_id());
-		$data['next_exam_time'] = '2 day and 3 hour and 25 min';
-		$data['pagination']     = $this->pagination->create_links();
+		$data['is_prof']        = $is_prof;
+
+		if($is_prof){
+			$this->load->view('academy/classes/prof_view', $data);
+		}else{
+			$this->load->view('academy/classes/view', $data);
+		}
+	}
+
+	function setting($id, $page = 0)
+	{
+		if (!is_numeric($id)) {
+			show_404();
+		}
+		if ($this->class_member_model->is_validate_member($id)) {
+			show_404();
+		}
+
+		$info = $this->class_model->get_info($id);
+
+		$data            = $this->post_model->get_class_posts($id, $page * 10);
+		$data['members'] = $this->class_member_model->get_members($id);
+
+		$data['lesson_name'] = $info['lesson_name'];
+		$data['prof_name']   = $info['prof_name'];
+		$data['new_change']  = $info['new_change'];
+		$data['is_prof']     = ($info['prof_id'] === $this->auth->get_user_id());
 
 		$this->load->view('academy/classes/view', $data);
 

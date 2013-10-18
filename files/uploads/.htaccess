@@ -4,3 +4,5 @@
 <IfModule mod_php5.c>
   php_value engine off
 </IfModule>
+
+deny from all
