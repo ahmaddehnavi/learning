@@ -21,9 +21,9 @@ $_CONFIG = array(
 	'disabled' => TRUE,
 	'denyZipDownload' => FALSE,
 	'denyUpdateCheck' => TRUE,
-	'denyExtensionRename' => FALSE,
+	'denyExtensionRename' => TRUE,
 
-	'theme' => "oxygen",
+	'theme' => "panda",
 
 	'uploadURL' => "../files/uploads/public",
 	'uploadDir' => "",

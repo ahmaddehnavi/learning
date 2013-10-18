@@ -104,8 +104,9 @@ class Auth
 		);
 		$this->CI->db->insert('profile', $data);
 
-		@mkdir('files/uploads/' . $user_id . '/image', 666);
-		@mkdir('files/uploads/' . $user_id . '/files', 666);
+		@mkdir('files/uploads/' . $user_id . '/image', 666, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files', 666, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files/private/', 666, TRUE);
 		@mkdir('files/uploads/' . $user_id . '/files/private/exercise', 666, TRUE);
 		@mkdir('files/uploads/' . $user_id . '/files/public/image', 666, TRUE);
 
@@ -114,7 +115,7 @@ class Auth
         ErrorDocument 403 /404.html
         ';
 		@file_put_contents('files/uploads/' . $user_id . '/files/private/.htaccess', $htaccess);
-		chmod('files/uploads/' . $user_id . '/files/private/.htaccess',666);
+		chmod('files/uploads/' . $user_id . '/files/private/.htaccess', 666);
 	}
 
 	// --------------------------------------------------------------------------

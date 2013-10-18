@@ -9,6 +9,15 @@
 <script type="text/javascript">
 $('body').noContext();
 </script>
+<div id="nav">
+	<ul>
+		<li><a href="../">home</a></li>
+		<li><a href="../index.php/academy">academy</a></li>
+		<li><a href="../index.php/user">user</a></li>
+		<li class="active"><a href="/">file management</a></li>
+		<div class="badboy"></div>
+	</ul>
+</div>
 <div id="resizer"></div>
 <div id="shadow"></div>
 <div id="dialog"></div>
@@ -21,7 +30,7 @@ $('body').noContext();
 <div id="right">
     <div id="toolbar">
         <div>
-        <a href="kcact:upload"><?php echo $this->label("Upload") ?></a>
+        <a id="upload_btn" href="kcact:upload"><?php echo $this->label("Upload") ?></a>
         <a href="kcact:refresh"><?php echo $this->label("Refresh") ?></a>
         <a href="kcact:settings"><?php echo $this->label("Settings") ?></a>
         <a href="kcact:maximize"><?php echo $this->label("Maximize") ?></a>
@@ -82,5 +91,6 @@ $('body').noContext();
 </div>
 <div id="status"><span id="fileinfo">&nbsp;</span></div>
 </div>
+
 </body>
 </html>
