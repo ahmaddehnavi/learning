@@ -92,6 +92,9 @@
 										src="<?php echo FILES_USERS_PATH . '/' . $post->author_id . '/image/profile.jpg' ?>"
 										alt="" width="50px" height="50px"/>
 								</figure>
+								<p class='name'>
+									<?=$post->author_name?>
+								</p>
 							</section>
 							<section class='total' style="padding-top: 1px;">
 								<header class='widget_head'>
@@ -114,11 +117,11 @@
 											</form>
 										</div>
 									</footer>
-								<?php } elseif ($post->post_type === 'exercise') {
+								<?php } if ($post->post_type === 'exercise') {
 									$upload_input='upload_input_'.$post->post_id;
 									echo form_open_multipart('academy/exercise/upload','target="_blank"');  ?>
 									<input type="hidden" name="post_id" value="<?=$post->post_id?>"/>
-
+<p>pdf , rar , zip , docx  allowed.</p>
 									<input type="file" class="upload_input" id="<?=$upload_input?>" name="userfile"/>
 									<input type="button" upload_input="<?=$upload_input?>" class="upload_btn" value="select file" />
 
