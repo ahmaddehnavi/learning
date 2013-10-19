@@ -173,9 +173,17 @@
 
     }
 
-}(jQuery));
 
-(function ($) {
+    $.fn.upload_btn = function () {
+        return this.each(function () {
+            var $this = $(this);
+            var $upload_input = $this.attr('upload_input')
+            $this.click(function () {
+                $('#' + $upload_input).click();
+            });
+        });
+
+    }
 
     $.fn.toggleButton = function (options) {
 
@@ -430,5 +438,9 @@ $(document).ready(function () {
     }
     $(window).resize(fixSize);
     fixSize();
+
+    if ('function' === typeof run) {
+        run();
+    }
 
 });

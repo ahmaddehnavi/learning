@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Exercise extends  Auth_Controller
+class Exercise extends Auth_Controller
 {
 	/**
 	 * todo
@@ -11,20 +11,9 @@ class Exercise extends  Auth_Controller
 
 	}
 
-	function index()
-	{
-		$this->load->view('academy/exercises');
-	}
-
 	function upload()
 	{
-		echo form_open_multipart('academy/exercise/upload') .
 
-			form_hidden('post_id', '74') .
-			'<input type="file" name="userfile" />' .
-			form_submit() .
-			form_close();
-		echo validation_errors();
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('post_id', 'post id', 'trim|required|is_natural');
@@ -40,7 +29,9 @@ class Exercise extends  Auth_Controller
 
 		$this->load->model(array('post_model'));
 
-		if ($this->post_model->is_can_upload_exercise($post_id) === FALSE) return FALSE;
+		if ($this->post_model->is_can_upload_exercise($post_id) === FALSE) {
+			return "don't allow to upload exercise .";
+		}
 
 		$author_id = $this->post_model->get_author_id($post_id);
 

@@ -98,7 +98,7 @@ class Post_Model extends CI_Model
 
 	public function is_can_upload_exercise($post_id)
 	{
-		$sql = "SELECT author_id FROM post WHERE post_id=? AND post_type='exercise' LIMIT 1";
+		$sql = "SELECT * FROM post WHERE post_id=? AND post_type='exercise' LIMIT 1";
 		$row = $this->db->query($sql, array($post_id));
 		if ($row->num_rows() !== 1) {
 			return FALSE;
@@ -109,7 +109,7 @@ class Post_Model extends CI_Model
 		JOIN class ON class.class_id=class_member.class_id AND class_member.student_id = ? AND class_member.status = 2
 		JOIN class_post ON class_post.post_id = ?';
 		$row = $this->db->query($sql, array($this->auth->get_user_id(), $post_id));
-		if ($row->num_rows() > 1) {
+		if ($row->num_rows() > 0) {
 			return TRUE;
 		}
 

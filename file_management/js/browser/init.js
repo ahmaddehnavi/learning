@@ -157,22 +157,22 @@ browser.initResizer = function() {
 };
 
 browser.resize = function() {
-    _('left').style.width = '25%';
-    _('right').style.width = '75%';
+//    _('left').style.width = '25%';
+//    _('right').style.width = '100%';
     _('toolbar').style.height = $('#toolbar a').outerHeight() + "px";
     _('shadow').style.width = $(window).width() + 'px';
     _('shadow').style.height = _('resizer').style.height = $(window).height() + 'px';
     _('left').style.height = _('right').style.height =
-        $(window).height() - $('#status').outerHeight() + 'px';
+        $(window).height() - $('#status').outerHeight()-30 + 'px';
     _('folders').style.height =
         $('#left').outerHeight() - _.outerVSpace('#folders') + 'px';
     browser.fixFilesHeight();
     var width = $('#left').outerWidth() + $('#right').outerWidth();
     _('status').style.width = width + 'px';
-    while ($('#status').outerWidth() > width)
-        _('status').style.width = _.nopx(_('status').style.width) - 1 + 'px';
-    while ($('#status').outerWidth() < width)
-        _('status').style.width = _.nopx(_('status').style.width) + 1 + 'px';
+//    while ($('#status').outerWidth() > width)
+//        _('status').style.width = _.nopx(_('status').style.width) - 1 + 'px';
+//    while ($('#status').outerWidth() < width)
+//        _('status').style.width = _.nopx(_('status').style.width) + 1 + 'px';
     if ($.browser.msie && ($.browser.version.substr(0, 1) < 8))
         _('right').style.width = $(window).width() - $('#left').outerWidth() + 'px';
     _('files').style.width = $('#right').innerWidth() - _.outerHSpace('#files') + 'px';

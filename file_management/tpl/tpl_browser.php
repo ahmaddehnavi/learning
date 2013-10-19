@@ -14,7 +14,7 @@ $('body').noContext();
 		<li><a href="../">home</a></li>
 		<li><a href="../index.php/academy">academy</a></li>
 		<li><a href="../index.php/user">user</a></li>
-		<li class="active"><a href="/">file management</a></li>
+		<li class="active"><a href="../file_management">file management</a></li>
 		<div class="badboy"></div>
 	</ul>
 </div>

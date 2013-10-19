@@ -93,9 +93,9 @@ imgLoading.src = 'themes/oxygen/img/loading.gif';
 
 $(document).ready(function () {
     $('html').responsive();
-    $('#upload_btn').click(function(){
+    $('#upload_btn').click(function () {
 //     document.getElementsByName()
-    $('#upload input[type=file]').click();
+        $('#upload input[type=file]').click();
 //        alert("sd");
     });
 });
