@@ -79,6 +79,7 @@ class Post_Model extends CI_Model
 			->join('profile', 'profile.user_id=post.author_id')
 			->offset($offset)
 			->limit($limit)
+			->order_by('post_id', 'desc')
 			->get();
 
 		return $data;
