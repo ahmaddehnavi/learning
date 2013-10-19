@@ -8,9 +8,9 @@
  */
 
 class Code_Class extends CI_Controller{
-	function generate(){
+	function generate($a=1,$f=2){
 		$this->load->model('class_code_model');
-		$c=$this->class_code_model->generate_code(1,2);
+		$c=$this->class_code_model->generate_code($a,$f);
 		echo
 		'<pre>'.
 		print_r($c).
