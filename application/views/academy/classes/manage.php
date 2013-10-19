@@ -3,9 +3,9 @@
 
 	<nav>
 		<menu>
-			<li><?= anchor('/','home')?></li>
-			<li><?=anchor('/academy','academy','class="active"')?></li>
-			<li><a href="<?=FILE_MANAGE_PATH?>">file management</a></li>
+			<li><?= anchor('/', 'home')?></li>
+			<li><?=anchor('/academy', 'academy', 'class="active"')?></li>
+			<li><a href="<?= FILE_MANAGE_PATH ?>">file management</a></li>
 			<div class="badboy"></div>
 		</menu>
 		<ul class="collapse-btn btn-top toggle-off" collapse-target="nav">
@@ -69,17 +69,26 @@
 						<thead>
 						<tr>
 							<?=form_open('/academy/classes/create/', 'class=widget-body')?>
-							<th><input type="text" name="academy" class="suggest" placeholder="academy"/></th>
-							<th><input type="text" name="field" placeholder="field"/></th>
-							<th><input type="text" name="lesson" placeholder="lesson"/></th>
+							<th>
+								<select name="lesson_id">
+									<option value="">select lesson ...</option>
+									<?php
+									foreach ($lesson_list->result() as $lesson) {
+										echo '<option value="' . $lesson->lesson_id . '">' . $lesson->name . '</option>';
+									}?>
+								</select>
+							</th>
+							<th><input type="text" name="code1" placeholder="activation code 1"/></th>
+							<th><input type="text" name="code2" placeholder="activation code 2"/></th>
 							<th><input type="submit" value="create class" class="btn"/></th>
 							<div class="badboy"></div>
 							</form>
 						</tr>
-						<tr class="form_err">
-							<?=form_error('academy', '<td>', '</td>')?>
-							<?=form_error('field', '<td>', '</td>')?>
-							<?=form_error('lesson', '<td>', '</td>')?>
+						<tr>
+							<th class="form_err"><?=$error?></th>
+							<?=form_error('lesson_id', '<td class="form_err">', '</td>')?>
+							<?=form_error('code1', '<td class="form_err">', '</td>')?>
+							<?=form_error('code2', '<td class="form_err">', '</td>')?>
 						</tr>
 						<tr class="table-head">
 							<th>id</th>
@@ -119,29 +128,7 @@
 					<header class="widget-head">join to class</header>
 					<table class="table-form">
 						<thead>
-						<tr>
-							<form action="" style="padding:0">
-								<th>
-									<input type="text" name="class_id" placeholder="class_id"/>
-								</th>
-								<!--								<th>-->
-								<!--									<input type="text" name="academy" placeholder="academy" title="academy"/>-->
-								<!--								</th>-->
-								<!--								<th>-->
-								<!--									<input type="text" name="field" placeholder="field"/>-->
-								<!--								</th>-->
-								<!--								<th>-->
-								<!--									<input type="text" name="lesson" placeholder="lesson"/>-->
-								<!--								</th>-->
-								<!--								<th>-->
-								<!--									<input type="text" name="prof" placeholder="prof"/>-->
-								<!--								</th>-->
-								<th>
-									<input type="submit" value="join" class="btn"/>
-								</th>
-								<div class="badboy"></div>
-							</form>
-						</tr>
+
 						<tr class="table-head">
 							<th>id</th>
 							<th>academy</th>
@@ -228,6 +215,5 @@
 		</main>
 	</div>
 	<div class="badboy"></div>
-	<!--    <footer id="footer">footer</footer>-->
 	</div>
 <?php $this->load->view('base/footer'); ?>

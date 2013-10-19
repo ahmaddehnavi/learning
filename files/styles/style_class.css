@@ -98,12 +98,11 @@ header.widget-head {
     width:100%;
 }
 
-a.btn-fix{
+.one a.btn-fix{
     display: block;
     padding: 5px 8px;
     text-decoration: none;
     color : #fff;
-    background: #06a8f0;
     margin: 22px 78px 0;
     text-align: center;
 }

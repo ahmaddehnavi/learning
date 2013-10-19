@@ -24,7 +24,7 @@ class Academy_Model extends CI_Model
 
 	public function get_list()
 	{
-		return $this->db->select('name')->get('academy');
+		return $this->db->select('academy_id,name')->get('academy');
 	}
 
 }

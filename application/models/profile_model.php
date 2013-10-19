@@ -96,12 +96,12 @@ class Profile_Model extends CI_Model
 	 * @param $field
 	 * @return bool
 	 */
-	public function update_academy($academy, $field)
+	public function update_academy($academy_id, $field_id)
 	{
-		$this->load->model(array('academy_model', 'field_model'));
+//		$this->load->model(array('academy_model', 'field_model'));
 		$data = array(
-			'academy_id' => $this->academy_model->get_id_by_name($academy),
-			'field_id' => $this->field_model->get_id_by_name($field)
+			'academy_id' => $academy_id,
+			'field_id' => $field_id
 		);
 		$this->db
 			->where('user_id', $this->auth->get_user_id())

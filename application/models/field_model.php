@@ -20,7 +20,7 @@ class field_Model extends CI_Model
 
 	public function get_list()
 	{
-		return $row = $this->db->select('name')->get('field_table');
+		return $row = $this->db->select('field_id,name')->get('field_table');
 	}
 
 

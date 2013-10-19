@@ -10,7 +10,8 @@ class Home extends  Auth_Controller
 
 	function index()
 	{
-		$this->load->view('academy/home');
+//		$this->load->view('academy/home');
+		redirect('academy/classes/');
 	}
 
 

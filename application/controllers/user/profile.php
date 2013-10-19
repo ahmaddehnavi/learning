@@ -49,21 +49,21 @@ class Profile extends Auth_Controller
 			}
 		} else if ($this->input->post('form_num') == 3) {
 			$this->form_validation
-				->set_rules('academy', 'academy', 'trim|xss_clean|is_exist[academy.name]')
-				->set_rules('field', 'field', 'trim|xss_clean|is_exist[field_table.name]');
+				->set_rules('academy_id', 'academy', 'trim|is_natural|is_exist[academy.academy_id]')
+				->set_rules('field_id', 'field', 'trim|is_natural|is_exist[field_table.field_id]');
 
 			if ($this->form_validation->run()) {
 				$this->profile_model->update_academy(
-					$this->form_validation->set_value('academy'),
-					$this->form_validation->set_value('field')
+					$this->form_validation->set_value('academy_id'),
+					$this->form_validation->set_value('field_id')
 				);
 			}
 		}
 
 		$data['full_name']    = $this->profile_model->get_full_name();
 		$data['about']        = $this->profile_model->get_about();
-		$data['academy']      = $this->profile_model->get_academy_name();
-		$data['field']        = $this->profile_model->get_field_name();
+		$data['academy_id']      = $this->profile_model->get_academy_id();
+		$data['field_id']        = $this->profile_model->get_field_id();
 		$data['academy_list'] = $this->academy_model->get_list();
 		$data['field_list']   = $this->field_model->get_list();
 //		var_dump($data['field_list'] );

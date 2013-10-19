@@ -151,28 +151,34 @@
 
 							<div>
 								<div class="row">
-									<label for="academy"> academy :</label>
-									<select name="academy" id="academy">
+									<select name="academy_id">
+										<option value="">select your academy ...</option>
 										<?php
 										foreach ($academy_list->result() as $academy) {
-											echo '<option value="'.$academy->name.'">'.$academy->name.'</option>';
+											if ($academy->academy_id == $academy_id) {
+												echo '<option selected value="' .  $academy->academy_id . '">' . $academy->name . '</option>';
+											} else {
+												echo '<option value="' .  $academy->academy_id . '">' . $academy->name . '</option>';
+											}
 										}?>
 									</select>
-									<!--<input type="text" name="academy" value="-->
-									<?//= $academy ?><!--"/>-->
-									<?=form_error('academy', '<div class="form_err">', '</div>')?>
+									<?=form_error('academy_id', '<div class="form_err">', '</div>')?>
 								</div>
 
 								<div class="row">
-									<label for="field"> field :</label>
-									<select name="field" id="academy">
+<!--									<label for="field_id"> field :</label>-->
+									<select name="field_id">
+										<option value="">select your field ...</option>
 										<?php
 										foreach ($field_list->result() as $field) {
-											echo '<option value="'.$field->name.'">'.$field->name.'</option>';
+											if ($field->field_id == $field_id) {
+												echo '<option selected value="' .  $field->field_id . '">' . $field->name . '</option>';
+											} else {
+												echo '<option value="' . $field->field_id . '">' . $field->name . '</option>';
+											}
 										}?>
 									</select>
-<!--									<input type="text" name="field" value="--><?//= $field ?><!--"/>-->
-									<?=form_error('field_table', '<div class="form_err">', '</div>')?>
+									<?=form_error('field_id', '<div class="form_err">', '</div>')?>
 								</div>
 							</div>
 

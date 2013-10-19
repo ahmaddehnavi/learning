@@ -28,6 +28,10 @@ class Lesson_Model extends CI_Model
 		return '';
 	}
 
+	public function get_list()
+	{
+		return $row = $this->db->select('lesson_id,name')->get('lesson');
+	}
 
 }
 /* End of file academy_model.php */
