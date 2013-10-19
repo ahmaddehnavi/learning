@@ -56,6 +56,16 @@ class Class_Member_Model extends CI_Model
 		return $this->db->query($sql, array($class_id));
 	}
 
+	public function get_member_mails($class_id)
+	{
+		$sql = 'SELECT user.email
+		FROM class_member
+		JOIN user ON user.user_id=class_member.student_id
+		WHERE class_id=?';
+
+		return $this->db->query($sql, array($class_id));
+	}
+
 	public function is_student_of_class($class_id)
 	{
 		$sql = 'SELECT * FROM class_member WHERE class_id=? AND student_id=?';

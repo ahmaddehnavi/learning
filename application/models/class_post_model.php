@@ -12,7 +12,7 @@ class Class_Post_Model extends CI_Model
 	{
 		$sql = '';
 		foreach ($classes as $class) {
-			$sql .= 'INSERT INTO class_post VALUES(' . $post_id . ',' . intval($class) . ');';
+			$sql .= 'INSERT INTO class_post(post_id , class_id) VALUES(' . $post_id . ',' . intval($class) . ');';
 		}
 		$this->db->query($sql);
 		$this->db->affected_rows() == count($classes);
