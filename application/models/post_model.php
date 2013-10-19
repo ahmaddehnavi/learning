@@ -8,10 +8,10 @@ class Post_Model extends CI_Model
 		parent::__construct();
 	}
 
-	public function create($post_type,$is_public, $subject, $body)
+	public function create($post_type, $is_public, $subject, $body)
 	{
 		$sql = 'INSERT INTO post(author_id,post_type,is_public,subject,body) VALUES(?,?,?,?,?)';
-		if (FALSE !== $this->db->query($sql, array($this->auth->get_user_id(), $post_type,$is_public, $subject, $body))) {
+		if (FALSE !== $this->db->query($sql, array($this->auth->get_user_id(), $post_type, $is_public, $subject, $body))) {
 			return $this->db->insert_id();
 		}
 
@@ -46,16 +46,16 @@ class Post_Model extends CI_Model
 		return $data;
 	}
 
-	public function get_public_posts($author_id,$offset = 0, $limit = 10)
+	public function get_public_posts($author_id, $offset = 0, $limit = 10)
 	{
-		$author_id=intval($author_id);
+		$author_id     = intval($author_id);
 		$data['total'] = $this->db
-			->where(array('author_id'=>$author_id,'is_public'=>1) )
+			->where(array('author_id' => $author_id, 'is_public' => 1))
 			->count_all_results('post');
 
 		$data['posts'] = $this->db
 			->select('author_id,full_name AS author_name,post_id,subject,body,post_type')
-			->where(array('author_id'=>$author_id,'is_public'=>1) )
+			->where(array('author_id' => $author_id, 'is_public' => 1))
 			->offset($offset)
 			->limit($limit)
 			->order_by('post_id', 'desc')
@@ -96,41 +96,21 @@ class Post_Model extends CI_Model
 		return FALSE;
 	}
 
-	public function is_valid_exercise($post_id)
+	public function is_can_upload_exercise($post_id)
 	{
 		$sql = "SELECT author_id FROM post WHERE post_id=? AND post_type='exercise' LIMIT 1";
 		$row = $this->db->query($sql, array($post_id));
-		if ($row->num_rows() === 1) {
-			return $row->row('author_id');
+		if ($row->num_rows() !== 1) {
+			return FALSE;
 		}
-
-		return FALSE;
-	}
-
-	public function is_can_read($post_id)
-	{
-		$this->load->model(array('profile_model', 'lesson_model'));
 
 		$sql = '
 		SELECT * FROM class_member
-		JOIN class ON class.class_id=class_member.class_id AND class_member.student_id = ?
+		JOIN class ON class.class_id=class_member.class_id AND class_member.student_id = ? AND class_member.status = 2
 		JOIN class_post ON class_post.post_id = ?';
 		$row = $this->db->query($sql, array($this->auth->get_user_id(), $post_id));
 		if ($row->num_rows() > 1) {
 			return TRUE;
-		}
-
-		return FALSE;
-	}
-
-	public function is_can_edit($post_id)
-	{
-		$this->load->model(array('profile_model', 'lesson_model'));
-
-		$sql = 'SELECT author_id FROM post WHERE post_id=? LIMIT 1';
-		$row = $this->db->query($sql, array($post_id));
-		if ($row->num_rows() === 1) {
-			return $row->row('author_id');
 		}
 
 		return FALSE;

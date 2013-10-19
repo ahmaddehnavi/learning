@@ -2,6 +2,9 @@
 
 class Exercise extends  Auth_Controller
 {
+	/**
+	 * todo
+	 */
 	function __construct()
 	{
 		parent::__construct();
@@ -37,10 +40,9 @@ class Exercise extends  Auth_Controller
 
 		$this->load->model(array('post_model'));
 
-		if ($this->post_model->is_can_read($post_id) === FALSE) return FALSE;
+		if ($this->post_model->is_can_upload_exercise($post_id) === FALSE) return FALSE;
 
-		$author_id = $this->post_model->is_valid_exercise($post_id);
-		if ($author_id === FALSE) return FALSE;
+		$author_id = $this->post_model->get_author_id($post_id);
 
 		$full_name = $this->auth->get_full_name();
 		$config    = array(
