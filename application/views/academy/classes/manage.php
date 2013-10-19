@@ -179,6 +179,7 @@
 							<th>field</th>
 							<th>lesson</th>
 							<th>prof</th>
+							<th>status</th>
 							<th>action</th>
 							<div class="badboy"></div>
 						</tr>
@@ -190,7 +191,12 @@
 								<td colspan="6">no class find.</td>
 							</tr>
 						<?php
-						}
+						}else{
+						$status=array(
+							'block',
+							'wait',
+							'active'
+						);
 						foreach ($student_class->result() as $row) {
 							?>
 							<tr>
@@ -199,6 +205,8 @@
 								<td><?php echo $row->field_name?></td>
 								<td><?php echo $row->lesson_name?></td>
 								<td><?php echo $row->prof_name?></td>
+								<td><?php echo $status[$row->joined_status]?></td>
+
 								<td>
 									<?=form_open('/academy/classes/leave/')?>
 									<input type="hidden" name="class_id" value="<?= $row->class_id ?>"/>
@@ -208,7 +216,8 @@
 									</form>
 								</td>
 							</tr>
-						<?php }?>
+						<?php }
+						}?>
 						</tbody>
 					</table>
 				</section>

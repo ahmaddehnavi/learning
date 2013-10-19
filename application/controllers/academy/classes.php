@@ -24,7 +24,7 @@ class Classes extends Auth_Controller
 			show_404();
 		}
 		$is_prof = FALSE;
-		if ($this->class_member_model->is_student_of_class($id) === TRUE) {
+		if ($this->class_member_model->is_non_blocked_student_of_class($id) === TRUE) {
 			$is_prof = FALSE;
 		} elseif ($this->class_model->is_prof_of_class($id) === TRUE) {
 			$is_prof = TRUE;
@@ -35,7 +35,7 @@ class Classes extends Auth_Controller
 		$info = $this->class_model->get_info($id);
 
 		$data            = $this->post_model->get_class_posts($id, $page * 10);
-		$data['members'] = $this->class_member_model->get_members($id);
+		$data['members'] = $this->class_member_model->get_active_members($id);
 		$this->load->library('pagination');
 		$config['base_url']         = site_url('academy/classes/view/' . $id . '/');
 		$config['total_rows']       = $data['total'];
@@ -59,24 +59,24 @@ class Classes extends Auth_Controller
 
 	function setting($id, $page = 0)
 	{
-		if (!is_numeric($id)) {
-			show_404();
-		}
-		if ($this->class_member_model->is_validate_member($id)) {
-			show_404();
-		}
-
-		$info = $this->class_model->get_info($id);
-
-		$data            = $this->post_model->get_class_posts($id, $page * 10);
-		$data['members'] = $this->class_member_model->get_members($id);
-
-		$data['lesson_name'] = $info['lesson_name'];
-		$data['prof_name']   = $info['prof_name'];
-		$data['new_change']  = $info['new_change'];
-		$data['is_prof']     = ($info['prof_id'] === $this->auth->get_user_id());
-
-		$this->load->view('academy/classes/view', $data);
+//		if (!is_numeric($id)) {
+//			show_404();
+//		}
+//		if ($this->class_member_model->is_validate_member($id)) {
+//			show_404();
+//		}
+//
+//		$info = $this->class_model->get_info($id);
+//
+//		$data            = $this->post_model->get_class_posts($id, $page * 10);
+//		$data['members'] = $this->class_member_model->get_all_members($id);
+//
+//		$data['lesson_name'] = $info['lesson_name'];
+//		$data['prof_name']   = $info['prof_name'];
+//		$data['new_change']  = $info['new_change'];
+//		$data['is_prof']     = ($info['prof_id'] === $this->auth->get_user_id());
+//
+//		$this->load->view('academy/classes/view', $data);
 
 	}
 
