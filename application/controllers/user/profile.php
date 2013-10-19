@@ -47,6 +47,16 @@ class Profile extends Auth_Controller
 			if (!empty($_FILES['userfile'])) {
 				$data['upload_err'] = $this->_upload_profile_image();
 			}
+//			echo $this->input->post('is_crop');exit;
+//			if (intval($this->input->post('is_crop')) === 1) {
+//				$x1 = intval($this->input->post('x1'));
+//				$x2 = intval($this->input->post('x2'));
+//				$y1 = intval($this->input->post('y1'));
+//				$y2 = intval($this->input->post('y2'));
+//
+//				$this->_crop_profile_image($x1, $x2, $y1, $y2);
+//			}
+
 		} else if ($this->input->post('form_num') == 3) {
 			$this->form_validation
 				->set_rules('academy_id', 'academy', 'trim|is_natural|is_exist[academy.academy_id]')
@@ -62,11 +72,11 @@ class Profile extends Auth_Controller
 
 		$data['full_name']    = $this->profile_model->get_full_name();
 		$data['about']        = $this->profile_model->get_about();
-		$data['academy_id']      = $this->profile_model->get_academy_id();
-		$data['field_id']        = $this->profile_model->get_field_id();
+		$data['academy_id']   = $this->profile_model->get_academy_id();
+		$data['field_id']     = $this->profile_model->get_field_id();
 		$data['academy_list'] = $this->academy_model->get_list();
 		$data['field_list']   = $this->field_model->get_list();
-//		var_dump($data['field_list'] );
+
 		$this->load->view('user/profile', $data);
 	}
 
@@ -97,7 +107,6 @@ class Profile extends Auth_Controller
 				->resize(100, 100)
 				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_100.jpg', TRUE);
 
-//			echo $this->image_moo->display_errors();
 			return TRUE;
 		} else {
 			return $this->upload->display_errors();
@@ -105,6 +114,17 @@ class Profile extends Auth_Controller
 
 		return FALSE;
 	}
+//
+//	function _crop_profile_image($x1, $x2, $y1, $y2)
+//	{
+//		print_r(func_get_args());
+//		$path = 'files/uploads/' . $this->auth->get_user_id() . '/image/profile.jpg';
+//		$this->load->library('image_moo');
+//		$this->image_moo
+//			->load($path)
+//			->crop($x1, $x2, $y1, $y2)
+//			->save($path, TRUE);
+//	}
 
 }
 

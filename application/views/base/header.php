@@ -17,6 +17,8 @@
 
     <link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/style1.css"/>
 
+	<script src="<?= FILES_JS_PATH ?>/base/jquery-1.9.0.js"></script>
+
     <?php
     if (!isset($title))
         echo '<title>Panda</title>';

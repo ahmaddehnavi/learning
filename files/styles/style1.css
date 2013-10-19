@@ -116,7 +116,7 @@ label {
     padding : 0;
 }
 
-.mini-phone form * {
+.mini-phone form > * {
     text-align         : center !important;
     width              : 100%;
     box-sizing         : border-box;
