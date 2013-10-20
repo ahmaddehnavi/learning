@@ -1,32 +1,5 @@
 <?php $this->load->view('base/header'); ?>
-<!--	<script src="--><?//=FILES_JS_PATH?><!--/jcrop/jquery.Jcrop.min.js"></script>
-	<link rel="stylesheet" href="<?=FILES_CSS_PATH?>/jquery.Jcrop.css" type="text/css" />
-	<script type="text/javascript">
-		function run(){
-			var x1Input=$('#x1');
-			var x2Input=$('#x2');
-			var y1Input=$('#y1');
-			var y2Input=$('#y2');
-			function setValue(c)
-			{
-				x1Input.val(c.x);
-				x2Input.val(c.x2);
-				y1Input.val(c.y);
-				y2Input.val(c.y2);
-				// variables can be accessed here as
-				// c.x, c.y, c.x2, c.y2, c.w, c.h
-			}
 
-			$('#target').Jcrop({
-				onSelect:    setValue,
-				bgColor:     'black',
-				bgOpacity:   .4,
-				setSelect:   [ 100, 100, 50, 50 ],
-				aspectRatio: 1,
-				minSize:[100,100]
-			});
-		}
-	</script> -->
 	<style>
 		.large-desktop .widget, .desktop .widget, .tablet .widget {
 			width       : 45%;

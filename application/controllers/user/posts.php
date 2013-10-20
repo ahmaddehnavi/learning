@@ -48,10 +48,11 @@ class Posts extends Auth_Controller
 	function publish()
 	{
 		$this->load->library('form_validation');
+		$this->load->helper('htmlpurifier');
 		$this->load->model('class_model');
 
 		$this->form_validation
-			->set_rules('subject', 'Subject', 'trim|required')
+			->set_rules('subject', 'Subject', 'trim|required|xss_clean')
 			->set_rules('body', 'post body', 'trim|required')
 			->set_rules('classes[]', 'Selected Classes', 'trim')
 			->set_rules('mail_notice', 'Mail notification', 'trim')
@@ -61,7 +62,7 @@ class Posts extends Auth_Controller
 		$data['publish_error'] = '';
 		if ($this->form_validation->run()) {
 			$subject = $this->form_validation->set_value('subject');
-			$body    = $this->form_validation->set_value('body');
+			$body    =  html_purify($this->form_validation->set_value('body')).'<div class="badboy"></div>';
 			$classes = $this->input->post('classes');
 			if (is_array($classes)) {
 				foreach ($classes AS $class) {
@@ -117,17 +118,13 @@ class Posts extends Auth_Controller
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('post_id', 'post id', 'trim|required|is_natural');
-		$this->form_validation->set_rules('next', 'next page', 'trim|required');
+		$this->form_validation->set_rules('next', 'next page', 'trim|required|xss_clean');
 
 		$next = 'user/posts';
 		if ($this->form_validation->run()) {
 			$this->load->model('post_model');
 			$this->post_model->remove($this->form_validation->set_value('post_id'));
 			$next = $this->form_validation->set_value('next');
-//				$this->load->view('base/message',array(
-//						'message'=>'post deleted successful.',
-//						'next_page'=>'user/posts')
-//				);
 		}
 		redirect($next);
 	}
