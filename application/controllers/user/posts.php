@@ -61,8 +61,8 @@ class Posts extends Auth_Controller
 
 		$data['publish_error'] = '';
 		if ($this->form_validation->run()) {
-			$subject = $this->form_validation->set_value('subject');
-			$body    =  html_purify($this->form_validation->set_value('body')).'<div class="badboy"></div>';
+			$subject    = $this->form_validation->set_value('subject');
+			$body    = html_purify($this->form_validation->set_value('body'));
 			$classes = $this->input->post('classes');
 			if (is_array($classes)) {
 				foreach ($classes AS $class) {
@@ -86,7 +86,7 @@ class Posts extends Auth_Controller
 					$this->class_post_model->add_post_to_classes($id, $classes);
 				}
 				if ($mail_notice == 1)
-					$this->notification->notice_new_post($classes,$subject, $body);
+					$this->notification->notice_new_post($classes, $subject, $body);
 				redirect('user/posts/');
 			}
 		}

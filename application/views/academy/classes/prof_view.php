@@ -103,6 +103,7 @@
 								</header>
 								<section class='widget_body'>
 									<div class="text">    <?php echo $post->body ?></div>
+									<div class="badboy"></div>
 									<p class='publish'><?php echo'2 hours ago' ?></p>
 								</section>
 								>
