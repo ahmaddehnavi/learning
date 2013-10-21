@@ -34,6 +34,7 @@ class Lost_password extends CI_Controller
 			if (FALSE !== ($ud = $this->auth->forgot_password($email))) {
 				$message = $this->_prep_message($ud, $email);
 
+
 				$this->load->library('email');
 
 				$is_send=$this->email->from('system@panda.com', 'Panda Academy')

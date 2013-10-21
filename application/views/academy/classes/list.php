@@ -27,6 +27,7 @@
 			<menu>
 				<h2>academy :</h2>
 				<li class="active"><?php echo anchor("academy/classes", '<i class="icon-group"></i>classes') ?></li>
+				<li><?php echo anchor("academy/classes/manage", '<i class="icon-cog"></i>manage') ?></li>
 				<h2>user :</h2>
 				<li><?php echo anchor("user/dashboard", '<i class="icon-dashboard"></i>dashboard') ?></li>
 				<li><?php echo anchor('user/messages', '<i class="icon-inbox"></i>messages<b class="label">'.$this->unread_message.'</b>') ?></li>
@@ -59,7 +60,7 @@
 						<h2>Classes</h2>
 
 						<div>list of your classes</div>
-						<?=anchor('/academy/classes/manage', 'manage - / +', 'class="btn-fix btn-small right" title="add , remove , join , leave"');?>
+<!--						--><?//=anchor('/academy/classes/manage', 'manage - / +', 'class="btn-fix btn-small right" title="add , remove , join , leave"');?>
 					</section>
 				</section>
 				<section id="content-body">
