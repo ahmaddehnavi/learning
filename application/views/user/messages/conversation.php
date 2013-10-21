@@ -16,7 +16,8 @@
 			</ul>
 		</nav>
 		<aside id="sidebar">
-			<header><?php echo $this->auth->get_full_name(); ?>&nbsp;</header>
+			<header><img src="<?= FILES_USERS_PATH . '/' . $this->auth->get_user_id() ?>/image/profile_80.jpg"
+						 width="40px" height="40px" id="user-image"/><?php echo $this->auth->get_full_name(); ?>&nbsp;</header>
 			<ul class="collapse-btn btn-left toggle-off" collapse-target="#sidebar">
 				<li></li>
 				<li></li>
