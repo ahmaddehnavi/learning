@@ -24,9 +24,9 @@
 			</ul>
 			<menu>
 				<h2>message :</h2>
-				<li class=""><?php echo anchor("user/messages/", "unread<b class='label'>$this->unread_message</b>") ?></li>
-				<li class="active"><?php echo anchor("user/messages/inbox", "inbox") ?></li>
-				<li class=""><?php echo anchor("user/messages/sent", "sent") ?></li>
+				<li><?php echo anchor("user/messages/", '<i class="icon-inbox"></i>unread<b class="label">'.$this->unread_message.'</b>') ?></li>
+				<li class="active"><?php echo anchor("user/messages/inbox", '<i class="icon-download-alt"></i>inbox') ?></li>
+				<li><?php echo anchor("user/messages/sent", '<i class="icon-upload-alt"></i>sent') ?></li>
 
 				<h2>user :</h2>
 				<li><?php echo anchor("user/dashboard", '<i class="icon-dashboard"></i>dashboard') ?></li>
