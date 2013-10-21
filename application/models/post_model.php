@@ -10,8 +10,8 @@ class Post_Model extends CI_Model
 
 	public function create($post_type, $is_public, $subject, $body)
 	{
-		$sql = 'INSERT INTO post(author_id,post_type,is_public,subject,body) VALUES(?,?,?,?,?)';
-		if (FALSE !== $this->db->query($sql, array($this->auth->get_user_id(), $post_type, $is_public, $subject, $body))) {
+		$sql = 'INSERT INTO post(author_id,post_type,is_public,time,subject,body) VALUES(?,?,?,?,?,?)';
+		if (FALSE !== $this->db->query($sql, array($this->auth->get_user_id(), $post_type, $is_public, time(),$subject, $body))) {
 			return $this->db->insert_id();
 		}
 
@@ -35,7 +35,7 @@ class Post_Model extends CI_Model
 			->count_all_results('post');
 
 		$data['posts'] = $this->db
-			->select('author_id,full_name AS author_name,is_public,post_id,subject,body,post_type')
+			->select('post.*,full_name AS author_name')
 			->where('author_id', $this->auth->get_user_id())
 			->offset($offset)
 			->limit($limit)
@@ -54,7 +54,7 @@ class Post_Model extends CI_Model
 			->count_all_results('post');
 
 		$data['posts'] = $this->db
-			->select('author_id,full_name AS author_name,post_id,subject,body,post_type')
+			->select('post.*,full_name AS author_name')
 			->where(array('author_id' => $author_id, 'is_public' => 1))
 			->offset($offset)
 			->limit($limit)

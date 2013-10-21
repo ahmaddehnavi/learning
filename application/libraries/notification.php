@@ -45,7 +45,6 @@ class Notification extends Auth_Controller
 	public function new_message_notice($to, $message)
 	{
 		$this->CI->load->model('user_model');
-
 		$this->CI->email->from('no-reply@panda.com');
 		$this->CI->email->to($this->CI->user_model->get_mail_by_id($to));
 		$this->CI->email->subject('Panda Academy | new message exist.');

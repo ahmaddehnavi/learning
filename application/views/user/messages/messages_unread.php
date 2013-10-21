@@ -79,7 +79,7 @@
 								'<tr>' .
 								'<td>' . anchor('user/messages/conversation/' . $message->from_id, $message->full_name, 'target="_blank"') . '</td>' .
 								'<td>' . substr($message->message, 0, 50) . '</td>' .
-								'<td>' . date('y/m/d h:m', $message->time) . '</td>' .
+								'<td>' . date('Y/m/d h:m', $message->time) . '</td>' .
 								'</tr>';
 						}
 						?>
@@ -91,7 +91,7 @@
 					//						echo 'from : ' . $message->full_name . '<br/>';
 					//						echo 'message : ' . $message->message . '<br/>';
 					//						echo 'from id :' . $message->from_id . '<br/>';
-					//						echo '' . date('y/m/d h:m', $message->time) . '<hr/>';
+					//						echo '' . date('Y/m/d h:m', $message->time) . '<hr/>';
 					//
 
 					?>

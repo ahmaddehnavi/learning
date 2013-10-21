@@ -91,7 +91,7 @@
 							<section class="image">
 								<figure class="imgpost">
 									<img
-										src="<?php echo FILES_USERS_PATH . '/' . $post->author_id . '/image/profile.jpg' ?>"
+										src="<?php echo FILES_USERS_PATH . '/' . $post->author_id . '/image/profile_50.jpg' ?>"
 										alt="" width="50px" height="50px"/></figure>
 								<p class='name'>
 									<?=$post->author_name?>
@@ -106,9 +106,9 @@
 								<section class='widget_body'>
 									<div class="text">    <?php echo $post->body ?></div>
 									<div class="badboy"></div>
-									<p class='publish'><?php echo'2 hours ago' ?></p>
+									<p class='publish'><?php echo  date('Y/m/d h:m',$post->time) ?></p>
 								</section>
-								>
+
 								<?php if ($post->author_id == $user_id) { ?>
 									<footer class="widget_footer">
 										<div class="menu">

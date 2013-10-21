@@ -2,10 +2,17 @@
 
 class View extends CI_Controller
 {
+	public $unread_message = '';
+
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model(array('profile_model', 'post_model'));
+		if ($this->auth->is_logged_in()) {
+			$this->load->model('message_model');
+			if (($n = $this->message_model->get_unread_number()) != 0)
+				$this->unread_message = $n;
+		}
 	}
 
 	function u($username, $page = 0)

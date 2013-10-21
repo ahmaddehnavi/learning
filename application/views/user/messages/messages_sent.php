@@ -72,7 +72,7 @@
 							echo 'to : '.$message->full_name.'<br/>';
 							echo 'message : '.$message->message.'<br/>';
 							echo 'to id :'.$message->to_id.'<br/>';
-							echo 'sent time :'.date('y/m/d h:m',$message->time).'<hr/>';
+							echo 'sent time :'.date('Y/m/d h:m',$message->time).'<hr/>';
 							}
 					echo $pagination;
 					?>

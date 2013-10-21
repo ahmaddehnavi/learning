@@ -72,7 +72,7 @@
 						echo 'from : ' . $message->full_name . '<br/>';
 						echo '' . $message->from_id . '<br/>';
 						echo 'message : ' . $message->message . '<br/>';
-						echo '' . date('y/m/d h:m', $message->time) . '<hr/>';
+						echo '' . date('Y/m/d h:m', $message->time) . '<hr/>';
 					}
 
 					echo $pagination;

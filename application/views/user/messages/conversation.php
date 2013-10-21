@@ -82,7 +82,7 @@
 
 								echo 'message : ' . $message->message . '<br/>';
 
-								echo '' . date('y/m/d h:m', $message->time) . '<hr/>';
+								echo '' . date('Y/m/d h:m', $message->time) . '<hr/>';
 								echo '</div><div class="badboy"></div>';
 							}else{//received
 								echo '<div style="background-color: greenyellow;">';
@@ -95,7 +95,7 @@
 
 								echo 'message : ' . $message->message . '<br/>';
 
-								echo '' . date('y/m/d h:m', $message->time) . '<hr/>';
+								echo '' . date('Y/m/d h:m', $message->time) . '<hr/>';
 								echo '</div><div class="badboy"></div>';
 
 							}
