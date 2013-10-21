@@ -47,15 +47,6 @@ class Profile extends Auth_Controller
 			if (!empty($_FILES['userfile'])) {
 				$data['upload_err'] = $this->_upload_profile_image();
 			}
-//			echo $this->input->post('is_crop');exit;
-//			if (intval($this->input->post('is_crop')) === 1) {
-//				$x1 = intval($this->input->post('x1'));
-//				$x2 = intval($this->input->post('x2'));
-//				$y1 = intval($this->input->post('y1'));
-//				$y2 = intval($this->input->post('y2'));
-//
-//				$this->_crop_profile_image($x1, $x2, $y1, $y2);
-//			}
 
 		} else if ($this->input->post('form_num') == 3) {
 			$this->form_validation
@@ -87,9 +78,11 @@ class Profile extends Auth_Controller
 			'allowed_types' => 'gif|jpg|png',
 			'max_size' => '2048',
 			'file_name' => 'profile.jpg',
-			'is_image' => TRUE,
 			'overwrite' => TRUE,
 		);
+
+		if(!file_exists($config['upload_path']))
+			@mkdir($config['upload_path']);
 		$this->load->library('upload', $config);
 
 		if ($this->upload->do_upload()) {
@@ -117,18 +110,6 @@ class Profile extends Auth_Controller
 
 		return FALSE;
 	}
-//
-//	function _crop_profile_image($x1, $x2, $y1, $y2)
-//	{
-//		print_r(func_get_args());
-//		$path = 'files/uploads/' . $this->auth->get_user_id() . '/image/profile.jpg';
-//		$this->load->library('image_moo');
-//		$this->image_moo
-//			->load($path)
-//			->crop($x1, $x2, $y1, $y2)
-//			->save($path, TRUE);
-//	}
-
 }
 
 /* End of file Home.php */
