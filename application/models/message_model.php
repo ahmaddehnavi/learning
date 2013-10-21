@@ -16,6 +16,16 @@ class Message_Model extends CI_Model
 		return $this->db->affected_rows() == 1;
 	}
 
+
+	public function mark_as_read()
+	{
+		$sql = 'UPDATE message SET is_read = 1 WHERE to_id = ?';
+		$this->db->query($sql, array($this->auth->get_user_id()));
+
+		return $this->db->affected_rows();
+	}
+
+
 	public function get_sent_messages($offset = 0)
 	{
 		$sql='

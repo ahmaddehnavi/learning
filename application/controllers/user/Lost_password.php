@@ -36,13 +36,14 @@ class Lost_password extends CI_Controller
 
 				$this->load->library('email');
 
-				$this->email->from('system@academy.com', 'System')
+				$is_send=$this->email->from('system@panda.com', 'Panda Academy')
 					->to($email)
 					->subject('Recovery Password, Panda Academy!')
 					->message($message)
 					->send();
-//				echo $this->email->print_debugger();
-				 redirect('forgot_password/reset_requested');
+
+				if($is_send)
+				 redirect('user/lost_password/reset_requested');
 			}
 
 			$data['form_error'] = TRUE;
@@ -59,7 +60,7 @@ class Lost_password extends CI_Controller
 	 */
 	public function reset_requested()
 	{
-		$this->load->view('reset_requested');
+		$this->load->view('user/reset_requested');
 	}
 
 	// --------------------------------------------------------------------------
