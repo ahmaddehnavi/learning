@@ -1,5 +1,5 @@
 <?php
-
+session_set_cookie_params(0, '/');
 /** This file is part of KCFinder project
  *
  * @desc Base configuration file
@@ -85,8 +85,8 @@ $_CONFIG = array(
 
 	'jpegQuality' => 90,
 
-	'cookieDomain' => "",
-	'cookiePath' => "",
+	'cookieDomain' => ".ahmaddehnavi.ir",
+	'cookiePath' => "/",
 	'cookiePrefix' => 'FM_',
 
 	// THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION CONFIGURATION
@@ -94,10 +94,10 @@ $_CONFIG = array(
 	//'_tinyMCEPath' => "/tiny_mce",
 
 	'_sessionVar' => &$_SESSION['file_management'],
-	//'_sessionLifetime' => 30,
+	'_sessionLifetime' => 60,
 //	'_sessionDir' => "/panda/",
 
-	//'_sessionDomain' => ".mysite.com",
-	//'_sessionPath' => "/my/path",
+	'_sessionDomain' => ".ahmaddehnavi.ir",
+	'_sessionPath' => "/",
 );
 ?>

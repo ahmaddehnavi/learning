@@ -16,6 +16,7 @@
     <!-- ############################################################################ -->
 
     <link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/style1.css"/>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 	<script src="<?= FILES_JS_PATH ?>/base/jquery-1.9.0.js"></script>
 

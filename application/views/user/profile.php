@@ -38,11 +38,11 @@
 			</ul>
 			<menu>
 				<h2>user :</h2>
-				<li class="icon-dashboard"><?php echo anchor("user/dashboard", "dashboard") ?></li>
-				<li class="icon-message"><?php echo anchor("user/messages", "messages<b class='label'>$this->unread_message</b>") ?></li>
-				<li class="icon-post"><?php echo anchor("user/posts", "posts") ?></li>
-				<li class="icon-profile"><?php echo anchor("user/profile", "profile") ?></li>
-				<li class="icon-logout .top-line"><?php echo anchor("user/logout", "logout") ?></li>
+				<li><?php echo anchor("user/dashboard", '<i class="icon-dashboard"></i>dashboard') ?></li>
+				<li><?php echo anchor('user/messages', '<i class="icon-inbox"></i>messages<b class="label">'.$this->unread_message.'</b>') ?></li>
+				<li><?php echo anchor('user/posts', '<i class="icon-file-text"></i>posts') ?></li>
+				<li><?php echo anchor('user/profile', '<i class="icon-user"></i>profile') ?></li>
+				<li class="top-line"><?php echo anchor('user/logout', '<i class="icon-signout"></i>logout') ?></li>
 			</menu>
 
 		</aside>

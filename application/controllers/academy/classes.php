@@ -26,7 +26,7 @@ class Classes extends Auth_Controller
 		}
 		$is_prof = FALSE;
 		if ($this->class_member_model->is_non_blocked_student_of_class($id) === TRUE) {
-			$is_prof = FALSE;
+//			$is_prof = FALSE;
 		} elseif ($this->class_model->is_prof_of_class($id) === TRUE) {
 			$is_prof = TRUE;
 		} else {

@@ -1,6 +1,6 @@
 body {
     position         : relative;
-    font-family      : "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;;
     background-color : rgb(241, 240, 250);
 }
 
@@ -128,8 +128,8 @@ label {
     margin-right       : auto;
 }
 
-.upload_input{
-    display: none;
+.upload_input {
+    display : none;
 }
 
 /*________________________________________Button________________________________________*/
@@ -266,6 +266,7 @@ main {
 
 }
 
+
 #sidebar header {
     background         : #333;
     border-bottom      : 1px solid #000;
@@ -290,7 +291,7 @@ main {
 #sidebar a {
     color          : #ccc;
     display        : block;
-    padding        : 10px 15px 10px 55px;
+    padding        : 10px 15px;
     text-transform : capitalize;
     font-size      : 13px;
     font-weight    : 500;
@@ -677,19 +678,19 @@ nav a:hover, nav li.active a {
     display : block;
 }
 
-section.list{
-    width: 90%;
-    min-height: 200px;
-    margin: 20px 0 0 9px;
-    border-top : 1px solid #676B6D;
-    padding-top: 10px;
+section.list {
+    width       : 90%;
+    min-height  : 200px;
+    margin      : 20px 0 0 9px;
+    border-top  : 1px solid #676B6D;
+    padding-top : 10px;
     /*overflow: hidden;*/
     /*-webkit-border-top-image: linear-gradient( rgba(219, 219, 219,0) 13% , rgba(232, 232, 232,0.5) 42%, rgb(255, 255, 255) 64%) 14% stretch;*/
 }
 
-.list:hover{
-    overflow-y: scroll ;
-    overflow-x: hidden;
+.list:hover {
+    overflow-y : scroll;
+    overflow-x : hidden;
 }
 
 .list::-webkit-scrollbar {
@@ -704,25 +705,48 @@ section.list{
     background : #D5DCFD;
 }
 
-.list .menu{
-    list-style: none;
+.list .menu {
+    list-style : none;
 }
 
-.list a.ad{
-    display: block !important;
-    padding: 6px 0px 6px 25px !important;
-    margin-bottom: 5px !important;
+.list a.ad {
+    display       : block !important;
+    padding       : 6px 0px 6px 25px !important;
+    margin-bottom : 5px !important;
 }
 
-.list figure{
+.list figure {
+    float  : left;
+    margin : 0 0 0 -19px;
+}
+
+.list p {
+    margin-left : 15px;
+    color       : #C9C9C9;
+    margin-top  : 1.5%;
+    display     : inline-block;
+    font-size   : 14px;
+}
+
+
+
+
+
+
+
+
+
+#sidebar i {
+    display     : block;
     float: left;
-    margin: 0 0 0 -19px;
+    color          : #777;
+    font-size: 14px;
+    margin: -2px 12px 0px 13px;
+    text-shadow : 0 0 1px #000;
+    text-align  : center;
+    width       : 20px;
 }
 
-.list p{
-    margin-left: 15px;
-    color: #C9C9C9;
-    margin-top: 1.5%;
-    display: inline-block;
-    font-size: 14px;
+#sidebar li:hover i , #sidebar li.active i{
+    color: #eee;
 }

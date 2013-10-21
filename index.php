@@ -1,5 +1,5 @@
 <?php
-
+ini_set('session.cookie_path', '/');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

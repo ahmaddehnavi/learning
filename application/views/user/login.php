@@ -1,7 +1,10 @@
 <?php $this->load->view('base/header'); ?>
 	<style type="text/css">
+		#container{
+			padding: 50px 0;
+		}
 		.login-form {
-			margin    : 50px auto;
+			margin    : 0 auto;
 			width     : 330px;
 			max-width : 100%;
 		}
@@ -54,7 +57,7 @@
 			<li></li>
 		</ul>
 	</nav>
-
+<div id="container">
 	<div class="login-form widget">
 		<?php echo $registration_message; ?>
 		<?php echo form_open('user/login', 'class="widget-body"')?>
@@ -88,5 +91,5 @@
 		</div>
 		</form>
 	</div>
-
+</div>
 <?php $this->load->view('base/footer'); ?>
