@@ -105,10 +105,10 @@ class Auth
 		$this->CI->db->insert('profile', $data);
 
 		@mkdir('files/uploads/' . $user_id . '/image', 0777, TRUE);
-		@mkdir('files/uploads/' . $user_id . '/files', 0777, TRUE);
-		@mkdir('files/uploads/' . $user_id . '/files/private/', 0777, TRUE);
-		@mkdir('files/uploads/' . $user_id . '/files/private/exercise', 0777, TRUE);
-		@mkdir('files/uploads/' . $user_id . '/files/public/image', 0777, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files', 0666, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files/private/', 0666, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files/private/exercise', 0666, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files/public/image', 0666, TRUE);
 
 		$htaccess = '
 		deny from all

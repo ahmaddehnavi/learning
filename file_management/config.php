@@ -95,7 +95,7 @@ $_CONFIG = array(
 
 	'_sessionVar' => &$_SESSION['file_management'],
 	//'_sessionLifetime' => 30,
-	//'_sessionDir' => "/full/directory/path",
+//	'_sessionDir' => "/panda/",
 
 	//'_sessionDomain' => ".mysite.com",
 	//'_sessionPath' => "/my/path",
