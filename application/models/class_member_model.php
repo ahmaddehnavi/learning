@@ -18,7 +18,7 @@ class Class_Member_Model extends CI_Model
 	 */
 	public function join($class_id, $student_id)
 	{
-		$sql = 'SELECT * FROM class WHERE class_id=? AND join_status = 1 LIMIT ';
+		$sql = 'SELECT * FROM class WHERE class_id=? AND join_status = 1 LIMIT 1';
 		$row = $this->db->query($sql, array($class_id));
 		if ($row->num_rows() === 0) {
 			return FALSE;

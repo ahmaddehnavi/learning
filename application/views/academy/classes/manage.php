@@ -142,8 +142,9 @@
 						<tbody>
 						<?php if ($suggest->num_rows() == 0) { ?>
 							<tr>
-								<td colspan="6">No suggest available.</td>
+								<td colspan="6">No suggest available. <?=anchor('user/profile','click here','class=btn-fix btn-small')?> for update your academy setting.</td>
 							</tr>
+
 						<?php
 						}
 						foreach ($suggest->result() as $row) {
