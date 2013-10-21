@@ -13,14 +13,15 @@ class Messages extends Auth_Controller
 		$this->load->view('user/messages/messages_unread', $data);
 	}
 
-	function sent($page = 0)
+	function sent($page = 1)
 	{
+		$page--;
 		$this->load->library('pagination');
 		$config['base_url']         = site_url('user/messages/sent/');
 		$config['total_rows']       = $this->message_model->get_sent_number();
 		$config['per_page']         = 10;
 		$config['use_page_numbers'] = TRUE;
-		$config['uri_segment']      = 5;
+		$config['uri_segment']      = 4;
 
 
 		$this->pagination->initialize($config);
@@ -30,14 +31,16 @@ class Messages extends Auth_Controller
 		$this->load->view('user/messages/messages_sent', $data);
 	}
 
-	function inbox($page = 0)
+
+	function inbox($page = 1)
 	{
+		$page--;
 		$this->load->library('pagination');
 		$config['base_url']         = site_url('user/messages/inbox/');
 		$config['total_rows']       = $this->message_model->get_inbox_number();
 		$config['per_page']         = 10;
 		$config['use_page_numbers'] = TRUE;
-		$config['uri_segment']      = 5;
+		$config['uri_segment']      = 4;
 		$this->pagination->initialize($config);
 		$data['pagination'] = $this->pagination->create_links();
 
@@ -61,9 +64,7 @@ class Messages extends Auth_Controller
 				$this->notification->new_message_notice($to,$message);
 			}
 		}
-//echo 'ssssssss';
 		redirect('user/messages/sent');
-//		echo 'sss';
 	}
 
 	function conversation($other_id = FALSE)

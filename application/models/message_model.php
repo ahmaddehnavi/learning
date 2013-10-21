@@ -39,7 +39,7 @@ class Message_Model extends CI_Model
 		SELECT message.* , profile.full_name
    	    FROM message
 		JOIN profile ON profile.user_id = message.to_id AND message.from_id=?
-		ORDER BY time
+		ORDER BY  message_id desc
 		LIMIT ?,10';
 		return $this->db->query($sql, array($this->auth->get_user_id(),$offset));
 	}
@@ -54,7 +54,7 @@ class Message_Model extends CI_Model
 		SELECT message.* , profile.full_name
    	    FROM message
 		JOIN profile ON profile.user_id=message.from_id AND to_id=?
-		ORDER BY time
+		ORDER BY message_id desc
 		LIMIT ?,10';
 		return $this->db->query($sql, array( $this->auth->get_user_id(),$offset));
 	}
@@ -69,7 +69,7 @@ class Message_Model extends CI_Model
 		SELECT message.* , profile.full_name
    	    FROM message
 		JOIN profile ON profile.user_id=message.from_id AND to_id=? AND message.is_read = 0
-		ORDER BY time';
+		ORDER BY  message_id desc';
 		return $this->db->query($sql, array( $this->auth->get_user_id()));
 	}
 
@@ -87,7 +87,7 @@ class Message_Model extends CI_Model
 	 */
 	public function get_sent_number()
 	{
-		$sql = 'SELECT count(*) AS num FROM message WHERE from_id=? ';
+		$sql = 'SELECT count(message_id) AS num FROM message WHERE from_id=? ';
 		return $this->db->query($sql, array($this->auth->get_user_id()))->row('num');
 	}
 
@@ -96,7 +96,7 @@ class Message_Model extends CI_Model
 	 */
 	public function get_unread_number()
 	{
-		$sql = 'SELECT count(*) AS num FROM message WHERE to_id=? AND is_read=0';
+		$sql = 'SELECT count(message_id) AS num FROM message WHERE to_id=? AND is_read=0';
 		return $this->db->query($sql, array($this->auth->get_user_id()))->row('num');
 	}
 
@@ -111,7 +111,7 @@ class Message_Model extends CI_Model
 		$sql='
 		SELECT DISTINCT * FROM message
 		WHERE (from_id= ? AND  to_id = ?) OR (from_id= ? AND  to_id = ?)
-		ORDER BY time
+		ORDER BY  message_id desc
 		LIMIT ?,10';
 		return $this->db->query($sql, array($user_id,$other_id,$other_id,$user_id,$offset));
 	}
