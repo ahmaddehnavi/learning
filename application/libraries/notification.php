@@ -52,7 +52,7 @@ class Notification extends Auth_Controller
 			$this->CI->email->subject('Panda Academy | new message exist.');
 			$this->CI->email->message(
 				$message.'</br>
-				<a href="'.site_url('user/messages/').'">click here to view your message</a>
+				<a href="'.site_url('user/messages/').'">click here to view your message</a></br>
 				or go to '.site_url('user/messages/')
 			);
 			return $this->CI->email->send();

@@ -45,7 +45,7 @@ class Exercise extends Auth_Controller
 		);
 
 		if (!file_exists($config['upload_path']))
-			mkdir($config['upload_path'], 666, TRUE);
+			mkdir($config['upload_path'], 0777, TRUE);
 
 		$this->load->library('upload', $config);
 		if ($this->upload->do_upload()) {

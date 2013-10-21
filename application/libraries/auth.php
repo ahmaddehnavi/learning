@@ -104,11 +104,11 @@ class Auth
 		);
 		$this->CI->db->insert('profile', $data);
 
-		@mkdir('files/uploads/' . $user_id . '/image', 666, TRUE);
-		@mkdir('files/uploads/' . $user_id . '/files', 666, TRUE);
-		@mkdir('files/uploads/' . $user_id . '/files/private/', 666, TRUE);
-		@mkdir('files/uploads/' . $user_id . '/files/private/exercise', 666, TRUE);
-		@mkdir('files/uploads/' . $user_id . '/files/public/image', 666, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/image', 0777, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files', 0777, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files/private/', 0777, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files/private/exercise', 0777, TRUE);
+		@mkdir('files/uploads/' . $user_id . '/files/public/image', 0777, TRUE);
 
 		$htaccess = '
 		deny from all

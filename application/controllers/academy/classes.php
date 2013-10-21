@@ -18,8 +18,9 @@ class Classes extends Auth_Controller
 		$this->load->view('academy/classes/list', $data);
 	}
 
-	function view($id, $page = 0)
+	function view($id, $page = 1)
 	{
+		$page--;
 		if (!is_numeric($id)) {
 			show_404();
 		}
