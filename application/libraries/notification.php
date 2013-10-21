@@ -24,7 +24,6 @@ class Notification extends Auth_Controller
 		foreach($classes as $class ){
 			$q=$this->CI->class_member_model->get_member_mails($class);
 			if($q->num_rows()>0){
-//				print_r($q);
 				$mail_list='';
 				foreach($q->result() as $row){
 					$mail_list.=$row->email.',';
@@ -40,16 +39,23 @@ class Notification extends Auth_Controller
 				or go to '.site_url('academy/classes/view/'.$class)
 			);
 			return $this->CI->email->send();
-//			echo $this->CI->email->print_debugger().'</br>';
 			}
 		}
 		return null;
 	}
+	public function new_message_notice($to,$message)
+	{
+		$this->CI->load->model('user_model');
 
-//	function _mail($subject,$body,){
-//		$subject=''.$subject;
-//		$body=''.$body;
-//
-//		foreach()
-//	}
+			$this->CI->email->from('no-reply@panda.com');
+			$this->CI->email->to($this->CI->user_model->get_mail_by_id($to));
+			$this->CI->email->subject('Panda Academy | new message exist.');
+			$this->CI->email->message(
+				$message.'</br>
+				<a href="'.site_url('user/messages/').'">click here to view your message</a>
+				or go to '.site_url('user/messages/')
+			);
+			return $this->CI->email->send();
+	}
+
 }

@@ -10,7 +10,6 @@ class Messages extends Auth_Controller
 	function index()
 	{
 		$data['messages_unread'] = $this->message_model->get_unread_messages(0);
-//		$this->message_model->mark_as_read();
 		$this->load->view('user/messages/messages_unread', $data);
 	}
 
@@ -43,7 +42,7 @@ class Messages extends Auth_Controller
 		$data['pagination'] = $this->pagination->create_links();
 
 		$data['messages_inbox'] = $this->message_model->get_inbox_messages($page * 10);
-//		$this->message_model->mark_as_read();
+
 		$this->load->view('user/messages/messages_inbox', $data);
 	}
 
@@ -51,16 +50,20 @@ class Messages extends Auth_Controller
 	{
 		$this->load->library('form_validation');
 		$this->form_validation
-			->set_rules('to', 'receiver', 'required|is_natural')
+			->set_rules('to', 'receiver', 'required|is_natural|is_exist[user.user_id]')
 			->set_rules('message', 'message', 'required');
 
 		if ($this->form_validation->run()) {
 			$to      = $this->form_validation->set_value('to');
 			$message = $this->form_validation->set_value('message');
-			$this->session->set_userdata('is_sent', ($this->message_model->send($to, $message) != FALSE));
+			if($this->message_model->send($to, $message)!==false){
+				$this->load->library('notification');
+				$this->notification->new_message_notice($to,$message);
+			}
 		}
-
+//echo 'ssssssss';
 		redirect('user/messages/sent');
+//		echo 'sss';
 	}
 
 	function conversation($other_id = FALSE)
@@ -75,6 +78,7 @@ class Messages extends Auth_Controller
 		$data['other_full_name'] = $this->profile_model->get_full_name_by_id($other_id);
 		$data['user_full_name']  = $this->profile_model->get_full_name();
 
+		$this->message_model->conversation_mark_as_read($other_id);
 		$this->load->view('user/messages/conversation', $data);
 	}
 

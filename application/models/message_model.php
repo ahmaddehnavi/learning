@@ -17,26 +17,37 @@ class Message_Model extends CI_Model
 	}
 
 
-	public function mark_as_read()
+	/**
+	 * @param $othor_user_id
+	 * @return bool
+	 */
+	public function conversation_mark_as_read($othor_user_id)
 	{
-		$sql = 'UPDATE message SET is_read = 1 WHERE to_id = ?';
-		$this->db->query($sql, array($this->auth->get_user_id()));
+		$sql = 'UPDATE message SET is_read = 1 WHERE to_id = ? AND from_id=?';
+		$this->db->query($sql, array($this->auth->get_user_id(),$othor_user_id));
 
-		return $this->db->affected_rows();
+		return $this->db->affected_rows() > 0;
 	}
 
-
+	/**
+	 * @param int $offset
+	 * @return CI_DB_result
+	 */
 	public function get_sent_messages($offset = 0)
 	{
 		$sql='
 		SELECT message.* , profile.full_name
    	    FROM message
-		JOIN profile ON profile.user_id = message.to_id AND (from_id=?)
+		JOIN profile ON profile.user_id = message.to_id AND message.from_id=?
 		ORDER BY time
 		LIMIT ?,10';
 		return $this->db->query($sql, array($this->auth->get_user_id(),$offset));
 	}
 
+	/**
+	 * @param int $offset
+	 * @return CI_DB_result
+	 */
 	public function get_inbox_messages($offset = 0)
 	{
 		$sql='
@@ -48,6 +59,10 @@ class Message_Model extends CI_Model
 		return $this->db->query($sql, array( $this->auth->get_user_id(),$offset));
 	}
 
+	/**
+	 * @param int $offset
+	 * @return CI_DB_result
+	 */
 	public function get_unread_messages($offset = 0)
 	{
 		$sql='
@@ -58,23 +73,38 @@ class Message_Model extends CI_Model
 		return $this->db->query($sql, array( $this->auth->get_user_id()));
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function get_inbox_number()
 	{
 		$sql = 'SELECT count(*) AS num FROM message WHERE to_id=?';
 		return $this->db->query($sql, array($this->auth->get_user_id()))->row('num');
 	}
+
+	/**
+	 * @return mixed
+	 */
 	public function get_sent_number()
 	{
 		$sql = 'SELECT count(*) AS num FROM message WHERE from_id=? ';
 		return $this->db->query($sql, array($this->auth->get_user_id()))->row('num');
 	}
+
+	/**
+	 * @return mixed
+	 */
 	public function get_unread_number()
 	{
 		$sql = 'SELECT count(*) AS num FROM message WHERE to_id=? AND is_read=0';
 		return $this->db->query($sql, array($this->auth->get_user_id()))->row('num');
 	}
 
-
+	/**
+	 * @param $other_id
+	 * @param int $offset
+	 * @return CI_DB_result
+	 */
 	public function get_conversation($other_id,$offset=0)
 	{
 		$user_id=$this->auth->get_user_id();
