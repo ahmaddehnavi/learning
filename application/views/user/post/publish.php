@@ -34,10 +34,10 @@
 			<li></li>
 		</ul>
 		<menu>
-			<h2>academy :</h2>
-			<li class="icon-exercise"><?php echo anchor("academy/exercises", "exercises") ?></li>
-			<li class="icon-class"><?php echo anchor("academy/classes", "classes") ?></li>
-			<li class="icon-exam"><?php echo anchor("academy/exames", "exames") ?></li>
+			<h2>post :</h2>
+			<li class="active"><?php echo anchor('user/posts/publish', '<i class="icon-pencil"></i>publish') ?></li>
+			<li><?php echo anchor("user/posts", '<i class="icon-edit"></i>manage') ?></li>
+
 			<h2>user :</h2>
 			<li><?php echo anchor("user/dashboard", '<i class="icon-dashboard"></i>dashboard') ?></li>
 			<li><?php echo anchor('user/messages', '<i class="icon-inbox"></i>messages<b class="label">'.$this->unread_message.'</b>') ?></li>

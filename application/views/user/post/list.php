@@ -15,13 +15,18 @@
 			</ul>
 		</nav>
 		<aside id="sidebar">
-			<header><?php echo $this->auth->get_full_name(); ?>&nbsp;</header>
+			<header><img src="<?= FILES_USERS_PATH . '/' . $this->auth->get_user_id() ?>/image/profile_80.jpg"
+						 width="40px" height="40px" id="user-image"/><?php echo $this->auth->get_full_name(); ?>&nbsp;</header>
 			<ul class="collapse-btn btn-left toggle-off" collapse-target="#sidebar">
 				<li></li>
 				<li></li>
 				<li></li>
 			</ul>
 			<menu>
+				<h2>post :</h2>
+				<li><?php echo anchor('user/posts/publish', '<i class="icon-pencil"></i>publish') ?></li>
+				<li class="active"><?php echo anchor("user/posts", '<i class="icon-edit"></i>manage') ?></li>
+
 				<h2>user :</h2>
 				<li><?php echo anchor("user/dashboard", '<i class="icon-dashboard"></i>dashboard') ?></li>
 				<li><?php echo anchor('user/messages', '<i class="icon-inbox"></i>messages<b class="label">'.$this->unread_message.'</b>') ?></li>
@@ -55,7 +60,7 @@
 
 						<div>Sample description for classes page</div>
 					</section>
-					<?php echo anchor('/user/posts/publish', 'publish new post', 'class="btn-fix btn-small right"')?>
+<!--					--><?php //echo anchor('/user/posts/publish', 'publish new post', 'class="btn-fix btn-small right"')?>
 					<div class="badboy"></div>
 				</section>
 				<section id="content-body">

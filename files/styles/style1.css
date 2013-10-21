@@ -1,6 +1,6 @@
 body {
     position         : relative;
-    font-family: 'Roboto', Arial, sans-serif;;
+    font-family      : 'Roboto', Arial, sans-serif;;
     background-color : rgb(241, 240, 250);
 }
 
@@ -266,7 +266,6 @@ main {
 
 }
 
-
 #sidebar header {
     background         : #333;
     border-bottom      : 1px solid #000;
@@ -279,9 +278,10 @@ main {
     -webkit-box-shadow : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
     -moz-box-shadow    : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
     box-shadow         : 0 0 2px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.05) inset;
-    padding            : 23px 20px 23px 50px;
+    padding            : 23px 20px 23px 63px;
     font-size          : 14px;
     color              : #ccc;
+    position           : relative;
 }
 
 .top-line {
@@ -728,25 +728,26 @@ section.list {
     font-size   : 14px;
 }
 
-
-
-
-
-
-
-
-
 #sidebar i {
     display     : block;
-    float: left;
-    color          : #777;
-    font-size: 14px;
-    margin: -2px 12px 0px 13px;
+    float       : left;
+    color       : #777;
+    font-size   : 14px;
+    margin      : -2px 15px 0px 13px;
     text-shadow : 0 0 1px #000;
     text-align  : center;
     width       : 20px;
 }
 
-#sidebar li:hover i , #sidebar li.active i{
-    color: #eee;
+#sidebar li:hover i, #sidebar li.active i {
+    color : #eee;
 }
+
+#user-image {
+    position      : absolute;
+    top           : 10px;
+    left          : 14px;
+    border-radius : 4px;
+}
+
+

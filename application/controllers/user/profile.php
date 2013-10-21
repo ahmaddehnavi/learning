@@ -101,6 +101,9 @@ class Profile extends Auth_Controller
 				->resize(24, 24)
 				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_24.jpg', TRUE)
 
+				->resize(40, 40)
+				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_40.jpg', TRUE)
+
 				->resize(80, 80)
 				->save('files/uploads/' . $this->auth->get_user_id() . '/image/profile_80.jpg', TRUE)
 
