@@ -750,4 +750,8 @@ section.list {
     border-radius : 4px;
 }
 
-
+#sidebar header a{
+    display: inline;
+    padding: 0;
+    margin: 0;
+}

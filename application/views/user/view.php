@@ -17,8 +17,15 @@
 			</ul>
 		</nav>
 		<aside id="sidebar">
-				<header><img src="<?= FILES_USERS_PATH . '/' . $this->auth->get_user_id() ?>/image/profile_80.jpg"
-						 width="40px" height="40px" id="user-image"/><?php echo $this->auth->get_full_name(); ?>&nbsp;</header>
+			<header>
+				<?php if ($this->auth->is_logged_in()) {
+					echo anchor('/user/view/u/' . $this->auth->get_username(),
+						'<img src="'. FILES_USERS_PATH . '/' . $this->auth->get_user_id().'/image/profile_80.jpg"
+							 width="40px" height="40px" id="user-image"/>'.$this->auth->get_full_name()
+						,'target="_blank"');
+				}
+				?>
+				&nbsp;</header>
 
 			<ul class="collapse-btn btn-left toggle-off">
 				<li></li>
@@ -35,8 +42,8 @@
 					<li class="top-line"><?php echo anchor('user/logout', '<i class="icon-signout"></i>logout') ?></li>
 				<? } else { ?>
 					<h2>user :</h2>
-					<li class="icon-login"><?php echo anchor("user/login", "login") ?></li>
-					<li class="icon-register"><?php echo anchor("user/register", "register") ?></li>
+					<li><?php echo anchor("user/login", '<i class="icon-signin"></i>login') ?></li>
+					<li><?php echo anchor('user/register', '<i class="icon-user"></i>register') ?></li>
 				<? }?>
 			</menu>
 

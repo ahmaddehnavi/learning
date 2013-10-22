@@ -15,9 +15,13 @@
 			</ul>
 		</nav>
 		<aside id="sidebar">
-				<header><img src="<?= FILES_USERS_PATH . '/' . $this->auth->get_user_id() ?>/image/profile_80.jpg"
-						 width="40px" height="40px" id="user-image"/><?php echo $this->auth->get_full_name(); ?>&nbsp;</header>
-
+			<header>
+				<?php echo anchor('/user/view/u/' . $this->auth->get_username(),
+					'<img src="'. FILES_USERS_PATH . '/' . $this->auth->get_user_id().'/image/profile_80.jpg"
+							 width="40px" height="40px" id="user-image"/>'.$this->auth->get_full_name()
+					,'target="_blank"');
+				?>
+				&nbsp;</header>
 			<ul class="collapse-btn btn-left toggle-on" collapse-target="#sidebar">
 				<li></li>
 				<li></li>
@@ -34,6 +38,22 @@
 				<li><?php echo anchor('user/profile', '<i class="icon-user"></i>profile') ?></li>
 				<li class="top-line"><?php echo anchor('user/logout', '<i class="icon-signout"></i>logout') ?></li>
 			</menu>
+			<section class="list">
+				<menu>
+
+					<?php  foreach ($members->result() as $member) {
+						echo '<li>';
+						echo    anchor('user/view/id/' . $member->student_id, '
+							<figure><img src="' . FILES_USERS_PATH . '/' . $member->student_id . '/image/profile_24.jpg"
+							alt="" width=24 height=24/></figure>
+							<p>' . $member->student_name . '</p>
+							<div class="badboy"></div>'
+							, 'class="ad" target="_blank"');
+						echo '</li>';
+					} ?>
+
+				</menu>
+			</section>
 		</aside>
 		<div id="content">
 			<header>
@@ -117,22 +137,7 @@
 								echo anchor('academy/classes/enable_join/'.$class_id,'enable join student.','class="btn-fix btn-small" style="margin:10px 10px 0px 10px"');
 							}?>
 						</section>
-						<section class="list">
-							<menu>
 
-								<?php  foreach ($members->result() as $member) {
-									echo '<li>';
-									echo    anchor('user/view/id/' . $member->student_id, '
-							<figure><img src="' . FILES_USERS_PATH . '/' . $member->student_id . '/image/profile_24.jpg"
-							alt="" width=24 height=24/></figure>
-							<p>' . $member->student_name . '</p>
-							<div class="badboy"></div>'
-										, 'class="ad" target="_blank"');
-									echo '</li>';
-								} ?>
-
-							</menu>
-						</section>
 
 					</section>
 				</section>

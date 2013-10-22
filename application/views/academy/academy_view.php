@@ -16,9 +16,13 @@
 		</ul>
 	</nav>
 	<aside id="sidebar">
-		<header><img src="<?= FILES_USERS_PATH . '/' . $this->auth->get_user_id() ?>/image/profile_80.jpg"
-					 width="40px" height="40px" id="user-image"/><?php echo $this->auth->get_full_name(); ?>&nbsp;</header>
-
+		<header>
+			<?php echo anchor('/user/view/u/' . $this->auth->get_username(),
+				'<img src="'. FILES_USERS_PATH . '/' . $this->auth->get_user_id().'/image/profile_80.jpg"
+							 width="40px" height="40px" id="user-image"/>'.$this->auth->get_full_name()
+				,'target="_blank"');
+			?>
+			&nbsp;</header>
 		<ul class="collapse-btn btn-left toggle-on" collapse-target="#sidebar">
 			<li></li>
 			<li></li>
