@@ -10,7 +10,7 @@ class Dashboard extends  Auth_Controller
 
     function index()
     {
-        $this->load->view('user/dashboard');
+        redirect('academy/classes');
     }
 }
 

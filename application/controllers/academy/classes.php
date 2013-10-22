@@ -14,7 +14,8 @@ class Classes extends Auth_Controller
 	{
 		$data['prof_class']    = $this->class_model->get_prof_classes();
 		$data['student_class'] = $this->class_model->get_student_classes();
-
+		if ($data['prof_class']->num_rows() == 0 && $data['student_class']->num_rows() == 0)
+			redirect('academy/classes/manage');
 		$this->load->view('academy/classes/list', $data);
 	}
 
@@ -49,9 +50,9 @@ class Classes extends Auth_Controller
 		$data['lesson_name'] = $info['lesson_name'];
 		$data['prof_name']   = $info['prof_name'];
 		$data['new_change']  = $info['new_change'];
-		$data['join_status']  = $info['join_status'];
+		$data['join_status'] = $info['join_status'];
 		$data['is_prof']     = $is_prof;
-		$data['class_id']     = $id;
+		$data['class_id']    = $id;
 
 		if ($is_prof) {
 			$this->load->view('academy/classes/prof_view', $data);

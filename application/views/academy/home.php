@@ -27,7 +27,7 @@
 				<h2>academy :</h2>
 				<li class="icon-class active"><?php echo anchor("academy/classes", "classes") ?></li>
 				<h2>user :</h2>
-				<li><?php echo anchor("user/dashboard", '<i class="icon-dashboard"></i>dashboard') ?></li>
+
 				<li><?php echo anchor('user/messages', '<i class="icon-inbox"></i>messages<b class="label">'.$this->unread_message.'</b>') ?></li>
 				<li><?php echo anchor('user/posts', '<i class="icon-file-text"></i>posts') ?></li>
 				<li><?php echo anchor('user/profile', '<i class="icon-user"></i>profile') ?></li>
