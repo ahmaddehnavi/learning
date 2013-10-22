@@ -56,18 +56,19 @@ class Class_Member_Model extends CI_Model
 	 */
 	public function update_members_status($class_id, $members_id, $status)
 	{
+//		echo implode(',', $members_id);exit;
 		$this->load->model('class_model');
-		if ($this->class_model->is_prof_of_class($class_id))
+		if (!$this->class_model->is_prof_of_class($class_id))
 			return FALSE;
-		$sql = 'UPDATE class_member SET status = ? WHERE class_id = ? AND prof_id=? AND student_id IN (?)';
-		$this->db->query($sql, array($status, $class_id, implode(',', $members_id)));
+		$sql = 'UPDATE class_member SET status = ? WHERE class_id = ? AND (student_id IN('.implode(',', $members_id).'))';
+		$this->db->query($sql, array($status, $class_id));
 
-		return $this->db->affected_rows() == count($members_id);
+		return $this->db->affected_rows() === count($members_id);
 	}
 
 	public function get_all_members($class_id)
 	{
-		$sql = 'SELECT student_id , profile.full_name AS student_name
+		$sql = 'SELECT student_id,status , profile.full_name AS student_name
 		FROM class_member
 		JOIN profile ON profile.user_id=class_member.student_id
 		WHERE class_id=?';

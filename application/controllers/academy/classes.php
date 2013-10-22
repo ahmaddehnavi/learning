@@ -60,6 +60,24 @@ class Classes extends Auth_Controller
 			$this->load->view('academy/classes/view', $data);
 		}
 	}
+function setting($id)
+	{
+		if (!is_numeric($id)) {
+			show_404();
+		}
+		if ($this->class_model->is_prof_of_class($id) === FALSE) {
+			show_404();
+		}
+
+		$info            = $this->class_model->get_info($id);
+		$data['members'] =$this->class_member_model->get_all_members($id);
+
+		$data['lesson_name'] = $info['lesson_name'];
+		$data['prof_name']   = $info['prof_name'];
+		$data['join_status'] = $info['join_status'];
+		$data['class_id']    = $id;
+		$this->load->view('academy/classes/setting', $data);
+	}
 
 	function enable_join($id)
 	{
@@ -67,7 +85,7 @@ class Classes extends Auth_Controller
 			show_404();
 		}
 		$this->class_model->enable_join($id);
-		redirect('academy/classes/view/' . $id);
+		redirect('academy/classes/setting/' . $id);
 	}
 
 	function disable_join($id)
@@ -76,7 +94,7 @@ class Classes extends Auth_Controller
 			show_404();
 		}
 		$this->class_model->disable_join($id);
-		redirect('academy/classes/view/' . $id);
+		redirect('academy/classes/setting/' . $id);
 	}
 
 	function create()
@@ -166,13 +184,14 @@ class Classes extends Auth_Controller
 		if ($this->form_validation->run()) {
 			$class_id=$this->form_validation->set_value('class_id');
 			$status=$this->form_validation->set_value('status');
-			$members_id=$this->form_validation->set_value('members_id[]');
+			$members_id=$this->input->post('members_id');
+
 			if(is_array($members_id)){
 				$this->class_member_model->update_members_status($class_id,$members_id,$status);
 			}
 		}
 
-		redirect('academy/classes/view/'.$class_id);
+		redirect('academy/classes/setting/'.$class_id);
 
 	}
 }

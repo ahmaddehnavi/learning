@@ -54,7 +54,6 @@ class Posts extends Auth_Controller
 		$this->form_validation
 			->set_rules('subject', 'Subject', 'trim|required|xss_clean')
 			->set_rules('body', 'post body', 'trim|required')
-			->set_rules('classes[]', 'Selected Classes', 'trim')
 			->set_rules('mail_notice', 'Mail notification', 'trim')
 			->set_rules('post_type', 'post type', 'trim|required')
 			->set_rules('is_public', 'public publish', 'trim');
