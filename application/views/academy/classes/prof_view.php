@@ -62,14 +62,14 @@
 					</section>
 				</section>
 				<section id="content-body">
-
+					<section class="class-posts">
 					<?php
 					$user_id = $this->auth->get_user_id();
 					$delete_url = site_url('user/posts/remove');
 					$next = current_url();
 					foreach ($posts->result() as $post) {
 						?>
-						<section class="left">
+
 							<section class="widget">
 								<section class="image">
 									<figure class="imgpost">
@@ -82,9 +82,7 @@
 								</section>
 								<section class='total' style="padding-top: 1px;">
 									<header class='widget_head'>
-
 										<p class='subject'><?php echo $post->subject ?></p>
-
 									</header>
 									<section class='widget_body'>
 										<div class="text">    <?php echo $post->body ?></div>
@@ -110,34 +108,33 @@
 								<?php echo $pagination; ?>
 							</section>
 						</section>
-						<section class="right" style="width:200px;">
-							<section>
-								<?php
-								if($join_status==1){
-									echo anchor('academy/classes/disable_join/'.$class_id,'disable join student.','class="btn-fix"');
-								}else{
-									echo anchor('academy/classes/enable_join/'.$class_id,'enable join student.','class="btn-fix"');
-								}?>
-							</section>
-							<section class="list">
-								<menu>
+					<section>
+						<section>
+							<?php
+							if($join_status==1){
+								echo anchor('academy/classes/disable_join/'.$class_id,'disable join student.','class="btn-fix btn-small" style="margin:10px 10px 0px 10px"');
+							}else{
+								echo anchor('academy/classes/enable_join/'.$class_id,'enable join student.','class="btn-fix btn-small" style="margin:10px 10px 0px 10px"');
+							}?>
+						</section>
+						<section class="list">
+							<menu>
 
-									<?php  foreach ($members->result() as $member) {
-										echo '<li>';
-										echo    anchor('user/view/id/' . $member->student_id, '
+								<?php  foreach ($members->result() as $member) {
+									echo '<li>';
+									echo    anchor('user/view/id/' . $member->student_id, '
 							<figure><img src="' . FILES_USERS_PATH . '/' . $member->student_id . '/image/profile_24.jpg"
 							alt="" width=24 height=24/></figure>
 							<p>' . $member->student_name . '</p>
 							<div class="badboy"></div>'
-											, 'class="ad" target="_blank"');
-										echo '</li>';
-									} ?>
+										, 'class="ad" target="_blank"');
+									echo '</li>';
+								} ?>
 
-								</menu>
-							</section>
-
+							</menu>
 						</section>
 
+					</section>
 				</section>
 			</main>
 		</div>
