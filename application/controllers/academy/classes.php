@@ -148,13 +148,32 @@ class Classes extends Auth_Controller
 
 	function leave()
 	{
-		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural|is_exist[class.class_id]');
+		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural');
 
 		if ($this->form_validation->run()) {
 			$this->class_member_model->leave($this->form_validation->set_value('class_id'));
 		}
 
 		redirect('academy/classes/manage');
+	}
+
+	function update_members(){
+		$this->form_validation
+			->set_rules('class_id', 'Class id', 'trim|required')
+			->set_rules('status', 'student status', 'trim|required|is_natural|greater_than[-1]|less_than[3]')
+			->set_rules('members_id[]', 'members id', 'trim|required');
+
+		if ($this->form_validation->run()) {
+			$class_id=$this->form_validation->set_value('class_id');
+			$status=$this->form_validation->set_value('status');
+			$members_id=$this->form_validation->set_value('members_id[]');
+			if(is_array($members_id)){
+				$this->class_member_model->update_members_status($class_id,$members_id,$status);
+			}
+		}
+
+		redirect('academy/classes/view/'.$class_id);
+
 	}
 }
 

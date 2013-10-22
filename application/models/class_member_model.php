@@ -4,7 +4,7 @@ class Class_Member_Model extends CI_Model
 {
 	/**
 	 *status 0=block  , 1=wait , 2=active
- 	 */
+	 */
 	function __construct()
 	{
 		parent::__construct();
@@ -48,6 +48,23 @@ class Class_Member_Model extends CI_Model
 		return $this->db->affected_rows() == 1;
 	}
 
+	/**
+	 * @param $class_id
+	 * @param $members_id
+	 * @param $status
+	 * @return bool
+	 */
+	public function update_members_status($class_id, $members_id, $status)
+	{
+		$this->load->model('class_model');
+		if ($this->class_model->is_prof_of_class($class_id))
+			return FALSE;
+		$sql = 'UPDATE class_member SET status = ? WHERE class_id = ? AND prof_id=? AND student_id IN (?)';
+		$this->db->query($sql, array($status, $class_id, implode(',', $members_id)));
+
+		return $this->db->affected_rows() == count($members_id);
+	}
+
 	public function get_all_members($class_id)
 	{
 		$sql = 'SELECT student_id , profile.full_name AS student_name
@@ -58,7 +75,7 @@ class Class_Member_Model extends CI_Model
 		return $this->db->query($sql, array($class_id));
 	}
 
-    public function get_active_members($class_id)
+	public function get_active_members($class_id)
 	{
 		$sql = 'SELECT student_id , profile.full_name AS student_name
 		FROM class_member
