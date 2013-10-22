@@ -42,10 +42,10 @@
 	</style>
 	<nav>
 		<menu>
-			<li><a href="#">item 1</a></li>
-			<li><a href="#">item 2</a></li>
-			<li><a href="#">item 3</a></li>
-			<li><a href="#">item 4</a></li>
+			<li><?= anchor('/', 'home')?></li>
+			<li><?=anchor('/academy', 'academy')?></li>
+			<li class="active"><?=anchor('/user', 'user')?></li>
+			<li><a href="<?= FILE_MANAGE_PATH ?>">file management</a></li>
 			<div class="badboy"></div>
 		</menu>
 		<ul class="collapse-btn btn-top toggle-on" collapse-target="nav">

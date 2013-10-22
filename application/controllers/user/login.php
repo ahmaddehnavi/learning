@@ -14,7 +14,7 @@ class Login extends CI_Controller
 			if ($this->loginwithgoogle->is_logged_in()) {
 				if ($this->auth->force_login($this->loginwithgoogle->get_mail()) !== FALSE) {
 					$next_page = $this->session->userdata('next_page');
-					redirect(empty($next_page) ? 'user/dashboard' : $next_page);
+					redirect(empty($next_page) ? 'academy/classes' : $next_page);
 				}
 			}
 			$google_url = $this->loginwithgoogle->get_auth_url();
@@ -32,7 +32,7 @@ class Login extends CI_Controller
 		$data      = array(
 			'login_error' => FALSE,
 			'registration_message' => $this->session->flashdata('registration_message'),
-			'next_page' => empty($next_page) ? 'user/dashboard' : $next_page,
+			'next_page' => empty($next_page) ? 'academy/classes' : $next_page,
 			'google_url' => $google_url
 		);
 

@@ -6,10 +6,10 @@
 </head>
 <body>
 
-username : <?=$username?>
-password : <?=$password?>
-full_name : <?=$full_name?>
-user_id : <?=$user_id?>
+username : <?=$username?> <br/>
+password : <?=$password?> <br/>
+full_name : <?=$full_name?> <br/>
+user_id : <?=$user_id?> <br/>
 
 </body>
 </html>

@@ -37,7 +37,7 @@ class Lost_password extends CI_Controller
 
 				$this->load->library('email');
 
-				$is_send=$this->email->from('system@panda.com', 'Panda Academy')
+				$is_send=$this->email->from('no-reply@pandaacademy.ir', 'Panda Academy')
 					->to($email)
 					->subject('Recovery Password, Panda Academy!')
 					->message($message)
