@@ -42,7 +42,7 @@ class Class_Member_Model extends CI_Model
 	{
 		$student_id = $this->auth->get_user_id();
 
-		$sql = 'DELETE FROM class_member WHERE class_id=? AND student_id=? LIMIT 1';
+		$sql = 'DELETE FROM class_member WHERE class_id=? AND student_id=? AND status!=0 LIMIT 1';
 		$this->db->query($sql, array($class_id, $student_id));
 
 		return $this->db->affected_rows() == 1;
