@@ -41,37 +41,25 @@ class Class_Model extends CI_Model
 		return $this->db->affected_rows() == 1;
 	}
 
-//
-//	/**
-//	 * @param $class_id
-//	 * @param $student_id
-//	 * @return bool
-//	 */
-//	public function join($class_id, $student_id)
-//	{
-//		$sql = 'SELECT * FROM class_member WHERE class_id=? AND student_id=? LIMIT 1';
-//		$row = $this->db->query($sql, array($class_id, $student_id));
-//		if ($row->num_rows() > 0) {
-//			return TRUE;
-//		}
-//
-//		$sql = 'INSERT INTO class_member(class_id, student_id) VALUES(?,?)';
-//		if (FALSE !== $this->db->query($sql, array($class_id, $student_id))) {
-//			return $this->db->insert_id();
-//		}
-//
-//		return FALSE;
-//	}
-//
-//	public function leave($class_id)
-//	{
-//		$student_id = $this->auth->get_user_id();
-//
-//		$sql = 'DELETE FROM class_member WHERE class_id=? AND student_id=? LIMIT 1';
-//		$this->db->query($sql, array($class_id, $student_id));
-//
-//		return $this->db->affected_rows() == 1;
-//	}
+	public function disable_join($class_id)
+	{
+		$pro_id = $this->auth->get_user_id();
+
+		$sql = 'UPDATE class SET join_status = 0 WHERE class_id=? AND prof_id=? LIMIT 1';
+		$this->db->query($sql, array($class_id, $pro_id));
+
+		return $this->db->affected_rows() == 1;
+	}
+
+	public function enable_join($class_id)
+	{
+		$pro_id = $this->auth->get_user_id();
+
+		$sql = 'UPDATE class SET join_status = 1 WHERE class_id=? AND prof_id=? LIMIT 1';
+		$this->db->query($sql, array($class_id, $pro_id));
+
+		return $this->db->affected_rows() == 1;
+	}
 
 	/**
 	 * @return CI_DB_result
@@ -97,9 +85,6 @@ class Class_Model extends CI_Model
 
 	public function get_student_classes()
 	{
-//		$this->load->model('profile_model');
-//		$academy_id = $this->profile_model->get_academy_id();
-//		$field_id   = $this->profile_model->get_field_id();
 		$sql        =
 			'SELECT class.class_id,class.prof_id,lesson.name AS lesson_name ,profile.full_name AS prof_name
 			 FROM class
@@ -132,9 +117,6 @@ class Class_Model extends CI_Model
 	 */
 	public function get_prof_classes()
 	{
-		$this->load->model('profile_model');
-		$academy_id = $this->profile_model->get_academy_id();
-		$field_id   = $this->profile_model->get_field_id();
 		$sql        =
 			'SELECT class.class_id,class.prof_id,academy.name AS academy_name,field_table.name AS field_name,lesson.name AS lesson_name
 			 FROM class
@@ -146,24 +128,6 @@ class Class_Model extends CI_Model
 		return $this->db->query($sql, array($this->auth->get_user_id()));
 	}
 
-	/**
-	 * @param $class_id
-	 * @param $academy
-	 * @param $field
-	 * @param $lesson
-	 * @param $prof
-	 * @return CI_DB_result
-//	 */
-//	public function search($class_id, $academy, $field, $lesson, $prof)
-//	{
-//		$sql = 'SELECT class.*
-//                   FROM class WHERE class.class_id=?
-//                   JOIN academy ON academy.academy_id=class.academy_id AND academy.name= ?
-//                   JOIN field_table ON field_table.field_id=class.field_id AND field_table.name= ?
-//                   JOIN users ON users.users_id=class.users_id AND users.name= ?';
-//
-//		return $this->db->query($sql, array($class_id, $academy, $field, $lesson, $prof));
-//	}
 
 	public function get_prof_id($class_id)
 	{
@@ -185,6 +149,7 @@ class Class_Model extends CI_Model
 		$data['prof_name']   = $this->profile_model->get_full_name_by_id($row->row('prof_id'));
 		$data['lesson_name'] = $this->lesson_model->get_name_by_id($row->row('lesson_id'));
 		$data['prof_id']     = $row->row('prof_id');
+		$data['join_status'] = $row->row('join_status');
 		$data['new_change']  = $this->get_number_of_new_change($class_id);
 
 		return $data;
@@ -207,12 +172,16 @@ class Class_Model extends CI_Model
 		return $this->db->query($sql, array($class_id))->row('number_of_change');
 	}
 
+	/**
+	 * @param $class_id
+	 * @return bool
+	 */
 	public function inc_number_of_change($class_id)
 	{
-		$sql = 'UPDATE class SET number_of_change=number_of_change+1 WHERE class_id=? LIMIT 1';
-		$this->db->query($sql, array($class_id));
+		$sql = 'UPDATE class SET number_of_change=number_of_change+1 WHERE class_id IN (?) LIMIT 1';
+		$this->db->query($sql, array(implode(',' ,$class_id)));
 
-		return $this->db->affected_rows() == 1;
+		return $this->db->affected_rows() == count($class_id);
 	}
 
 	/**

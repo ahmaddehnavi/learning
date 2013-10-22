@@ -87,6 +87,7 @@ class Posts extends Auth_Controller
 				}
 				if ($mail_notice == 1)
 					$this->notification->notice_new_post($classes, $subject, $body);
+
 				redirect('user/posts/');
 			}
 		}

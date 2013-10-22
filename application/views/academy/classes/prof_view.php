@@ -34,24 +34,6 @@
 				<li><?php echo anchor('user/profile', '<i class="icon-user"></i>profile') ?></li>
 				<li class="top-line"><?php echo anchor('user/logout', '<i class="icon-signout"></i>logout') ?></li>
 			</menu>
-
-
-			<section class="list">
-				<menu>
-
-					<?php  foreach ($members->result() as $member) {
-						echo '<li>';
-						echo    anchor('user/view/id/' . $member->student_id, '
-							<figure><img src="' . FILES_USERS_PATH . '/' . $member->student_id . '/image/profile_24.jpg"
-							alt="" width=24 height=24/></figure>
-							<p>' . $member->student_name . '</p>
-							<div class="badboy"></div>'
-							, 'class="ad" target="_blank"');
-						echo '</li>';
-					} ?>
-
-				</menu>
-			</section>
 		</aside>
 		<div id="content">
 			<header>
@@ -87,46 +69,74 @@
 					$next = current_url();
 					foreach ($posts->result() as $post) {
 						?>
-						<section class="widget" tabindex="1">
-							<section class="image">
-								<figure class="imgpost">
-									<img
-										src="<?php echo FILES_USERS_PATH . '/' . $post->author_id . '/image/profile_50.jpg' ?>"
-										alt="" width="50px" height="50px"/></figure>
-								<p class='name'>
-									<?=$post->author_name?>
-								</p>
-							</section>
-							<section class='total' style="padding-top: 1px;">
-								<header class='widget_head'>
-
-									<p class='subject'><?php echo $post->subject ?></p>
-
-								</header>
-								<section class='widget_body'>
-									<div class="text">    <?php echo $post->body ?></div>
-									<div class="badboy"></div>
-									<p class='publish'><?php echo  date('Y/m/d h:m',$post->time) ?></p>
+						<section class="left">
+							<section class="widget">
+								<section class="image">
+									<figure class="imgpost">
+										<img
+											src="<?php echo FILES_USERS_PATH . '/' . $post->author_id . '/image/profile_50.jpg' ?>"
+											alt="" width="50px" height="50px"/></figure>
+									<p class='name'>
+										<?=$post->author_name?>
+									</p>
 								</section>
+								<section class='total' style="padding-top: 1px;">
+									<header class='widget_head'>
 
-								<?php if ($post->author_id == $user_id) { ?>
-									<footer class="widget_footer">
-										<div class="menu">
-											<?=form_open($delete_url);?>
-											<input type="hidden" name="post_id" value="<?= $post->post_id; ?>"/>
-											<input type="hidden" name="next" value="<?= $next ?>"/>
-											<input type="submit" class="btn" value="delete"/>
-											</form>
-										</div>
-									</footer>
-								<?php } ?>
+										<p class='subject'><?php echo $post->subject ?></p>
+
+									</header>
+									<section class='widget_body'>
+										<div class="text">    <?php echo $post->body ?></div>
+										<div class="badboy"></div>
+										<p class='publish'><?php echo  date('Y/m/d h:m',$post->time) ?></p>
+									</section>
+
+									<?php if ($post->author_id == $user_id) { ?>
+										<footer class="widget_footer">
+											<div class="menu">
+												<?=form_open($delete_url);?>
+												<input type="hidden" name="post_id" value="<?= $post->post_id; ?>"/>
+												<input type="hidden" name="next" value="<?= $next ?>"/>
+												<input type="submit" class="btn" value="delete"/>
+												</form>
+											</div>
+										</footer>
+									<?php } ?>
+								</section>
+							</section>
+							<?php }?>
+							<section class="widget" style="width: inherit;">
+								<?php echo $pagination; ?>
 							</section>
 						</section>
-					<?php }?>
-					<!--                <div class="badboy"></div>-->
-					<section class="widget" style="width: inherit;">
-						<?php echo $pagination; ?>
-					</section>
+						<section class="right" style="width:200px;">
+							<section>
+								<?php
+								if($join_status==1){
+									echo anchor('academy/classes/disable_join/'.$class_id,'disable join student.','class="btn-fix"');
+								}else{
+									echo anchor('academy/classes/enable_join/'.$class_id,'enable join student.','class="btn-fix"');
+								}?>
+							</section>
+							<section class="list">
+								<menu>
+
+									<?php  foreach ($members->result() as $member) {
+										echo '<li>';
+										echo    anchor('user/view/id/' . $member->student_id, '
+							<figure><img src="' . FILES_USERS_PATH . '/' . $member->student_id . '/image/profile_24.jpg"
+							alt="" width=24 height=24/></figure>
+							<p>' . $member->student_name . '</p>
+							<div class="badboy"></div>'
+											, 'class="ad" target="_blank"');
+										echo '</li>';
+									} ?>
+
+								</menu>
+							</section>
+
+						</section>
 
 				</section>
 			</main>

@@ -99,6 +99,14 @@ class Class_Member_Model extends CI_Model
 		return $this->db->query($sql, array($class_id, $this->auth->get_user_id()))->num_rows() === 1;
 	}
 
+//	public function reset_number_of_change($class_id)
+//	{
+//		$sql = 'UPDATE class SET number_of_change=number_of_change+1 WHERE class_id IN (?) LIMIT 1';
+//		$this->db->query($sql, array(implode(',' ,$class_id)));
+//
+//		return $this->db->affected_rows() == count($class_id);
+//	}
+
 }
 /* End of file academy_model.php */
 /* Location: ./application/models/academy_model.php */

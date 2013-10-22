@@ -85,6 +85,7 @@ class Post_Model extends CI_Model
 		return $data;
 	}
 
+
 	public function get_author_id($post_id)
 	{
 		$sql = 'SELECT author_id FROM post WHERE post_id=? LIMIT 1';

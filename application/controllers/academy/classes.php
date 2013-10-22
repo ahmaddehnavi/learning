@@ -26,17 +26,17 @@ class Classes extends Auth_Controller
 		}
 		$is_prof = FALSE;
 		if ($this->class_member_model->is_non_blocked_student_of_class($id) === TRUE) {
-//			$is_prof = FALSE;
+			$members = $this->class_member_model->get_active_members($id);
 		} elseif ($this->class_model->is_prof_of_class($id) === TRUE) {
+			$members = $this->class_member_model->get_all_members($id);
 			$is_prof = TRUE;
 		} else {
 			show_404();
 		}
 
-		$info = $this->class_model->get_info($id);
-
+		$info            = $this->class_model->get_info($id);
 		$data            = $this->post_model->get_class_posts($id, $page * 10);
-		$data['members'] = $this->class_member_model->get_active_members($id);
+		$data['members'] = $members;
 		$this->load->library('pagination');
 		$config['base_url']         = site_url('academy/classes/view/' . $id . '/');
 		$config['total_rows']       = $data['total'];
@@ -49,7 +49,9 @@ class Classes extends Auth_Controller
 		$data['lesson_name'] = $info['lesson_name'];
 		$data['prof_name']   = $info['prof_name'];
 		$data['new_change']  = $info['new_change'];
+		$data['join_status']  = $info['join_status'];
 		$data['is_prof']     = $is_prof;
+		$data['class_id']     = $id;
 
 		if ($is_prof) {
 			$this->load->view('academy/classes/prof_view', $data);
@@ -58,27 +60,22 @@ class Classes extends Auth_Controller
 		}
 	}
 
-	function setting($id, $page = 0)
+	function enable_join($id)
 	{
-//		if (!is_numeric($id)) {
-//			show_404();
-//		}
-//		if ($this->class_member_model->is_validate_member($id)) {
-//			show_404();
-//		}
-//
-//		$info = $this->class_model->get_info($id);
-//
-//		$data            = $this->post_model->get_class_posts($id, $page * 10);
-//		$data['members'] = $this->class_member_model->get_all_members($id);
-//
-//		$data['lesson_name'] = $info['lesson_name'];
-//		$data['prof_name']   = $info['prof_name'];
-//		$data['new_change']  = $info['new_change'];
-//		$data['is_prof']     = ($info['prof_id'] === $this->auth->get_user_id());
-//
-//		$this->load->view('academy/classes/view', $data);
+		if (!is_numeric($id)) {
+			show_404();
+		}
+		$this->class_model->enable_join($id);
+		redirect('academy/classes/view/' . $id);
+	}
 
+	function disable_join($id)
+	{
+		if (!is_numeric($id)) {
+			show_404();
+		}
+		$this->class_model->disable_join($id);
+		redirect('academy/classes/view/' . $id);
 	}
 
 	function create()
@@ -100,11 +97,11 @@ class Classes extends Auth_Controller
 				redirect('academy/classes/manage');
 			}
 
-			$lesson = $this->form_validation->set_value('lesson_id');
+			$lesson  = $this->form_validation->set_value('lesson_id');
 			$prof_id = $this->auth->get_user_id();
 			$id      = $this->class_model->create($academy_id, $field_id, $lesson, $prof_id);
 			if (FALSE !== $id) {
-				$this->class_code_model->use_code($code1,$code2);
+				$this->class_code_model->use_code($code1, $code2);
 				redirect('/academy/classes/view/' . $id);
 			}
 
@@ -131,7 +128,7 @@ class Classes extends Auth_Controller
 		$data['prof_class']    = $this->class_model->get_prof_classes();
 		$data['student_class'] = $this->class_model->get_full_student_classes();
 		$data['lesson_list']   = $this->lesson_model->get_list();
-		$data['error'] = $this->session->flashdata('invalid_code_error');
+		$data['error']         = $this->session->flashdata('invalid_code_error');
 		$this->load->view('academy/classes/manage', $data);
 	}
 
