@@ -66,7 +66,7 @@ class Auth
 	 * @param    string        email address
 	 * @return    mixed        user_id
 	 */
-	public function create_user($full_name, $username, $password, $email)
+	public function create_user($full_name, $username, $email)
 	{
 		$qry = $this->CI->db
 			->where('username', $username)
@@ -81,7 +81,7 @@ class Auth
 
 		$data = array(
 			'username' => $username,
-			'password' => sha1($password . $salt),
+			'password' => sha1($salt),
 			'email' => $email,
 			'salt' => $salt,
 			'status' => self::$status['inactive'],
@@ -92,7 +92,7 @@ class Auth
 
 		$this->create_profile($user_id, $full_name);
 
-
+		$this->send_user_information($user_id,$username,$email,$full_name);
 		return $user_id;
 	}
 
@@ -391,12 +391,46 @@ class Auth
 			$this->CI->email->from('system@academy.com', 'System')
 				->to($mail)
 				->subject('Recovery Password, Panda Academy!')
-				->message('
-				your new password is : ' . $new_password
-				)
+				->message($this->CI->load->view('mail/account_information',array(
+					'new_password'=>$new_password
+				),TRUE))
 				->send();
 
 //			echo $this->CI->email->print_debugger();
+
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	public function send_user_information($user_id,$username,$mail,$full_name)
+	{
+		$this->CI->load->helper('string');
+
+		$salt         = $this->_create_salt();
+		$new_password = random_string('alnum', 10);
+		$data         = array(
+			'password' => sha1($new_password . $salt),
+			'salt' => $salt
+		);
+
+		$this->CI->db->where('user_id', $user_id)->limit(1)->update('user', $data);
+
+		if ($this->CI->db->affected_rows() === 1) {
+
+			$this->CI->load->library('email');
+
+			$this->CI->email->from('no-replay@academy.com', 'System')
+				->to($mail)
+				->subject('Panda Academy | Account Information')
+				->message($this->CI->load->view('mail/account_information',array(
+					'username'=>$username,
+					'password'=>$new_password,
+					'full_name'=>$full_name,
+					'user_id'=>$user_id
+				),TRUE))
+				->send();
 
 			return TRUE;
 		}
