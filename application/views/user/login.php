@@ -87,7 +87,7 @@
 
 		<div class="login-with">
 			<h2>or login with :</h2>
-			<a href="<?php echo $google_url;?>" class="btn btn-small" ><i class="icon-google-plus-sign"></i>&nbsp;&nbsp;google</a>
+			<a href="<?php echo $google_url;?>" class="btn btn-small" ><i class="icon-google-plus"></i>&nbsp;&nbsp;google</a>
 		</div>
 		</form>
 	</div>
