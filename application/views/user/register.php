@@ -72,14 +72,6 @@
 			<input type="email" name="email" value="<?php echo set_value('email'); ?>"/>
 			<?= form_error('email', '<p class="form_err">', '</p>')?>
 		</label><br>
-<!--		<label>Password:-->
-<!--			<input type="password" name="password" value="--><?php //echo set_value('password'); ?><!--"/>-->
-<!--			--><?//= form_error('password', '<p class="form_err">', '</p>')?>
-<!--		</label><br>-->
-<!--		<label>Confirm Password:-->
-<!--			<input type="password" name="password_conf" value="--><?php //echo set_value('password_conf'); ?><!--"/>-->
-<!--			--><?//= form_error('password_conf', '<p class="form_err">', '</p>')?>
-<!--		</label><br>-->
 
 		<div>
 			<input type="submit" value="create account" class="btn" name='submits'>

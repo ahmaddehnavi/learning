@@ -115,7 +115,7 @@ class Auth
         ErrorDocument 403 /404.html
         ';
 		@file_put_contents('files/uploads/' . $user_id . '/files/private/.htaccess', $htaccess);
-		chmod('files/uploads/' . $user_id . '/files/private/.htaccess', 666);
+//		chmod('files/uploads/' . $user_id . '/files/private/.htaccess', 666);
 	}
 
 	// --------------------------------------------------------------------------
@@ -421,7 +421,7 @@ class Auth
 
 			$this->CI->load->library('email');
 
-			$this->CI->email->from('no-replay@academy.com', 'System')
+			$this->CI->email->from('no-reply@academy.com', 'System')
 				->to($mail)
 				->subject('Panda Academy | Account Information')
 				->message($this->CI->load->view('mail/account_information',array(

@@ -29,7 +29,7 @@ class Notification extends Auth_Controller
 					$mail_list .= $row->email . ',';
 				}
 
-				$this->CI->email->from('no-reply@panda.com');
+				$this->CI->email->from('no-reply@pandaacademy.ir');
 				$this->CI->email->to('');
 				$this->CI->email->bcc($mail_list);
 				$this->CI->email->subject('Panda Academy | ' . $post_subject);
@@ -45,7 +45,7 @@ class Notification extends Auth_Controller
 	public function new_message_notice($to, $message)
 	{
 		$this->CI->load->model('user_model');
-		$this->CI->email->from('no-reply@panda.com');
+		$this->CI->email->from('no-reply@pandaacademy.ir');
 		$this->CI->email->to($this->CI->user_model->get_mail_by_id($to));
 		$this->CI->email->subject('Panda Academy | new message exist.');
 		$this->CI->email->message($this->CI->load->view('mail/notify_new_message', array(
