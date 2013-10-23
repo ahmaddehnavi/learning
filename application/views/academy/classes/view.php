@@ -113,34 +113,28 @@
 									<div class="badboy"></div>
 									<p class='publish'><?php echo date('Y/m/d h:m',$post->time) ?></p>
 								</section>
+								<section class="widget-footer">
+								<?php
 
-								<?php if ($post->author_id == $user_id) { ?>
-									<footer class="widget_footer">
-										<div class="menu">
-											<?=form_open($delete_url);?>
-											<input type="hidden" name="post_id" value="<?= $post->post_id; ?>"/>
-											<input type="hidden" name="next" value="<?= $next ?>"/>
-											<input type="submit" class="btn" value="delete"/>
-											</form>
-										</div>
-									</footer>
-								<?php } if ($post->post_type === 'exercise') {
+								if ($post->post_type === 'exercise') {
 									$upload_input='upload_input_'.$post->post_id;
 									echo form_open_multipart('academy/exercise/upload','target="_blank"');  ?>
 									<input type="hidden" name="post_id" value="<?=$post->post_id?>"/>
                                     <p>pdf , docx , zip , rar allowed.</p>
 									<input type="file" class="upload_input" id="<?=$upload_input?>" name="userfile"/>
-									<input type="button" upload_input="<?=$upload_input?>" class="upload_btn" value="select file" />
+								<input type="button" upload_input="<?=$upload_input?>" class="upload_btn btn" value="select file" />
 
-									<input type="submit" class="btn-small" value="upload exercise"/>
+									<input type="submit" class="btn btn-small" value="upload exercise"/>
 									</form>
 								<?php
 								}
 								?>
+								</section>
+								<div class="badboy"></div>
 							</section>
 						</section>
+
 					<?php }?>
-					<!--                <div class="badboy"></div>-->
 					<section class="widget" style="width: inherit;">
 						<?php echo $pagination; ?>
 					</section>

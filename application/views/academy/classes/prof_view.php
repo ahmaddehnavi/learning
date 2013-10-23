@@ -79,7 +79,7 @@
 						<h2><?=$lesson_name?> :</h2>
 
 						<div> Professor : <?=$prof_name?></div>
-						<?php echo anchor("academy/classes/setting/".$class_id, '<i class="icon-cogs"></i> &nbsp;&nbsp;setting','class="btn-fix btn-small right"') ?>
+						<?php echo anchor("academy/classes/setting/" . $class_id, '<i class="icon-cogs"></i> &nbsp;&nbsp;setting', 'class="btn-fix btn-small right"') ?>
 					</section>
 				</section>
 				<section id="content-body">
@@ -111,19 +111,27 @@
 										<p class='publish'><?php echo  date('Y/m/d h:m', $post->time) ?></p>
 									</section>
 
-									<?php if ($post->author_id == $user_id) { ?>
-										<footer class="widget_footer">
-											<div class="menu">
-												<?=form_open($delete_url);?>
+									<footer class="widget_footer">
+										<ul>
+											<li><?=form_open($delete_url);?>
 												<input type="hidden" name="post_id" value="<?= $post->post_id; ?>"/>
 												<input type="hidden" name="next" value="<?= $next ?>"/>
-												<input type="submit" class="btn" value="delete"/>
+												<input type="submit" class="btn btn-red" value="delete"/>
 												</form>
-											</div>
-										</footer>
-									<?php } ?>
+											</li>
+											<?php
+											if ($post->post_type === 'exercise') {
+												echo '<li class="view-exercise">' .
+													anchor(FILE_MANAGE_PATH . '/browse.php?dir=files/private/exercise/' . $post->post_id, 'view uploaded exercise', 'class="btn btn-small" target="_blank"') .
+													'</li>';
+											}
+											?>
+										</ul>
+									</footer>
+									<div class="badboy"></div>
 								</section>
 							</section>
+
 						<?php }?>
 						<section class="widget" style="width: inherit;">
 							<?php echo $pagination; ?>

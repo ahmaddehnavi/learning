@@ -650,32 +650,29 @@ nav a:hover, nav li.active a {
 }
 
 .widget_footer {
-    width              : 100px;
-    float              : right;
-    visibility         : hidden;
-    -webkit-transition : all .2s ease;
+    width              : 100%;
+    height: 0px;
+    overflow: hidden;
+    transition : all .5s ease;
 
-}
-
-.widget_footer .menu {
-    width : 100px;
 }
 
 .widget_footer li {
-    float  : left;
-    margin : 2px 5px;
+    float: right;
+    height: 50px;
 }
 
-.widget_footer li a {
-    text-decoration : none;
+.widget:focus .widget_footer , .widget:hover .widget_footer {
+    height: 55px;
 }
 
-.widget:hover .widget_footer {
-    visibility : visible;
+.view-exercise{
+    margin-top: 16px;
+    margin-right: 27px;
 }
 
-.widget:focus .widget_footer {
-    display : block;
+.view-exercise a{
+    padding: 10px;
 }
 
 section.list {
@@ -684,9 +681,7 @@ section.list {
     margin      : 20px 0 0 9px;
     border-top  : 1px solid #676B6D;
     padding-top : 10px;
-    /*overflow: hidden;*/
-    /*-webkit-border-top-image: linear-gradient( rgba(219, 219, 219,0) 13% , rgba(232, 232, 232,0.5) 42%, rgb(255, 255, 255) 64%) 14% stretch;*/
-}
+ }
 
 .list:hover {
     overflow-y : scroll;
@@ -750,8 +745,28 @@ section.list {
     border-radius : 4px;
 }
 
-#sidebar header a{
-    display: inline;
-    padding: 0;
-    margin: 0;
+#sidebar header a {
+    display : inline;
+    padding : 0;
+    margin  : 0;
+}
+
+.upload_btn {
+    padding : 8px;
+}
+
+.btn-red:hover{
+    background: #a00;
+    color: #fff;
+}
+
+.img-user-view{
+    margin-right: 30px;
+    float: left;
+}
+
+.img-user-view img{
+    width: 100px;
+    height: 100px;
+    border-radius: 4px;
 }

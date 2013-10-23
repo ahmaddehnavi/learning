@@ -38,12 +38,16 @@ class Auth
 	 */
 	public function log_out($redirect = '')
 	{
-		$this->CI->session->sess_destroy();
+
 		if (!isset($_SESSION)) {
 			session_start();
 		}
 		$_SESSION['file_management']['disabled']  = TRUE;
 		$_SESSION['file_management']['uploadURL'] = '../files/uploads/public';
+
+		$this->CI->session->sess_destroy();
+		session_unset();
+		session_destroy();
 
 		redirect($redirect);
 	}

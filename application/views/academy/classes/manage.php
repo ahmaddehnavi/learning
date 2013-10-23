@@ -119,7 +119,7 @@
 								<td>
 									<?=form_open('/academy/classes/remove/')?>
 									<input type="hidden" name="class_id" value="<?= $row->class_id ?>"/>
-									<input type="submit" value="remove" class="btn btn-small"/>
+									<input type="submit" value="remove" class="btn btn-small  btn-red"/>
 
 									<div class="badboy"></div>
 									</form>

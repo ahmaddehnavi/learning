@@ -6,6 +6,8 @@ class Logout extends CI_Controller
 	function index()
 	{
 		$this->auth->log_out();
+//		$this->load->library('loginwithgoogle');
+//		$this->loginwithgoogle->log_out();
 	}
 
 }
