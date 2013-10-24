@@ -197,16 +197,12 @@ class Classes extends Auth_Controller
 
 	}
 
-	function remove_blocked_members()
+	function remove_blocked_members($class_id)
 	{
-		$this->form_validation
-			->set_rules('class_id', 'Class id', 'trim|required|is_natural');
-
-		if ($this->form_validation->run()) {
-			$class_id = $this->form_validation->set_value('class_id');
-			$this->class_member_model->remove_blocked_members($class_id);
+		if (!is_numeric($class_id)) {
+			show_404();
 		}
-
+		$this->class_member_model->remove_blocked_members($class_id);
 		redirect('academy/classes/setting/' . $class_id);
 
 	}
