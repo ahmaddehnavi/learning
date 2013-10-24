@@ -98,18 +98,6 @@ class Class_Member_Model extends CI_Model
 		return $this->db->query($sql, array($class_id));
 	}
 
-
-	public function leave_all_students($class_id){
-		$this->load->model('class_model');
-		if (!$this->class_model->is_prof_of_class($class_id))
-			return FALSE;
-
-		$sql = 'DELETE FROM class_member WHERE class_id = ?';
-		$this->db->query($sql, array($class_id));
-
-		return $this->db->affected_rows();
-	}
-
 	public function get_active_member_mails($class_id)
 	{
 		$sql = 'SELECT user.email
@@ -141,6 +129,7 @@ class Class_Member_Model extends CI_Model
 		return $this->db->query($sql, array($class_id, $this->auth->get_user_id()))->num_rows() === 1;
 	}
 
+
 //	public function reset_number_of_change($class_id)
 //	{
 //		$sql = 'UPDATE class SET number_of_change=number_of_change+1 WHERE class_id IN (?) LIMIT 1';
@@ -148,6 +137,18 @@ class Class_Member_Model extends CI_Model
 //
 //		return $this->db->affected_rows() == count($class_id);
 //	}
+
+
+	public function leave_all_students($class_id){
+		$this->load->model('class_model');
+		if (!$this->class_model->is_prof_of_class($class_id))
+			return FALSE;
+
+		$sql = 'DELETE FROM class_member WHERE class_id = ?';
+		$this->db->query($sql, array($class_id));
+
+		return $this->db->affected_rows();
+	}
 
 }
 /* End of file academy_model.php */

@@ -1,34 +1,34 @@
 <?php $this->load->view('base/header'); ?>
 	<style type="text/css">
-		.login-form {
+		.message-box {
 			margin    : 50px auto;
 			width     : 330px;
 			max-width : 100%;
 		}
 
-		.login-form form {
+		.message-box form {
 			padding : 30px;
 		}
 
-		.mini-phone .login-form form {
+		.mini-phone .message-box form {
 			padding : 0;
 		}
 
-		.mini-phone .login-form {
+		.mini-phone .message-box {
 			margin : auto;
 		}
 
-		.login-form .aa {
+		.message-box .aa {
 			font-size : 11px;
 			padding   : 30px 0 10px 10px;
 			display   : block;
 		}
 
-		.mini-phone .login-form .aa {
+		.mini-phone .message-box .aa {
 			padding : 3px 10px;
 		}
 
-		.login-form h2 {
+		.message-box h2 {
 			border-bottom : 1px solid #aaa;
 			margin-bottom : 15px;
 			padding       : 10px 0;
@@ -55,7 +55,7 @@
 		</ul>
 	</nav>
 
-	<div class="login-form widget">
+	<div class="message-box widget">
 		<?php echo form_open('user/register', 'class="widget-body"')?>
 
 		<label>full name:

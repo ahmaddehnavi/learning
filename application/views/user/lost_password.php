@@ -4,13 +4,13 @@
 		padding : 50px 0;
 	}
 
-	.login-form {
+	.message-box {
 		margin    : 0 auto;
 		width     : 330px;
 		max-width : 100%
 	}
 
-	.login-form input , .btn{
+	.message-box input , .btn{
 		max-width: 100%;
 	}
 
@@ -20,11 +20,11 @@
 	.mini-phone h2{
 		text-align: center;
 	}
-	.mini-phone .login-form {
+	.mini-phone .message-box {
 		margin : auto;
 	}
 
-	.login-form h2 {
+	.message-box h2 {
 		border-bottom : 1px solid #aaa;
 		margin-bottom : 15px;
 		padding       : 10px 0;
@@ -47,7 +47,7 @@
 	</ul>
 </nav>
 <div id="container">
-	<div class="login-form widget">
+	<div class="message-box widget">
 		<h2>reset password</h2>
 		<?php echo form_open('user/lost_password')?>
 		<input type="email" name="email" placeholder="mail"/>
