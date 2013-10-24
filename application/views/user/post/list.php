@@ -56,16 +56,15 @@
 						<ul>
 							<li><?php echo anchor('home', 'home')?> </a>&nbsp;&gt;&nbsp;</li>
 							<li><?php echo anchor('user/home', 'user')?> </a>&nbsp;&gt;&nbsp;</li>
-							<li>dashboard</li>
+							<li>posts</li>
 						</ul>
 					</section>
 
 					<section class="bottom">
-						<h2>dashboard</h2>
+						<h2>posts</h2>
 
-						<div>Sample description for classes page</div>
+						<div>all your post</div>
 					</section>
-<!--					--><?php //echo anchor('/user/posts/publish', 'publish new post', 'class="btn-fix btn-small right"')?>
 					<div class="badboy"></div>
 				</section>
 				<section id="content-body">
@@ -90,14 +89,14 @@
 								<section class='widget_body'>
 									<div class="text">    <?php echo $post->body ?></div>
 									<div class="badboy"></div>
-									<p class='publish'><?php echo date('Y/m/d h:m',$post->time) ?></p>
+									<p class='publish'><?php echo date('Y/m/d H:m',$post->time) ?></p>
 								</section>
 								<footer class="widget_footer">
 									<div class="menu">
 										<?=form_open($delete_url);?>
 										<input type="hidden" name="post_id" value="<?=$post->post_id;?>"/>
 										<input type="hidden" name="next" value="<?=$next?>"/>
-										<input type="submit" class="btn" value="delete"/>
+										<input type="submit" class="btn confirm" value="delete"/>
 										</form>
 									</div>
 								</footer>
@@ -116,4 +115,16 @@
 		<div class="badboy"></div>
 		<!--    <footer id="footer">footer</footer>-->
 	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			$('.confirm').confirmOn({
+				questionText: 'This action cannot be undone, are you sure?',
+				textYes: 'Yes, I\'m sure',
+				textNo: 'No, I\'m not sure'
+			},'click', function() {
+				$(this).parent('form').submit();
+			});
+		});
+	</script>
 <?php $this->load->view('base/footer'); ?>

@@ -66,6 +66,18 @@ class Class_Member_Model extends CI_Model
 		return $this->db->affected_rows() === count($members_id);
 	}
 
+	public function remove_blocked_members($class_id)
+	{
+		$this->load->model('class_model');
+		if (!$this->class_model->is_prof_of_class($class_id))
+			return FALSE;
+
+		$sql = 'DELETE class_member WHERE class_id = ? AND status = 0';
+		$this->db->query($sql, array($class_id));
+
+		return $this->db->affected_rows();
+	}
+
 	public function get_all_members($class_id)
 	{
 		$sql = 'SELECT student_id,status , profile.full_name AS student_name

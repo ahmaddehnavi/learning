@@ -60,7 +60,8 @@ class Classes extends Auth_Controller
 			$this->load->view('academy/classes/view', $data);
 		}
 	}
-function setting($id)
+
+	function setting($id)
 	{
 		if (!is_numeric($id)) {
 			show_404();
@@ -70,7 +71,7 @@ function setting($id)
 		}
 
 		$info            = $this->class_model->get_info($id);
-		$data['members'] =$this->class_member_model->get_all_members($id);
+		$data['members'] = $this->class_member_model->get_all_members($id);
 
 		$data['lesson_name'] = $info['lesson_name'];
 		$data['prof_name']   = $info['prof_name'];
@@ -175,23 +176,38 @@ function setting($id)
 		redirect('academy/classes/manage');
 	}
 
-	function update_members(){
+	function update_members()
+	{
 		$this->form_validation
 			->set_rules('class_id', 'Class id', 'trim|required')
 			->set_rules('status', 'student status', 'trim|required|is_natural|greater_than[-1]|less_than[3]')
 			->set_rules('members_id[]', 'members id', 'trim|required');
 
 		if ($this->form_validation->run()) {
-			$class_id=$this->form_validation->set_value('class_id');
-			$status=$this->form_validation->set_value('status');
-			$members_id=$this->input->post('members_id');
+			$class_id   = $this->form_validation->set_value('class_id');
+			$status     = $this->form_validation->set_value('status');
+			$members_id = $this->input->post('members_id');
 
-			if(is_array($members_id)){
-				$this->class_member_model->update_members_status($class_id,$members_id,$status);
+			if (is_array($members_id)) {
+				$this->class_member_model->update_members_status($class_id, $members_id, $status);
 			}
 		}
 
-		redirect('academy/classes/setting/'.$class_id);
+		redirect('academy/classes/setting/' . $class_id);
+
+	}
+
+	function remove_blocked_members()
+	{
+		$this->form_validation
+			->set_rules('class_id', 'Class id', 'trim|required|is_natural');
+
+		if ($this->form_validation->run()) {
+			$class_id = $this->form_validation->set_value('class_id');
+			$this->class_member_model->remove_blocked_members($class_id);
+		}
+
+		redirect('academy/classes/setting/' . $class_id);
 
 	}
 }

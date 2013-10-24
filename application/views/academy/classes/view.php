@@ -111,7 +111,7 @@
 								<section class='widget_body'>
 									<div class="text"><?php echo $post->body ?></div>
 									<div class="badboy"></div>
-									<p class='publish'><?php echo date('Y/m/d h:m',$post->time) ?></p>
+									<p class='publish'><?php echo date('Y/m/d H:m',$post->time) ?></p>
 								</section>
 								<section class="widget-footer">
 								<?php

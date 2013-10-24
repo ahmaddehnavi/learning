@@ -70,21 +70,21 @@
 						<ul>
 							<li><?php echo anchor('home', 'home')?> </a>&nbsp;&gt;&nbsp;</li>
 							<li><?php echo anchor('user/home', 'user')?> </a>&nbsp;&gt;&nbsp;</li>
-							<li>view</li>
+							<li><?=$user_info->row('full_name')?></li>
 						</ul>
 					</section>
 
-					<section style="margin: 20px 0 30px 0">
+					<section style="margin: 20px 0 75px 0">
 						<section class="img-user-view">
 							<img src="<?= FILES_USERS_PATH . '/' . $user_info->row('user_id') ?>/image/profile_100.jpg"
 								 width="100px" height="100px"/>
 						</section>
 						<section class="user-info">
 							<h2><?=$user_info->row('full_name')?></h2>
-							</br></br></br>
 							<div><?=$user_info->row('academy_name')?> , <?=$user_info->row('field_name')?></div>
-						</section>
+							</section>
 					</section>
+					<div><?=$user_info->row('about')?></div>
 				</section>
 				<section id="content-body">
 
@@ -133,7 +133,7 @@
 								<section class='widget_body'>
 									<div class="text">    <?php echo $post->body ?></div>
 									<div class="badboy"></div>
-									<p class='publish'><?php echo date('Y/m/d h:m',$post->time) ?></p>
+									<p class='publish'><?php echo date('Y/m/d H:m',$post->time) ?></p>
 								</section>
 
 								<?php if ($post->author_id == $user_id) { ?>

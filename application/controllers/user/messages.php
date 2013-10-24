@@ -46,6 +46,7 @@ class Messages extends Auth_Controller
 
 		$data['messages_inbox'] = $this->message_model->get_inbox_messages($page * 10);
 
+		$this->message_model->all_mark_as_read();
 		$this->load->view('user/messages/messages_inbox', $data);
 	}
 

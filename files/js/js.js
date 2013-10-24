@@ -1,221 +1,257 @@
-/**
- * jquery.confirm
- *
- * @version 1.2
- *
- * @author My C-Labs
- * @author Matthieu Napoli <matthieu@mnapoli.fr>
- *
- * @url https://github.com/myclabs/jquery.confirm
- */
-(function ($) {
-
-    /**
-     * Confirm a link or a button
-     * @param options {text, confirm, cancel, confirmButton, cancelButton, post}
-     */
-    $.fn.confirm = function (options) {
-        if (typeof options === 'undefined') {
-            options = {};
+(function (e) {
+    var t = e.confirmOn = {};
+    t.providedOptions = {};
+    t.defaultSettings = {questionText: "Are you sure?", classPrepend: "confirmon", textYes: "Yes", textNo: "No"};
+    t.overrideDefaultSettings = function (n) {
+        t.defaultSettings = e.extend({}, t.defaultSettings, n)
+    };
+    t.setOptions = function (n, r) {
+        r = e.extend({}, t.defaultSettings, r);
+        n.data("confirmon", {options: r})
+    };
+    t.createOverlay = function (t) {
+        var n = t.data("confirmon").options.classPrepend;
+        return e("<div/>").addClass(n + "-overlay").hide().appendTo("body")
+    };
+    t.showOverlay = function (t) {
+        var n = t.data("confirmon").options.classPrepend;
+        e("." + n + "-overlay").fadeIn()
+    };
+    t.deleteOverlay = function (t) {
+        var n = t.data("confirmon").options.classPrepend;
+        e("." + n + "-overlay").fadeOut(function () {
+            e(this).remove()
+        })
+    };
+    t.createBox = function (t) {
+        var n = t.data("confirmon").options.classPrepend;
+        var r = t.data("confirmon").options.questionText;
+        var i = t.data("confirmon").options.textYes;
+        var s = t.data("confirmon").options.textNo;
+        var o = e("<div/>").addClass(n + "-box").hide().appendTo("body");
+        e("<p/>").html(r).appendTo(o);
+        e("<button/>").html(i).appendTo(o);
+        e("<button/>").html(s).appendTo(o)
+    };
+    t.showBox = function (t) {
+        var n = t.data("confirmon").options.classPrepend;
+        e("." + n + "-box").fadeIn()
+    };
+    t.deleteBox = function (t) {
+        var n = t.data("confirmon").options.classPrepend;
+        e("." + n + "-box").fadeOut(function () {
+            e(this).remove()
+        })
+    };
+    t.convertArguments = function (n, r, i, s, o) {
+        if (typeof n === "object") {
+            e.each(n, function (e, u) {
+                if (typeof u === "string") {
+                    t.providedOptions = n;
+                    n = r;
+                    r = i;
+                    i = s;
+                    s = o;
+                    return false
+                } else {
+                    t.providedOptions = {}
+                }
+            })
+        } else {
+            t.providedOptions = {}
+        }
+        if (i == null && s == null && o == null) {
+            i = r;
+            r = n
+        } else if (s == null && o == null) {
+            s = i;
+            i = r;
+            r = n
+        } else {
+            o = s;
+            s = i;
+            i = r;
+            r = n
+        }
+        if (typeof r === "object") {
+            return{events: r, selector: i, data: s}
+        } else {
+            return{events: r, selector: i, data: s, handler: o}
+        }
+    };
+    e.confirmOn.attachYesHandler = function (t, n, r) {
+        var i = t.data("confirmon").options.classPrepend;
+        e("." + i + "-box button").eq(0).on("click", function () {
+            e.confirmOn.deleteOverlay(t);
+            e.confirmOn.deleteBox(t);
+            n.call(t.get(), r)
+        })
+    };
+    e.confirmOn.attachNoHandler = function (t) {
+        var n = t.data("confirmon").options.classPrepend;
+        e("." + n + "-box button").eq(1).on("click", function () {
+            e.confirmOn.deleteOverlay(t);
+            e.confirmOn.deleteBox(t)
+        })
+    };
+    e.fn.confirmOn = function (t, n, r, i, s) {
+        function f(t) {
+            t.preventDefault();
+            e.confirmOn.createOverlay(u);
+            e.confirmOn.showOverlay(u);
+            e.confirmOn.createBox(u);
+            e.confirmOn.showBox(u);
+            e.confirmOn.attachYesHandler(u, o, t);
+            e.confirmOn.attachNoHandler(u)
         }
 
-        options.button = $(this);
-
-        this.click(function (e) {
-            e.preventDefault();
-
-            $.confirm(options, e);
-        });
-
-        return this;
-    };
-
-    /**
-     * Show a confirmation dialog
-     * @param options {text, confirm, cancel, confirmButton, cancelButton, post}
-     */
-    $.confirm = function (options, e) {
-        // Default options
-        var settings = $.extend({
-            text: "Are you sure?",
-            confirmButton: "Yes",
-            cancelButton: "Cancel",
-            post: false,
-            confirm: function (o) {
-                var url = e.currentTarget.attributes['href'].value;
-                if (options.post) {
-                    var form = $('<form method="post" class="hide" action="' + url + '"></form>');
-                    $("body").append(form);
-                    form.submit();
-                } else {
-                    window.location = url;
-                }
-            },
-            cancel: function (o) {
-            },
-            button: null
-        }, options);
-
-        // Modal
-        var buttons = '<button class="confirm btn btn-primary" type="button" data-dismiss="modal">'
-            + settings.confirmButton + '</button>'
-            + '<button class="cancel btn" type="button" data-dismiss="modal">'
-            + settings.cancelButton + '</button>';
-        var modalHTML = '<div class="confirmation-modal modal hide fade" tabindex="-1" role="dialog">'
-            + '<div class="modal-body">' + settings.text + '</div>'
-            + '<div class="modal-footer">' + buttons + '</div>'
-            + '</div>';
-
-        var modal = $(modalHTML);
-
-        modal.on('shown', function () {
-            modal.find(".btn-primary:first").focus();
-        });
-        modal.on('hidden', function () {
-            modal.remove();
-        });
-        modal.find(".confirm").click(function (e) {
-            settings.confirm(settings.button);
-        });
-        modal.find(".cancel").click(function (e) {
-            settings.cancel(settings.button);
-        });
-
-        // Show the modal
-        $("body").append(modal);
-        modal.modal();
+        var o;
+        if (typeof n === "function") {
+            o = n;
+            n = f
+        } else if (typeof r === "function") {
+            o = r;
+            r = f
+        } else if (typeof i === "function") {
+            o = i;
+            i = f
+        } else if (typeof s === "function") {
+            o = s;
+            s = f
+        }
+        var u = e(this);
+        var a = e.confirmOn.convertArguments(t, n, r, i, s);
+        e.confirmOn.setOptions(u, e.confirmOn.providedOptions);
+        u.on(a.events, a.selector, a.data, a.handler);
     }
 
-})(jQuery);
 
-(function ($) {
+        $.fn.responsive = function (options) {
 
-    $.fn.responsive = function (options) {
+            // Establish our default settings
+            var settings = $.extend({
+                onLargeDesktop: function () {
+                },
+                onDesktop: function () {
+                },
+                onTablet: function () {
+                },
+                onPhone: function () {
+                },
+                onMiniPhone: function () {
+                },
+                onNoLargeDesktop: function () {
+                },
+                onNoDesktop: function () {
+                },
+                onNoTablet: function () {
+                },
+                onNoPhone: function () {
+                },
+                onNoMiniPhone: function () {
+                }
+            }, options);
 
-        // Establish our default settings
-        var settings = $.extend({
-            onLargeDesktop: function () {
-            },
-            onDesktop: function () {
-            },
-            onTablet: function () {
-            },
-            onPhone: function () {
-            },
-            onMiniPhone: function () {
-            },
-            onNoLargeDesktop: function () {
-            },
-            onNoDesktop: function () {
-            },
-            onNoTablet: function () {
-            },
-            onNoPhone: function () {
-            },
-            onNoMiniPhone: function () {
-            }
-        }, options);
-
-        var $window = jQuery(window);
+            var $window = jQuery(window);
 //        var preClass = "";
 
-        var $tag = $(this);
-        $window.load(function () {
-            checkWidth($tag);
-        });
+            var $tag = $(this);
+            $window.load(function () {
+                checkWidth($tag);
+            });
 
-        $window.resize(function () {
-            checkWidth($tag);
-        });
-        return $(this);
+            $window.resize(function () {
+                checkWidth($tag);
+            });
+            return $(this);
 
-        function checkWidth($tag) {
-            if ($window.width() > 1200) {
-                $tag.removeClass('no-large-desktop desktop tablet phone mini-phone').addClass('large-desktop no-desktop no-tablet no-phone no-mini-phone');
-                settings.onLargeDesktop();
-                settings.onNoDesktop();
-                settings.onNoTablet();
-                settings.onNoPhone();
-                settings.onNoMiniPhone();
+            function checkWidth($tag) {
+                if ($window.width() > 1200) {
+                    $tag.removeClass('no-large-desktop desktop tablet phone mini-phone').addClass('large-desktop no-desktop no-tablet no-phone no-mini-phone');
+                    settings.onLargeDesktop();
+                    settings.onNoDesktop();
+                    settings.onNoTablet();
+                    settings.onNoPhone();
+                    settings.onNoMiniPhone();
+                }
+                else if ($window.width() > 979) {
+                    $tag.removeClass('large-desktop no-desktop tablet phone mini-phone').addClass('no-large-desktop desktop no-tablet no-phone no-mini-phone');
+                    settings.onNoLargeDesktop();
+                    settings.onDesktop();
+                    settings.onNoTablet();
+                    settings.onNoPhone();
+                    settings.onNoMiniPhone();
+                }
+                else if ($window.width() > 767) {
+                    $tag.removeClass('large-desktop desktop no-tablet phone mini-phone').addClass('no-large-desktop no-desktop tablet no-phone no-mini-phone');
+                    settings.onNoLargeDesktop();
+                    settings.onNoDesktop();
+                    settings.onTablet();
+                    settings.onNoPhone();
+                    settings.onNoMiniPhone();
+                }
+                else if ($window.width() > 480) {
+                    $tag.removeClass('large-desktop desktop tablet no-phone mini-phone').addClass('no-large-desktop no-desktop no-tablet phone no-mini-phone');
+                    settings.onNoLargeDesktop();
+                    settings.onNoDesktop();
+                    settings.onNoTablet();
+                    settings.onPhone();
+                    settings.onNoMiniPhone();
+                } else {
+                    $tag.removeClass('large-desktop desktop tablet phone no-mini-phone').addClass('no-large-desktop no-desktop no-tablet no-phone mini-phone');
+                    settings.onNoLargeDesktop();
+                    settings.onNoDesktop();
+                    settings.onNoTablet();
+                    settings.onNoPhone();
+                    settings.onMiniPhone();
+                }
             }
-            else if ($window.width() > 979) {
-                $tag.removeClass('large-desktop no-desktop tablet phone mini-phone').addClass('no-large-desktop desktop no-tablet no-phone no-mini-phone');
-                settings.onNoLargeDesktop();
-                settings.onDesktop();
-                settings.onNoTablet();
-                settings.onNoPhone();
-                settings.onNoMiniPhone();
-            }
-            else if ($window.width() > 767) {
-                $tag.removeClass('large-desktop desktop no-tablet phone mini-phone').addClass('no-large-desktop no-desktop tablet no-phone no-mini-phone');
-                settings.onNoLargeDesktop();
-                settings.onNoDesktop();
-                settings.onTablet();
-                settings.onNoPhone();
-                settings.onNoMiniPhone();
-            }
-            else if ($window.width() > 480) {
-                $tag.removeClass('large-desktop desktop tablet no-phone mini-phone').addClass('no-large-desktop no-desktop no-tablet phone no-mini-phone');
-                settings.onNoLargeDesktop();
-                settings.onNoDesktop();
-                settings.onNoTablet();
-                settings.onPhone();
-                settings.onNoMiniPhone();
-            } else {
-                $tag.removeClass('large-desktop desktop tablet phone no-mini-phone').addClass('no-large-desktop no-desktop no-tablet no-phone mini-phone');
-                settings.onNoLargeDesktop();
-                settings.onNoDesktop();
-                settings.onNoTablet();
-                settings.onNoPhone();
-                settings.onMiniPhone();
-            }
+
         }
 
-    }
 
-
-    $.fn.upload_btn = function () {
-        return this.each(function () {
-            var $this = $(this);
-            var $upload_input = $this.attr('upload_input')
-            $this.click(function () {
-                $('#' + $upload_input).click();
+        $.fn.upload_btn = function () {
+            return this.each(function () {
+                var $this = $(this);
+                var $upload_input = $this.attr('upload_input')
+                $this.click(function () {
+                    $('#' + $upload_input).click();
+                });
             });
-        });
 
-    }
+        }
 
-    $.fn.toggleButton = function (options) {
+        $.fn.toggleButton = function (options) {
 
-        // Establish our default settings
-        var settings = $.extend({
-            onToggleOn: function () {
-            },
-            onToggleOff: function () {
-            }
-        }, options);
-
-        return this.each(function () {
-            var $this = $(this);
-            $this.click(function () {
-
-                if ($this.hasClass('toggle-on')) {
-                    $this.removeClass('toggle-on').addClass('toggle-off');
-                    settings.onToggleOff();
-                } else if ($this.hasClass('toggle-off')) {
-                    $this.removeClass('toggle-off').addClass('toggle-on');
-                    settings.onToggleOn();
+            // Establish our default settings
+            var settings = $.extend({
+                onToggleOn: function () {
+                },
+                onToggleOff: function () {
                 }
-                else {
-                    $this.addClass('toggle-on');
-                    settings.onToggleOn();
-                }
+            }, options);
+
+            return this.each(function () {
+                var $this = $(this);
+                $this.click(function () {
+
+                    if ($this.hasClass('toggle-on')) {
+                        $this.removeClass('toggle-on').addClass('toggle-off');
+                        settings.onToggleOff();
+                    } else if ($this.hasClass('toggle-off')) {
+                        $this.removeClass('toggle-off').addClass('toggle-on');
+                        settings.onToggleOn();
+                    }
+                    else {
+                        $this.addClass('toggle-on');
+                        settings.onToggleOn();
+                    }
+                });
             });
-        });
 
-    }
+        }
 
-}(jQuery));
+    }(jQuery));
 (function (window, document, $) {
 
     var isInputSupported = 'placeholder' in document.createElement('input');

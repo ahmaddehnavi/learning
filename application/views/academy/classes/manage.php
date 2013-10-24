@@ -119,7 +119,7 @@
 								<td>
 									<?=form_open('/academy/classes/remove/')?>
 									<input type="hidden" name="class_id" value="<?= $row->class_id ?>"/>
-									<input type="submit" value="remove" class="btn btn-small  btn-red"/>
+									<input type="submit" value="remove" class="btn btn-small confirm-remove btn-red"/>
 
 									<div class="badboy"></div>
 									</form>
@@ -217,7 +217,7 @@
 								<td>
 									<?=form_open('/academy/classes/leave/')?>
 									<input type="hidden" name="class_id" value="<?= $row->class_id ?>"/>
-									<input type="submit" value="leave" class="btn btn-small"/>
+									<input type="submit" value="leave" class="btn btn-small confirm-leave"/>
 
 									<div class="badboy"></div>
 									</form>
@@ -232,4 +232,25 @@
 	</div>
 	<div class="badboy"></div>
 	</div>
+
+
+	<script type="text/javascript">
+		$(function() {
+			$('.confirm-remove').confirmOn({
+				questionText: 'Remove class action cannot be undone, are you sure?',
+				textYes: 'Yes',
+				textNo: 'No'
+			},'click', function() {
+				$(this).parent('form').submit();
+			});
+
+			$('.confirm-leave').confirmOn({
+				questionText: 'are you sure?',
+				textYes: 'Yes',
+				textNo: 'No'
+			},'click', function() {
+				$(this).parent('form').submit();
+			});
+		});
+	</script>
 <?php $this->load->view('base/footer'); ?>

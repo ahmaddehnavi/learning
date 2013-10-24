@@ -75,7 +75,12 @@
 								echo anchor('academy/classes/disable_join/' . $class_id, '<i class="icon-lock"></i> &nbsp;&nbsp;disable join student.', 'class="btn-fix btn-small" style="margin:10px 10px 0px 10px"');
 							} else {
 								echo anchor('academy/classes/enable_join/' . $class_id, '<i class="icon-unlock"></i> &nbsp;&nbsp;enable join student.', 'class="btn-fix btn-small" style="margin:10px 10px 0px 10px"');
-							}?>
+							}
+							echo anchor('academy/classes/remove_blocked_members/', '<i class="icon-remove"></i> &nbsp;&nbsp;remove blocked student.', 'class="btn-fix btn-small" style="margin:10px 10px 0px 10px"');
+
+							?>
+
+
 						</section>
 
 						<?php

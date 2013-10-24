@@ -108,7 +108,7 @@
 									<section class='widget_body'>
 										<div class="text">    <?php echo $post->body ?></div>
 										<div class="badboy"></div>
-										<p class='publish'><?php echo  date('Y/m/d h:m', $post->time) ?></p>
+										<p class='publish'><?php echo  date('Y/m/d H:m', $post->time) ?></p>
 									</section>
 
 									<footer class="widget_footer">
@@ -116,7 +116,7 @@
 											<li><?=form_open($delete_url);?>
 												<input type="hidden" name="post_id" value="<?= $post->post_id; ?>"/>
 												<input type="hidden" name="next" value="<?= $next ?>"/>
-												<input type="submit" class="btn btn-red" value="delete"/>
+												<input type="submit" class="btn btn-red confirm" value="delete"/>
 												</form>
 											</li>
 											<?php
@@ -142,4 +142,17 @@
 		</div>
 		<div class="badboy"></div>
 	</div>
+
+
+	<script type="text/javascript">
+		$(function() {
+			$('.confirm').confirmOn({
+				questionText: 'This action cannot be undone, are you sure?',
+				textYes: 'Yes, I\'m sure',
+				textNo: 'No, I\'m not sure'
+			},'click', function() {
+				$(this).parent('form').submit();
+			});
+		});
+	</script>
 <?php $this->load->view('base/footer'); ?>
