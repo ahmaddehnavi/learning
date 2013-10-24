@@ -94,7 +94,7 @@ $_CONFIG = array(
 	//'_tinyMCEPath' => "/tiny_mce",
 
 	'_sessionVar' => &$_SESSION['file_management'],
-	'_sessionLifetime' => 60,
+	'_sessionLifetime' => 600,
 //	'_sessionDir' => "/panda/",
 
 	'_sessionDomain' => ".ahmaddehnavi.ir",

@@ -9,6 +9,7 @@
 			width     : 330px;
 			max-width : 100%;
 			background-color: #fff;
+			padding: 20px;
 		}
 		.message-box input , .btn{
 			max-width: 100%;
@@ -23,6 +24,7 @@
 
 		.mini-phone .message-box {
 			margin : auto;
+			padding: 5px;
 		}
 
 		.message-box h2 {
