@@ -28,7 +28,7 @@ $_CONFIG = array(
 	'uploadURL' => "../files/uploads/public",
 	'uploadDir' => "",
 
-	'dirPerms' => 0755,
+	'dirPerms' => 0777,
 	'filePerms' => 0644,
 
 	'access' => array(

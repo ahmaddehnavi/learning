@@ -196,7 +196,7 @@ class Classes extends Auth_Controller
 			}
 		}
 
-		redirect('academy/classes/setting/' . $class_id);
+		redirect('academy/classes/setting/' . intval($this->form_validation->set_value('class_id')));
 
 	}
 

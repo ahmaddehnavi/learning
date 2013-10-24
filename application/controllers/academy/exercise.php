@@ -38,14 +38,8 @@ class Exercise extends Auth_Controller
 
 		$author_id = $this->post_model->get_author_id($post_id);
 
-		$full_name = $this->auth->get_full_name();
-		$config    = array(
-			'upload_path' => 'files/uploads/' . $author_id . '/files/private/exercise/' . $post_id . '/',
-			'allowed_types' => 'rar|zip|pdf|docx',
-			'max_size' => '10240',
-			'file_name' => $this->auth->get_user_id() . '[' . $full_name . ']',
-			'overwrite' => TRUE,
-		);
+
+
 
 		if (!file_exists('files/uploads/' . $author_id . '/files/private/.htaccess')) {
 
@@ -58,14 +52,30 @@ class Exercise extends Auth_Controller
 			ErrorDocument 403 /404.html
         ';
 			@file_put_contents('files/uploads/' . $author_id . '/files/private/.htaccess', $htaccess);
-			chmod('files/uploads/' . $author_id . '/files/private/.htaccess', 666);
+//			chmod('files/uploads/' . $author_id . '/files/private/.htaccess', 777);
 		}
+
+		if (!file_exists('files/uploads/' . $author_id . '/files/private/exercise/'.$post_id)) {
+			@mkdir('files/uploads/' . $author_id . '/files/private/exercise/'.$post_id, 0777, TRUE);
+		}
+
+
+
+
+		$full_name = $this->auth->get_full_name();
+		$config    = array(
+			'upload_path' => 'files/uploads/' . $author_id . '/files/private/exercise/' . $post_id . '/',
+			'allowed_types' => 'rar|zip|pdf|docx',
+			'max_size' => '10240',
+			'file_name' => $this->auth->get_user_id() . '[' . $full_name . ']',
+			'overwrite' => TRUE,
+		);
 
 		$this->load->library('upload', $config);
 		if ($this->upload->do_upload()) {
 			return TRUE;
 		} else {
-			return $this->upload->display_errors();
+			return 'error ';//$this->upload->display_errors();
 		}
 	}
 

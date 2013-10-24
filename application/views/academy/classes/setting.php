@@ -151,7 +151,7 @@
 			$('.check').prop('checked', true);
 		}
 		});
-		
+
 
 		$(function() {
 			$('.confirm-remove').confirmOn({
