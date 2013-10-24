@@ -131,6 +131,7 @@ class Classes extends Auth_Controller
 	}
 
 
+
 	function remove()
 	{
 		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural|is_exist[class.class_id]');
