@@ -130,12 +130,14 @@ class Classes extends Auth_Controller
 		redirect('academy/classes/manage');
 	}
 
+
 	function remove()
 	{
 		$this->form_validation->set_rules('class_id', 'Class id', 'trim|required|is_natural|is_exist[class.class_id]');
 
 		if ($this->form_validation->run()) {
 			$this->class_model->remove($this->form_validation->set_value('class_id'));
+			$this->class_member_model->leave_all_students($this->form_validation->set_value('class_id'));
 		}
 
 		redirect('academy/classes/manage');

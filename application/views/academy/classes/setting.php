@@ -76,7 +76,7 @@
 							} else {
 								echo anchor('academy/classes/enable_join/' . $class_id, '<i class="icon-unlock"></i> &nbsp;&nbsp;enable join student.', 'class="btn-fix btn-small" style="margin:10px 10px 0px 10px"');
 							}
-							echo anchor('academy/classes/remove_blocked_members/' . $class_id, '<i class="icon-remove"></i> &nbsp;&nbsp;remove blocked student.', 'class="btn-fix btn-small" style="margin:10px 10px 0px 10px"');
+							echo anchor('academy/classes/remove_blocked_members/' . $class_id, '<i class="icon-remove"></i> &nbsp;&nbsp;remove blocked student.', 'class="btn-fix btn-small btn-red" style="margin:10px 10px 0px 10px"');
 
 							?>
 
@@ -95,6 +95,7 @@
 								<th>status</th>
 							</tr>
 							</thead>
+
 							<tbody>
 							<?php foreach ($members->result() as $member) { ?>
 								<tr>
@@ -149,6 +150,25 @@
 		}else{
 			$('.check').prop('checked', true);
 		}
+		});
+		
+
+		$(function() {
+			$('.confirm-remove').confirmOn({
+			questionText: 'Remove student action cannot be undone, are you sure?',
+			textYes: 'Yes',
+			textNo: 'No'
+			},'click', function() {
+//			$(this).;
+			});
+
+		$('.confirm-leave').confirmOn({
+			questionText: 'are you sure?',
+			textYes: 'Yes',
+			textNo: 'No'
+			},'click', function() {
+			$(this).parent('form').submit();
+			});
 		});
 	</script>
 <?php $this->load->view('base/footer'); ?>

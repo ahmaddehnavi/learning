@@ -72,7 +72,7 @@ class Class_Member_Model extends CI_Model
 		if (!$this->class_model->is_prof_of_class($class_id))
 			return FALSE;
 
-		$sql = 'DELETE class_member WHERE class_id = ? AND status = 0';
+		$sql = 'DELETE FROM class_member WHERE class_id = ? AND status = 0';
 		$this->db->query($sql, array($class_id));
 
 		return $this->db->affected_rows();
@@ -96,6 +96,18 @@ class Class_Member_Model extends CI_Model
 		WHERE class_id=?';
 
 		return $this->db->query($sql, array($class_id));
+	}
+
+
+	public function leave_all_students($class_id){
+		$this->load->model('class_model');
+		if (!$this->class_model->is_prof_of_class($class_id))
+			return FALSE;
+
+		$sql = 'DELETE FROM class_member WHERE class_id = ?';
+		$this->db->query($sql, array($class_id));
+
+		return $this->db->affected_rows();
 	}
 
 	public function get_active_member_mails($class_id)
