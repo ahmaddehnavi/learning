@@ -1,6 +1,11 @@
 <?php $this->load->view('base/header'); ?>
-	<div id="container">
+	<style type="text/css">
+		.widget_body .text{
+			padding-top: 40px;
 
+		}
+	</style>
+	<div id="container">
 		<nav>
 			<menu>
 				<li><?= anchor('/', 'home')?></li>
@@ -73,15 +78,40 @@
 					<?php
 					$user_id = $this->auth->get_user_id();
 					foreach ($messages_inbox->result() as $message) {
-						echo 'id : ' . $message->message_id . '<br/>';
-						echo 'from : ' . $message->full_name . '<br/>';
-						echo '' . $message->from_id . '<br/>';
-						echo 'message : ' . $message->message . '<br/>';
-						echo '' . date('Y/m/d H:m', $message->time) . '<hr/>';
-					}
-
-					echo $pagination;
+//						echo 'id : ' . $message->message_id . '<br/>';
+//						echo 'from : ' . $message->full_name . '<br/>';
+//						echo '' . $message->from_id . '<br/>';
+//						echo 'message : ' . $message->message . '<br/>';
+//						echo '' . date('Y/m/d H:m', $message->time) . '<hr/>';
+//					}
+//
+//					echo $pagination;
 					?>
+
+
+					<section class="widget " tabindex="1">
+						<section class="image">
+							<figure class="imgpost">
+								<img
+									src="<?php echo FILES_USERS_PATH . '/' . $message->from_id . '/image/profile_50.jpg' ?>"
+									alt="" width="50px" height="50px"/></figure>
+							<p class='name'><?php echo $message->full_name?></p>
+						</section>
+						<section class='total' style="padding-top: 1px;">
+
+							<section class='widget_body'>
+								<div class="text">    <?php echo $message->message ?></div>
+								<div class="badboy"></div>
+								<p class='publish'><?php echo date('Y/m/d H:m', $message->time) ?></p>
+							</section>
+
+						</section>
+					</section>
+					<?php }?>
+					<div class="badboy"></div>
+					<section class="widget" style="width: inherit;">
+						<?php echo $pagination; ?>
+					</section>
 
 				</section>
 			</main>

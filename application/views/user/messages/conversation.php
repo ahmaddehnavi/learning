@@ -1,4 +1,17 @@
 <?php $this->load->view('base/header'); ?>
+	<style type="text/css">
+		.widget_body .text{
+			padding-top: 40px;
+		}
+
+		.image{
+			float: right;
+		}
+
+		.total{
+			margin: 10px 85px 10px 10px;
+		}
+	</style>
 	<div id="container">
 
 		<nav>
@@ -70,43 +83,92 @@
 					</section>
 				</section>
 				<section id="content-body">
-					<pre>
-						<?php
-						$user_id=$this->auth->get_user_id();
+<!--					<pre>-->
+<!--						--><?php
+//						$user_id=$this->auth->get_user_id();
+//
+//						foreach ($messages->result() as $message) {
+//
+//							if($user_id==  $message->from_id){//sent
+//								echo '<div style="background-color: yellowgreen;">';
+//								echo 'id : ' . $message->message_id . '<br/>';
+//
+//								echo 'from : ' . $user_full_name. '<br/>';
+//								echo 'from id :' . $message->from_id . '<br/>';
+//
+//								echo 'to : ' . $other_full_name. '<br/>';
+//
+//								echo 'message : ' . $message->message . '<br/>';
+//
+//								echo '' . date('Y/m/d H:m', $message->time) . '<hr/>';
+//								echo '</div><div class="badboy"></div>';
+//							}else{//received
+//								echo '<div style="background-color: greenyellow;">';
+//								echo 'id : ' . $message->message_id . '<br/>';
+//
+//								echo 'from : ' . $other_full_name. '<br/>';
+//								echo 'from id :' . $message->from_id . '<br/>';
+//
+//								echo 'to : ' .$user_full_name. '<br/>';
+//
+//								echo 'message : ' . $message->message . '<br/>';
+//
+//								echo '' . date('Y/m/d H:m', $message->time) . '<hr/>';
+//								echo '</div><div class="badboy"></div>';
+//
+//							}
+//						}
+//						?>
+<!--						</pre>-->
 
-						foreach ($messages->result() as $message) {
 
-							if($user_id==  $message->from_id){//sent
-								echo '<div style="background-color: yellowgreen;">';
-								echo 'id : ' . $message->message_id . '<br/>';
+					<?php
+					$user_id=$this->auth->get_user_id();
 
-								echo 'from : ' . $user_full_name. '<br/>';
-								echo 'from id :' . $message->from_id . '<br/>';
+					foreach ($messages->result() as $message) {
+						if($user_id==  $message->from_id){//sent?>
+					<section class="widget" tabindex="1">
+						<section class="image">
+							<figure class="imgpost ">
+								<img
+									src="<?php echo FILES_USERS_PATH . '/' . $message->from_id . '/image/profile_50.jpg' ?>"
+									alt="" width="50px" height="50px"/></figure>
+							<p class='name'><?php echo $user_full_name?></p>
+						</section>
+						<section class='total' style="padding-top: 1px;">
 
-								echo 'to : ' . $other_full_name. '<br/>';
+							<section class='widget_body'>
+								<div class="text">    <?php echo $message->message ?></div>
+								<div class="badboy"></div>
+								<p class='publish'><?php echo date('Y/m/d H:m', $message->time) ?></p>
+							</section>
 
-								echo 'message : ' . $message->message . '<br/>';
+						</section>
+					</section>
+					<?php }else{//received?>
 
-								echo '' . date('Y/m/d H:m', $message->time) . '<hr/>';
-								echo '</div><div class="badboy"></div>';
-							}else{//received
-								echo '<div style="background-color: greenyellow;">';
-								echo 'id : ' . $message->message_id . '<br/>';
+							<section class="widget" tabindex="1">
+								<section class="image">
+									<figure class="imgpost ">
+										<img
+											src="<?php echo FILES_USERS_PATH . '/' . $message->from_id . '/image/profile_50.jpg' ?>"
+											alt="" width="50px" height="50px"/></figure>
+									<p class='name'><?php echo $other_full_name?></p>
+								</section>
+								<section class='total' style="padding-top: 1px;">
 
-								echo 'from : ' . $other_full_name. '<br/>';
-								echo 'from id :' . $message->from_id . '<br/>';
+									<section class='widget_body'>
+										<div class="text">    <?php echo $message->message ?></div>
+										<div class="badboy"></div>
+										<p class='publish'><?php echo date('Y/m/d H:m', $message->time) ?></p>
+									</section>
 
-								echo 'to : ' .$user_full_name. '<br/>';
+								</section>
+							</section>
+							<?php }
+					}?>
 
-								echo 'message : ' . $message->message . '<br/>';
 
-								echo '' . date('Y/m/d H:m', $message->time) . '<hr/>';
-								echo '</div><div class="badboy"></div>';
-
-							}
-						}
-						?>
-						</pre>
 
 				</section>
 			</main>
