@@ -53,10 +53,10 @@ class Loginwithgoogle
 			//Get user details if user is logged in
 			$user                    = $google_oauthV2->userinfo->get();
 			$this->user_id           = $user['id'];
-			$this->user_name         = filter_var($user['name'], FILTER_SANITIZE_SPECIAL_CHARS);
-			$this->user_mail             = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
-			$this->profile_url       = filter_var($user['link'], FILTER_VALIDATE_URL);
-			$this->profile_image_url = filter_var($user['picture'], FILTER_VALIDATE_URL);
+			//$this->user_name         = filter_var($user['name'], FILTER_SANITIZE_SPECIAL_CHARS);
+			$this->user_mail         = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
+			//$this->profile_url       = filter_var($user['link'], FILTER_VALIDATE_URL);
+			//$this->profile_image_url = filter_var($user['picture'], FILTER_VALIDATE_URL);
 //			$personMarkup      = "$email<div><img src='$profile_image_url?sz=50'></div>";
 			$_SESSION['token'] = $gClient->getAccessToken();
 		} else {
@@ -83,25 +83,25 @@ class Loginwithgoogle
 		return $this->user_id;
 	}
 
-	public function get_username()
-	{
-		return $this->user_name;
-	}
-
-	public function get_profile_url()
-	{
-		return $this->profile_url;
-	}
+//	public function get_username()
+//	{
+//		return $this->user_name;
+//	}
+//
+//	public function get_profile_url()
+//	{
+//		return $this->profile_url;
+//	}
 
 	public function get_mail()
 	{
 		return $this->user_mail;
 	}
 
-	public function get_profile_image()
-	{
-		return $this->profile_image_url;
-	}
+//	public function get_profile_image()
+//	{
+//		return $this->profile_image_url;
+//	}
 
 	public function get_auth_url()
 	{
