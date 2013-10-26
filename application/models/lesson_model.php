@@ -28,9 +28,16 @@ class Lesson_Model extends CI_Model
 		return '';
 	}
 
+	public function get_list_by_field_id($field_id)
+	{
+		return $row = $this->db->select('lesson_id,name')->where('field_id',$field_id)->get('lesson');
+	}
+
 	public function get_list()
 	{
-		return $row = $this->db->select('lesson_id,name')->get('lesson');
+		$this->load->model('profile_model');
+		$field_id=$this->profile_model->get_field_id();
+		return $row = $this->db->select('lesson_id,name')->where('field_id',$field_id)->get('lesson');
 	}
 
 }

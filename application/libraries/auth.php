@@ -70,7 +70,7 @@ class Auth
 	 * @param    string        email address
 	 * @return    mixed        user_id
 	 */
-	public function create_user($full_name, $username, $email)
+	public function create_user($full_name, $username, $email,$academy_id,$field_id)
 	{
 		$qry = $this->CI->db
 			->where('username', $username)
@@ -94,17 +94,19 @@ class Auth
 		$this->CI->db->insert('user', $data);
 		$user_id = $this->CI->db->insert_id();
 
-		$this->create_profile($user_id, $full_name);
+		$this->create_profile($user_id, $full_name,$academy_id,$field_id);
 
 		$this->send_user_information($user_id,$username,$email,$full_name);
 		return $user_id;
 	}
 
-	private function create_profile($user_id, $full_name)
+	private function create_profile($user_id, $full_name,$academy_id,$field_id)
 	{
 		$data = array(
 			'user_id' => $user_id,
-			'full_name' => $full_name
+			'full_name' => $full_name,
+			'academy_id'=>$academy_id,
+			'field_id'=>$field_id
 		);
 		$this->CI->db->insert('profile', $data);
 
@@ -392,7 +394,7 @@ class Auth
 
 			$this->CI->load->library('email');
 
-			$this->CI->email->from('system@academy.com', 'System')
+			$this->CI->email->from('system@ahmaddehnavi.ir', 'System')
 				->to($mail)
 				->subject('Recovery Password, Panda Academy!')
 				->message($this->CI->load->view('mail/account_information',array(
@@ -425,7 +427,7 @@ class Auth
 
 			$this->CI->load->library('email');
 
-			$this->CI->email->from('no-reply@academy.com', 'System')
+			$this->CI->email->from('no-reply@ahmaddehnavi.ir', 'System')
 				->to($mail)
 				->subject('Panda Academy | Account Information')
 				->message($this->CI->load->view('mail/account_information',array(
@@ -438,6 +440,7 @@ class Auth
 
 			return TRUE;
 		}
+
 
 		return FALSE;
 	}

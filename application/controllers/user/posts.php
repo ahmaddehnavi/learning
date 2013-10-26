@@ -84,9 +84,11 @@ class Posts extends Auth_Controller
 				if (is_array($classes)) {
 					$this->class_post_model->add_post_to_classes($id, $classes);
 				}
-				if ($mail_notice == 1)
+				if ($mail_notice == 1){
+					if (is_array($classes)){
 					$this->notification->notice_new_post($classes, $subject, $body);
-
+					}
+				}
 				redirect('user/posts/');
 			}
 		}

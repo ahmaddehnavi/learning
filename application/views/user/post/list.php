@@ -3,9 +3,9 @@
 
 		<nav>
 			<menu>
-				<li><?= anchor('/','home')?></li>
-				<li class="active"><?=anchor('/academy','academy')?></li>
-				<li><a href="<?=FILE_MANAGE_PATH?>">file management</a></li>
+				<li><?= anchor('/', 'home')?></li>
+				<li class="active"><?=anchor('/academy', 'academy')?></li>
+				<li><a href="<?= FILE_MANAGE_PATH ?>">file management</a></li>
 				<div class="badboy"></div>
 			</menu>
 			<ul class="collapse-btn btn-top toggle-off" collapse-target="nav">
@@ -17,9 +17,9 @@
 		<aside id="sidebar">
 			<header>
 				<?php echo anchor('/user/view/u/' . $this->auth->get_username(),
-					'<img src="'. FILES_USERS_PATH . '/' . $this->auth->get_user_id().'/image/profile_80.jpg"
-							 width="40px" height="40px" id="user-image"/>'.$this->auth->get_full_name()
-					,'target="_blank"');
+					'<img src="' . FILES_USERS_PATH . '/' . $this->auth->get_user_id() . '/image/profile_80.jpg"
+							 width="40px" height="40px" id="user-image"/>' . $this->auth->get_full_name()
+					, 'target="_blank"');
 				?>
 				&nbsp;</header>
 			<ul class="collapse-btn btn-left toggle-off" collapse-target="#sidebar">
@@ -34,7 +34,7 @@
 
 				<h2>user :</h2>
 
-				<li><?php echo anchor('user/messages', '<i class="icon-inbox"></i>messages<b class="label">'.$this->unread_message.'</b>') ?></li>
+				<li><?php echo anchor('user/messages', '<i class="icon-inbox"></i>messages<b class="label">' . $this->unread_message . '</b>') ?></li>
 				<li><?php echo anchor('user/posts', '<i class="icon-file-text"></i>posts') ?></li>
 				<li><?php echo anchor('user/profile', '<i class="icon-user"></i>profile') ?></li>
 				<li class="top-line"><?php echo anchor('user/logout', '<i class="icon-signout"></i>logout') ?></li>
@@ -68,9 +68,10 @@
 					<div class="badboy"></div>
 				</section>
 				<section id="content-body">
-					<?php $delete_url=site_url('user/posts/remove');
-					$next=current_url();
-					foreach ($posts->result() as $post) { ?>
+					<?php $delete_url = site_url('user/posts/remove');
+					$next = current_url();
+					foreach ($posts->result() as $post) {
+						?>
 
 						<section class="widget " tabindex="1">
 							<section class="image">
@@ -89,16 +90,24 @@
 								<section class='widget_body'>
 									<div class="text">    <?php echo $post->body ?></div>
 									<div class="badboy"></div>
-									<p class='publish'><?php echo date('Y/m/d H:m',$post->time) ?></p>
+									<p class='publish'><?php echo date('Y/m/d H:m', $post->time) ?></p>
 								</section>
 								<footer class="widget_footer">
-									<div class="menu">
-										<?=form_open($delete_url);?>
-										<input type="hidden" name="post_id" value="<?=$post->post_id;?>"/>
-										<input type="hidden" name="next" value="<?=$next?>"/>
-										<input type="submit" class="btn confirm" value="delete"/>
-										</form>
-									</div>
+									<ul>
+										<li><?=form_open($delete_url);?>
+											<input type="hidden" name="post_id" value="<?= $post->post_id; ?>"/>
+											<input type="hidden" name="next" value="<?= $next ?>"/>
+											<input type="submit" class="btn btn-red confirm" value="delete"/>
+											</form>
+										</li>
+										<?php
+										if ($post->post_type === 'exercise') {
+											echo '<li class="view-exercise">' .
+												anchor(FILE_MANAGE_PATH . '/browse.php?dir=files/private/exercise/' . $post->post_id, 'view uploaded exercise', 'class="btn btn-small" target="_blank"') .
+												'</li>';
+										}
+										?>
+									</ul>
 								</footer>
 							</section>
 						</section>
@@ -117,12 +126,12 @@
 	</div>
 
 	<script type="text/javascript">
-		$(function() {
+		$(function () {
 			$('.confirm').confirmOn({
 				questionText: 'This action cannot be undone, are you sure?',
 				textYes: 'Yes, I\'m sure',
 				textNo: 'No, I\'m not sure'
-			},'click', function() {
+			}, 'click', function () {
 				$(this).parent('form').submit();
 			});
 		});

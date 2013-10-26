@@ -132,7 +132,7 @@
 							<?php echo form_error('post_type', '<p class="form_err">', '</p>') ?>
 						</label>
 						<label for="mail_notice">
-							<input type="checkbox" checked="checked"  name="mail_notice" value="1"/>&nbsp;&nbsp;mail notification (free)?
+							<input type="checkbox" checked="checked"  name="mail_notice" value="1"/>&nbsp;&nbsp;mail notification ?
 							<?php echo form_error('mail_notice', '<p class="form_err">', '</p>') ?>
 						</label>
 						<label for="blog">

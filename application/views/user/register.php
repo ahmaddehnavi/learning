@@ -18,16 +18,6 @@
 			margin : auto;
 		}
 
-		.message-box .aa {
-			font-size : 11px;
-			padding   : 30px 0 10px 10px;
-			display   : block;
-		}
-
-		.mini-phone .message-box .aa {
-			padding : 3px 10px;
-		}
-
 		.message-box h2 {
 			border-bottom : 1px solid #aaa;
 			margin-bottom : 15px;
@@ -35,10 +25,11 @@
 			color         : #aaa;
 		}
 
-		.login-with {
-			margin-top : 50px;
+		select {
+			margin: 10px 0;
+			border-radius: 2px;
+			width: 100%;
 		}
-
 	</style>
 	<nav>
 		<menu>
@@ -61,17 +52,47 @@
 		<label>full name:
 			<input type="text" name="full_name" value="<?php echo set_value('full_name'); ?>"/>
 			<?= form_error('full_name', '<p class="form_err">', '</p>')?>
-		</label><br>
+		</label><br/>
 
 		<label>username:
 			<input type="text" name="username" value="<?php echo set_value('username'); ?>"/>
 			<?= form_error('username', '<p class="form_err">', '</p>')?>
-		</label><br>
+		</label><br/>
 
 		<label>Email:
 			<input type="email" name="email" value="<?php echo set_value('email'); ?>"/>
 			<?= form_error('email', '<p class="form_err">', '</p>')?>
-		</label><br>
+		</label><br/>
+
+		<label for="academy_id">select your academy :
+			<select name="academy_id">
+				<option value=""> ...</option>
+				<?php
+				foreach ($academy_list->result() as $academy) {
+					if ($academy->academy_id == $academy_id) {
+						echo '<option selected value="' .  $academy->academy_id . '">' . $academy->name . '</option>';
+					} else {
+						echo '<option value="' .  $academy->academy_id . '">' . $academy->name . '</option>';
+					}
+				}?>
+			</select>
+			<?=form_error('academy_id', '<div class="form_err">', '</div>')?>
+		</label><br/>
+
+		<label for="field_id"> select your field :
+			<select name="field_id">
+				<option value=""> ...</option>
+				<?php
+				foreach ($field_list->result() as $field) {
+					if ($field->field_id == $field_id) {
+						echo '<option selected value="' .  $field->field_id . '">' . $field->name . '</option>';
+					} else {
+						echo '<option value="' . $field->field_id . '">' . $field->name . '</option>';
+					}
+				}?>
+			</select>
+			<?=form_error('field_id', '<div class="form_err">', '</div>')?>
+		</label><br/>
 
 		<div>
 			<input type="submit" value="create account" class="btn" name='submits'>

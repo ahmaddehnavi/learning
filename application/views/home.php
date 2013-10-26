@@ -21,6 +21,8 @@
 	<link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/home.css"/>
 	<link rel="stylesheet" type="text/css" href="<?= FILES_CSS_PATH ?>/train_slideshow.css"/>
 
+	<script src="<?= FILES_JS_PATH ?>/base/jquery-1.9.0.js"></script>
+	<title>Panda Academy</title>
 </head>
 <body>
 
@@ -30,7 +32,7 @@
 		<div class="user">
 			<?php
 			if ($this->auth->is_logged_in()) {
-				echo anchor('/user/dashboard/', $this->auth->get_full_name());
+				echo anchor('/academy/classes/', $this->auth->get_full_name());
 			} else {
 				echo anchor('/user/login/', 'sign in');
 			}
@@ -122,6 +124,15 @@
 <script type="text/javascript">
 	startSlider();
 </script>
+<!-- ############################################################################ -->
+<script src="<?= FILES_JS_PATH ?>/base/prefixfree.min.js"></script>
+<!-- ############################################################################ -->
 
+<script type="text/javascript" src="<?= FILES_JS_PATH ?>/js.js"></script>
+<script type="text/javascript">
+	$('img').error(function () {
+		$(this).attr('src', "<?php echo FILES_IMG_PATH.'/no-image.jpg';?>");
+	});
+</script>
 </body>
 </html>
