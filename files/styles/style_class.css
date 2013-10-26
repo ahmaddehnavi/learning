@@ -22,16 +22,13 @@ header.widget-head {
 
 .one {
     float      : left;
-    width      : 25%;
+    width      : 245px;
     margin     : 2% 1.3%;
     border     : 1px solid rgb(223, 207, 207);
     transition : all .2s;
     position: relative;
    padding-bottom: 15px;
-}
-
-.desktop .one {
-   /*background-image : url();*/
+    max-width: 100%;
 }
 
 .descript {
@@ -54,25 +51,13 @@ header.widget-head {
     font-size: 23px;
 }
 
-.phone .one {
-    margin : 1%;
-    width  : 30.1%;
-}
-
 .mini-phone .one {
-    width     : 100%;
     margin    : 10px auto;
-    max-width : 250px;
     float     : none;
 }
 
-.phone .one {
-     width     : 50%;
-}
 
 .tablet .one {
-    width  : 30%;
-    max-width : 250px;
     float: left;
 }
 
