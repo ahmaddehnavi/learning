@@ -80,8 +80,7 @@
 
 						<div> Professor : <?=$prof_name?></div>
 						<?php echo anchor("academy/classes/setting/" . $class_id, '<i class="icon-cogs"></i> &nbsp;&nbsp;setting', 'class="btn-fix btn-small right" style="margin-left: 20px;"') ?>
-						<?php echo anchor("academy/classes/booklet/".$class_id, '<i class="icon-fa-book"></i> &nbsp;&nbsp;search booklet','class="btn-fix btn-small right"') ?>
-
+						<?php echo anchor("academy/classes/booklet/".$class_id, '<i class="icon-book"></i> &nbsp;&nbsp;search booklet','class="btn-fix btn-small right"') ?>
 
 					</section>
 				</section>
