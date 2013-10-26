@@ -76,25 +76,28 @@ class Post_Model extends CI_Model
 
 		$data['total'] = $this->db
 			->select('count(post.post_id) AS num')
-			->where(array('post_type' => 'booklet', 'is_public' => 1))
-			->join('class', 'class.field_id = '.$field_id.' lesson_id='.$lesson_id)
-			->join('class_post', 'class_post.class_id = class.class_id')
-			->offset($offset)
-			->order_by('post_id', 'desc')
+			->from('post')
+			->join('class_post', 'class_post.post_id = post.post_id')
+			->join('class', "class.class_id=class_post.class_id")
+
 			->join('profile', 'profile.user_id = post.author_id')
-			->get('post')->row('num');
+			->where(array('post_type' => 'booklet', 'is_public' => 1))
+			->where(array('class.field_id' => $field_id , 'class.lesson_id'=>$lesson_id))
+			->get()->row('num');
 
 		$data['posts'] = $this->db
 			->select('post.*,full_name AS author_name')
-			->where(array('post_type' => 'booklet', 'is_public' => 1))
-			->join('class', 'class.field_id = '.$field_id.' lesson_id='.$lesson_id)
-			->join('class_post', 'class_post.class_id = class.class_id')
+			->from('post')
+			->join('class_post', 'class_post.post_id = post.post_id')
+			->join('class', "class.class_id=class_post.class_id")
 
+			->join('profile', 'profile.user_id = post.author_id')
+			->where(array('post_type' => 'booklet', 'is_public' => 1))
+			->where(array('class.field_id' => $field_id , 'class.lesson_id'=>$lesson_id))
 			->offset($offset)
 			->limit($limit)
 			->order_by('post_id', 'desc')
-			->join('profile', 'profile.user_id = post.author_id')
-			->get('post');
+			->get();
 
 		return $data;
 	}

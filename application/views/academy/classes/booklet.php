@@ -73,22 +73,20 @@
 							<li><?php echo anchor('home', 'home')?> </a>&nbsp;&gt;&nbsp;</li>
 							<li><?php echo anchor('academy/home', 'academy')?> </a>&nbsp;&gt;&nbsp;</li>
 							<li><?php echo anchor('academy/classes', 'classes')?> </a>&nbsp;&gt;&nbsp;</li>
-							<li><?=$lesson_name?></li>
+							<li><?php echo anchor('academy/classes/view/'.$class_id,$lesson_name)?> </a>&nbsp;&gt;&nbsp;</li>
+							<li>Booklet</li>
 						</ul>
 					</section>
 
 					<section class="bottom">
 						<h2><?=$lesson_name?> :</h2>
-
-						<div> Professor : <?=$prof_name?></div>
+						<div> All Available Booklet for <?=$lesson_name?> </div>
+						<?php echo anchor("academy/classes/view/".$class_id, '<i class="icon-arrow-left"></i> &nbsp;&nbsp;back to class','class="btn-fix btn-small right"') ?>
 					</section>
 				</section>
 				<section id="content-body">
 
 					<?php
-					$user_id = $this->auth->get_user_id();
-					$delete_url = site_url('user/posts/remove');
-					$next = current_url();
 					foreach ($posts->result() as $post) {
 						?>
 						<section class="widget" tabindex="1">
@@ -113,23 +111,7 @@
 									<div class="badboy"></div>
 									<p class='publish'><?php echo date('Y/m/d H:m',$post->time) ?></p>
 								</section>
-								<section class="widget-footer">
-								<?php
 
-								if ($post->post_type === 'exercise') {
-									$upload_input='upload_input_'.$post->post_id;
-									echo form_open_multipart('academy/exercise/upload','target="_blank"');  ?>
-									<input type="hidden" name="post_id" value="<?=$post->post_id?>"/>
-                                    <p>pdf , docx , zip , rar allowed.</p>
-									<input type="file" class="upload_input" id="<?=$upload_input?>" name="userfile"/>
-								<input type="button" upload_input="<?=$upload_input?>" class="upload_btn btn" value="select file" />
-
-									<input type="submit" class="btn btn-small" value="upload exercise"/>
-									</form>
-								<?php
-								}
-								?>
-								</section>
 								<div class="badboy"></div>
 							</section>
 						</section>
@@ -144,9 +126,4 @@
 		</div>
 		<div class="badboy"></div>
 	</div>
-	<script type="text/javascript">
-		function run(){
-			$('.upload_btn').upload_btn();
-		}
-	</script>
 <?php $this->load->view('base/footer'); ?>

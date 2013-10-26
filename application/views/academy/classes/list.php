@@ -105,7 +105,7 @@
 								<section class="one">
 
 									<figure class="background">
-										<img src="<?php echo FILES_IMG_PATH . '/bg2.jpg'; ?> " alt="" width="100%"
+										<img src="<?php echo FILES_IMG_PATH . '/Grass.jpg'; ?> " alt="" width="100%"
 											 height=100%/>
 									</figure>
 									<figure class="img-teacher">

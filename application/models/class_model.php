@@ -198,7 +198,7 @@ class Class_Model extends CI_Model
 	{
 		$sql = 'SELECT field_id , lesson_id FROM class WHERE class_id=? LIMIT 1';
 
-		return $this->db->query($sql, array($class_id))->row('field_id');
+		return $this->db->query($sql, array($class_id));
 	}
 
 

@@ -61,7 +61,7 @@ class Classes extends Auth_Controller
 		}
 	}
 
-function booklet($id, $page = 1)
+	function booklet($id, $page = 1)
 	{
 		$page--;
 		if (!is_numeric($id)) {
@@ -77,8 +77,9 @@ function booklet($id, $page = 1)
 			show_404();
 		}
 
-		$info            = $this->class_model->get_info($id);
-		$data            = $this->post_model->get_class_booklet($id, $page * 10);
+		$info = $this->class_model->get_info($id);
+		$data = $this->post_model->get_class_booklet($id, $page * 10);
+
 		$data['members'] = $members;
 		$this->load->library('pagination');
 		$config['base_url']         = site_url('academy/classes/booklet/' . $id . '/');
@@ -168,8 +169,6 @@ function booklet($id, $page = 1)
 
 		redirect('academy/classes/manage');
 	}
-
-
 
 	function remove()
 	{
