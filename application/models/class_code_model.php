@@ -40,8 +40,8 @@ class Class_Code_Model extends CI_Model
 	public function generate_code($academy_id, $field_id)
 	{
 		$data = array(
-			'code1' => random_string('alnum', rand(12, 20)),
-			'code2' => random_string('alnum', rand(12, 20)),
+			'code1' => random_string('alnum', rand(6, 10)),
+			'code2' => random_string('alnum', rand(6, 10)),
 			'academy_id' => $academy_id,
 			'field_id' => $field_id
 		);
