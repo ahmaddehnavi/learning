@@ -65,6 +65,40 @@ class Post_Model extends CI_Model
 		return $data;
 	}
 
+
+
+	public function get_class_booklet($class_id, $offset = 0, $limit = 10)
+	{
+		$this->load->model('class_model');
+		$row=$this->class_model->get_field_lesson($class_id);
+		$field_id=$row->row('field_id');
+		$lesson_id=$row->row('lesson_id');
+
+		$data['total'] = $this->db
+			->select('count(post.post_id) AS num')
+			->where(array('post_type' => 'booklet', 'is_public' => 1))
+			->join('class', 'class.field_id = '.$field_id.' lesson_id='.$lesson_id)
+			->join('class_post', 'class_post.class_id = class.class_id')
+			->offset($offset)
+			->order_by('post_id', 'desc')
+			->join('profile', 'profile.user_id = post.author_id')
+			->get('post')->row('num');
+
+		$data['posts'] = $this->db
+			->select('post.*,full_name AS author_name')
+			->where(array('post_type' => 'booklet', 'is_public' => 1))
+			->join('class', 'class.field_id = '.$field_id.' lesson_id='.$lesson_id)
+			->join('class_post', 'class_post.class_id = class.class_id')
+
+			->offset($offset)
+			->limit($limit)
+			->order_by('post_id', 'desc')
+			->join('profile', 'profile.user_id = post.author_id')
+			->get('post');
+
+		return $data;
+	}
+
 	public function get_class_posts($class_id, $offset = 0, $limit = 10)
 	{
 		$data['total'] = $this->db

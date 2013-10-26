@@ -194,6 +194,13 @@ class Class_Model extends CI_Model
 		return $this->db->query($sql, array($class_id))->row('prof_id') === $this->auth->get_user_id();
 	}
 
+	public function get_field_lesson($class_id)
+	{
+		$sql = 'SELECT field_id , lesson_id FROM class WHERE class_id=? LIMIT 1';
+
+		return $this->db->query($sql, array($class_id))->row('field_id');
+	}
+
 
 }
 /* End of file academy_model.php */

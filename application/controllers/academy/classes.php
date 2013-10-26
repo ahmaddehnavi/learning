@@ -61,6 +61,45 @@ class Classes extends Auth_Controller
 		}
 	}
 
+function booklet($id, $page = 1)
+	{
+		$page--;
+		if (!is_numeric($id)) {
+			show_404();
+		}
+		$is_prof = FALSE;
+		if ($this->class_member_model->is_non_blocked_student_of_class($id) === TRUE) {
+			$members = $this->class_member_model->get_active_members($id);
+		} elseif ($this->class_model->is_prof_of_class($id) === TRUE) {
+			$members = $this->class_member_model->get_all_members($id);
+			$is_prof = TRUE;
+		} else {
+			show_404();
+		}
+
+		$info            = $this->class_model->get_info($id);
+		$data            = $this->post_model->get_class_booklet($id, $page * 10);
+		$data['members'] = $members;
+		$this->load->library('pagination');
+		$config['base_url']         = site_url('academy/classes/booklet/' . $id . '/');
+		$config['total_rows']       = $data['total'];
+		$config['per_page']         = 10;
+		$config['use_page_numbers'] = TRUE;
+		$config['uri_segment']      = 5;
+		$this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+
+		$data['lesson_name'] = $info['lesson_name'];
+		$data['prof_name']   = $info['prof_name'];
+		$data['new_change']  = $info['new_change'];
+		$data['join_status'] = $info['join_status'];
+		$data['is_prof']     = $is_prof;
+		$data['class_id']    = $id;
+
+		$this->load->view('academy/classes/booklet', $data);
+
+	}
+
 	function setting($id)
 	{
 		if (!is_numeric($id)) {
