@@ -1,4 +1,4 @@
-<?php $this->load->view('base/header'); ?>
+<?php $this->load->view('base/header', array('title' => 'user | view')); ?>
 
 	<script src="<?= FILES_JS_PATH ?>/jquery-autosize.min.js"></script>
 	<script type="text/javascript">

@@ -1,4 +1,4 @@
-<?php $this->load->view('base/header'); ?>
+<?php $this->load->view('base/header', array('title' => 'user | lost password')); ?>
 <style type="text/css">
 	#container {
 		padding : 50px 0;

@@ -1,4 +1,4 @@
-<?php $this->load->view('base/header'); ?>
+<?php $this->load->view('base/header', array('title' => 'user | register')); ?>
 	<style type="text/css">
 		.message-box {
 			margin    : 50px auto;

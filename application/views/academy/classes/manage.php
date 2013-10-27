@@ -1,4 +1,4 @@
-<?php $this->load->view('base/header'); ?>
+<?php $this->load->view('base/header', array('title' => 'manage class')); ?>
 	<div id="container">
 
 	<nav>

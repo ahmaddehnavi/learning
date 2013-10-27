@@ -1,4 +1,4 @@
-<?php $this->load->view('base/header', array('title' => $lesson_name)); ?>
+<?php $this->load->view('base/header', array('title' => 'classes | '.$lesson_name)); ?>
 	<div id="container">
 
 		<nav>

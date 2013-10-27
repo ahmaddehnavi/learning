@@ -7,7 +7,7 @@
 <body>
 
 from : <?=$from_name?></br>
-from id : <?=$from_id?></br>
+<?//=$from_id?>
 message : <?=$message?></br>
 
 <a href="<?=site_url('user/messages/')?>">click here to view your message</a></br>

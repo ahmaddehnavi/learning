@@ -1,4 +1,4 @@
-<?php $this->load->view('base/header'); ?>
+<?php $this->load->view('base/header', array('title' => 'post | publish')); ?>
 <script src="<?= FILES_JS_PATH ?>/ckeditor/ckeditor.js"></script>
 
 <style type="text/css">

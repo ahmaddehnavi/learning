@@ -1,4 +1,4 @@
-<?php $this->load->view('base/header'); ?>
+<?php $this->load->view('base/header', array('title' => 'user | profile')); ?>
 
 	<style>
 		.large-desktop .widget, .desktop .widget, .tablet .widget {
