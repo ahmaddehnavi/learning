@@ -11,9 +11,13 @@ class Code_Class extends CI_Controller{
 	function generate($a=1,$f=2){
 		$this->load->model('class_code_model');
 		$c=$this->class_code_model->generate_code($a,$f);
-		echo
-		'<pre>'.
-		print_r($c).
-		'</pre>';
+//		echo
+//		'<pre>'.
+//		print_r($c).
+//		'</pre>';
+		echo 'activation code 1 : '.$c['code1'];
+		echo '<br/>activation code 2 : '.$c['code2'];
+		echo '<br/>academy : shahrood';
+		echo '<br/> field : computer';
 	}
 }

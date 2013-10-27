@@ -85,11 +85,9 @@
 											 height=100%/>
 									</figure>
 									<figure class="img-teacher">
-										<a href="#">
-											<img
-												src="<?php echo FILES_USERS_PATH . '/' . $class->prof_id . '/image/profile_100.jpg'; ?>"
-												width="100px" height="100px"/>
-										</a>
+										<?=anchor('/user/view/id/'.$class->prof_id,'<img
+												src="'.FILES_USERS_PATH . '/' . $class->prof_id . '/image/profile_100.jpg"
+												width="100px" height="100px"/>','target="_blank"')?>
 									</figure>
 
 									<section class="descript">
@@ -109,11 +107,9 @@
 											 height=100%/>
 									</figure>
 									<figure class="img-teacher">
-										<a href="#">
-											<img
-												src="<?php echo FILES_USERS_PATH . '/' . $class->prof_id . '/image/profile_100.jpg'; ?>"
-												width="100px" height="100px"/>
-										</a>
+										<?=anchor('/user/view/id/'.$class->prof_id,'<img
+												src="'.FILES_USERS_PATH . '/' . $class->prof_id . '/image/profile_100.jpg"
+												width="100px" height="100px"/>','target="_blank"')?>
 									</figure>
 
 									<section class="descript">
