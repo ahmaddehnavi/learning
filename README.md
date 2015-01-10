@@ -21,3 +21,5 @@ a system to make easier communication between students and professor
 
 # live demo
 http://ahmaddehnavi.ir/panda/
+
+go to http://ahmaddehnavi.ir/panda/index.php/code_class/generate to generate class activation code (need to create class)
