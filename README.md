@@ -1,3 +1,4 @@
+#Panda Academy
 a system to make easier communication between students and professor 
 
 
@@ -9,8 +10,9 @@ a system to make easier communication between students and professor
 - students can see available classes and join to it
 - professors can block or remove student
 - students can see their classmates
-- users can send message to other users
+- users can send message to each other
 - professors can create exercise and student upload exercise file
+- responsive design
 - ....
 
 #technology
